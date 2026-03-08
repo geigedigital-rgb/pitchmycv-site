@@ -4,4 +4,4 @@ Allow: /
 # Keep report page out of search results
 Disallow: /scan
 
-Sitemap: https://www.pitchcv.app/sitemap.xml
+Sitemap: https://pitchcv.app/sitemap.xml
