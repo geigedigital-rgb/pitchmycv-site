@@ -862,6 +862,26 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-weight: 600;
 }
 
+#resumes-counter.counter-roll {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1em;
+  vertical-align: baseline;
+}
+
+#resumes-counter .counter-roll-track {
+  display: flex;
+  flex-direction: column;
+}
+
+#resumes-counter .counter-roll-value {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+}
+
 .benefits-grid-lite {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
