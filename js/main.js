@@ -14,6 +14,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadZone = document.getElementById("upload-zone");
   const fileInput = document.getElementById("file-input");
 
+  // Hero gauge intro animation (run once after full page load)
+  const gaugeFill = document.querySelector(".gauge-fill");
+  const gaugeValue = document.querySelector(".gauge-value");
+
+  if (gaugeFill && gaugeValue) {
+    const maxPercent = 100;
+    const upDurationMs = 2200;
+    const holdAtMaxMs = 2000;
+    const downDurationMs = 1800;
+    const totalLength = typeof gaugeFill.getTotalLength === "function"
+      ? gaugeFill.getTotalLength()
+      : 157;
+
+    const easeInOutCubic = t => (
+      t < 0.5
+        ? 4 * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 3) / 2
+    );
+
+    const setGaugeState = percent => {
+      const safePercent = Math.max(0, Math.min(maxPercent, percent));
+      const progress = safePercent / maxPercent;
+      gaugeFill.style.strokeDasharray = `${totalLength}`;
+      gaugeFill.style.strokeDashoffset = `${totalLength * (1 - progress)}`;
+      gaugeValue.textContent = `${Math.round(safePercent)}%`;
+    };
+
+    const animateRange = (from, to, durationMs, onDone) => {
+      const start = performance.now();
+
+      const tick = now => {
+        const elapsed = now - start;
+        const t = Math.min(1, elapsed / durationMs);
+        const eased = easeInOutCubic(t);
+        setGaugeState(from + (to - from) * eased);
+
+        if (t < 1) {
+          requestAnimationFrame(tick);
+          return;
+        }
+
+        if (typeof onDone === "function") {
+          onDone();
+        }
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const runGaugeIntroAnimation = () => {
+      // Disable CSS transition to avoid conflict with frame-by-frame animation.
+      gaugeFill.style.transition = "none";
+      setGaugeState(0);
+
+      animateRange(0, maxPercent, upDurationMs, () => {
+        setTimeout(() => {
+          animateRange(maxPercent, 0, downDurationMs);
+        }, holdAtMaxMs);
+      });
+    };
+
+    if (document.readyState === "complete") {
+      runGaugeIntroAnimation();
+    } else {
+      window.addEventListener("load", runGaugeIntroAnimation, { once: true });
+    }
+  }
+
   if (uploadZone && fileInput) {
     // Prevent default drag behaviors
     ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
