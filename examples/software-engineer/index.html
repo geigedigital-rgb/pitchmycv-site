@@ -58,36 +58,9 @@
       }
     ]
   }
-  </script>
-  <style>
-    /* Specific styles for SEO article pages */
-    .seo-header { background: var(--bg-white); padding: 80px 0 60px; text-align: center; border-bottom: 1px solid var(--border-color); }
-    .seo-header h1 { font-size: clamp(32px, 4vw, 48px); margin-bottom: 16px; }
-    .seo-header p { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
-    
-    .article-grid { display: grid; grid-template-columns: 1fr 350px; gap: 48px; padding: 60px 0; }
-    
-    .article-content h2 { font-size: 1.75rem; margin: 40px 0 20px; }
-    .article-content h3 { font-size: 1.35rem; margin: 32px 0 16px; }
-    .article-content p { margin-bottom: 16px; font-size: 1.05rem; }
-    .article-content ul { padding-left: 24px; margin-bottom: 24px; list-style: disc; }
-    .article-content li { margin-bottom: 8px; font-size: 1.05rem; }
-    
-    .example-box { background: var(--bg-light); border: 1px solid var(--border-color); border-left: 4px solid var(--primary); padding: 24px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 24px; }
-    .example-box.bad { border-left-color: var(--color-danger); }
-    
-    .sidebar { position: sticky; top: 24px; }
-    .sidebar-widget { background: var(--bg-white); border: 1px solid var(--border-color); padding: 32px; border-radius: var(--radius-md); text-align: center; box-shadow: var(--shadow-sm); }
-    
-    @media (max-width: 900px) {
-      .article-grid { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="site-header">
     <div class="wrap header-wrap">
       <a href="/" class="logo">Pitch My CV</a>
@@ -98,62 +71,75 @@
     </div>
   </header>
 
-  <div class="seo-header">
+  <section class="example-hero">
     <div class="wrap">
-      <h1>Software Engineer Resume Example & Guide</h1>
-      <p>Your skills matter, but your resume also needs clear structure. This guide shows how to make it readable for ATS and easy for recruiters to scan.</p>
+      <p class="example-breadcrumb">Resume examples / Software engineer</p>
+      <h1>Software Engineer Resume Example</h1>
+      <p>Use this guide to structure a software engineer resume that is readable for ATS and persuasive for hiring managers.</p>
     </div>
-  </div>
+  </section>
 
-  <main class="wrap article-grid">
-    <!-- Article Body -->
-    <article class="article-content">
-      <h2>Why Software Engineer Resumes Fail ATS</h2>
-      <p>Many software resumes fail because of layout, not experience. Two-column templates, icons, and visual skill bars often break parsing.</p>
-      <p>Most ATS tools read plain text from top to bottom. If they cannot parse your resume, your profile may look incomplete.</p>
-      
-      <h2>How to Write a Tech Resume Summary</h2>
-      <p>Skip the old-style objective statement. Start with a short summary that shows your level, core stack, and strongest result.</p>
-      
-      <div class="example-box bad">
-        <strong style="color: var(--color-danger)">❌ Bad Example:</strong><br><br>
-        Looking for a challenging software engineering role where I can utilize my coding skills to build great products and learn new technologies.
-      </div>
-      
-      <div class="example-box">
-        <strong style="color: var(--primary)">✅ Good Example:</strong><br><br>
-        Backend Software Engineer with 4+ years of experience building scalable microservices in Python and Go. Proven track record of optimizing database queries to reduce API latency by 40% for high-traffic SaaS platforms. AWS Certified Developer.
-      </div>
+  <main class="example-layout">
+    <aside class="example-toc">
+      <h2>Table of contents</h2>
+      <a href="#what-do-recruiters-check">What recruiters check first</a>
+      <a href="#how-to-write-resume">How to write your resume</a>
+      <a href="#summary-example">Summary example</a>
+      <a href="#experience-sample">Experience sample</a>
+      <a href="#skills-section">Skills section</a>
+    </aside>
 
-      <h2>Optimizing the Skills Section</h2>
-      <p>The skills section is where ATS systems check job-match terms. Keep it clear and close to the language in the job post.</p>
-      <ul>
-        <li><strong>Group by category:</strong> Languages (Python, TS), Frameworks (React, Django), Infrastructure (AWS, Docker).</li>
-        <li><strong>Use exact matches:</strong> If the job asks for "Node.js", don't write "NodeJS". The ATS parser might not recognize them as the same thing.</li>
-        <li><strong>Drop the progress bars:</strong> Never use "80%" or "Intermediate" next to a skill. It confuses the software.</li>
-      </ul>
+    <article class="example-article">
+      <section id="what-do-recruiters-check">
+        <h2>What recruiters check first</h2>
+        <p>Recruiters scan engineering resumes quickly. They usually look for stack relevance, years of experience, and clear impact in your latest roles.</p>
+        <p>If your layout is hard to parse, ATS systems may miss important information. Keep your format simple, readable, and text-based.</p>
+      </section>
 
-      <h2>Writing Measurable Achievements</h2>
-      <p>Your experience section should show outcomes, not only tasks.</p>
-      
-      <div class="example-box">
-        <strong style="color: var(--primary)">✅ Good Bullet Points:</strong><br><br>
-        • Architected and deployed a serverless image processing pipeline using AWS Lambda, reducing monthly compute costs by $2,400.<br>
-        • Migrated legacy monolithic frontend to React/Next.js, improving Google Lighthouse performance score from 45 to 92.<br>
-        • Mentored 3 junior developers and introduced automated CI/CD PR testing, cutting deployment failures by 35%.
-      </div>
+      <section id="how-to-write-resume">
+        <h2>How to write your software engineer resume</h2>
+        <p>Start with a short summary, then show experience with measurable outcomes. Use the same technical terms that appear in the target job description when they match your background.</p>
+      </section>
 
-      <p>Before you apply, run a final check in the <a href="/tools/ats-checker">ATS checker</a> and review this <a href="/ats-resume-checklist">ATS resume checklist</a>.</p>
+      <section id="summary-example">
+        <h2>Software engineer summary example</h2>
+        <div class="example-snippet">
+          <div class="example-snippet-head">
+            <span class="example-snippet-label">adaptable summary example</span>
+            <button class="copy-btn-lite" type="button">Copy to clipboard</button>
+          </div>
+          <p>Backend Software Engineer with 4+ years of experience building scalable microservices in Python and Go. Improved API latency by 40% through query optimization and caching strategy. Comfortable with AWS, CI/CD, and production incident response.</p>
+        </div>
+      </section>
+
+      <section id="experience-sample">
+        <h2>Employment history sample</h2>
+        <p>Use bullet points that connect your work to business or product results.</p>
+        <div class="example-tip">
+          <h3>Use this bullet formula</h3>
+          <p><strong>Action + context + metric + result.</strong> Example: “Built async ingestion service in Go, reducing event processing time from 12m to 4m and improving data freshness for analytics users.”</p>
+        </div>
+      </section>
+
+      <section id="skills-section">
+        <h2>Skills example section</h2>
+        <p>Group skills by category so ATS and recruiters can scan quickly:</p>
+        <p><strong>Languages:</strong> Python, Go, TypeScript<br><strong>Frameworks:</strong> FastAPI, Node.js, React<br><strong>Infrastructure:</strong> AWS, Docker, PostgreSQL, Redis</p>
+      </section>
+      <p>Before applying, run your draft through the <a href="/tools/ats-checker">ATS checker</a> and compare with our <a href="/ats-resume-checklist">resume checklist</a>.</p>
     </article>
 
-    <!-- Contextual Sidebar / Conversion Trap -->
-    <aside class="sidebar">
-      <div class="sidebar-widget">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" style="margin-bottom: 16px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="12"></line><line x1="15" y1="15" x2="12" y2="12"></line></svg>
-        <h3 style="margin: 0 0 12px; font-size: 1.25rem;">Is your resume passing the ATS?</h3>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">Upload your software engineering resume. Our AI will scan it for formatting errors and missing tech stack keywords.</p>
+    <aside class="example-side">
+      <div class="example-score">4.5 ★★★★★</div>
+      <div class="example-preview-card">
+        <img src="../../assets/resume-example-1.png" alt="Software engineer resume template preview">
         <a href="/#upload-zone" class="btn btn-primary btn-full">Scan My Resume Free</a>
-        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;">Instant results. No signup.</div>
+        <p class="example-share">Share this article</p>
+        <div class="example-share-icons">
+          <span class="example-share-icon">X</span>
+          <span class="example-share-icon">in</span>
+          <span class="example-share-icon">f</span>
+        </div>
       </div>
     </aside>
   </main>
