@@ -140,4 +140,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // Resumes Created Counter Animation
+  const resumesCounter = document.getElementById("resumes-counter");
+  if (resumesCounter) {
+    let baseNumber = 1638;
+    
+    // Function to generate random interval between 5 and 15 seconds
+    const getRandomInterval = () => Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000;
+    
+    const updateCounter = () => {
+      baseNumber += 1;
+      // Format number with commas
+      resumesCounter.textContent = baseNumber.toLocaleString('en-US');
+      
+      // Add a slight animation class
+      resumesCounter.style.transition = "color 0.3s ease";
+      resumesCounter.style.color = "var(--primary)";
+      
+      setTimeout(() => {
+        resumesCounter.style.color = "inherit";
+      }, 300);
+      
+      // Set next timeout
+      setTimeout(updateCounter, getRandomInterval());
+    };
+
+    // Start the counter
+    setTimeout(updateCounter, getRandomInterval());
+  }
 });

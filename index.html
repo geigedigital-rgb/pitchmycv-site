@@ -30,8 +30,8 @@
         "ratingValue": "4.4",
         "bestRating": "5",
         "worstRating": "1",
-        "ratingCount": "37389",
-        "reviewCount": "37389"
+        "ratingCount": "342",
+        "reviewCount": "342"
       }
     }
   ]
@@ -71,13 +71,14 @@
               <li class="hero-trust-item" itemscope itemtype="https://schema.org/AggregateRating">
                 <span class="hero-trust-star" aria-hidden="true">★</span>
                 <a href="https://www.trustpilot.com/review/pitchmycv.com" class="hero-trust-brand" rel="noopener noreferrer" target="_blank">Trustpilot</a>
-                <span><span itemprop="ratingValue">4.4</span> out of <span itemprop="bestRating">5</span> <span aria-hidden="true">|</span> <span itemprop="ratingCount">37,389</span> reviews</span>
+                <span><span itemprop="ratingValue">4.4</span> out of <span itemprop="bestRating">5</span> <span aria-hidden="true">|</span> <span itemprop="ratingCount">342</span> reviews</span>
               </li>
             </ul>
           </aside>
         </div>
         
         <div class="hero-right">
+          <div class="hero-right-glow" aria-hidden="true"></div>
           <div class="score-gauge-wrap">
             <div class="score-gauge" aria-hidden="true">
               <svg viewBox="0 0 120 70" class="gauge-svg">
@@ -91,7 +92,7 @@
                   </linearGradient>
                 </defs>
                 <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
-                <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5" class="gauge-fill"/>
+                <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" class="gauge-fill"/>
               </svg>
               <span class="gauge-value">0%</span>
             </div>
@@ -116,17 +117,17 @@
         <!-- Left: Image (rounded block, same style as rest of site) -->
         <div class="hiring-visual">
           <div class="hiring-img-wrap">
-            <img src="assets/hiring-block.png" alt="Professional at laptop, resume and career focus" width="600" height="400" loading="lazy">
+            <img src="assets/hr-approve-cv.png" alt="Professional at laptop, resume and career focus" width="600" height="400" loading="lazy">
             <!-- Overlay 1: Resume Score -->
             <div class="hiring-score-card" aria-hidden="true">
               <div class="score-box">81%</div>
               <div class="score-text">Resume<br>Score</div>
             </div>
 
-            <!-- Overlay 2: ATS Perfect -->
+            <!-- Overlay 2: HR Approved -->
             <div class="hiring-ats-pill" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-              ATS Perfect
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+              HR Approved
             </div>
 
             <!-- Overlay 3: Skills List -->
@@ -237,12 +238,30 @@
 
         <div class="hr-funnel-visual">
           <div class="funnel-simple">
+            <svg width="0" height="0" style="position: absolute; pointer-events: none;">
+              <defs>
+                <linearGradient id="grad-blue" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.1" />
+                  <stop offset="100%" stop-color="#7c3aed" stop-opacity="1" />
+                </linearGradient>
+                <linearGradient id="grad-green" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#4ade80" stop-opacity="0.1" />
+                  <stop offset="100%" stop-color="#16a34a" stop-opacity="1" />
+                </linearGradient>
+                <linearGradient id="grad-red" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f87171" stop-opacity="0.1" />
+                  <stop offset="100%" stop-color="#dc2626" stop-opacity="1" />
+                </linearGradient>
+              </defs>
+            </svg>
+
             <div class="funnel-bg" aria-hidden="true">
-              <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; pointer-events: none;">
-                <path d="M 210,80 Q 210,140 120,180" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4" />
-                <path d="M 210,80 Q 210,140 300,180" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4" />
-              </svg>
+              <div class="ring r-1"></div>
+              <div class="ring r-2"></div>
+              <div class="ring r-3"></div>
+              <div class="ring r-4"></div>
             </div>
+            
             <div class="funnel-card funnel-top">
               <div class="funnel-icon blue">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
@@ -252,6 +271,29 @@
                 <span>Candidates applied</span>
               </div>
             </div>
+
+            <div class="flow-spacer">
+              <svg width="2" height="32" viewBox="0 0 2 32">
+                <line x1="1" y1="0" x2="1" y2="32" stroke="#e2e8f0" stroke-width="2" />
+                <line x1="1" y1="0" x2="1" y2="32" stroke="url(#grad-blue)" stroke-width="3" class="flow-pulse-vert" />
+              </svg>
+            </div>
+
+            <div class="funnel-hr-step">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="HR Manager" class="hr-step-img">
+              <div class="hr-step-label">HR Manager</div>
+            </div>
+
+            <div class="flow-spacer split-spacer">
+              <svg width="100%" height="40" viewBox="0 0 100 40" preserveAspectRatio="none">
+                <path d="M 50,0 L 50,10 C 50,20 25,20 25,30 L 25,40" fill="none" stroke="#e2e8f0" stroke-width="2" vector-effect="non-scaling-stroke" />
+                <path d="M 50,0 L 50,10 C 50,20 75,20 75,30 L 75,40" fill="none" stroke="#e2e8f0" stroke-width="2" vector-effect="non-scaling-stroke" />
+                
+                <path d="M 50,0 L 50,10 C 50,20 25,20 25,30 L 25,40" fill="none" stroke="url(#grad-green)" stroke-width="3" vector-effect="non-scaling-stroke" class="flow-pulse-split delay-1" />
+                <path d="M 50,0 L 50,10 C 50,20 75,20 75,30 L 75,40" fill="none" stroke="url(#grad-red)" stroke-width="3" vector-effect="non-scaling-stroke" class="flow-pulse-split delay-2" />
+              </svg>
+            </div>
+
             <div class="funnel-split">
               <div class="funnel-card funnel-ok">
                 <div class="funnel-icon green">
@@ -310,66 +352,14 @@
 
           <!-- Right: Carousel of Resume Mockups -->
           <div class="examples-v2-carousel">
-            <div class="resume-sheet">
-              <!-- Simple CSS Mockup 1 -->
-              <div class="rs-header">
-                <div class="rs-avatar"></div>
-                <div class="rs-title-wrap">
-                  <div class="rs-name"></div>
-                  <div class="rs-job"></div>
-                </div>
-              </div>
-              <div class="rs-body">
-                <div class="rs-col-left">
-                  <div class="rs-section-title"></div>
-                  <div class="rs-line" style="width: 100%"></div>
-                  <div class="rs-line" style="width: 90%"></div>
-                  <div class="rs-line" style="width: 80%"></div>
-                  <div class="rs-space"></div>
-                  <div class="rs-section-title"></div>
-                  <div class="rs-line" style="width: 100%"></div>
-                  <div class="rs-line" style="width: 85%"></div>
-                  <div class="rs-line" style="width: 70%"></div>
-                </div>
-                <div class="rs-col-right">
-                  <div class="rs-section-title"></div>
-                  <div class="rs-line" style="width: 100%"></div>
-                  <div class="rs-line" style="width: 95%"></div>
-                  <div class="rs-line" style="width: 80%"></div>
-                  <div class="rs-space"></div>
-                  <div class="rs-section-title"></div>
-                  <div class="rs-line" style="width: 98%"></div>
-                  <div class="rs-line" style="width: 92%"></div>
-                  <div class="rs-line" style="width: 100%"></div>
-                  <div class="rs-line" style="width: 85%"></div>
-                </div>
-              </div>
+            <div class="resume-example-wrap">
+              <div class="example-glow glow-1"></div>
+              <img src="assets/resume-example-1.png" alt="Sales Director Resume Example" class="resume-example-img">
             </div>
-
-            <div class="resume-sheet offset-sheet">
-              <!-- Simple CSS Mockup 2 -->
-              <div class="rs-header">
-                <div class="rs-title-wrap" style="margin-left: 0;">
-                  <div class="rs-name" style="width: 60%"></div>
-                  <div class="rs-job" style="width: 40%"></div>
-                </div>
-              </div>
-              <div class="rs-body">
-                <div class="rs-col-right" style="width: 100%">
-                  <div class="rs-section-title"></div>
-                  <div class="rs-line" style="width: 100%"></div>
-                  <div class="rs-line" style="width: 95%"></div>
-                  <div class="rs-line" style="width: 80%"></div>
-                  <div class="rs-space"></div>
-                  <div class="rs-section-title"></div>
-                  <div class="rs-line" style="width: 98%"></div>
-                  <div class="rs-line" style="width: 92%"></div>
-                  <div class="rs-line" style="width: 100%"></div>
-                  <div class="rs-line" style="width: 85%"></div>
-                </div>
-              </div>
+            <div class="resume-example-wrap offset-sheet">
+              <div class="example-glow glow-2"></div>
+              <img src="assets/resume-example-2.png" alt="Senior Finance Analyst Resume Example" class="resume-example-img">
             </div>
-            
           </div>
         </div>
       </div>
@@ -381,7 +371,7 @@
         <h2 class="trust-headline">Trusted by job seekers worldwide</h2>
         <div class="trust-metrics">
           <div class="metric">
-            <strong>4,005,400</strong>
+            <strong>12,450</strong>
             <span>Total Users</span>
           </div>
           <div class="metric">
@@ -400,8 +390,8 @@
     <section class="benefits section-white">
       <div class="wrap">
         <div class="benefits-headline">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 13h8V3H3z"></path><path d="M13 21h8v-8h-8z"></path><path d="M13 3h8v8h-8z"></path><path d="M3 21h8v-8H3z"></path></svg>
-          <h2><span>44,233</span> resumes created today</h2>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--primary)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <h2><span id="resumes-counter">1,638</span> resumes created today</h2>
         </div>
 
         <div class="benefits-grid-lite">
@@ -443,7 +433,7 @@
               <div class="tp-score">4.3 out of 5</div>
               <div class="tp-stars">★★★★★</div>
               <div class="tp-brand">Trustpilot</div>
-              <p class="tp-meta">based on 55,245 reviews</p>
+              <p class="tp-meta">based on 342 reviews</p>
             </article>
 
             <article class="review-card">
