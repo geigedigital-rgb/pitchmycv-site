@@ -5,7 +5,7 @@
   --bg-white: #ffffff;
   --bg-light: #f8fafc;
   --text-main: #0f172a;
-  --text-muted: #64748b;
+  --text-muted: #475569;
   --border-color: #e2e8f0;
   
   --radius-sm: 10px;
@@ -1352,7 +1352,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* --- Examples Directory (Resume.io-inspired UX pattern) --- */
 .examples-directory {
   background: var(--bg-white);
-  padding: 44px 0 80px;
+  padding: 40px 0 64px;
 }
 
 .examples-shell {
@@ -1418,7 +1418,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .examples-micro-note {
   margin: 10px 0 20px;
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .examples-template-grid {
@@ -1459,6 +1459,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .example-template-link {
   margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #dbe5f2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2563eb;
   font-weight: 600;
   font-size: 0.93rem;
 }
@@ -1501,6 +1509,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding: 0 16px;
   color: var(--text-main);
   font-weight: 600;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .examples-show-more {
@@ -1510,6 +1519,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: 8px;
   color: #2563eb;
   font-weight: 600;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .example-page {
@@ -1518,7 +1528,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .example-hero {
   border-bottom: 1px solid var(--border-color);
-  padding: 48px 0 36px;
+  padding: 40px 0 28px;
 }
 
 .example-hero .wrap {
@@ -1547,7 +1557,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .example-layout {
   max-width: 1160px;
   margin: 0 auto;
-  padding: 36px 24px 72px;
+  padding: 28px 24px 56px;
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr) 260px;
   gap: 26px;
@@ -1585,7 +1595,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .example-article h2 {
   font-size: 1.6rem;
-  margin: 34px 0 14px;
+  margin: 26px 0 12px;
 }
 
 .example-article section {
@@ -1604,7 +1614,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-radius: 12px;
   padding: 20px;
   background: #fbfdff;
-  margin: 22px 0;
+  margin: 16px 0;
 }
 
 .example-snippet-head {
@@ -1631,6 +1641,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 0.8rem;
   font-weight: 600;
   padding: 8px 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .example-tip {
@@ -1638,7 +1649,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-radius: 12px;
   background: #f8fafc;
   padding: 18px 18px 16px;
-  margin: 20px 0 8px;
+  margin: 14px 0 8px;
 }
 
 .example-tip h3 {
@@ -1686,7 +1697,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .example-share {
-  color: #94a3b8;
+  color: #64748b;
   font-size: 0.9rem;
   margin-bottom: 10px;
   text-align: center;
@@ -1709,6 +1720,37 @@ ul { margin: 0; padding: 0; list-style: none; }
   color: #2563eb;
   font-weight: 700;
   font-size: 0.85rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.example-template-link,
+.meta-pill {
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.examples-directory .btn:hover,
+.example-layout .btn:hover,
+.examples-role-pill:hover,
+.meta-pill:hover,
+.copy-btn-lite:hover,
+.example-share-icon:hover,
+.example-template-link:hover {
+  border-color: #93c5fd;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.examples-directory .btn-primary:hover,
+.example-layout .btn-primary:hover {
+  border-color: var(--primary-hover);
+  background-color: var(--primary-hover);
+  color: #ffffff;
+}
+
+.examples-show-more:hover {
+  color: #1d4ed8;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 1080px) {
