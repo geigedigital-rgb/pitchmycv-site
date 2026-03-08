@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Resume Is Rejected by ATS — ATS Resume Checker | Pitch My CV</title>
+  <meta name="description" content="ATS resume checker and optimizer. See your score, find missing keywords, improve your resume for the job. Pass filters, get interviews.">
+  <link rel="canonical" href="https://pitchmycv.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Your Resume Is Rejected by ATS — Check Your Score | Pitch My CV">
+  <meta property="og:description" content="ATS resume checker. See your score, find what's wrong. Improve your resume for the job — pass filters, get interviews.">
+  <meta property="og:url" content="https://pitchmycv.com/">
+  <meta property="og:locale" content="en_US">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Pitch My CV",
+      "applicationCategory": "BusinessApplication",
+      "description": "Resume optimization for applicant tracking systems. ATS checker, keyword scanner, and resume formatting to pass filters and get interviews.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.4",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "37389",
+        "reviewCount": "37389"
+      }
+    }
+  ]
+  </script>
+</head>
+<body>
+  <!-- Header (Rezi-style) -->
+  <header class="site-header">
+    <div class="wrap header-wrap">
+      <a href="/" class="logo" aria-label="Pitch My CV home">Pitch My CV</a>
+      <nav class="header-nav">
+        <a href="#upload-zone">Scan Resume</a>
+        <a href="examples/software-engineer.html">Resume Examples</a>
+        <a href="tools/ats-checker.html">ATS Checker</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#upload-zone" class="btn btn-primary btn-sm">Check ATS Score Free</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- BLOCK 1: Hero (Rezi-style: headline + CTA left, score gauge + import right) -->
+    <section class="hero" id="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-content">
+          <h1 class="hero-title">Stop getting auto-rejected.<br>Multiply your interview chances.</h1>
+          <p class="hero-sub">Don't let hidden ATS algorithms discard your application. Run a deep diagnostic scan to uncover exactly what's blocking your resume—and fix it to get noticed by real recruiters.</p>
+          <a href="#upload-zone" class="btn btn-primary btn-large" onclick="document.getElementById('file-input').click(); return false;">Check ATS score free</a>
+          <aside class="hero-trust" aria-label="Social proof and reviews">
+            <ul class="hero-trust-list">
+              <li class="hero-trust-item">
+                <span class="hero-trust-icon" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </span>
+                <span><strong>39%</strong> more likely to land interviews</span>
+              </li>
+              <li class="hero-trust-item" itemscope itemtype="https://schema.org/AggregateRating">
+                <span class="hero-trust-star" aria-hidden="true">★</span>
+                <a href="https://www.trustpilot.com/review/pitchmycv.com" class="hero-trust-brand" rel="noopener noreferrer" target="_blank">Trustpilot</a>
+                <span><span itemprop="ratingValue">4.4</span> out of <span itemprop="bestRating">5</span> <span aria-hidden="true">|</span> <span itemprop="ratingCount">37,389</span> reviews</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+        
+        <div class="hero-right">
+          <div class="score-gauge-wrap">
+            <div class="score-gauge" aria-hidden="true">
+              <svg viewBox="0 0 120 70" class="gauge-svg">
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ef4444"/>
+                    <stop offset="25%" stop-color="#f59e0b"/>
+                    <stop offset="50%" stop-color="#eab308"/>
+                    <stop offset="75%" stop-color="#22c55e"/>
+                    <stop offset="100%" stop-color="#14b8a6"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
+                <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="78.5" stroke-dashoffset="78.5" class="gauge-fill"/>
+              </svg>
+              <span class="gauge-value">0%</span>
+            </div>
+            <span class="gauge-label">Interview chances</span>
+          </div>
+          <div class="upload-card" id="upload-zone">
+            <h3>Check your resume now</h3>
+            <p class="upload-hint"><strong>Drop</strong> your PDF or DOCX to uncover hidden errors</p>
+            <p class="upload-formats">Max 5MB. 100% Secure.</p>
+            <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
+            <button type="button" class="btn btn-primary btn-full mt-4" onclick="document.getElementById('file-input').click()">Check my ATS score</button>
+            <p class="upload-secure"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Secure. No signup required. Files auto-deleted after analysis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 2: Explanation of the Hiring System (Modern UI) -->
+    <section class="hiring-system">
+      <div class="wrap system-layout">
+        
+        <!-- Left: Image (rounded block, same style as rest of site) -->
+        <div class="hiring-visual">
+          <div class="hiring-img-wrap">
+            <img src="assets/hiring-block.png" alt="Professional at laptop, resume and career focus" width="600" height="400" loading="lazy">
+            <!-- Overlay 1: Resume Score -->
+            <div class="hiring-score-card" aria-hidden="true">
+              <div class="score-box">81%</div>
+              <div class="score-text">Resume<br>Score</div>
+            </div>
+
+            <!-- Overlay 2: ATS Perfect -->
+            <div class="hiring-ats-pill" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              ATS Perfect
+            </div>
+
+            <!-- Overlay 3: Skills List -->
+            <div class="hiring-skills-card" aria-hidden="true">
+              <div class="skills-card-header">
+                <strong>Skills</strong>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              </div>
+              <div class="skills-list">
+                <span class="skill-tag">Management Skills</span>
+                <span class="skill-tag">Analytical Thinking</span>
+                <span class="skill-tag">Leadership</span>
+              </div>
+              <div class="skills-add">+ Add skill</div>
+            </div>
+          </div>
+          <div class="hiring-tags">
+            <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> ATS Parsing</span>
+            <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Keyword Match</span>
+            <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Action Verbs</span>
+            <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Formatting</span>
+          </div>
+        </div>
+
+        <!-- Right: Text & Infographic -->
+        <div class="system-content">
+          <h2>The hidden filter blocking your interviews</h2>
+          <p class="lead">Companies don't read every resume. They use Applicant Tracking Systems (ATS) to auto-screen candidates. Ensure every detail meets the highest parsing standards, exceeding recruiter expectations.</p>
+          
+          <div class="modern-steps">
+            <div class="m-step">
+              <div class="m-icon-wrap">
+                <div class="m-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+                </div>
+                <div class="m-badge">1</div>
+              </div>
+              <span>Upload</span>
+            </div>
+            
+            <div class="m-step">
+              <div class="m-icon-wrap">
+                <div class="m-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="m-badge">2</div>
+              </div>
+              <span>Scan</span>
+            </div>
+            
+            <div class="m-step">
+              <div class="m-icon-wrap">
+                <div class="m-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </div>
+                <div class="m-badge" style="background: var(--color-danger);">3</div>
+              </div>
+              <span>Issues</span>
+            </div>
+            
+            <div class="m-step">
+              <div class="m-icon-wrap">
+                <div class="m-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <div class="m-badge" style="background: var(--color-success);">4</div>
+              </div>
+              <span>Fix</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOCK 3: Product Solution (Orbital UI) -->
+    <section class="product-solution section-white">
+      <div class="wrap solution-layout">
+        
+        <div class="solution-content">
+          <h2>Diagnose and fix your resume in minutes</h2>
+          <p class="lead">Our AI platform analyzes your document exactly like an employer's software, exposing weaknesses before you apply. Turn rejections into interviews.</p>
+          
+          <div class="solution-features">
+            <div class="s-feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <div>
+                <h4>ATS Compatibility Analysis</h4>
+                <p>We parse your resume to ensure structural integrity. Find out if tables or complex layouts are corrupting your data.</p>
+              </div>
+            </div>
+            <div class="s-feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line><line x1="12" y1="7" x2="12" y2="13"></line></svg>
+              <div>
+                <h4>Keyword Optimization</h4>
+                <p>Paste the job description. Our system instantly identifies missing hard skills, soft skills, and industry terminology.</p>
+              </div>
+            </div>
+            <div class="s-feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              <div>
+                <h4>Bullet Point Rewriting</h4>
+                <p>Transform weak duties into high-impact, measurable achievements using AI trained on successful resumes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hr-funnel-visual">
+          <div class="funnel-simple">
+            <div class="funnel-bg" aria-hidden="true">
+              <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0; pointer-events: none;">
+                <path d="M 210,80 Q 210,140 120,180" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4" />
+                <path d="M 210,80 Q 210,140 300,180" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="4 4" />
+              </svg>
+            </div>
+            <div class="funnel-card funnel-top">
+              <div class="funnel-icon blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <div class="funnel-text">
+                <strong>80</strong>
+                <span>Candidates applied</span>
+              </div>
+            </div>
+            <div class="funnel-split">
+              <div class="funnel-card funnel-ok">
+                <div class="funnel-icon green">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="funnel-text">
+                  <strong>3</strong>
+                  <span>To interview</span>
+                </div>
+              </div>
+              <div class="funnel-card funnel-out">
+                <div class="funnel-icon red">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                </div>
+                <div class="funnel-text">
+                  <strong>77</strong>
+                  <span>Auto-rejected</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- BLOCK 5: Resume Examples -->
+    <section class="resume-examples-v2 section-white">
+      <div class="wrap">
+        <!-- Top Categories -->
+        <div class="resume-categories-wrap">
+          <button class="cat-nav-btn left" aria-label="Scroll left">&lsaquo;</button>
+          <div class="resume-categories">
+            <a href="#" class="cat-tag active">All</a>
+            <a href="#" class="cat-tag">Software Engineer</a>
+            <a href="#" class="cat-tag">Product Manager</a>
+            <a href="#" class="cat-tag">Marketing</a>
+            <a href="#" class="cat-tag">Data Scientist</a>
+            <a href="#" class="cat-tag">Sales</a>
+            <a href="#" class="cat-tag">HR Manager</a>
+            <a href="#" class="cat-tag">Designer</a>
+            <a href="#" class="cat-tag">Finance</a>
+            <a href="#" class="cat-tag">Operations</a>
+            <a href="#" class="cat-tag">Customer Support</a>
+          </div>
+          <button class="cat-nav-btn right" aria-label="Scroll right">&rsaquo;</button>
+        </div>
+
+        <div class="examples-v2-grid">
+          <!-- Left: Text Content -->
+          <div class="examples-v2-text">
+            <h2>Get the interview with professional resume examples</h2>
+            <p class="lead">Impress employers and recruiters. Choose from hundreds of professionally-designed resume examples tailored for your exact role. Download to Word or PDF.</p>
+            <a href="/examples/" class="btn btn-primary btn-large">See all resume examples</a>
+          </div>
+
+          <!-- Right: Carousel of Resume Mockups -->
+          <div class="examples-v2-carousel">
+            <div class="resume-sheet">
+              <!-- Simple CSS Mockup 1 -->
+              <div class="rs-header">
+                <div class="rs-avatar"></div>
+                <div class="rs-title-wrap">
+                  <div class="rs-name"></div>
+                  <div class="rs-job"></div>
+                </div>
+              </div>
+              <div class="rs-body">
+                <div class="rs-col-left">
+                  <div class="rs-section-title"></div>
+                  <div class="rs-line" style="width: 100%"></div>
+                  <div class="rs-line" style="width: 90%"></div>
+                  <div class="rs-line" style="width: 80%"></div>
+                  <div class="rs-space"></div>
+                  <div class="rs-section-title"></div>
+                  <div class="rs-line" style="width: 100%"></div>
+                  <div class="rs-line" style="width: 85%"></div>
+                  <div class="rs-line" style="width: 70%"></div>
+                </div>
+                <div class="rs-col-right">
+                  <div class="rs-section-title"></div>
+                  <div class="rs-line" style="width: 100%"></div>
+                  <div class="rs-line" style="width: 95%"></div>
+                  <div class="rs-line" style="width: 80%"></div>
+                  <div class="rs-space"></div>
+                  <div class="rs-section-title"></div>
+                  <div class="rs-line" style="width: 98%"></div>
+                  <div class="rs-line" style="width: 92%"></div>
+                  <div class="rs-line" style="width: 100%"></div>
+                  <div class="rs-line" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="resume-sheet offset-sheet">
+              <!-- Simple CSS Mockup 2 -->
+              <div class="rs-header">
+                <div class="rs-title-wrap" style="margin-left: 0;">
+                  <div class="rs-name" style="width: 60%"></div>
+                  <div class="rs-job" style="width: 40%"></div>
+                </div>
+              </div>
+              <div class="rs-body">
+                <div class="rs-col-right" style="width: 100%">
+                  <div class="rs-section-title"></div>
+                  <div class="rs-line" style="width: 100%"></div>
+                  <div class="rs-line" style="width: 95%"></div>
+                  <div class="rs-line" style="width: 80%"></div>
+                  <div class="rs-space"></div>
+                  <div class="rs-section-title"></div>
+                  <div class="rs-line" style="width: 98%"></div>
+                  <div class="rs-line" style="width: 92%"></div>
+                  <div class="rs-line" style="width: 100%"></div>
+                  <div class="rs-line" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 6: Authority and Trust (Rezi-style big numbers) -->
+    <section class="trust section-light text-center">
+      <div class="wrap">
+        <h2 class="trust-headline">Trusted by job seekers worldwide</h2>
+        <div class="trust-metrics">
+          <div class="metric">
+            <strong>4,005,400</strong>
+            <span>Total Users</span>
+          </div>
+          <div class="metric">
+            <strong>62.18%</strong>
+            <span>Interview Rate</span>
+          </div>
+          <div class="metric">
+            <strong>8.23/10</strong>
+            <span>Avg. User Review</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 7: Benefits and Outcomes -->
+    <section class="benefits section-white">
+      <div class="wrap">
+        <div class="benefits-headline">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 13h8V3H3z"></path><path d="M13 21h8v-8h-8z"></path><path d="M13 3h8v8h-8z"></path><path d="M3 21h8v-8H3z"></path></svg>
+          <h2><span>44,233</span> resumes created today</h2>
+        </div>
+
+        <div class="benefits-grid-lite">
+          <article class="benefit-card-lite">
+            <div class="b-icon-lite"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
+            <h3>A draft in 10 mins</h3>
+            <p>The AI builder is much faster than starting from scratch.</p>
+          </article>
+
+          <article class="benefit-card-lite">
+            <div class="b-icon-lite"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"></path><path d="M12 3v18"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
+            <h3>Fewer mistakes</h3>
+            <p>Fix typos and formatting issues before recruiters review your resume.</p>
+          </article>
+
+          <article class="benefit-card-lite">
+            <div class="b-icon-lite"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18"></path><path d="M6 3h12v18H6z"></path><path d="M9 12h6"></path></svg></div>
+            <h3>ATS templates</h3>
+            <p>Use recruiter-friendly structures that parse correctly in ATS systems.</p>
+          </article>
+
+          <article class="benefit-card-lite">
+            <div class="b-icon-lite"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M9 10c0-1.1 1-2 3-2s3 .9 3 2-1 2-3 2-3 .9-3 2 1 2 3 2 3-.9 3-2"></path></svg></div>
+            <h3>Higher salary confidence</h3>
+            <p>Present stronger impact and negotiate from a better position.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 7.5: Testimonials -->
+    <section class="testimonials section-light">
+      <div class="wrap">
+        <h2 class="reviews-title"><span>92%</span> of customers recommend us</h2>
+
+        <div class="reviews-track-wrap">
+          <div class="reviews-track" id="reviews-track">
+            <article class="review-card trustpilot-card">
+              <div class="tp-score">4.3 out of 5</div>
+              <div class="tp-stars">★★★★★</div>
+              <div class="tp-brand">Trustpilot</div>
+              <p class="tp-meta">based on 55,245 reviews</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <h3>Great tool</h3>
+              <p>Great tool. New features are extra special and make the design of a CV even more useful to stand out.</p>
+              <div class="review-meta">Ana Lucia Soler · about 10 hours ago</div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <h3>Best CV editor</h3>
+              <p>Best website so far for quick CV editing. Others were not friendly and this one made it simple.</p>
+              <div class="review-meta">Raja Lingaswaran · 1 day ago</div>
+            </article>
+
+            <article class="review-card">
+              <div class="review-stars">★★★★☆</div>
+              <h3>I like it</h3>
+              <p>Not my first time using it. It helped me a lot before, and I really like the integration.</p>
+              <div class="review-meta">Egzonit Demhasaj · 2 days ago</div>
+            </article>
+          </div>
+        </div>
+
+        <div class="reviews-controls">
+          <button class="reviews-nav-btn" type="button" data-reviews-nav="prev" aria-label="Previous reviews">&lsaquo;</button>
+          <button class="reviews-nav-btn" type="button" data-reviews-nav="next" aria-label="Next reviews">&rsaquo;</button>
+          <div class="reviews-progress" aria-hidden="true">
+            <span class="reviews-progress-fill"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 8: Call to Action (Rezi-style) -->
+    <section class="cta-banner section-light text-center">
+      <div class="wrap">
+        <h2>Ready to see your ATS score?</h2>
+        <p class="mb-4 text-muted">Upload your resume. It takes 10 seconds.</p>
+        <a href="#upload-zone" class="btn btn-primary btn-large">Check ATS score free</a>
+      </div>
+    </section>
+
+    <!-- BLOCK 9: Pricing (Rezi-style: 3 plans) -->
+    <section class="pricing section-white" id="pricing">
+      <div class="wrap text-center">
+        <div class="section-header">
+          <h2>Respectful pricing</h2>
+          <p>Choose from the most popular plans. Satisfaction promised with a 100% money-back guarantee.</p>
+        </div>
+        
+        <div class="pricing-grid pricing-grid-3">
+          <div class="pricing-card">
+            <div class="pricing-badge">No card required</div>
+            <h3>Free</h3>
+            <div class="price">$0</div>
+            <ul>
+              <li>One resume scan</li>
+              <li>ATS score & basic feedback</li>
+              <li>Limited keyword check</li>
+            </ul>
+            <a href="#upload-zone" class="btn btn-outline btn-full mt-4">Start ATS check</a>
+          </div>
+          <div class="pricing-card featured">
+            <h3>Pro</h3>
+            <div class="price">$29<span>/mo</span></div>
+            <ul>
+              <li>Unlimited resumes</li>
+              <li>Full AI optimization</li>
+              <li>Job description tailoring</li>
+              <li>ATS-friendly export</li>
+            </ul>
+            <a href="#upload-zone" class="btn btn-primary btn-full mt-4">Start ATS check</a>
+            <p class="pricing-guarantee">100% money-back guarantee</p>
+          </div>
+          <div class="pricing-card">
+            <h3>Lifetime</h3>
+            <div class="price">$149<span> one-time</span></div>
+            <ul>
+              <li>All Pro features forever</li>
+              <li>No subscription</li>
+              <li>Unlimited downloads</li>
+            </ul>
+            <a href="#upload-zone" class="btn btn-outline btn-full mt-4">Start ATS check</a>
+            <p class="pricing-guarantee">100% money-back guarantee</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 10: Frequently Asked Questions -->
+    <section class="faq section-light" id="faq">
+      <div class="wrap faq-wrap">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How do ATS systems actually work?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Applicant Tracking Systems (ATS) scan submitted resumes, extract the text, and parse it into a structured database. They then score and rank candidates based on how well the extracted text matches the keywords, skills, and requirements listed in the job description.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Does the tool rewrite my resume automatically?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <p>No. We provide targeted AI suggestions for weak bullet points and missing keywords. You have full control to accept, reject, or edit the AI's recommendations so the resume remains authentically yours.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Is my resume data kept private?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Your uploaded documents are securely processed for analysis and are not sold to third parties, recruiters, or data brokers. You can delete your data from our systems at any time.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How does the AI improve my content?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Our AI analyzes the job description to find missing hard and soft skills. It then suggests ways to incorporate those keywords naturally into your experience section, while converting passive duties into active, metric-driven achievements.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Can I cancel my subscription?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. You can cancel your monthly subscription at any time with one click in your account settings. You will retain access to pro features until the end of your current billing cycle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 11: Final Conversion (Rezi-style) -->
+    <section class="final-cta section-white text-center">
+      <div class="wrap">
+        <h2>Ready to improve your resume?</h2>
+        <p class="mb-4 text-muted" style="max-width: 560px; margin: 0 auto 28px;">Scan your resume now to see your ATS score and fix what's holding you back.</p>
+        <a href="#upload-zone" class="btn btn-primary btn-large">Check ATS score free</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/#upload-zone">Scan Resume</a></li>
+            <li><a href="/#pricing">Pricing</a></li>
+            <li><a href="/#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Free Tools</h4>
+          <ul>
+            <li><a href="/tools/ats-checker.html">ATS Resume Checker</a></li>
+            <li><a href="#">Resume Keyword Scanner</a></li>
+            <li><a href="#">Action Verb Generator</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resume Examples</h4>
+          <ul>
+            <li><a href="/examples/software-engineer.html">Software Engineer</a></li>
+            <li><a href="#">Product Manager</a></li>
+            <li><a href="#">Marketing Manager</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/#faq">FAQ</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-text">© 2026 Pitch My CV. Resume optimization for applicant tracking systems.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
