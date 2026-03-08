@@ -213,23 +213,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const resumesCounter = document.getElementById("resumes-counter");
   if (resumesCounter) {
     let baseNumber = 1638;
-    
+    const formatCounter = value => value.toLocaleString("en-US");
+
+    const setCounterValue = value => {
+      resumesCounter.innerHTML = `<span class="counter-roll-value">${formatCounter(value)}</span>`;
+    };
+
+    const rollCounterTo = value => {
+      const currentValueNode = resumesCounter.querySelector(".counter-roll-value");
+      const currentText = currentValueNode
+        ? currentValueNode.textContent
+        : formatCounter(value - 1);
+      const nextText = formatCounter(value);
+
+      const track = document.createElement("span");
+      track.className = "counter-roll-track";
+      track.innerHTML = `
+        <span class="counter-roll-value">${currentText}</span>
+        <span class="counter-roll-value">${nextText}</span>
+      `;
+
+      resumesCounter.innerHTML = "";
+      resumesCounter.appendChild(track);
+
+      const animation = track.animate(
+        [
+          { transform: "translateY(0%)" },
+          { transform: "translateY(-100%)" }
+        ],
+        {
+          duration: 650,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          fill: "forwards"
+        }
+      );
+
+      animation.onfinish = () => {
+        setCounterValue(value);
+      };
+    };
+
+    resumesCounter.classList.add("counter-roll");
+    setCounterValue(baseNumber);
+
     // Function to generate random interval between 5 and 15 seconds
     const getRandomInterval = () => Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000;
     
     const updateCounter = () => {
       baseNumber += 1;
-      // Format number with commas
-      resumesCounter.textContent = baseNumber.toLocaleString('en-US');
-      
-      // Add a slight animation class
-      resumesCounter.style.transition = "color 0.3s ease";
-      resumesCounter.style.color = "var(--primary)";
-      
-      setTimeout(() => {
-        resumesCounter.style.color = "inherit";
-      }, 300);
-      
+      rollCounterTo(baseNumber);
+
       // Set next timeout
       setTimeout(updateCounter, getRandomInterval());
     };
