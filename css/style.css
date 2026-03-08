@@ -1069,6 +1069,108 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: width 0.2s ease;
 }
 
+/* --- BLOCK 8: Contrast CTA Banner --- */
+.cta-banner {
+  padding: 72px 0;
+  background: var(--bg-white);
+}
+
+.cta-banner-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 300px;
+  background: linear-gradient(115deg, #061a61 0%, #0a2b85 58%, #1b43a7 100%);
+}
+
+.cta-banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 56px 52px;
+}
+
+.cta-banner-content h2 {
+  color: #ffffff;
+  font-size: clamp(32px, 3.8vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  max-width: 560px;
+  margin-bottom: 14px;
+}
+
+.cta-banner-sub {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.45;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.cta-banner-content .btn-primary {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+
+.cta-banner-content .btn-primary:hover {
+  background: #4338ca;
+  border-color: #4338ca;
+}
+
+.cta-banner-media {
+  position: relative;
+  min-height: 300px;
+}
+
+.cta-banner-media img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 86%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  border-top-left-radius: 140px;
+}
+
+.cta-banner-blob {
+  position: absolute;
+  right: -44px;
+  bottom: -22px;
+  width: 240px;
+  height: 180px;
+  background: #dffcff;
+  border-top-left-radius: 80%;
+  border-top-right-radius: 26%;
+}
+
+.cta-banner-scribble {
+  position: absolute;
+  right: 24px;
+  border-top: 4px solid #3b4bff;
+  border-radius: 999px;
+  opacity: 0.95;
+  z-index: 3;
+}
+
+.cta-banner-scribble-1 {
+  top: 20px;
+  width: 190px;
+  height: 58px;
+  transform: rotate(8deg);
+}
+
+.cta-banner-scribble-2 {
+  top: 56px;
+  width: 170px;
+  height: 50px;
+  transform: rotate(8deg);
+}
+
 /* --- BLOCK 9: Pricing (Rezi-style 3 cards) --- */
 .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
 .pricing-grid-3 { grid-template-columns: repeat(3, 1fr); max-width: 1000px; }
@@ -1118,6 +1220,22 @@ ul { margin: 0; padding: 0; list-style: none; }
   .features-list { grid-template-columns: 1fr; }
   .system-layout { grid-template-columns: 1fr; }
   .solution-layout { grid-template-columns: 1fr; gap: 40px; }
+  .cta-banner-card { grid-template-columns: 1fr; }
+  .cta-banner-content { padding: 44px 34px 34px; }
+  .cta-banner-content h2 { max-width: none; }
+  .cta-banner-sub { max-width: none; font-size: 1.08rem; }
+  .cta-banner-media { min-height: 220px; }
+  .cta-banner-media img {
+    width: 100%;
+    border-top-left-radius: 46px;
+    object-position: center 28%;
+  }
+  .cta-banner-blob {
+    width: 180px;
+    height: 140px;
+    right: -28px;
+    bottom: -20px;
+  }
   .funnel-simple { max-width: 100%; padding: 24px 20px 20px; }
   .funnel-split { grid-template-columns: 1fr; }
   .benefits-grid-lite { grid-template-columns: repeat(2, 1fr); }
@@ -1130,6 +1248,18 @@ ul { margin: 0; padding: 0; list-style: none; }
   .grid-4, .workflow-steps { grid-template-columns: 1fr; }
   .benefits-grid-lite { grid-template-columns: 1fr; gap: 12px; }
   .benefits-headline { flex-direction: column; text-align: center; }
+  .cta-banner { padding: 56px 0; }
+  .cta-banner-content { padding: 32px 24px 28px; text-align: left; }
+  .cta-banner-content h2 { font-size: clamp(26px, 8vw, 36px); }
+  .cta-banner-sub { font-size: 1rem; margin-bottom: 22px; }
+  .cta-banner-media { min-height: 190px; }
+  .cta-banner-scribble {
+    right: 14px;
+    border-top-width: 3px;
+  }
+  .cta-banner-scribble-1 { top: 10px; width: 120px; height: 36px; }
+  .cta-banner-scribble-2 { top: 32px; width: 106px; height: 30px; }
+  .cta-banner-blob { width: 120px; height: 96px; right: -18px; bottom: -12px; }
   .reviews-controls { justify-content: center; }
   .reviews-progress { max-width: 220px; }
   .pricing-grid, .pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
