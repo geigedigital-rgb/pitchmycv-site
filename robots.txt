@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Keep report page out of search results
+Disallow: /scan.html
+
+Sitemap: https://pitchmycv.com/sitemap.xml
