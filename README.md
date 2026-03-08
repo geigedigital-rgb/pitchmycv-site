@@ -10,14 +10,15 @@ Conversion-focused landing page for an AI resume optimization product (Rezi/Enha
 
 ## Structure
 
-- `index.html` — Main landing page
+- `index.html` — Main landing page (`/`)
+- `examples/`, `tools/`, `about/`, `blog/`, etc. — Clean routes via `index.html` files in folders
 - `css/style.css` — Styling and design system
 - `js/main.js` — Interactions (Drag & Drop)
-- `assets/images/` — Image assets
+- `assets/` — Image assets
 
 ## Run locally
 
-Open `index.html` in a browser, or use a static server:
+Open the project in a browser via a static server:
 
 ```bash
 npx serve .
