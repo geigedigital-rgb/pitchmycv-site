@@ -104,12 +104,52 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .hero-right { position: relative; display: flex; flex-direction: column; gap: 24px; align-items: center; z-index: 1; }
 .hero-right-glow { position: absolute; inset: -20%; background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 60%); z-index: -1; pointer-events: none; border-radius: 50%; }
-.score-gauge-wrap { text-align: center; }
-.score-gauge { position: relative; width: 140px; height: 80px; }
+.score-gauge-wrap {
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+  --gauge-glow-rgb: 34, 197, 94;
+  --gauge-glow-alpha: 0;
+  --gauge-glow-scale: 0.9;
+}
+.score-gauge-wrap::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 190px;
+  height: 120px;
+  transform: translateX(-50%) scale(var(--gauge-glow-scale));
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(20px);
+  opacity: 1;
+  background: radial-gradient(
+    circle at 50% 58%,
+    rgba(var(--gauge-glow-rgb), var(--gauge-glow-alpha)) 0%,
+    rgba(var(--gauge-glow-rgb), 0) 72%
+  );
+  transition: transform 0.25s ease-out, background 0.25s linear;
+}
+.score-gauge { position: relative; z-index: 1; width: 140px; height: 80px; }
 .gauge-svg { width: 100%; height: 100%; display: block; }
 .gauge-fill { transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
 .gauge-value { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 1.75rem; font-weight: 700; color: var(--text-main); }
 .gauge-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+
+.score-gauge-wrap.gauge-near-max::before {
+  animation: gaugeGlowPulse 1.15s ease-in-out infinite;
+}
+
+@keyframes gaugeGlowPulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(var(--gauge-glow-scale));
+  }
+  50% {
+    transform: translateX(-50%) scale(calc(var(--gauge-glow-scale) + 0.05));
+  }
+}
 
 .upload-card {
   background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px 28px;
