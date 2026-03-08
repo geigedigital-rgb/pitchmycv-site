@@ -17,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Hero gauge intro animation (run once after full page load)
   const gaugeFill = document.querySelector(".gauge-fill");
   const gaugeValue = document.querySelector(".gauge-value");
+  const gaugeWrap = document.querySelector(".score-gauge-wrap");
 
-  if (gaugeFill && gaugeValue) {
+  if (gaugeFill && gaugeValue && gaugeWrap) {
     const maxPercent = 100;
     const upDurationMs = 2200;
     const holdAtMaxMs = 2000;
@@ -36,9 +37,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const setGaugeState = percent => {
       const safePercent = Math.max(0, Math.min(maxPercent, percent));
       const progress = safePercent / maxPercent;
+      const startColor = [239, 68, 68];
+      const endColor = [34, 197, 94];
+      const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * progress);
+      const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * progress);
+      const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * progress);
+      const glowAlphaBase = Math.pow(progress, 1.45) * 0.26;
+      const nearMaxBoost = progress > 0.9 ? ((progress - 0.9) / 0.1) * 0.08 : 0;
+      const glowAlpha = Math.min(0.34, glowAlphaBase + nearMaxBoost);
+      const glowScale = 0.9 + progress * 0.12;
+
       gaugeFill.style.strokeDasharray = `${totalLength}`;
       gaugeFill.style.strokeDashoffset = `${totalLength * (1 - progress)}`;
       gaugeValue.textContent = `${Math.round(safePercent)}%`;
+
+      gaugeWrap.style.setProperty("--gauge-glow-rgb", `${r}, ${g}, ${b}`);
+      gaugeWrap.style.setProperty("--gauge-glow-alpha", glowAlpha.toFixed(3));
+      gaugeWrap.style.setProperty("--gauge-glow-scale", glowScale.toFixed(3));
+
+      if (progress >= 0.96) {
+        gaugeWrap.classList.add("gauge-near-max");
+      } else {
+        gaugeWrap.classList.remove("gauge-near-max");
+      }
     };
 
     const animateRange = (from, to, durationMs, onDone) => {
