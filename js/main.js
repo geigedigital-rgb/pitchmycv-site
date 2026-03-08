@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> Analyzing...';
           }
           setTimeout(() => {
-            window.location.href = 'scan.html';
+            window.location.href = '/scan';
           }, 1500);
         } else {
           alert("Please upload a PDF or DOCX file.");
