@@ -18,6 +18,26 @@
   <meta name="twitter:description" content="Read practical resume and ATS optimization guides from Pitch My CV.">
   <meta name="twitter:image" content="https://pitchmycv.com/assets/hr-approve-cv.png">
   <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "name": "Pitch My CV Blog",
+        "url": "https://pitchmycv.com/blog.html",
+        "description": "Resume and ATS optimization guides."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://pitchmycv.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://pitchmycv.com/blog.html"}
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -36,11 +56,31 @@
       <h1 style="font-size: clamp(30px, 4vw, 46px); margin-bottom: 14px;">Blog</h1>
       <p class="text-muted" style="margin-bottom: 24px;">Guides to help you pass ATS filters and write stronger resumes.</p>
 
-      <article style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
-        <h2 style="margin-bottom: 8px;">Software Engineer Resume Example & Guide</h2>
-        <p class="text-muted" style="margin-bottom: 14px;">Learn how to structure a tech resume for ATS parsing and recruiter review.</p>
-        <a href="/examples/software-engineer.html" class="btn btn-outline btn-sm">Read article</a>
-      </article>
+      <div style="display: grid; gap: 14px;">
+        <article style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <h2 style="margin-bottom: 8px;">ATS Resume Checklist (2026)</h2>
+          <p class="text-muted" style="margin-bottom: 14px;">A practical checklist for formatting, keywords, and measurable bullet points before each application.</p>
+          <a href="/ats-resume-checklist.html" class="btn btn-outline btn-sm">Read article</a>
+        </article>
+
+        <article style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <h2 style="margin-bottom: 8px;">Top ATS Resume Mistakes</h2>
+          <p class="text-muted" style="margin-bottom: 14px;">Five common problems that cause parser failures and recruiter drop-off.</p>
+          <a href="/ats-resume-mistakes.html" class="btn btn-outline btn-sm">Read article</a>
+        </article>
+
+        <article style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <h2 style="margin-bottom: 8px;">Resume Keyword Optimization Guide</h2>
+          <p class="text-muted" style="margin-bottom: 14px;">How to improve ATS matching without keyword stuffing or losing credibility.</p>
+          <a href="/resume-keyword-optimization.html" class="btn btn-outline btn-sm">Read article</a>
+        </article>
+
+        <article style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+          <h2 style="margin-bottom: 8px;">Resume Examples by Role</h2>
+          <p class="text-muted" style="margin-bottom: 14px;">Software engineering, product management, and marketing examples with ATS-safe structures.</p>
+          <a href="/examples/index.html" class="btn btn-outline btn-sm">Open examples</a>
+        </article>
+      </div>
     </div>
   </main>
 
