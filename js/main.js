@@ -235,47 +235,125 @@ document.addEventListener("DOMContentLoaded", () => {
   if (resumesCounter) {
     let baseNumber = 1638;
     const formatCounter = value => value.toLocaleString("en-US");
+    let displayedCounter = baseNumber;
+    let finalizeCounterTimer = null;
 
-    const setCounterValue = value => {
-      resumesCounter.innerHTML = `<span class="counter-roll-value">${formatCounter(value)}</span>`;
+    const createDigitNode = digit => {
+      const slot = document.createElement("span");
+      slot.className = "counter-digit counter-digit-static";
+      const valueNode = document.createElement("span");
+      valueNode.className = "counter-digit-value";
+      valueNode.textContent = digit;
+      slot.appendChild(valueNode);
+      return slot;
     };
 
-    const rollCounterTo = value => {
-      const currentValueNode = resumesCounter.querySelector(".counter-roll-value");
-      const currentText = currentValueNode
-        ? currentValueNode.textContent
-        : formatCounter(value - 1);
-      const nextText = formatCounter(value);
+    const createSeparatorNode = char => {
+      const separator = document.createElement("span");
+      separator.className = "counter-separator";
+      separator.textContent = char;
+      return separator;
+    };
 
-      const track = document.createElement("span");
-      track.className = "counter-roll-track";
-      track.innerHTML = `
-        <span class="counter-roll-value">${currentText}</span>
-        <span class="counter-roll-value">${nextText}</span>
-      `;
+    const renderStaticCounter = value => {
+      resumesCounter.innerHTML = "";
+      const chars = formatCounter(value).split("");
+
+      chars.forEach(char => {
+        if (/\d/.test(char)) {
+          resumesCounter.appendChild(createDigitNode(char));
+        } else {
+          resumesCounter.appendChild(createSeparatorNode(char));
+        }
+      });
+    };
+
+    const rollCounterTo = nextValue => {
+      if (finalizeCounterTimer) {
+        clearTimeout(finalizeCounterTimer);
+        finalizeCounterTimer = null;
+      }
+
+      const prevRaw = String(displayedCounter);
+      const nextRaw = String(nextValue);
+      const maxLen = Math.max(prevRaw.length, nextRaw.length);
+      const prevDigits = prevRaw.padStart(maxLen, " ");
+      const nextDigits = nextRaw.padStart(maxLen, " ");
+      const changedMask = Array.from({ length: maxLen }, (_, idx) => prevDigits[idx] !== nextDigits[idx]);
+      const nextChars = formatCounter(nextValue).split("");
 
       resumesCounter.innerHTML = "";
-      resumesCounter.appendChild(track);
 
-      const animation = track.animate(
-        [
-          { transform: "translateY(0%)" },
-          { transform: "translateY(-100%)" }
-        ],
-        {
-          duration: 650,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-          fill: "forwards"
+      const tracks = [];
+      let digitIndex = 0;
+
+      nextChars.forEach(char => {
+        if (!/\d/.test(char)) {
+          resumesCounter.appendChild(createSeparatorNode(char));
+          return;
         }
-      );
 
-      animation.onfinish = () => {
-        setCounterValue(value);
-      };
+        const newDigit = nextDigits[digitIndex];
+        const oldDigitRaw = prevDigits[digitIndex];
+        const shouldAnimate = changedMask[digitIndex];
+
+        if (!shouldAnimate) {
+          resumesCounter.appendChild(createDigitNode(newDigit));
+          digitIndex += 1;
+          return;
+        }
+
+        const oldDigit = /\d/.test(oldDigitRaw) ? oldDigitRaw : "0";
+        const slot = document.createElement("span");
+        slot.className = "counter-digit counter-digit-rolling";
+
+        const track = document.createElement("span");
+        track.className = "counter-digit-track";
+
+        const oldValue = document.createElement("span");
+        oldValue.className = "counter-digit-value";
+        oldValue.textContent = oldDigit;
+
+        const newValue = document.createElement("span");
+        newValue.className = "counter-digit-value";
+        newValue.textContent = newDigit;
+
+        track.append(oldValue, newValue);
+        slot.appendChild(track);
+        resumesCounter.appendChild(slot);
+        tracks.push({ track, index: digitIndex });
+
+        digitIndex += 1;
+      });
+
+      const baseDuration = 560;
+      let maxDelay = 0;
+
+      tracks.forEach(({ track, index }) => {
+        const delay = Math.max(0, (maxLen - 1 - index) * 28);
+        maxDelay = Math.max(maxDelay, delay);
+        track.animate(
+          [
+            { transform: "translateY(0%)" },
+            { transform: "translateY(-100%)" }
+          ],
+          {
+            duration: baseDuration,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+            delay
+          }
+        );
+      });
+
+      finalizeCounterTimer = setTimeout(() => {
+        displayedCounter = nextValue;
+        renderStaticCounter(nextValue);
+      }, baseDuration + maxDelay + 40);
     };
 
     resumesCounter.classList.add("counter-roll");
-    setCounterValue(baseNumber);
+    renderStaticCounter(baseNumber);
 
     // Function to generate random interval between 5 and 15 seconds
     const getRandomInterval = () => Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000;
