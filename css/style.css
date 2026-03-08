@@ -903,23 +903,44 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 #resumes-counter.counter-roll {
-  display: inline-block;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.01em;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   height: 1em;
   line-height: 1em;
   vertical-align: baseline;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 
-#resumes-counter .counter-roll-track {
+#resumes-counter .counter-digit {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 0.62em;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+}
+
+#resumes-counter .counter-digit-track {
   display: flex;
   flex-direction: column;
+  will-change: transform;
 }
 
-#resumes-counter .counter-roll-value {
+#resumes-counter .counter-digit-value {
   display: block;
   height: 1em;
   line-height: 1em;
+}
+
+#resumes-counter .counter-separator {
+  display: inline-block;
+  width: 0.34em;
+  text-align: center;
 }
 
 .benefits-grid-lite {
