@@ -22,7 +22,7 @@
   --color-warning: #f59e0b;
   --badge-green: #22c55e;
   --accent-soft-gradient: linear-gradient(120deg, #2563eb 0%, #3b82f6 52%, #60a5fa 100%);
-  --site-release-label: "v2026.03.08-rwd-06";
+  --site-release-label: "v2026.03.08-rwd-07";
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -1381,6 +1381,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   .header-wrap.has-toggle .header-nav.is-open { display: flex; }
   .header-wrap:not(.has-toggle) .header-nav { display: flex; width: 100%; }
   .grid-4, .workflow-steps { grid-template-columns: 1fr; }
+  .hero-title { font-size: clamp(28px, 7.2vw, 34px); line-height: 1.18; }
+  .hero-sub { font-size: 1rem; max-width: 100%; }
   .benefits-grid-lite { grid-template-columns: 1fr; gap: 12px; }
   .reviews-track { grid-template-columns: minmax(0, 1fr); }
   .benefits-headline { flex-direction: column; text-align: center; }
@@ -1426,6 +1428,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 480px) {
   .btn-large { width: 100%; padding: 14px 20px; }
   .upload-card { padding: 24px 18px; }
+  .hero-title { font-size: clamp(24px, 8vw, 30px); }
+  .hero-sub { font-size: 0.95rem; }
   .m-step span { font-size: 0.72rem; }
   .header-nav { gap: 6px; }
   .header-nav a { width: 100%; justify-content: center; }
