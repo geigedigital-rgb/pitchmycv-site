@@ -13,6 +13,7 @@ Conversion-focused landing page for an AI resume optimization product (Rezi/Enha
 - `index.html` — Main landing page (`/`)
 - `examples/`, `tools/`, `about/`, `blog/`, etc. — Clean routes via `index.html` files in folders
 - `css/style.css` — Styling and design system
+- `css/examples-resume-assets.css` — Styles for resume preview/download block on role example pages
 - `js/main.js` — Interactions (Drag & Drop)
 - `assets/` — Image assets
 - `scripts/generate_resume_examples.py` — Offline generator for per-role PDF/PNG resume examples

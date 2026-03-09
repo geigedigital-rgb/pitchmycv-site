@@ -1,0 +1,70 @@
+/* Resume template preview/download module (examples detail pages only) */
+
+.example-score {
+  color: #f97316;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.example-preview-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px -20px rgba(15, 23, 42, 0.6);
+}
+
+.example-preview-card img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 12px;
+}
+
+.example-side .btn {
+  width: 100%;
+  margin: 12px 0 16px;
+}
+
+.example-preview-card .btn.btn-primary {
+  margin-bottom: 10px;
+}
+
+.example-preview-card .btn.btn-outline {
+  margin: 0 0 10px;
+}
+
+.example-download-note {
+  color: #64748b;
+  font-size: 0.82rem;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.example-share {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.example-share-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.example-share-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid #dbe5f2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
