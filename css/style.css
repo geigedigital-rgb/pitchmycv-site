@@ -22,7 +22,7 @@
   --color-warning: #f59e0b;
   --badge-green: #22c55e;
   --accent-soft-gradient: linear-gradient(120deg, #2563eb 0%, #3b82f6 52%, #60a5fa 100%);
-  --site-release-label: "v2026.03.08-rwd-05";
+  --site-release-label: "v2026.03.08-rwd-06";
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -217,7 +217,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* --- BLOCK 2: Hiring System (Modern UI) --- */
 .hiring-system {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   padding: 100px 0;
   background: var(--bg-white);
 }
@@ -226,11 +226,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hiring-system::before {
   content: "";
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 60%;
-  height: 140%;
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  inset: 0;
+  width: auto;
+  height: auto;
+  background: radial-gradient(90% 72% at 86% 12%, rgba(167, 139, 250, 0.11) 0%, rgba(255, 255, 255, 0) 72%);
   z-index: 0;
   pointer-events: none;
 }
@@ -489,6 +488,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: clamp(24px, 5vw, 60px);
   align-items: center;
   padding: 60px 0;
+}
+
+.product-solution .wrap {
+  padding-inline: clamp(16px, 4vw, 24px);
 }
 
 .solution-content h2 {
@@ -1356,10 +1359,7 @@ ul { margin: 0; padding: 0; list-style: none; }
     bottom: -20px;
   }
   .hiring-system::before {
-    width: 100%;
-    right: -24%;
-    top: -14%;
-    height: 128%;
+    background: radial-gradient(90% 72% at 86% 12%, rgba(167, 139, 250, 0.12) 0%, rgba(255, 255, 255, 0) 72%);
   }
   .funnel-simple { max-width: 100%; padding: 24px 20px 20px; }
   .funnel-split { grid-template-columns: 1fr; }
@@ -1369,8 +1369,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   .roles-list { flex-direction: row; flex-wrap: wrap; justify-content: center; }
 }
 @media (max-width: 768px) {
-  .nav-toggle { display: inline-flex; }
-  .header-nav {
+  .header-wrap.has-toggle .nav-toggle { display: inline-flex; }
+  .header-wrap.has-toggle .header-nav {
     display: none;
     width: 100%;
     flex-direction: column;
@@ -1378,7 +1378,8 @@ ul { margin: 0; padding: 0; list-style: none; }
     gap: 8px;
     padding-top: 6px;
   }
-  .header-nav.is-open { display: flex; }
+  .header-wrap.has-toggle .header-nav.is-open { display: flex; }
+  .header-wrap:not(.has-toggle) .header-nav { display: flex; width: 100%; }
   .grid-4, .workflow-steps { grid-template-columns: 1fr; }
   .benefits-grid-lite { grid-template-columns: 1fr; gap: 12px; }
   .reviews-track { grid-template-columns: minmax(0, 1fr); }
@@ -1396,13 +1397,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   .cta-banner-scribble-2 { top: 32px; width: 106px; height: 30px; }
   .cta-banner-blob { width: 120px; height: 96px; right: -18px; bottom: -12px; }
   .reviews-controls { display: none; }
-  .modern-steps {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 10px;
-  }
+  .modern-steps { display: flex; justify-content: space-between; gap: 6px; flex-wrap: nowrap; }
   .modern-steps::before { display: none; }
-  .m-step span { text-align: center; }
+  .m-step { flex: 1 1 0; min-width: 0; gap: 8px; }
+  .m-icon { width: 38px; height: 38px; }
+  .m-badge { width: 16px; height: 16px; font-size: 0.6rem; top: -3px; right: -3px; }
+  .m-step span { text-align: center; font-size: 0.74rem; line-height: 1.15; }
   .header-nav a { font-size: 0.95rem; padding: 10px 12px; width: 100%; justify-content: center; }
   .header-nav .btn-primary { margin-left: 0; }
   .pricing-grid, .pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
@@ -1416,8 +1416,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hiring-score-card .score-box { font-size: 1rem; padding: 4px 8px; }
   .hiring-ats-pill { right: -2%; top: 20%; padding: 8px 12px; font-size: 0.85rem; }
   .hiring-skills-card { left: 4%; top: 10%; right: auto; bottom: auto; width: 160px; padding: 10px; }
-  .solution-layout { padding: 36px 0 24px; }
-  .funnel-simple { padding: 20px 16px 18px; }
+  .solution-layout { padding: 36px 0 24px; gap: 20px; }
+  .hr-funnel-visual { padding-inline: 12px; }
+  .funnel-simple { width: 100%; max-width: 100%; padding: 20px 16px 18px; }
   .example-snippet-head { flex-direction: column; align-items: flex-start; }
   .copy-btn-lite { width: 100%; }
 }
@@ -1425,7 +1426,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 480px) {
   .btn-large { width: 100%; padding: 14px 20px; }
   .upload-card { padding: 24px 18px; }
-  .modern-steps { grid-template-columns: 1fr; }
+  .m-step span { font-size: 0.72rem; }
   .header-nav { gap: 6px; }
   .header-nav a { width: 100%; justify-content: center; }
 }
