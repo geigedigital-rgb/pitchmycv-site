@@ -22,7 +22,7 @@
   --color-warning: #f59e0b;
   --badge-green: #22c55e;
   --accent-soft-gradient: linear-gradient(120deg, #2563eb 0%, #3b82f6 52%, #60a5fa 100%);
-  --site-release-label: "v2026.03.08-rwd-04";
+  --site-release-label: "v2026.03.08-rwd-05";
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -101,6 +101,31 @@ ul { margin: 0; padding: 0; list-style: none; }
 .header-nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; padding: 8px 12px; border-radius: var(--radius-sm); transition: color 0.2s; white-space: nowrap; }
 .header-nav a:hover { color: var(--text-main); }
 .header-nav .btn-primary { color: #fff; }
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-white);
+  color: var(--text-main);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: #334155;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 .nav-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: var(--badge-green); background: #dcfce7; padding: 2px 8px; border-radius: var(--radius-full); margin-left: 4px; }
 
 /* --- BLOCK 1: Hero (Rezi-style) --- */
@@ -192,7 +217,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* --- BLOCK 2: Hiring System (Modern UI) --- */
 .hiring-system {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding: 100px 0;
   background: var(--bg-white);
 }
@@ -256,8 +281,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Overlays on photo */
 .hiring-score-card {
   position: absolute;
-  left: 6%;
-  top: 15%;
+  right: 12%;
+  bottom: 8%;
   z-index: 2;
   background: var(--bg-white);
   border-radius: 12px;
@@ -304,8 +329,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .hiring-skills-card {
   position: absolute;
-  right: 12%;
-  bottom: 8%;
+  left: 6%;
+  top: 15%;
   z-index: 2;
   width: 190px;
   background: #fff;
@@ -461,7 +486,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .solution-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 60px;
+  gap: clamp(24px, 5vw, 60px);
   align-items: center;
   padding: 60px 0;
 }
@@ -515,6 +540,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-inline: clamp(4px, 2vw, 12px);
 }
 
 /* --- Funnel simple visual (Diagnose and fix) --- */
@@ -522,10 +548,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-inline: clamp(4px, 2vw, 12px);
 }
 
 .funnel-simple {
-  width: 100%;
+  width: min(100%, 460px);
   max-width: 460px;
   position: relative;
   background: #f8fafc;
@@ -1328,6 +1355,12 @@ ul { margin: 0; padding: 0; list-style: none; }
     right: -28px;
     bottom: -20px;
   }
+  .hiring-system::before {
+    width: 100%;
+    right: -24%;
+    top: -14%;
+    height: 128%;
+  }
   .funnel-simple { max-width: 100%; padding: 24px 20px 20px; }
   .funnel-split { grid-template-columns: 1fr; }
   .benefits-grid-lite { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1336,6 +1369,16 @@ ul { margin: 0; padding: 0; list-style: none; }
   .roles-list { flex-direction: row; flex-wrap: wrap; justify-content: center; }
 }
 @media (max-width: 768px) {
+  .nav-toggle { display: inline-flex; }
+  .header-nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 6px;
+  }
+  .header-nav.is-open { display: flex; }
   .grid-4, .workflow-steps { grid-template-columns: 1fr; }
   .benefits-grid-lite { grid-template-columns: 1fr; gap: 12px; }
   .reviews-track { grid-template-columns: minmax(0, 1fr); }
@@ -1360,8 +1403,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
   .modern-steps::before { display: none; }
   .m-step span { text-align: center; }
-  .header-nav a { font-size: 0.9rem; padding: 8px 10px; }
-  .header-nav a:not(.btn) { display: inline-flex; }
+  .header-nav a { font-size: 0.95rem; padding: 10px 12px; width: 100%; justify-content: center; }
   .header-nav .btn-primary { margin-left: 0; }
   .pricing-grid, .pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
   .pipeline-visual { flex-direction: column; gap: 24px; }
@@ -1370,10 +1412,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   .ui-sidebar { flex-direction: column; gap: 24px; }
   .trust-metrics { gap: 32px; flex-direction: column; }
   .section-light, .section-white { padding: 56px 0; }
-  .hiring-score-card { left: 4%; top: 10%; padding: 8px 12px; }
+  .hiring-score-card { right: 4%; bottom: 4%; left: auto; top: auto; padding: 8px 12px; }
   .hiring-score-card .score-box { font-size: 1rem; padding: 4px 8px; }
   .hiring-ats-pill { right: -2%; top: 20%; padding: 8px 12px; font-size: 0.85rem; }
-  .hiring-skills-card { right: 4%; bottom: 4%; width: 160px; padding: 10px; }
+  .hiring-skills-card { left: 4%; top: 10%; right: auto; bottom: auto; width: 160px; padding: 10px; }
+  .solution-layout { padding: 36px 0 24px; }
+  .funnel-simple { padding: 20px 16px 18px; }
   .example-snippet-head { flex-direction: column; align-items: flex-start; }
   .copy-btn-lite { width: 100%; }
 }

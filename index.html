@@ -75,7 +75,10 @@
   <header class="site-header">
     <div class="wrap header-wrap">
       <a href="/" class="logo" aria-label="Pitch My CV home">Pitch My CV</a>
-      <nav class="header-nav">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="header-nav" id="main-nav">
         <a href="#upload-zone">Scan Resume</a>
         <a href="/examples">Resume Examples</a>
         <a href="/tools/ats-checker">ATS Checker</a>
@@ -92,7 +95,6 @@
         <div class="hero-content">
           <h1 class="hero-title">Stop getting auto-rejected.<br>Multiply your interview chances.</h1>
           <p class="hero-sub">Don't let hidden ATS algorithms discard your application. Run a deep diagnostic scan to uncover exactly what's blocking your resume—and fix it to get noticed by real recruiters.</p>
-          <a href="#upload-zone" class="btn btn-primary btn-large" onclick="document.getElementById('file-input').click(); return false;">Check ATS score free</a>
           <aside class="hero-trust" aria-label="Social proof and reviews">
             <ul class="hero-trust-list">
               <li class="hero-trust-item">
