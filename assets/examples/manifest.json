@@ -75,7 +75,14 @@
       "Education and qualifications",
       "Skills section",
       "Additional sections (projects/certifications/languages)"
-    ]
+    ],
+    "variants": {
+      "a4_light": {
+        "label": "A4 light sidebar variant",
+        "pdf": "/assets/examples/marketing-manager/sample-a4-light.pdf",
+        "preview": "/assets/examples/marketing-manager/preview-a4-light.png"
+      }
+    }
   },
   "digital-marketing": {
     "role_title": "Digital Marketing Manager",
