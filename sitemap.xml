@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pitchcv.app/</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-09</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/tools/ats-checker</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-09</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/examples</loc>
@@ -66,11 +66,15 @@
   </url>
   <url>
     <loc>https://pitchcv.app/privacy</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-09</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/data-processing</loc>
+    <lastmod>2026-03-09</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/terms</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-09</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/blog</loc>

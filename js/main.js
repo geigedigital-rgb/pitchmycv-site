@@ -28,6 +28,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // One-time consent banner for first visit
+  const consentStorageKey = "pmcv_cookie_consent_v1";
+  const shouldShowConsent = (() => {
+    try {
+      return !window.localStorage.getItem(consentStorageKey);
+    } catch (error) {
+      return true;
+    }
+  })();
+
+  if (shouldShowConsent) {
+    const consentBanner = document.createElement("section");
+    consentBanner.className = "cookie-consent";
+    consentBanner.setAttribute("role", "dialog");
+    consentBanner.setAttribute("aria-live", "polite");
+    consentBanner.setAttribute("aria-label", "Cookie and data processing notice");
+    consentBanner.innerHTML = `
+      <div class="cookie-consent-card">
+        <p class="cookie-consent-text">
+          Мы используем необходимые cookies и данные взаимодействия с сайтом, чтобы предоставлять сервис и улучшать аналитику резюме.
+          Продолжая использование сайта, вы принимаете
+          <a href="/privacy">Политику конфиденциальности</a>,
+          <a href="/data-processing">Политику обработки данных</a> и
+          <a href="/terms">Публичную оферту</a>.
+        </p>
+        <button type="button" class="cookie-consent-accept">Принять</button>
+      </div>
+    `;
+
+    document.body.appendChild(consentBanner);
+    requestAnimationFrame(() => {
+      consentBanner.classList.add("is-visible");
+    });
+
+    const acceptButton = consentBanner.querySelector(".cookie-consent-accept");
+    if (acceptButton) {
+      acceptButton.addEventListener("click", () => {
+        try {
+          window.localStorage.setItem(consentStorageKey, "accepted");
+        } catch (error) {
+          // No-op if storage is unavailable.
+        }
+        consentBanner.classList.remove("is-visible");
+        setTimeout(() => consentBanner.remove(), 220);
+      });
+    }
+  }
+
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
