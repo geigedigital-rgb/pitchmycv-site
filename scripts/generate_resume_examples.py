@@ -18,6 +18,7 @@ from typing import Iterable
 from PIL import Image, ImageDraw, ImageFont
 from reportlab.lib.colors import Color
 from reportlab.lib.pagesizes import A4
+from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -710,66 +711,104 @@ def to_pdf_color(rgb: tuple[int, int, int]) -> Color:
     return Color(rgb[0] / 255, rgb[1] / 255, rgb[2] / 255)
 
 
-def wrap_words(text: str, max_chars: int) -> list[str]:
-    words = text.split()
+def normalize_text(text: str) -> str:
+    return " ".join(text.split())
+
+
+def fit_pdf_text(text: str, font_name: str, font_size: float, max_width: float) -> str:
+    text = normalize_text(text)
+    if pdfmetrics.stringWidth(text, font_name, font_size) <= max_width:
+        return text
+    if max_width <= 8:
+        return ""
+    suffix = "..."
+    candidate = text
+    while candidate and pdfmetrics.stringWidth(candidate + suffix, font_name, font_size) > max_width:
+        candidate = candidate[:-1]
+    return (candidate.rstrip() + suffix) if candidate else suffix
+
+
+def wrap_pdf_text(text: str, font_name: str, font_size: float, max_width: float) -> list[str]:
+    words = normalize_text(text).split(" ")
+    if not words or words == [""]:
+        return []
     lines: list[str] = []
-    current: list[str] = []
-    current_len = 0
-    for word in words:
-        add = len(word) + (1 if current else 0)
-        if current_len + add > max_chars:
-            lines.append(" ".join(current))
-            current = [word]
-            current_len = len(word)
+    current = words[0]
+    for word in words[1:]:
+        trial = f"{current} {word}"
+        if pdfmetrics.stringWidth(trial, font_name, font_size) <= max_width:
+            current = trial
         else:
-            current.append(word)
-            current_len += add
-    if current:
-        lines.append(" ".join(current))
+            lines.append(current)
+            if pdfmetrics.stringWidth(word, font_name, font_size) <= max_width:
+                current = word
+            else:
+                current = fit_pdf_text(word, font_name, font_size, max_width)
+    lines.append(current)
     return lines
+
+
+def draw_pdf_wrapped(
+    c: canvas.Canvas,
+    x: float,
+    y: float,
+    text: str,
+    max_width: float,
+    font_name: str = "Helvetica",
+    font_size: float = 8.3,
+    leading: float = 9.6,
+    max_lines: int | None = None,
+) -> float:
+    lines = wrap_pdf_text(text, font_name, font_size, max_width)
+    if max_lines is not None and len(lines) > max_lines:
+        tail = " ".join(lines[max_lines - 1 :])
+        lines = lines[: max_lines - 1] + [fit_pdf_text(tail, font_name, font_size, max_width)]
+    c.setFont(font_name, font_size)
+    for line in lines:
+        c.drawString(x, y, line)
+        y -= leading
+    return y
+
+
+def draw_pdf_bullets(
+    c: canvas.Canvas,
+    x: float,
+    y: float,
+    bullets: list[str],
+    max_width: float,
+    accent: tuple[int, int, int],
+    max_items: int = 3,
+    max_lines_per_item: int = 2,
+    font_size: float = 8.1,
+    leading: float = 9.2,
+) -> float:
+    text_x = x + 9
+    text_width = max_width - 9
+    for bullet in bullets[:max_items]:
+        lines = wrap_pdf_text(bullet, "Helvetica", font_size, text_width)
+        if len(lines) > max_lines_per_item:
+            tail = " ".join(lines[max_lines_per_item - 1 :])
+            lines = lines[: max_lines_per_item - 1] + [fit_pdf_text(tail, "Helvetica", font_size, text_width)]
+        c.setFillColor(to_pdf_color(accent))
+        c.circle(x + 2.4, y + 2.2, 1.5, stroke=0, fill=1)
+        c.setFillColor(Color(0, 0, 0))
+        c.setFont("Helvetica", font_size)
+        for idx, line in enumerate(lines):
+            c.drawString(text_x, y, line)
+            y -= leading
+        if lines:
+            y -= 1
+    return y
 
 
 def pdf_section_title(c: canvas.Canvas, x: float, y: float, width: float, title: str, accent: tuple[int, int, int]) -> float:
     c.setStrokeColor(to_pdf_color(accent))
     c.setLineWidth(1.0)
     c.line(x, y, x + width, y)
-    c.setFont("Helvetica-Bold", 10.2)
     c.setFillColor(Color(0, 0, 0))
-    c.drawString(x, y - 11, title.upper())
-    return y - 20
-
-
-def pdf_paragraph(c: canvas.Canvas, x: float, y: float, text: str, max_chars: int, size: float = 8.5, leading: float = 10.5) -> float:
-    c.setFont("Helvetica", size)
-    for line in wrap_words(text, max_chars):
-        c.drawString(x, y, line)
-        y -= leading
-    return y
-
-
-def pdf_bullet_lines(
-    c: canvas.Canvas,
-    x: float,
-    y: float,
-    bullets: list[str],
-    max_chars: int,
-    accent: tuple[int, int, int],
-    size: float = 8.2,
-    leading: float = 10.0,
-) -> float:
-    for bullet in bullets:
-        lines = wrap_words(bullet, max_chars)
-        c.setFillColor(to_pdf_color(accent))
-        c.circle(x + 2.5, y + 2.4, 1.7, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
-        c.setFont("Helvetica", size)
-        c.drawString(x + 8, y, lines[0])
-        y -= leading
-        for line in lines[1:]:
-            c.drawString(x + 8, y, line)
-            y -= leading
-        y -= 1
-    return y
+    c.setFont("Helvetica-Bold", 10.0)
+    c.drawString(x, y - 12, title.upper())
+    return y - 22
 
 
 def role_intro(profile: RoleProfile) -> str:
@@ -781,118 +820,183 @@ def role_intro(profile: RoleProfile) -> str:
 
 def technology_rows(profile: RoleProfile) -> list[tuple[str, str]]:
     return [
-        (profile.core_skills[0], f"Strong execution in {profile.core_skills[0].lower()} and {profile.core_skills[1].lower()}."),
-        (profile.core_skills[2], f"Applied in complex projects with measurable results in {profile.role_title.lower()} roles."),
-        ("Tooling", ", ".join(profile.tools[:6])),
+        (profile.core_skills[0], f"Execution in {profile.core_skills[0].lower()} and {profile.core_skills[1].lower()}."),
+        (profile.core_skills[2], f"Delivered complex initiatives in {profile.role_title.lower()} responsibilities."),
+        ("Tools", ", ".join(profile.tools[:6])),
         ("Certifications", ", ".join(profile.certifications[:2])),
     ]
 
 
 def draw_pdf_resume(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], page_w: float, page_h: float) -> None:
     accent = mix["accent"]
-    text = mix["text"]
-    c.setFillColor(to_pdf_color(text))
+    text_rgb = mix["text"]
+    margin = 34
+    content_w = page_w - margin * 2
+    bottom_safe = 44
+
+    c.setFillColor(to_pdf_color(text_rgb))
 
     # Header
-    c.setFont("Helvetica-Bold", 26)
-    c.drawString(34, page_h - 40, profile.person_name.upper())
-    intro_x = 210
-    c.setFont("Helvetica", 9.5)
-    intro_y = page_h - 29
-    for line in wrap_words(role_intro(profile), 69):
-        c.drawString(intro_x, intro_y, line)
-        intro_y -= 11
+    c.setFont("Helvetica-Bold", 25)
+    c.drawString(margin, page_h - 40, profile.person_name.upper())
 
-    # Contact row
+    intro_x = 214
+    intro_w = content_w - (intro_x - margin)
+    intro_y = page_h - 28
+    intro_y = draw_pdf_wrapped(
+        c,
+        intro_x,
+        intro_y,
+        role_intro(profile),
+        intro_w,
+        font_name="Helvetica",
+        font_size=9.4,
+        leading=11.0,
+        max_lines=5,
+    )
+
+    contact_line_y = min(page_h - 78, intro_y - 4)
     c.setStrokeColor(to_pdf_color(accent))
     c.setLineWidth(1.0)
-    c.line(34, page_h - 74, page_w - 34, page_h - 74)
-    c.setFont("Helvetica", 8.4)
-    contact_items = [profile.website, profile.email, profile.linkedin, profile.phone]
-    cx = 34
-    for item in contact_items:
-        c.drawString(cx, page_h - 89, item)
-        cx += 135
+    c.line(margin, contact_line_y, page_w - margin, contact_line_y)
 
-    y = page_h - 108
+    contact_y = contact_line_y - 14
+    contact_col_w = content_w / 4
+    contact_items = [profile.website, profile.email, profile.linkedin, profile.phone]
+    c.setFont("Helvetica", 8.4)
+    for idx, item in enumerate(contact_items):
+        x = margin + idx * contact_col_w
+        text = fit_pdf_text(item, "Helvetica", 8.4, contact_col_w - 10)
+        c.drawString(x, contact_y, text)
+
+    y = contact_y - 17
 
     # Experience
-    y = pdf_section_title(c, 34, y, page_w - 68, "Experience", accent)
-    year_col = 88
+    y = pdf_section_title(c, margin, y, content_w, "Experience", accent)
+    year_col = 96
     for exp in profile.experience[:3]:
-        c.setFont("Helvetica-Bold", 9.0)
-        c.drawString(34, y, exp.period.replace(" - ", "–"))
-        c.setFont("Helvetica-Bold", 9.0)
-        c.drawString(34 + year_col, y, exp.title)
+        if y <= bottom_safe + 200:
+            break
+        c.setFont("Helvetica-Bold", 8.9)
+        c.drawString(margin, y, fit_pdf_text(exp.period.replace(" - ", "–"), "Helvetica-Bold", 8.9, year_col - 8))
+        c.drawString(
+            margin + year_col,
+            y,
+            fit_pdf_text(exp.title, "Helvetica-Bold", 8.9, content_w - year_col - 4),
+        )
         y -= 10
-        c.setFont("Helvetica-Oblique", 8.2)
-        c.drawString(34 + year_col, y, f"{exp.company}, {exp.location}")
+        c.setFont("Helvetica-Oblique", 8.0)
+        c.drawString(
+            margin + year_col,
+            y,
+            fit_pdf_text(f"{exp.company}, {exp.location}", "Helvetica-Oblique", 8.0, content_w - year_col - 4),
+        )
         y -= 10
-        y = pdf_bullet_lines(c, 34 + year_col, y, exp.bullets[:3], 72, accent, size=8.0, leading=9.4)
+        y = draw_pdf_bullets(
+            c,
+            margin + year_col,
+            y,
+            exp.bullets,
+            content_w - year_col,
+            accent,
+            max_items=3,
+            max_lines_per_item=2,
+            font_size=8.0,
+            leading=9.2,
+        )
+        c.setStrokeColor(Color(0.87, 0.87, 0.87))
+        c.setLineWidth(0.5)
+        c.line(margin + year_col, y + 2, margin + content_w, y + 2)
+        y -= 5
+
+    # Technology
+    y = pdf_section_title(c, margin, y, content_w, "Technology", accent)
+    label_w = 124
+    for label, desc in technology_rows(profile):
+        if y <= bottom_safe + 120:
+            break
+        c.setFont("Helvetica-Bold", 8.6)
+        c.drawString(margin, y, fit_pdf_text(label, "Helvetica-Bold", 8.6, label_w - 6))
+        y = draw_pdf_wrapped(
+            c,
+            margin + label_w,
+            y,
+            desc,
+            content_w - label_w,
+            font_name="Helvetica",
+            font_size=8.1,
+            leading=9.1,
+            max_lines=2,
+        )
         y -= 2
 
-    # Technology / core stack
-    y = pdf_section_title(c, 34, y, page_w - 68, "Technology", accent)
-    c.setFont("Helvetica-Bold", 8.7)
-    tx_name = 34
-    tx_desc = 170
-    for name, desc in technology_rows(profile):
-        c.drawString(tx_name, y, name)
-        c.setFont("Helvetica", 8.3)
-        for line in wrap_words(desc, 75):
-            c.drawString(tx_desc, y, line)
-            y -= 9
-        y -= 2
-        c.setFont("Helvetica-Bold", 8.7)
-
-    # Two column section
+    # Two columns
     col_gap = 16
-    col_w = (page_w - 68 - col_gap) / 2
-    left_x = 34
-    right_x = 34 + col_w + col_gap
+    col_w = (content_w - col_gap) / 2
+    left_x = margin
+    right_x = margin + col_w + col_gap
     y -= 1
-    y_left = pdf_section_title(c, left_x, y, col_w, "Leadership", accent)
+
+    left_y = pdf_section_title(c, left_x, y, col_w, "Leadership", accent)
     leadership = [
         f"Led initiatives in {profile.core_skills[0].lower()} and {profile.core_skills[3].lower()} for multi-team delivery.",
         f"Mentored peers on {profile.tools[0]}, {profile.tools[1]}, and reusable implementation standards.",
     ]
-    y_left = pdf_bullet_lines(c, left_x, y_left, leadership, 45, accent, size=8.0, leading=9.3)
+    left_y = draw_pdf_bullets(
+        c,
+        left_x,
+        left_y,
+        leadership,
+        col_w,
+        accent,
+        max_items=2,
+        max_lines_per_item=2,
+        font_size=8.0,
+        leading=9.1,
+    )
 
-    y_right = pdf_section_title(c, right_x, y, col_w, "Project highlights", accent)
+    right_y = pdf_section_title(c, right_x, y, col_w, "Project highlights", accent)
     for pr in profile.projects[:2]:
+        c.setFont("Helvetica-Bold", 8.5)
+        c.drawString(right_x, right_y, fit_pdf_text(pr.name, "Helvetica-Bold", 8.5, col_w))
+        right_y -= 9
+        right_y = draw_pdf_wrapped(
+            c,
+            right_x,
+            right_y,
+            pr.details,
+            col_w,
+            font_name="Helvetica",
+            font_size=7.9,
+            leading=8.8,
+            max_lines=2,
+        )
+        right_y -= 2
+
+    y = max(left_y, right_y) + 2
+
+    # Education + language
+    if y > bottom_safe + 40:
+        y = pdf_section_title(c, margin, y, content_w, "Education and Language", accent)
+        edu_x = margin
+        lang_x = margin + content_w * 0.62
+        edu_y = y
+        for edu in profile.education[:2]:
+            c.setFont("Helvetica-Bold", 8.4)
+            c.drawString(edu_x, edu_y, fit_pdf_text(edu.period.replace(" - ", "–"), "Helvetica-Bold", 8.4, 54))
+            c.drawString(edu_x + 58, edu_y, fit_pdf_text(edu.degree, "Helvetica-Bold", 8.4, 210))
+            edu_y -= 9
+            c.setFont("Helvetica-Oblique", 7.9)
+            c.drawString(edu_x + 58, edu_y, fit_pdf_text(edu.school, "Helvetica-Oblique", 7.9, 210))
+            edu_y -= 9
+
         c.setFont("Helvetica-Bold", 8.6)
-        c.drawString(right_x, y_right, pr.name)
-        y_right -= 9
+        c.drawString(lang_x, y, "Languages")
+        lang_y = y - 10
         c.setFont("Helvetica", 8.0)
-        for line in wrap_words(pr.details, 45):
-            c.drawString(right_x, y_right, line)
-            y_right -= 9
-        y_right -= 2
-
-    y = min(y_left, y_right) - 2
-
-    # Education + Language
-    y = pdf_section_title(c, 34, y, page_w - 68, "Education and Language", accent)
-    edu_x = 34
-    lang_x = 332
-    ey = y
-    for edu in profile.education[:2]:
-        c.setFont("Helvetica-Bold", 8.6)
-        c.drawString(edu_x, ey, edu.period.replace(" - ", "–"))
-        c.drawString(edu_x + 58, ey, edu.degree)
-        ey -= 9
-        c.setFont("Helvetica-Oblique", 8.0)
-        c.drawString(edu_x + 58, ey, edu.school)
-        ey -= 8
-
-    ly = y
-    c.setFont("Helvetica-Bold", 8.8)
-    c.drawString(lang_x, ly, "Languages")
-    ly -= 10
-    c.setFont("Helvetica", 8.2)
-    for lang in profile.languages[:3]:
-        c.drawString(lang_x, ly, lang)
-        ly -= 9
+        for lang in profile.languages[:3]:
+            c.drawString(lang_x, lang_y, fit_pdf_text(lang, "Helvetica", 8.0, content_w - (lang_x - margin)))
+            lang_y -= 9
 
 
 def generate_pdf(profile: RoleProfile) -> Path:
@@ -922,17 +1026,60 @@ def font_for(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFon
     return ImageFont.load_default()
 
 
-def png_paragraph(
+def pil_text_width(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont) -> float:
+    if not text:
+        return 0.0
+    left, _, right, _ = draw.textbbox((0, 0), text, font=font)
+    return float(right - left)
+
+
+def fit_pil_text(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont, max_width: float) -> str:
+    text = normalize_text(text)
+    if pil_text_width(draw, text, font) <= max_width:
+        return text
+    suffix = "..."
+    candidate = text
+    while candidate and pil_text_width(draw, candidate + suffix, font) > max_width:
+        candidate = candidate[:-1]
+    return (candidate.rstrip() + suffix) if candidate else suffix
+
+
+def wrap_pil_text(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont, max_width: float) -> list[str]:
+    words = normalize_text(text).split(" ")
+    if not words or words == [""]:
+        return []
+    lines: list[str] = []
+    current = words[0]
+    for word in words[1:]:
+        trial = f"{current} {word}"
+        if pil_text_width(draw, trial, font) <= max_width:
+            current = trial
+        else:
+            lines.append(current)
+            if pil_text_width(draw, word, font) <= max_width:
+                current = word
+            else:
+                current = fit_pil_text(draw, word, font, max_width)
+    lines.append(current)
+    return lines
+
+
+def draw_png_wrapped(
     draw: ImageDraw.ImageDraw,
     text: str,
     x: int,
     y: int,
-    max_chars: int,
+    max_width: int,
     font: ImageFont.ImageFont,
-    fill: tuple[int, int, int] = (0, 0, 0),
-    leading: int = 24,
+    fill: tuple[int, int, int],
+    leading: int = 22,
+    max_lines: int | None = None,
 ) -> int:
-    for line in wrap_words(text, max_chars):
+    lines = wrap_pil_text(draw, text, font, max_width)
+    if max_lines is not None and len(lines) > max_lines:
+        tail = " ".join(lines[max_lines - 1 :])
+        lines = lines[: max_lines - 1] + [fit_pil_text(draw, tail, font, max_width)]
+    for line in lines:
         draw.text((x, y), line, font=font, fill=fill)
         y += leading
     return y
@@ -949,26 +1096,32 @@ def png_section_title(
 ) -> int:
     draw.line((x, y, x + width, y), fill=accent, width=3)
     draw.text((x, y + 8), title.upper(), font=title_font, fill=(0, 0, 0))
-    return y + 40
+    return y + 38
 
 
-def png_bullets(
+def draw_png_bullets(
     draw: ImageDraw.ImageDraw,
     bullets: list[str],
     x: int,
     y: int,
-    max_chars: int,
+    max_width: int,
     accent: tuple[int, int, int],
     font: ImageFont.ImageFont,
+    fill: tuple[int, int, int],
+    max_items: int = 3,
+    max_lines_per_item: int = 2,
     leading: int = 22,
 ) -> int:
-    for bullet in bullets:
-        lines = wrap_words(bullet, max_chars)
+    text_x = x + 14
+    text_width = max_width - 14
+    for bullet in bullets[:max_items]:
+        lines = wrap_pil_text(draw, bullet, font, text_width)
+        if len(lines) > max_lines_per_item:
+            tail = " ".join(lines[max_lines_per_item - 1 :])
+            lines = lines[: max_lines_per_item - 1] + [fit_pil_text(draw, tail, font, text_width)]
         draw.ellipse((x, y + 8, x + 8, y + 16), fill=accent)
-        draw.text((x + 14, y), lines[0], font=font, fill=(0, 0, 0))
-        y += leading
-        for line in lines[1:]:
-            draw.text((x + 14, y), line, font=font, fill=(0, 0, 0))
+        for line in lines:
+            draw.text((text_x, y), line, font=font, fill=fill)
             y += leading
         y += 2
     return y
@@ -977,46 +1130,89 @@ def png_bullets(
 def draw_png_resume(draw: ImageDraw.ImageDraw, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], width: int, height: int) -> None:
     accent = mix["accent"]
     text_color = mix["text"]
+    margin = 54
+    content_w = width - margin * 2
+    bottom_safe = height - 54
     body_font = font_for(16)
     section_font = font_for(20, bold=True)
 
     # Header area
-    draw.text((54, 54), profile.person_name.upper(), fill=text_color, font=font_for(44, bold=True))
+    draw.text((margin, 54), profile.person_name.upper(), fill=text_color, font=font_for(44, bold=True))
+    intro_x = 380
+    intro_w = width - margin - intro_x
     intro_y = 70
-    for line in wrap_words(role_intro(profile), 67):
-        draw.text((360, intro_y), line, fill=text_color, font=font_for(16))
-        intro_y += 24
-    draw.line((54, 148, width - 54, 148), fill=accent, width=3)
+    intro_y = draw_png_wrapped(
+        draw,
+        role_intro(profile),
+        intro_x,
+        intro_y,
+        intro_w,
+        body_font,
+        text_color,
+        leading=22,
+        max_lines=5,
+    )
+    contact_line_y = max(148, intro_y + 4)
+    draw.line((margin, contact_line_y, width - margin, contact_line_y), fill=accent, width=3)
 
     # Contact row
     contacts = [profile.website, profile.email, profile.linkedin, profile.phone]
-    cx = 54
-    for item in contacts:
-        draw.text((cx, 162), item, fill=text_color, font=font_for(14))
-        cx += 285
+    contact_y = contact_line_y + 14
+    col_w = content_w // 4
+    small_font = font_for(14)
+    for idx, item in enumerate(contacts):
+        x = margin + idx * col_w
+        draw.text((x, contact_y), fit_pil_text(draw, item, small_font, col_w - 12), fill=text_color, font=small_font)
 
-    y = 206
-    y = png_section_title(draw, "Experience", 54, y, width - 108, accent, section_font)
+    y = contact_y + 38
+    y = png_section_title(draw, "Experience", margin, y, content_w, accent, section_font)
     year_col = 132
     for exp in profile.experience[:3]:
-        draw.text((54, y), exp.period.replace(" - ", "–"), fill=text_color, font=font_for(15, bold=True))
-        draw.text((54 + year_col, y), exp.title, fill=text_color, font=font_for(17, bold=True))
+        if y > bottom_safe - 560:
+            break
+        draw.text((margin, y), fit_pil_text(draw, exp.period.replace(" - ", "–"), font_for(15, bold=True), year_col - 10), fill=text_color, font=font_for(15, bold=True))
+        draw.text(
+            (margin + year_col, y),
+            fit_pil_text(draw, exp.title, font_for(17, bold=True), content_w - year_col - 6),
+            fill=text_color,
+            font=font_for(17, bold=True),
+        )
         y += 24
-        draw.text((54 + year_col, y), f"{exp.company}, {exp.location}", fill=text_color, font=font_for(15))
+        draw.text(
+            (margin + year_col, y),
+            fit_pil_text(draw, f"{exp.company}, {exp.location}", font_for(15), content_w - year_col - 6),
+            fill=text_color,
+            font=font_for(15),
+        )
         y += 22
-        y = png_bullets(draw, exp.bullets[:3], 54 + year_col, y, 75, accent, body_font, leading=22)
+        y = draw_png_bullets(
+            draw,
+            exp.bullets,
+            margin + year_col,
+            y,
+            content_w - year_col,
+            accent,
+            body_font,
+            text_color,
+            max_items=3,
+            max_lines_per_item=2,
+            leading=21,
+        )
+        draw.line((margin + year_col, y + 2, margin + content_w, y + 2), fill=(220, 220, 220), width=1)
         y += 4
 
-    y = png_section_title(draw, "Technology", 54, y, width - 108, accent, section_font)
-    name_x, desc_x = 54, 290
+    y = png_section_title(draw, "Technology", margin, y, content_w, accent, section_font)
+    name_x, desc_x = margin, margin + 236
     for name, desc in technology_rows(profile):
-        draw.text((name_x, y), name, fill=text_color, font=font_for(15, bold=True))
-        y = png_paragraph(draw, desc, desc_x, y, 72, body_font, fill=text_color, leading=22)
+        if y > bottom_safe - 320:
+            break
+        draw.text((name_x, y), fit_pil_text(draw, name, font_for(15, bold=True), 220), fill=text_color, font=font_for(15, bold=True))
+        y = draw_png_wrapped(draw, desc, desc_x, y, content_w - (desc_x - margin), body_font, text_color, leading=21, max_lines=2)
         y += 2
 
     col_gap = 24
-    col_w = (width - 108 - col_gap) // 2
-    left_x = 54
+    col_w = (content_w - col_gap) // 2
+    left_x = margin
     right_x = left_x + col_w + col_gap
 
     y_left = png_section_title(draw, "Leadership", left_x, y, col_w, accent, section_font)
@@ -1024,31 +1220,43 @@ def draw_png_resume(draw: ImageDraw.ImageDraw, profile: RoleProfile, mix: dict[s
         f"Led initiatives in {profile.core_skills[0].lower()} and {profile.core_skills[3].lower()}.",
         f"Mentored teams on {profile.tools[0]}, {profile.tools[1]}, and delivery standards.",
     ]
-    y_left = png_bullets(draw, leadership, left_x, y_left, 37, accent, body_font, leading=21)
+    y_left = draw_png_bullets(
+        draw,
+        leadership,
+        left_x,
+        y_left,
+        col_w,
+        accent,
+        body_font,
+        text_color,
+        max_items=2,
+        max_lines_per_item=2,
+        leading=21,
+    )
 
     y_right = png_section_title(draw, "Project highlights", right_x, y, col_w, accent, section_font)
     for pr in profile.projects[:2]:
-        draw.text((right_x, y_right), pr.name, fill=text_color, font=font_for(15, bold=True))
+        draw.text((right_x, y_right), fit_pil_text(draw, pr.name, font_for(15, bold=True), col_w), fill=text_color, font=font_for(15, bold=True))
         y_right += 22
-        y_right = png_paragraph(draw, pr.details, right_x, y_right, 37, body_font, fill=text_color, leading=21)
+        y_right = draw_png_wrapped(draw, pr.details, right_x, y_right, col_w, body_font, text_color, leading=21, max_lines=2)
         y_right += 2
 
     y = max(y_left, y_right) + 2
-    y = png_section_title(draw, "Education and Language", 54, y, width - 108, accent, section_font)
-    edu_x = 54
-    lang_x = 650
+    y = png_section_title(draw, "Education and Language", margin, y, content_w, accent, section_font)
+    edu_x = margin
+    lang_x = margin + int(content_w * 0.62)
     for edu in profile.education[:2]:
-        draw.text((edu_x, y), edu.period.replace(" - ", "–"), fill=text_color, font=font_for(14, bold=True))
-        draw.text((edu_x + 110, y), edu.degree, fill=text_color, font=font_for(15, bold=True))
+        draw.text((edu_x, y), fit_pil_text(draw, edu.period.replace(" - ", "–"), font_for(14, bold=True), 100), fill=text_color, font=font_for(14, bold=True))
+        draw.text((edu_x + 110, y), fit_pil_text(draw, edu.degree, font_for(15, bold=True), 360), fill=text_color, font=font_for(15, bold=True))
         y += 22
-        draw.text((edu_x + 110, y), edu.school, fill=text_color, font=font_for(14))
+        draw.text((edu_x + 110, y), fit_pil_text(draw, edu.school, font_for(14), 360), fill=text_color, font=font_for(14))
         y += 21
 
     ly = y - 86
     draw.text((lang_x, ly), "Languages", fill=text_color, font=font_for(15, bold=True))
     ly += 24
     for lang in profile.languages[:3]:
-        draw.text((lang_x, ly), lang, fill=text_color, font=font_for(14))
+        draw.text((lang_x, ly), fit_pil_text(draw, lang, font_for(14), width - lang_x - margin), fill=text_color, font=font_for(14))
         ly += 22
 
 
