@@ -249,11 +249,18 @@ PROFILES: list[RoleProfile] = [
         linkedin="linkedin.com/in/jordanleemktg",
         summary=(
             "Marketing manager with broad B2B demand generation experience across content, paid media, "
-            "and lifecycle programs. Builds measurable funnel systems and aligns marketing execution with "
-            "sales pipeline and revenue targets."
+            "lifecycle programs, and GTM reporting. Builds measurable funnel systems, coaches cross-functional "
+            "teams, and aligns marketing execution with sales pipeline and revenue targets quarter over quarter."
         ),
-        core_skills=["Demand Generation", "Campaign Planning", "Funnel Analytics", "Content Strategy", "Team Leadership", "Budget Ownership"],
-        tools=["GA4", "HubSpot", "Salesforce", "Google Ads", "Meta Ads", "Looker Studio", "Semrush", "Ahrefs"],
+        core_skills=[
+            "Demand Generation",
+            "Campaign Planning",
+            "Funnel Analytics",
+            "Content Strategy",
+            "Team Leadership",
+            "Budget Ownership",
+        ],
+        tools=["GA4", "HubSpot", "Salesforce", "Google Ads", "Meta Ads", "Looker Studio", "Semrush", "Ahrefs", "Tableau", "VWO"],
         experience=[
             ExperienceItem(
                 period="2021 - Present",
@@ -261,9 +268,9 @@ PROFILES: list[RoleProfile] = [
                 company="BrightMint",
                 location="Warsaw",
                 bullets=[
-                    "Scaled MQL pipeline by 34% through segmented campaigns and channel testing.",
-                    "Improved paid media ROAS from 2.1x to 3.3x in two quarters.",
-                    "Built monthly funnel review process shared with GTM leadership.",
+                    "Scaled MQL pipeline by 34% through segmented campaigns, offer-specific landing pages, and weekly channel testing.",
+                    "Improved paid media ROAS from 2.1x to 3.3x in two quarters while maintaining lead quality thresholds set by sales.",
+                    "Built monthly funnel review process shared with GTM leadership, linking spend, SQL quality, and closed-won revenue.",
                 ],
             ),
             ExperienceItem(
@@ -272,9 +279,9 @@ PROFILES: list[RoleProfile] = [
                 company="NovaRetail",
                 location="Krakow",
                 bullets=[
-                    "Increased non-brand organic traffic by 52% across regional content hubs.",
-                    "Designed lifecycle nurture series that lifted SQL conversion by 14%.",
-                    "Collaborated with sales to map campaign influence to closed-won opportunities.",
+                    "Increased non-brand organic traffic by 52% across regional content hubs through topic clusters and content refresh sprints.",
+                    "Designed lifecycle nurture series that lifted SQL conversion by 14% and shortened average lead response latency.",
+                    "Collaborated with sales ops to map campaign influence to closed-won opportunities and improve forecasting confidence.",
                 ],
             ),
         ],
@@ -827,6 +834,23 @@ def technology_rows(profile: RoleProfile) -> list[tuple[str, str]]:
     ]
 
 
+def marketing_skill_descriptions(profile: RoleProfile) -> list[tuple[str, str]]:
+    return [
+        ("Demand generation", "Owns full-funnel programs from campaign launch to SQL handoff quality."),
+        ("Campaign planning", "Builds quarterly channel plans with budget pacing and clear experiment cadence."),
+        ("Funnel analytics", "Tracks MQL-to-revenue conversion and improves attribution confidence across GTM."),
+        ("Content strategy", "Aligns SEO, lifecycle, and sales enablement messaging with priority ICP segments."),
+    ]
+
+
+def marketing_success_highlights(profile: RoleProfile) -> list[str]:
+    return [
+        "Grew qualified pipeline while reducing CAC with stronger message-to-landing alignment.",
+        "Improved paid and lifecycle efficiency through structured experiment roadmaps.",
+        "Standardized KPI reviews to connect campaign investment with revenue outcomes.",
+    ]
+
+
 def draw_pdf_resume(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], page_w: float, page_h: float) -> None:
     accent = mix["accent"]
     text_rgb = mix["text"]
@@ -1284,9 +1308,9 @@ def draw_marketing_variant_pdf(profile: RoleProfile, mix: dict[str, tuple[int, i
 
     accent = mix["accent"]
     text = mix["text"]
-    m = 28
-    sidebar_w = 162
-    right_x = m + sidebar_w + 20
+    m = 26
+    sidebar_w = 176
+    right_x = m + sidebar_w + 22
     right_w = page_w - right_x - m
 
     # Main frame
@@ -1299,57 +1323,72 @@ def draw_marketing_variant_pdf(profile: RoleProfile, mix: dict[str, tuple[int, i
     c.line(m + sidebar_w, m, m + sidebar_w, page_h - m)
 
     # Header (right)
-    hy = page_h - 52
+    hy = page_h - 50
     c.setFillColor(to_pdf_color(text))
-    c.setFont("Helvetica-Bold", 24)
+    c.setFont("Helvetica-Bold", 25)
     c.drawString(right_x, hy, profile.person_name)
-    c.setFont("Helvetica", 11)
+    c.setFont("Helvetica", 11.6)
     c.drawString(right_x, hy - 14, "Marketing Specialist")
     c.setStrokeColor(to_pdf_color(accent))
     c.line(right_x, hy - 22, right_x + right_w, hy - 22)
 
     # Sidebar content
-    sy = page_h - 64
-    sy = pdf_section_title(c, m + 10, sy, sidebar_w - 20, "Personal details", accent)
-    c.setFont("Helvetica-Bold", 8.0)
+    sy = page_h - 62
+    sy = pdf_section_title(c, m + 12, sy, sidebar_w - 24, "Personal details", accent)
+    c.setFont("Helvetica-Bold", 8.3)
     labels = ["Name", "Address", "Phone", "Email", "Website", "LinkedIn"]
     values = [profile.person_name, profile.location, profile.phone, profile.email, profile.website, profile.linkedin]
     for label, value in zip(labels, values):
-        c.drawString(m + 10, sy, label)
+        c.drawString(m + 12, sy, label)
         sy = draw_pdf_wrapped(
             c,
-            m + 10,
-            sy - 9,
+            m + 12,
+            sy - 10,
             value,
-            sidebar_w - 20,
+            sidebar_w - 24,
             font_name="Helvetica",
-            font_size=7.8,
-            leading=8.7,
+            font_size=8.1,
+            leading=9.3,
             max_lines=2,
         )
-        sy -= 2
+        sy -= 4
 
-    sy = pdf_section_title(c, m + 10, sy, sidebar_w - 20, "Core skills", accent)
+    sy = pdf_section_title(c, m + 12, sy, sidebar_w - 24, "Core skills", accent)
     sy = draw_pdf_bullets(
         c,
-        m + 10,
+        m + 12,
         sy,
         profile.core_skills[:6],
-        sidebar_w - 20,
+        sidebar_w - 24,
         accent,
         max_items=6,
         max_lines_per_item=1,
-        font_size=7.7,
-        leading=8.6,
+        font_size=8.0,
+        leading=9.0,
     )
-    sy = pdf_section_title(c, m + 10, sy, sidebar_w - 20, "Languages", accent)
-    c.setFont("Helvetica", 7.8)
+
+    sy = pdf_section_title(c, m + 12, sy, sidebar_w - 24, "Success highlights", accent)
+    sy = draw_pdf_bullets(
+        c,
+        m + 12,
+        sy,
+        marketing_success_highlights(profile),
+        sidebar_w - 24,
+        accent,
+        max_items=3,
+        max_lines_per_item=2,
+        font_size=7.9,
+        leading=8.9,
+    )
+
+    sy = pdf_section_title(c, m + 12, sy, sidebar_w - 24, "Languages", accent)
+    c.setFont("Helvetica", 8.0)
     for lang in profile.languages[:3]:
-        c.drawString(m + 10, sy, fit_pdf_text(lang, "Helvetica", 7.8, sidebar_w - 20))
-        sy -= 9
+        c.drawString(m + 12, sy, fit_pdf_text(lang, "Helvetica", 8.0, sidebar_w - 24))
+        sy -= 10
 
     # Right column content
-    y = hy - 34
+    y = hy - 32
     y = pdf_section_title(c, right_x, y, right_w, "Profile", accent)
     y = draw_pdf_wrapped(
         c,
@@ -1358,69 +1397,86 @@ def draw_marketing_variant_pdf(profile: RoleProfile, mix: dict[str, tuple[int, i
         profile.summary,
         right_w,
         font_name="Helvetica",
-        font_size=8.6,
-        leading=10.0,
-        max_lines=5,
+        font_size=9.1,
+        leading=10.8,
+        max_lines=6,
     )
 
-    y -= 2
+    y -= 4
     y = pdf_section_title(c, right_x, y, right_w, "Work experience", accent)
     year_x = right_x
-    tl_x = right_x + 96
+    tl_x = right_x + 100
     c.setStrokeColor(Color(0.70, 0.74, 0.79))
     c.setLineWidth(0.7)
-    c.line(tl_x, y + 8, tl_x, y - 220)
+    c.line(tl_x, y + 8, tl_x, y - 236)
 
-    for exp in profile.experience[:3]:
+    for exp in profile.experience[:2]:
         c.setFillColor(to_pdf_color(text))
-        c.setFont("Helvetica-Bold", 8.2)
-        c.drawString(year_x, y, fit_pdf_text(exp.period.replace(" - ", " - "), "Helvetica-Bold", 8.2, 88))
+        c.setFont("Helvetica-Bold", 8.6)
+        c.drawString(year_x, y, fit_pdf_text(exp.period.replace(" - ", " - "), "Helvetica-Bold", 8.6, 92))
         c.setFillColor(to_pdf_color(accent))
         c.circle(tl_x, y + 2.2, 1.9, stroke=0, fill=1)
         c.setFillColor(to_pdf_color(text))
-        c.setFont("Helvetica-Bold", 8.6)
-        c.drawString(tl_x + 10, y, fit_pdf_text(exp.title, "Helvetica-Bold", 8.6, right_w - 110))
-        y -= 9
-        c.setFont("Helvetica-Oblique", 7.9)
-        c.drawString(tl_x + 10, y, fit_pdf_text(f"{exp.company}, {exp.location}", "Helvetica-Oblique", 7.9, right_w - 110))
-        y -= 9
+        c.setFont("Helvetica-Bold", 8.9)
+        c.drawString(tl_x + 10, y, fit_pdf_text(exp.title, "Helvetica-Bold", 8.9, right_w - 114))
+        y -= 10
+        c.setFont("Helvetica-Oblique", 8.2)
+        c.drawString(tl_x + 10, y, fit_pdf_text(f"{exp.company}, {exp.location}", "Helvetica-Oblique", 8.2, right_w - 114))
+        y -= 10
         y = draw_pdf_bullets(
             c,
             tl_x + 10,
             y,
             exp.bullets,
-            right_w - 110,
+            right_w - 114,
             accent,
             max_items=3,
-            max_lines_per_item=2,
-            font_size=7.8,
-            leading=8.9,
+            max_lines_per_item=3,
+            font_size=8.2,
+            leading=9.7,
         )
-        y -= 1
+        y -= 2
+
+    y = pdf_section_title(c, right_x, y, right_w, "Skills in practice", accent)
+    for skill_name, skill_desc in marketing_skill_descriptions(profile):
+        c.setFont("Helvetica-Bold", 8.6)
+        c.drawString(right_x, y, fit_pdf_text(skill_name, "Helvetica-Bold", 8.6, 118))
+        y = draw_pdf_wrapped(
+            c,
+            right_x + 122,
+            y,
+            skill_desc,
+            right_w - 122,
+            font_name="Helvetica",
+            font_size=8.1,
+            leading=9.3,
+            max_lines=2,
+        )
+        y -= 2
 
     y = pdf_section_title(c, right_x, y, right_w, "Education and certifications", accent)
     for edu in profile.education[:2]:
-        c.setFont("Helvetica-Bold", 8.4)
-        c.drawString(right_x, y, fit_pdf_text(edu.degree, "Helvetica-Bold", 8.4, right_w - 130))
-        c.setFont("Helvetica", 7.8)
-        c.drawRightString(right_x + right_w, y, fit_pdf_text(edu.period, "Helvetica", 7.8, 126))
-        y -= 9
-        c.setFont("Helvetica-Oblique", 7.7)
-        c.drawString(right_x, y, fit_pdf_text(edu.school, "Helvetica-Oblique", 7.7, right_w))
-        y -= 9
+        c.setFont("Helvetica-Bold", 8.6)
+        c.drawString(right_x, y, fit_pdf_text(edu.degree, "Helvetica-Bold", 8.6, right_w - 132))
+        c.setFont("Helvetica", 8.0)
+        c.drawRightString(right_x + right_w, y, fit_pdf_text(edu.period, "Helvetica", 8.0, 128))
+        y -= 10
+        c.setFont("Helvetica-Oblique", 7.9)
+        c.drawString(right_x, y, fit_pdf_text(edu.school, "Helvetica-Oblique", 7.9, right_w))
+        y -= 10
 
-    y -= 2
+    y -= 1
     y = pdf_section_title(c, right_x, y, right_w, "Tools", accent)
     y = draw_pdf_wrapped(
         c,
         right_x,
         y,
-        ", ".join(profile.tools[:10]),
+        ", ".join(profile.tools[:12]),
         right_w,
         font_name="Helvetica",
-        font_size=8.0,
-        leading=9.1,
-        max_lines=3,
+        font_size=8.2,
+        leading=9.5,
+        max_lines=4,
     )
 
     c.showPage()
@@ -1435,8 +1491,8 @@ def draw_marketing_variant_png(profile: RoleProfile, mix: dict[str, tuple[int, i
     accent = mix["accent"]
     text = mix["text"]
     m = 54
-    sidebar_w = 292
-    right_x = m + sidebar_w + 28
+    sidebar_w = 306
+    right_x = m + sidebar_w + 30
     right_w = width - right_x - m
 
     # Canvas + sidebar
@@ -1445,22 +1501,22 @@ def draw_marketing_variant_png(profile: RoleProfile, mix: dict[str, tuple[int, i
     draw.line((m + sidebar_w, m, m + sidebar_w, height - m), fill=accent, width=3)
 
     # Header
-    draw.text((right_x, 88), profile.person_name, fill=text, font=font_for(48, bold=True))
-    draw.text((right_x, 142), "Marketing Specialist", fill=text, font=font_for(22))
-    draw.line((right_x, 176, right_x + right_w, 176), fill=accent, width=3)
+    draw.text((right_x, 86), profile.person_name, fill=text, font=font_for(50, bold=True))
+    draw.text((right_x, 142), "Marketing Specialist", fill=text, font=font_for(24))
+    draw.line((right_x, 180, right_x + right_w, 180), fill=accent, width=3)
 
     # Sidebar
-    section_font = font_for(20, bold=True)
-    body_font = font_for(15)
+    section_font = font_for(21, bold=True)
+    body_font = font_for(16)
     y = 108
     y = png_section_title(draw, "Personal details", m + 18, y, sidebar_w - 36, accent, section_font)
     labels = ["Name", "Address", "Phone", "Email", "Website", "LinkedIn"]
     values = [profile.person_name, profile.location, profile.phone, profile.email, profile.website, profile.linkedin]
     for label, value in zip(labels, values):
         draw.text((m + 18, y), label, fill=(70, 76, 86), font=font_for(14, bold=True))
-        y += 20
-        y = draw_png_wrapped(draw, value, m + 18, y, sidebar_w - 36, font_for(14), text, leading=19, max_lines=2)
-        y += 3
+        y += 21
+        y = draw_png_wrapped(draw, value, m + 18, y, sidebar_w - 36, font_for(15), text, leading=20, max_lines=2)
+        y += 4
 
     y = png_section_title(draw, "Core skills", m + 18, y, sidebar_w - 36, accent, section_font)
     y = draw_png_bullets(
@@ -1470,60 +1526,91 @@ def draw_marketing_variant_png(profile: RoleProfile, mix: dict[str, tuple[int, i
         y,
         sidebar_w - 36,
         accent,
-        font_for(14),
+        font_for(15),
         text,
         max_items=6,
-        max_lines_per_item=1,
+        max_lines_per_item=2,
+        leading=21,
+    )
+
+    y = png_section_title(draw, "Success highlights", m + 18, y, sidebar_w - 36, accent, section_font)
+    y = draw_png_bullets(
+        draw,
+        marketing_success_highlights(profile),
+        m + 18,
+        y,
+        sidebar_w - 36,
+        accent,
+        font_for(14),
+        text,
+        max_items=3,
+        max_lines_per_item=3,
         leading=20,
     )
 
     y = png_section_title(draw, "Languages", m + 18, y, sidebar_w - 36, accent, section_font)
     for lang in profile.languages[:3]:
-        draw.text((m + 18, y), fit_pil_text(draw, lang, font_for(14), sidebar_w - 36), fill=text, font=font_for(14))
-        y += 20
+        draw.text((m + 18, y), fit_pil_text(draw, lang, font_for(15), sidebar_w - 36), fill=text, font=font_for(15))
+        y += 21
 
     # Right content
-    y = 196
+    y = 200
     y = png_section_title(draw, "Profile", right_x, y, right_w, accent, section_font)
-    y = draw_png_wrapped(draw, profile.summary, right_x, y, right_w, body_font, text, leading=21, max_lines=5)
-    y += 4
+    y = draw_png_wrapped(draw, profile.summary, right_x, y, right_w, body_font, text, leading=22, max_lines=6)
+    y += 6
 
     y = png_section_title(draw, "Work experience", right_x, y, right_w, accent, section_font)
     year_x = right_x
-    tl_x = right_x + 138
-    draw.line((tl_x, y + 8, tl_x, y + 580), fill=(181, 188, 198), width=2)
-    for exp in profile.experience[:3]:
-        draw.text((year_x, y), fit_pil_text(draw, exp.period.replace(" - ", " - "), font_for(14, bold=True), 128), fill=text, font=font_for(14, bold=True))
+    tl_x = right_x + 142
+    draw.line((tl_x, y + 8, tl_x, y + 600), fill=(181, 188, 198), width=2)
+    for exp in profile.experience[:2]:
+        draw.text((year_x, y), fit_pil_text(draw, exp.period.replace(" - ", " - "), font_for(15, bold=True), 132), fill=text, font=font_for(15, bold=True))
         draw.ellipse((tl_x - 4, y + 8, tl_x + 4, y + 16), fill=accent)
-        draw.text((tl_x + 14, y), fit_pil_text(draw, exp.title, font_for(16, bold=True), right_w - 154), fill=text, font=font_for(16, bold=True))
+        draw.text((tl_x + 14, y), fit_pil_text(draw, exp.title, font_for(17, bold=True), right_w - 158), fill=text, font=font_for(17, bold=True))
+        y += 22
+        draw.text((tl_x + 14, y), fit_pil_text(draw, f"{exp.company}, {exp.location}", font_for(15), right_w - 158), fill=(55, 61, 71), font=font_for(15))
         y += 21
-        draw.text((tl_x + 14, y), fit_pil_text(draw, f"{exp.company}, {exp.location}", font_for(14), right_w - 154), fill=(55, 61, 71), font=font_for(14))
-        y += 20
         y = draw_png_bullets(
             draw,
             exp.bullets,
             tl_x + 14,
             y,
-            right_w - 154,
+            right_w - 158,
             accent,
-            font_for(14),
+            font_for(15),
             text,
             max_items=3,
-            max_lines_per_item=2,
+            max_lines_per_item=3,
+            leading=21,
+        )
+        y += 4
+
+    y = png_section_title(draw, "Skills in practice", right_x, y, right_w, accent, section_font)
+    for skill_name, skill_desc in marketing_skill_descriptions(profile):
+        draw.text((right_x, y), fit_pil_text(draw, skill_name, font_for(15, bold=True), 154), fill=text, font=font_for(15, bold=True))
+        y = draw_png_wrapped(
+            draw,
+            skill_desc,
+            right_x + 160,
+            y,
+            right_w - 160,
+            font_for(14),
+            text,
             leading=20,
+            max_lines=2,
         )
         y += 2
 
     y = png_section_title(draw, "Education and certifications", right_x, y, right_w, accent, section_font)
     for edu in profile.education[:2]:
         draw.text((right_x, y), fit_pil_text(draw, edu.degree, font_for(15, bold=True), right_w - 150), fill=text, font=font_for(15, bold=True))
-        draw.text((right_x + right_w - 140, y), fit_pil_text(draw, edu.period, font_for(13), 140), fill=(70, 76, 86), font=font_for(13))
-        y += 20
-        draw.text((right_x, y), fit_pil_text(draw, edu.school, font_for(14), right_w), fill=(70, 76, 86), font=font_for(14))
-        y += 20
+        draw.text((right_x + right_w - 140, y), fit_pil_text(draw, edu.period, font_for(14), 140), fill=(70, 76, 86), font=font_for(14))
+        y += 21
+        draw.text((right_x, y), fit_pil_text(draw, edu.school, font_for(15), right_w), fill=(70, 76, 86), font=font_for(15))
+        y += 21
 
     y = png_section_title(draw, "Tools", right_x, y, right_w, accent, section_font)
-    _ = draw_png_wrapped(draw, ", ".join(profile.tools[:10]), right_x, y, right_w, font_for(14), text, leading=20, max_lines=3)
+    _ = draw_png_wrapped(draw, ", ".join(profile.tools[:12]), right_x, y, right_w, font_for(15), text, leading=21, max_lines=4)
 
     image.save(out_file, format="PNG", optimize=True)
 
