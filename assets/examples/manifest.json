@@ -1,0 +1,226 @@
+{
+  "software-engineer": {
+    "role_title": "Software Engineer",
+    "template": "A",
+    "pdf": "/assets/examples/software-engineer/sample.pdf",
+    "preview": "/assets/examples/software-engineer/preview.png",
+    "colors": {
+      "primary": [
+        220,
+        38,
+        38
+      ],
+      "secondary": [
+        37,
+        99,
+        235
+      ],
+      "tertiary": [
+        124,
+        58,
+        237
+      ],
+      "quaternary": [
+        22,
+        163,
+        74
+      ]
+    }
+  },
+  "product-manager": {
+    "role_title": "Product Manager",
+    "template": "B",
+    "pdf": "/assets/examples/product-manager/sample.pdf",
+    "preview": "/assets/examples/product-manager/preview.png",
+    "colors": {
+      "primary": [
+        37,
+        99,
+        235
+      ],
+      "secondary": [
+        22,
+        163,
+        74
+      ],
+      "tertiary": [
+        220,
+        38,
+        38
+      ],
+      "quaternary": [
+        124,
+        58,
+        237
+      ]
+    }
+  },
+  "marketing-manager": {
+    "role_title": "Marketing Manager",
+    "template": "C",
+    "pdf": "/assets/examples/marketing-manager/sample.pdf",
+    "preview": "/assets/examples/marketing-manager/preview.png",
+    "colors": {
+      "primary": [
+        37,
+        99,
+        235
+      ],
+      "secondary": [
+        124,
+        58,
+        237
+      ],
+      "tertiary": [
+        220,
+        38,
+        38
+      ],
+      "quaternary": [
+        22,
+        163,
+        74
+      ]
+    }
+  },
+  "digital-marketing": {
+    "role_title": "Digital Marketing Manager",
+    "template": "A",
+    "pdf": "/assets/examples/digital-marketing/sample.pdf",
+    "preview": "/assets/examples/digital-marketing/preview.png",
+    "colors": {
+      "primary": [
+        124,
+        58,
+        237
+      ],
+      "secondary": [
+        37,
+        99,
+        235
+      ],
+      "tertiary": [
+        22,
+        163,
+        74
+      ],
+      "quaternary": [
+        220,
+        38,
+        38
+      ]
+    }
+  },
+  "content-writer": {
+    "role_title": "Content Writer",
+    "template": "B",
+    "pdf": "/assets/examples/content-writer/sample.pdf",
+    "preview": "/assets/examples/content-writer/preview.png",
+    "colors": {
+      "primary": [
+        22,
+        163,
+        74
+      ],
+      "secondary": [
+        37,
+        99,
+        235
+      ],
+      "tertiary": [
+        124,
+        58,
+        237
+      ],
+      "quaternary": [
+        220,
+        38,
+        38
+      ]
+    }
+  },
+  "event-planner": {
+    "role_title": "Event Planner",
+    "template": "C",
+    "pdf": "/assets/examples/event-planner/sample.pdf",
+    "preview": "/assets/examples/event-planner/preview.png",
+    "colors": {
+      "primary": [
+        22,
+        163,
+        74
+      ],
+      "secondary": [
+        124,
+        58,
+        237
+      ],
+      "tertiary": [
+        37,
+        99,
+        235
+      ],
+      "quaternary": [
+        220,
+        38,
+        38
+      ]
+    }
+  },
+  "data-scientist": {
+    "role_title": "Data Scientist",
+    "template": "A",
+    "pdf": "/assets/examples/data-scientist/sample.pdf",
+    "preview": "/assets/examples/data-scientist/preview.png",
+    "colors": {
+      "primary": [
+        22,
+        163,
+        74
+      ],
+      "secondary": [
+        124,
+        58,
+        237
+      ],
+      "tertiary": [
+        37,
+        99,
+        235
+      ],
+      "quaternary": [
+        220,
+        38,
+        38
+      ]
+    }
+  },
+  "sales-manager": {
+    "role_title": "Sales Manager",
+    "template": "B",
+    "pdf": "/assets/examples/sales-manager/sample.pdf",
+    "preview": "/assets/examples/sales-manager/preview.png",
+    "colors": {
+      "primary": [
+        22,
+        163,
+        74
+      ],
+      "secondary": [
+        124,
+        58,
+        237
+      ],
+      "tertiary": [
+        37,
+        99,
+        235
+      ],
+      "quaternary": [
+        220,
+        38,
+        38
+      ]
+    }
+  }
+}

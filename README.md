@@ -15,6 +15,7 @@ Conversion-focused landing page for an AI resume optimization product (Rezi/Enha
 - `css/style.css` — Styling and design system
 - `js/main.js` — Interactions (Drag & Drop)
 - `assets/` — Image assets
+- `scripts/generate_resume_examples.py` — Offline generator for per-role PDF/PNG resume examples
 
 ## Run locally
 
@@ -25,6 +26,20 @@ npx serve .
 # or
 python3 -m http.server 8000
 ```
+
+## Generate role resume samples (offline)
+
+Run once locally or in CI to refresh static resume example files:
+
+```bash
+python3 -m pip install --upgrade reportlab pillow
+python3 scripts/generate_resume_examples.py
+```
+
+Generated files:
+
+- `assets/examples/<role>/sample.pdf`
+- `assets/examples/<role>/preview.png`
 
 ## SEO
 

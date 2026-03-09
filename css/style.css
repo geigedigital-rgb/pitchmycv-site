@@ -1696,6 +1696,21 @@ ul { margin: 0; padding: 0; list-style: none; }
   margin: 12px 0 16px;
 }
 
+.example-preview-card .btn.btn-primary {
+  margin-bottom: 10px;
+}
+
+.example-preview-card .btn.btn-outline {
+  margin: 0 0 10px;
+}
+
+.example-download-note {
+  color: #64748b;
+  font-size: 0.82rem;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
 .example-share {
   color: #64748b;
   font-size: 0.9rem;
