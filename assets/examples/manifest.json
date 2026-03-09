@@ -1,6 +1,6 @@
 {
   "software-engineer": {
-    "role_title": "Software Engineer",
+    "role_title": "Senior Software Engineer",
     "template": "A",
     "pdf": "/assets/examples/software-engineer/sample.pdf",
     "preview": "/assets/examples/software-engineer/preview.png",
@@ -25,7 +25,15 @@
         163,
         74
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "product-manager": {
     "role_title": "Product Manager",
@@ -53,7 +61,15 @@
         58,
         237
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "marketing-manager": {
     "role_title": "Marketing Manager",
@@ -81,7 +97,15 @@
         163,
         74
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "digital-marketing": {
     "role_title": "Digital Marketing Manager",
@@ -109,10 +133,18 @@
         38,
         38
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "content-writer": {
-    "role_title": "Content Writer",
+    "role_title": "Senior Content Writer",
     "template": "B",
     "pdf": "/assets/examples/content-writer/sample.pdf",
     "preview": "/assets/examples/content-writer/preview.png",
@@ -137,7 +169,15 @@
         38,
         38
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "event-planner": {
     "role_title": "Event Planner",
@@ -165,7 +205,15 @@
         38,
         38
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "data-scientist": {
     "role_title": "Data Scientist",
@@ -193,7 +241,15 @@
         38,
         38
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   },
   "sales-manager": {
     "role_title": "Sales Manager",
@@ -221,6 +277,14 @@
         38,
         38
       ]
-    }
+    },
+    "required_sections": [
+      "Header with role + contact details",
+      "Professional summary",
+      "Work experience with measurable achievements",
+      "Education and qualifications",
+      "Skills section",
+      "Additional sections (projects/certifications/languages)"
+    ]
   }
 }
