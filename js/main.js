@@ -1,4 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Mobile burger nav
+  const navToggle = document.querySelector(".nav-toggle");
+  const headerNav = document.querySelector(".header-nav");
+  if (navToggle && headerNav) {
+    const closeMenu = () => {
+      headerNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = headerNav.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    headerNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          closeMenu();
+        }
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+  }
+
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
@@ -178,8 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const reviewsPrevBtn = document.querySelector('[data-reviews-nav="prev"]');
   const reviewsNextBtn = document.querySelector('[data-reviews-nav="next"]');
   const reviewsProgressFill = document.querySelector(".reviews-progress-fill");
+  const reviewsControls = document.querySelector(".reviews-controls");
 
-  if (reviewsTrack && reviewsPrevBtn && reviewsNextBtn && reviewsProgressFill) {
+  if (reviewsTrack && reviewsPrevBtn && reviewsNextBtn && reviewsProgressFill && reviewsControls) {
+    let isScrollable = false;
+
     const getScrollStep = () => {
       const card = reviewsTrack.querySelector(".review-card");
       if (!card) return 280;
@@ -190,16 +222,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateReviewsProgress = () => {
       const maxScroll = reviewsTrack.scrollWidth - reviewsTrack.clientWidth;
+      isScrollable = maxScroll > 4;
+      reviewsControls.style.display = isScrollable ? "flex" : "none";
       const ratio = maxScroll > 0 ? reviewsTrack.scrollLeft / maxScroll : 0;
       const fillPercent = 20 + ratio * 80;
       reviewsProgressFill.style.width = `${fillPercent}%`;
     };
 
     reviewsPrevBtn.addEventListener("click", () => {
+      if (!isScrollable) return;
       reviewsTrack.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
     });
 
     reviewsNextBtn.addEventListener("click", () => {
+      if (!isScrollable) return;
       reviewsTrack.scrollBy({ left: getScrollStep(), behavior: "smooth" });
     });
 
