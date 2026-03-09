@@ -702,13 +702,8 @@ def seed_from_slug(slug: str) -> int:
 def color_mix(slug: str) -> dict[str, tuple[int, int, int]]:
     rng = random.Random(seed_from_slug(slug))
     colors = list(PALETTE.values())
-    rng.shuffle(colors)
-    return {
-        "primary": colors[0],
-        "secondary": colors[1],
-        "tertiary": colors[2],
-        "quaternary": colors[3],
-    }
+    accent = colors[rng.randrange(0, len(colors))]
+    return {"text": (17, 17, 17), "accent": accent}
 
 
 def to_pdf_color(rgb: tuple[int, int, int]) -> Color:
@@ -736,12 +731,12 @@ def wrap_words(text: str, max_chars: int) -> list[str]:
 
 def pdf_section_title(c: canvas.Canvas, x: float, y: float, width: float, title: str, accent: tuple[int, int, int]) -> float:
     c.setStrokeColor(to_pdf_color(accent))
-    c.setLineWidth(1.1)
+    c.setLineWidth(1.0)
     c.line(x, y, x + width, y)
-    c.setFont("Helvetica-Bold", 9.3)
+    c.setFont("Helvetica-Bold", 10.2)
     c.setFillColor(Color(0, 0, 0))
-    c.drawString(x, y - 10, title.upper())
-    return y - 18
+    c.drawString(x, y - 11, title.upper())
+    return y - 20
 
 
 def pdf_paragraph(c: canvas.Canvas, x: float, y: float, text: str, max_chars: int, size: float = 8.5, leading: float = 10.5) -> float:
@@ -777,292 +772,127 @@ def pdf_bullet_lines(
     return y
 
 
-def draw_pdf_header(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], page_w: float, page_h: float, top_bar: bool) -> float:
-    if top_bar:
-        c.setFillColor(to_pdf_color(mix["primary"]))
-        c.rect(0, page_h - 58, page_w, 58, fill=1, stroke=0)
-        c.setFillColor(Color(1, 1, 1))
-        c.setFont("Helvetica-Bold", 23)
-        c.drawString(36, page_h - 36, profile.person_name.upper())
-        c.setFont("Helvetica", 10)
-        c.drawString(36, page_h - 51, profile.role_title)
-        c.setFillColor(Color(0, 0, 0))
-        y = page_h - 72
-    else:
-        c.setFillColor(to_pdf_color(mix["primary"]))
-        c.rect(36, page_h - 70, page_w - 72, 4, fill=1, stroke=0)
-        c.setFillColor(Color(0, 0, 0))
-        c.setFont("Helvetica-Bold", 21)
-        c.drawString(36, page_h - 44, profile.person_name.upper())
-        c.setFont("Helvetica", 10.5)
-        c.drawString(36, page_h - 59, profile.role_title)
-        y = page_h - 82
-
-    contacts = (
-        f"{profile.location}  |  {profile.phone}  |  {profile.email}\n"
-        f"{profile.website}  |  {profile.linkedin}"
+def role_intro(profile: RoleProfile) -> str:
+    return (
+        f"{profile.role_title} with strong hands-on delivery across cross-functional teams. "
+        f"{profile.summary}"
     )
-    c.setFont("Helvetica", 8.7)
-    c.drawString(36, y, contacts.splitlines()[0])
-    c.drawString(36, y - 11, contacts.splitlines()[1])
-    c.setStrokeColor(to_pdf_color(mix["secondary"]))
-    c.setLineWidth(0.8)
-    c.line(36, y - 17, page_w - 36, y - 17)
-    return y - 25
 
 
-def draw_pdf_template_a(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], start_y: float, page_h: float) -> None:
-    left_x, left_w = 36, 160
-    right_x, right_w = 212, 348
-    bottom = 36
-
-    c.setStrokeColor(to_pdf_color(mix["secondary"]))
-    c.setLineWidth(1.1)
-    c.line(left_x + left_w, bottom, left_x + left_w, start_y)
-
-    y = start_y - 2
-    y = pdf_section_title(c, left_x, y, left_w - 10, "Personal details", mix["primary"])
-    c.setFont("Helvetica", 8.2)
-    for row in [profile.location, profile.phone, profile.email, profile.website]:
-        c.drawString(left_x, y, row)
-        y -= 10
-
-    y -= 3
-    y = pdf_section_title(c, left_x, y, left_w - 10, "Core skills", mix["secondary"])
-    y = pdf_bullet_lines(c, left_x, y, profile.core_skills[:6], 22, mix["secondary"])
-
-    y -= 2
-    y = pdf_section_title(c, left_x, y, left_w - 10, "Tools", mix["tertiary"])
-    y = pdf_paragraph(c, left_x, y, ", ".join(profile.tools), 27, size=8.0, leading=9.5)
-
-    y -= 2
-    y = pdf_section_title(c, left_x, y, left_w - 10, "Languages", mix["quaternary"])
-    for lang in profile.languages[:3]:
-        c.setFont("Helvetica", 8.2)
-        c.drawString(left_x, y, lang)
-        y -= 10
-
-    y -= 1
-    y = pdf_section_title(c, left_x, y, left_w - 10, "Certifications", mix["primary"])
-    y = pdf_bullet_lines(c, left_x, y, profile.certifications[:2], 24, mix["primary"], size=7.9, leading=9.3)
-
-    y = start_y - 2
-    y = pdf_section_title(c, right_x, y, right_w, "Professional summary", mix["primary"])
-    y = pdf_paragraph(c, right_x, y, profile.summary, 80)
-
-    y -= 2
-    y = pdf_section_title(c, right_x, y, right_w, "Work experience", mix["secondary"])
-    for idx, exp in enumerate(profile.experience[:2]):
-        accent = ("primary", "secondary", "tertiary", "quaternary")[idx % 4]
-        c.setFont("Helvetica-Bold", 9.1)
-        c.drawString(right_x, y, exp.title)
-        c.setFont("Helvetica", 8.1)
-        c.drawRightString(right_x + right_w, y, exp.period)
-        y -= 10
-        c.setFont("Helvetica-Oblique", 8.0)
-        c.drawString(right_x, y, f"{exp.company}, {exp.location}")
-        y -= 10
-        y = pdf_bullet_lines(c, right_x, y, exp.bullets[:3], 71, mix[accent], size=8.0, leading=9.5)
-        y -= 1
-
-    y = pdf_section_title(c, right_x, y, right_w, "Education", mix["tertiary"])
-    for edu in profile.education[:2]:
-        c.setFont("Helvetica-Bold", 8.9)
-        c.drawString(right_x, y, edu.degree)
-        c.setFont("Helvetica", 8.1)
-        c.drawRightString(right_x + right_w, y, edu.period)
-        y -= 10
-        c.setFont("Helvetica-Oblique", 8.0)
-        c.drawString(right_x, y, edu.school)
-        y -= 9
-        y = pdf_paragraph(c, right_x, y, edu.details, 75, size=8.0, leading=9.3)
-        y -= 1
-
-    y = pdf_section_title(c, right_x, y, right_w, "Projects", mix["quaternary"])
-    for pr in profile.projects[:2]:
-        c.setFont("Helvetica-Bold", 8.8)
-        c.drawString(right_x, y, pr.name)
-        y -= 9
-        y = pdf_paragraph(c, right_x, y, pr.details, 76, size=8.0, leading=9.2)
-        y -= 1
+def technology_rows(profile: RoleProfile) -> list[tuple[str, str]]:
+    return [
+        (profile.core_skills[0], f"Strong execution in {profile.core_skills[0].lower()} and {profile.core_skills[1].lower()}."),
+        (profile.core_skills[2], f"Applied in complex projects with measurable results in {profile.role_title.lower()} roles."),
+        ("Tooling", ", ".join(profile.tools[:6])),
+        ("Certifications", ", ".join(profile.certifications[:2])),
+    ]
 
 
-def draw_pdf_template_b(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], start_y: float, page_h: float) -> None:
-    left_x, left_w = 36, 146
-    right_x, right_w = 198, 362
-    panel_top = page_h - 72
-    panel_bottom = 42
+def draw_pdf_resume(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], page_w: float, page_h: float) -> None:
+    accent = mix["accent"]
+    text = mix["text"]
+    c.setFillColor(to_pdf_color(text))
 
-    c.setFillColor(Color(0.97, 0.97, 0.97))
-    c.rect(left_x, panel_bottom, left_w, panel_top - panel_bottom, fill=1, stroke=0)
-    c.setStrokeColor(to_pdf_color(mix["secondary"]))
+    # Header
+    c.setFont("Helvetica-Bold", 26)
+    c.drawString(34, page_h - 40, profile.person_name.upper())
+    intro_x = 210
+    c.setFont("Helvetica", 9.5)
+    intro_y = page_h - 29
+    for line in wrap_words(role_intro(profile), 69):
+        c.drawString(intro_x, intro_y, line)
+        intro_y -= 11
+
+    # Contact row
+    c.setStrokeColor(to_pdf_color(accent))
     c.setLineWidth(1.0)
-    c.line(left_x + left_w, panel_bottom, left_x + left_w, panel_top)
+    c.line(34, page_h - 74, page_w - 34, page_h - 74)
+    c.setFont("Helvetica", 8.4)
+    contact_items = [profile.website, profile.email, profile.linkedin, profile.phone]
+    cx = 34
+    for item in contact_items:
+        c.drawString(cx, page_h - 89, item)
+        cx += 135
 
-    y = start_y - 2
-    y = pdf_section_title(c, left_x + 8, y, left_w - 16, "Personal details", mix["primary"])
-    c.setFont("Helvetica", 8.0)
-    for row in [profile.location, profile.phone, profile.email, profile.linkedin]:
-        c.drawString(left_x + 8, y, row)
-        y -= 10
+    y = page_h - 108
 
-    y -= 2
-    y = pdf_section_title(c, left_x + 8, y, left_w - 16, "Interests", mix["tertiary"])
-    y = pdf_paragraph(c, left_x + 8, y, ", ".join(profile.interests), 21, size=7.9, leading=9.1)
-
-    y -= 2
-    y = pdf_section_title(c, left_x + 8, y, left_w - 16, "Skill level", mix["quaternary"])
-    for idx, rate in enumerate(profile.skill_ratings[:5]):
-        c.setFont("Helvetica", 7.9)
-        c.drawString(left_x + 8, y, rate.name)
-        dot_x = left_x + 82
-        for j in range(5):
-            color_key = ("primary", "secondary", "tertiary", "quaternary", "primary")[j]
-            dot = mix[color_key] if j < rate.level else (220, 220, 220)
-            c.setFillColor(to_pdf_color(dot))
-            c.circle(dot_x + j * 10, y + 2, 2.2, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
-        y -= 11
-
-    y_main = start_y - 2
-    y_main = pdf_section_title(c, right_x, y_main, right_w, "Profile", mix["primary"])
-    y_main = pdf_paragraph(c, right_x, y_main, profile.summary, 81)
-
-    y_main -= 2
-    y_main = pdf_section_title(c, right_x, y_main, right_w, "Work experience", mix["secondary"])
-    timeline_x = right_x + 57
-    c.setStrokeColor(to_pdf_color(mix["secondary"]))
-    c.setLineWidth(0.9)
-    c.line(timeline_x, y_main + 6, timeline_x, y_main - 170)
-    for idx, exp in enumerate(profile.experience[:2]):
-        accent = ("primary", "secondary", "tertiary", "quaternary")[idx % 4]
-        c.setFont("Helvetica", 8.0)
-        c.drawString(right_x, y_main, exp.period)
-        c.setFillColor(to_pdf_color(mix[accent]))
-        c.circle(timeline_x, y_main + 2.5, 2.4, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
+    # Experience
+    y = pdf_section_title(c, 34, y, page_w - 68, "Experience", accent)
+    year_col = 88
+    for exp in profile.experience[:3]:
         c.setFont("Helvetica-Bold", 9.0)
-        c.drawString(timeline_x + 12, y_main, exp.title)
-        y_main -= 10
-        c.setFont("Helvetica-Oblique", 7.9)
-        c.drawString(timeline_x + 12, y_main, f"{exp.company}, {exp.location}")
-        y_main -= 9
-        y_main = pdf_bullet_lines(c, timeline_x + 12, y_main, exp.bullets[:3], 61, mix[accent], size=7.9, leading=9.1)
-        y_main -= 2
-
-    y_main = pdf_section_title(c, right_x, y_main, right_w, "Education and qualifications", mix["tertiary"])
-    edu_x_line = right_x + 57
-    c.setStrokeColor(to_pdf_color(mix["tertiary"]))
-    c.line(edu_x_line, y_main + 6, edu_x_line, y_main - 85)
-    for idx, edu in enumerate(profile.education[:2]):
-        accent = ("tertiary", "quaternary")[idx % 2]
-        c.setFont("Helvetica", 7.9)
-        c.drawString(right_x, y_main, edu.period)
-        c.setFillColor(to_pdf_color(mix[accent]))
-        c.circle(edu_x_line, y_main + 2.3, 2.2, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
-        c.setFont("Helvetica-Bold", 8.8)
-        c.drawString(edu_x_line + 12, y_main, edu.degree)
-        y_main -= 9
-        c.setFont("Helvetica-Oblique", 7.8)
-        c.drawString(edu_x_line + 12, y_main, edu.school)
-        y_main -= 9
-        y_main = pdf_paragraph(c, edu_x_line + 12, y_main, edu.details, 60, size=7.8, leading=8.8)
-        y_main -= 2
-
-    y_main = pdf_section_title(c, right_x, y_main, right_w, "Projects and certifications", mix["quaternary"])
-    for pr in profile.projects[:1]:
-        c.setFont("Helvetica-Bold", 8.8)
-        c.drawString(right_x, y_main, pr.name)
-        y_main -= 9
-        y_main = pdf_paragraph(c, right_x, y_main, pr.details, 79, size=7.9, leading=9.0)
-    y_main = pdf_bullet_lines(c, right_x, y_main, profile.certifications[:2], 78, mix["quaternary"], size=7.8, leading=8.9)
-
-
-def draw_pdf_template_c(c: canvas.Canvas, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], start_y: float, page_w: float) -> None:
-    x_left = 36
-    x_mid = 160
-    x_text = 178
-    x_right = page_w - 36
-
-    y = start_y - 2
-    y = pdf_section_title(c, x_left, y, x_right - x_left, "Personal details", mix["primary"])
-    c.setFont("Helvetica-Bold", 8.1)
-    labels = ["Name", "Address", "Phone", "Email", "Website", "LinkedIn"]
-    values = [profile.person_name, profile.location, profile.phone, profile.email, profile.website, profile.linkedin]
-    for label, value in zip(labels, values):
-        c.drawString(x_left, y, label)
-        c.setFont("Helvetica", 8.1)
-        c.drawString(x_left + 92, y, value)
-        c.setFont("Helvetica-Bold", 8.1)
-        y -= 9
-
-    y -= 2
-    y = pdf_section_title(c, x_left, y, x_right - x_left, "Profile", mix["secondary"])
-    y = pdf_paragraph(c, x_left, y, profile.summary, 109, size=8.2, leading=9.5)
-
-    y -= 2
-    y = pdf_section_title(c, x_left, y, x_right - x_left, "Work experience", mix["tertiary"])
-    c.setStrokeColor(to_pdf_color(mix["tertiary"]))
-    c.setLineWidth(0.9)
-    timeline_top = y + 6
-    c.line(x_mid, timeline_top, x_mid, timeline_top - 170)
-    for idx, exp in enumerate(profile.experience[:2]):
-        accent = ("primary", "secondary", "tertiary", "quaternary")[idx % 4]
-        c.setFont("Helvetica", 8.1)
-        c.drawString(x_left, y, exp.period)
-        c.setFillColor(to_pdf_color(mix[accent]))
-        c.circle(x_mid, y + 2.2, 2.2, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
-        c.setFont("Helvetica-Bold", 8.9)
-        c.drawString(x_text, y, exp.title)
-        y -= 9
-        c.setFont("Helvetica-Oblique", 7.9)
-        c.drawString(x_text, y, f"{exp.company}, {exp.location}")
-        y -= 9
-        y = pdf_bullet_lines(c, x_text, y, exp.bullets[:3], 67, mix[accent], size=7.9, leading=9.0)
-        y -= 1
-
-    y = pdf_section_title(c, x_left, y, x_right - x_left, "Education and qualifications", mix["quaternary"])
-    c.setStrokeColor(to_pdf_color(mix["quaternary"]))
-    c.line(x_mid, y + 6, x_mid, y - 82)
-    for idx, edu in enumerate(profile.education[:2]):
-        accent = ("quaternary", "primary")[idx % 2]
-        c.setFont("Helvetica", 8.0)
-        c.drawString(x_left, y, edu.period)
-        c.setFillColor(to_pdf_color(mix[accent]))
-        c.circle(x_mid, y + 2.2, 2.2, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
-        c.setFont("Helvetica-Bold", 8.8)
-        c.drawString(x_text, y, edu.degree)
-        y -= 9
-        c.setFont("Helvetica-Oblique", 7.8)
-        c.drawString(x_text, y, edu.school)
-        y -= 9
-        y = pdf_paragraph(c, x_text, y, edu.details, 66, size=7.8, leading=8.8)
-        y -= 1
-
-    y = pdf_section_title(c, x_left, y, x_right - x_left, "Skills and additional information", mix["primary"])
-    for idx, rate in enumerate(profile.skill_ratings[:5]):
-        c.setFont("Helvetica-Bold", 8.1)
-        c.drawString(x_left, y, rate.name)
-        dot_x = x_left + 88
-        for j in range(5):
-            key = ("primary", "secondary", "tertiary", "quaternary", "primary")[j]
-            dot = mix[key] if j < rate.level else (222, 222, 222)
-            c.setFillColor(to_pdf_color(dot))
-            c.circle(dot_x + j * 9, y + 2, 2.0, stroke=0, fill=1)
-        c.setFillColor(Color(0, 0, 0))
-        if idx < len(profile.languages):
-            c.setFont("Helvetica", 7.8)
-            c.drawString(x_left + 155, y, profile.languages[idx])
+        c.drawString(34, y, exp.period.replace(" - ", "–"))
+        c.setFont("Helvetica-Bold", 9.0)
+        c.drawString(34 + year_col, y, exp.title)
         y -= 10
+        c.setFont("Helvetica-Oblique", 8.2)
+        c.drawString(34 + year_col, y, f"{exp.company}, {exp.location}")
+        y -= 10
+        y = pdf_bullet_lines(c, 34 + year_col, y, exp.bullets[:3], 72, accent, size=8.0, leading=9.4)
+        y -= 2
 
-    y -= 2
-    c.setFont("Helvetica-Bold", 8.1)
-    c.drawString(x_left, y, "Certifications")
-    y -= 9
-    y = pdf_bullet_lines(c, x_left, y, profile.certifications[:2], 46, mix["secondary"], size=7.8, leading=8.8)
+    # Technology / core stack
+    y = pdf_section_title(c, 34, y, page_w - 68, "Technology", accent)
+    c.setFont("Helvetica-Bold", 8.7)
+    tx_name = 34
+    tx_desc = 170
+    for name, desc in technology_rows(profile):
+        c.drawString(tx_name, y, name)
+        c.setFont("Helvetica", 8.3)
+        for line in wrap_words(desc, 75):
+            c.drawString(tx_desc, y, line)
+            y -= 9
+        y -= 2
+        c.setFont("Helvetica-Bold", 8.7)
+
+    # Two column section
+    col_gap = 16
+    col_w = (page_w - 68 - col_gap) / 2
+    left_x = 34
+    right_x = 34 + col_w + col_gap
+    y -= 1
+    y_left = pdf_section_title(c, left_x, y, col_w, "Leadership", accent)
+    leadership = [
+        f"Led initiatives in {profile.core_skills[0].lower()} and {profile.core_skills[3].lower()} for multi-team delivery.",
+        f"Mentored peers on {profile.tools[0]}, {profile.tools[1]}, and reusable implementation standards.",
+    ]
+    y_left = pdf_bullet_lines(c, left_x, y_left, leadership, 45, accent, size=8.0, leading=9.3)
+
+    y_right = pdf_section_title(c, right_x, y, col_w, "Project highlights", accent)
+    for pr in profile.projects[:2]:
+        c.setFont("Helvetica-Bold", 8.6)
+        c.drawString(right_x, y_right, pr.name)
+        y_right -= 9
+        c.setFont("Helvetica", 8.0)
+        for line in wrap_words(pr.details, 45):
+            c.drawString(right_x, y_right, line)
+            y_right -= 9
+        y_right -= 2
+
+    y = min(y_left, y_right) - 2
+
+    # Education + Language
+    y = pdf_section_title(c, 34, y, page_w - 68, "Education and Language", accent)
+    edu_x = 34
+    lang_x = 332
+    ey = y
+    for edu in profile.education[:2]:
+        c.setFont("Helvetica-Bold", 8.6)
+        c.drawString(edu_x, ey, edu.period.replace(" - ", "–"))
+        c.drawString(edu_x + 58, ey, edu.degree)
+        ey -= 9
+        c.setFont("Helvetica-Oblique", 8.0)
+        c.drawString(edu_x + 58, ey, edu.school)
+        ey -= 8
+
+    ly = y
+    c.setFont("Helvetica-Bold", 8.8)
+    c.drawString(lang_x, ly, "Languages")
+    ly -= 10
+    c.setFont("Helvetica", 8.2)
+    for lang in profile.languages[:3]:
+        c.drawString(lang_x, ly, lang)
+        ly -= 9
 
 
 def generate_pdf(profile: RoleProfile) -> Path:
@@ -1074,16 +904,7 @@ def generate_pdf(profile: RoleProfile) -> Path:
 
     c = canvas.Canvas(str(out_file), pagesize=A4)
     c.setTitle(f"{profile.role_title} Resume Example")
-
-    use_top_bar = profile.template == "B"
-    start_y = draw_pdf_header(c, profile, mix, page_w, page_h, top_bar=use_top_bar)
-    if profile.template == "A":
-        draw_pdf_template_a(c, profile, mix, start_y, page_h)
-    elif profile.template == "B":
-        draw_pdf_template_b(c, profile, mix, start_y, page_h)
-    else:
-        draw_pdf_template_c(c, profile, mix, start_y, page_w)
-
+    draw_pdf_resume(c, profile, mix, page_w, page_h)
     c.showPage()
     c.save()
     return out_file
@@ -1153,220 +974,82 @@ def png_bullets(
     return y
 
 
-def draw_png_header(
-    draw: ImageDraw.ImageDraw,
-    profile: RoleProfile,
-    mix: dict[str, tuple[int, int, int]],
-    width: int,
-    top_bar: bool,
-) -> int:
-    if top_bar:
-        draw.rectangle((0, 0, width, 92), fill=mix["primary"])
-        draw.text((54, 20), profile.person_name.upper(), fill=(255, 255, 255), font=font_for(40, bold=True))
-        draw.text((54, 62), profile.role_title, fill=(255, 255, 255), font=font_for(20))
-        y = 116
-    else:
-        draw.rectangle((54, 54, width - 54, 62), fill=mix["primary"])
-        draw.text((54, 78), profile.person_name.upper(), fill=(0, 0, 0), font=font_for(40, bold=True))
-        draw.text((54, 124), profile.role_title, fill=(0, 0, 0), font=font_for(20))
-        y = 156
-    draw.text((54, y), f"{profile.location}  |  {profile.phone}  |  {profile.email}", fill=(0, 0, 0), font=font_for(16))
-    draw.text((54, y + 24), f"{profile.website}  |  {profile.linkedin}", fill=(0, 0, 0), font=font_for(16))
-    draw.line((54, y + 54, width - 54, y + 54), fill=mix["secondary"], width=2)
-    return y + 74
-
-
-def draw_png_template_a(draw: ImageDraw.ImageDraw, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], width: int, height: int, start_y: int) -> None:
-    left_x, left_w = 54, 300
-    right_x, right_w = 388, width - 442
+def draw_png_resume(draw: ImageDraw.ImageDraw, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], width: int, height: int) -> None:
+    accent = mix["accent"]
+    text_color = mix["text"]
     body_font = font_for(16)
-    section_font = font_for(18, bold=True)
+    section_font = font_for(20, bold=True)
 
-    draw.line((left_x + left_w, start_y, left_x + left_w, height - 70), fill=mix["secondary"], width=3)
+    # Header area
+    draw.text((54, 54), profile.person_name.upper(), fill=text_color, font=font_for(44, bold=True))
+    intro_y = 70
+    for line in wrap_words(role_intro(profile), 67):
+        draw.text((360, intro_y), line, fill=text_color, font=font_for(16))
+        intro_y += 24
+    draw.line((54, 148, width - 54, 148), fill=accent, width=3)
 
-    y = start_y + 6
-    y = png_section_title(draw, "Personal details", left_x, y, left_w - 20, mix["primary"], section_font)
-    for row in [profile.location, profile.phone, profile.email, profile.website]:
-        draw.text((left_x, y), row, fill=(0, 0, 0), font=body_font)
+    # Contact row
+    contacts = [profile.website, profile.email, profile.linkedin, profile.phone]
+    cx = 54
+    for item in contacts:
+        draw.text((cx, 162), item, fill=text_color, font=font_for(14))
+        cx += 285
+
+    y = 206
+    y = png_section_title(draw, "Experience", 54, y, width - 108, accent, section_font)
+    year_col = 132
+    for exp in profile.experience[:3]:
+        draw.text((54, y), exp.period.replace(" - ", "–"), fill=text_color, font=font_for(15, bold=True))
+        draw.text((54 + year_col, y), exp.title, fill=text_color, font=font_for(17, bold=True))
         y += 24
-
-    y += 4
-    y = png_section_title(draw, "Core skills", left_x, y, left_w - 20, mix["secondary"], section_font)
-    y = png_bullets(draw, profile.core_skills[:6], left_x, y, 24, mix["secondary"], body_font, leading=21)
-
-    y += 4
-    y = png_section_title(draw, "Tools", left_x, y, left_w - 20, mix["tertiary"], section_font)
-    y = png_paragraph(draw, ", ".join(profile.tools), left_x, y, 30, body_font, leading=21)
-
-    y += 4
-    y = png_section_title(draw, "Languages", left_x, y, left_w - 20, mix["quaternary"], section_font)
-    for lang in profile.languages[:3]:
-        draw.text((left_x, y), lang, fill=(0, 0, 0), font=body_font)
+        draw.text((54 + year_col, y), f"{exp.company}, {exp.location}", fill=text_color, font=font_for(15))
         y += 22
+        y = png_bullets(draw, exp.bullets[:3], 54 + year_col, y, 75, accent, body_font, leading=22)
+        y += 4
 
-    yr = start_y + 6
-    yr = png_section_title(draw, "Professional summary", right_x, yr, right_w, mix["primary"], section_font)
-    yr = png_paragraph(draw, profile.summary, right_x, yr, 70, body_font, leading=22)
+    y = png_section_title(draw, "Technology", 54, y, width - 108, accent, section_font)
+    name_x, desc_x = 54, 290
+    for name, desc in technology_rows(profile):
+        draw.text((name_x, y), name, fill=text_color, font=font_for(15, bold=True))
+        y = png_paragraph(draw, desc, desc_x, y, 72, body_font, fill=text_color, leading=22)
+        y += 2
 
-    yr += 5
-    yr = png_section_title(draw, "Work experience", right_x, yr, right_w, mix["secondary"], section_font)
-    for idx, exp in enumerate(profile.experience[:2]):
-        key = ("primary", "secondary", "tertiary", "quaternary")[idx % 4]
-        draw.text((right_x, yr), exp.title, fill=(0, 0, 0), font=font_for(17, bold=True))
-        draw.text((right_x + right_w - 170, yr), exp.period, fill=(0, 0, 0), font=font_for(15))
-        yr += 21
-        draw.text((right_x, yr), f"{exp.company}, {exp.location}", fill=(40, 40, 40), font=font_for(15))
-        yr += 20
-        yr = png_bullets(draw, exp.bullets[:3], right_x, yr, 64, mix[key], body_font, leading=21)
-        yr += 3
+    col_gap = 24
+    col_w = (width - 108 - col_gap) // 2
+    left_x = 54
+    right_x = left_x + col_w + col_gap
 
-    yr = png_section_title(draw, "Education", right_x, yr, right_w, mix["tertiary"], section_font)
-    for edu in profile.education[:2]:
-        draw.text((right_x, yr), edu.degree, fill=(0, 0, 0), font=font_for(17, bold=True))
-        draw.text((right_x + right_w - 160, yr), edu.period, fill=(0, 0, 0), font=font_for(14))
-        yr += 20
-        draw.text((right_x, yr), edu.school, fill=(38, 38, 38), font=font_for(15))
-        yr += 19
-        yr = png_paragraph(draw, edu.details, right_x, yr, 68, body_font, leading=21)
-        yr += 2
+    y_left = png_section_title(draw, "Leadership", left_x, y, col_w, accent, section_font)
+    leadership = [
+        f"Led initiatives in {profile.core_skills[0].lower()} and {profile.core_skills[3].lower()}.",
+        f"Mentored teams on {profile.tools[0]}, {profile.tools[1]}, and delivery standards.",
+    ]
+    y_left = png_bullets(draw, leadership, left_x, y_left, 37, accent, body_font, leading=21)
 
-    yr = png_section_title(draw, "Projects", right_x, yr, right_w, mix["quaternary"], section_font)
+    y_right = png_section_title(draw, "Project highlights", right_x, y, col_w, accent, section_font)
     for pr in profile.projects[:2]:
-        draw.text((right_x, yr), pr.name, fill=(0, 0, 0), font=font_for(16, bold=True))
-        yr += 20
-        yr = png_paragraph(draw, pr.details, right_x, yr, 68, body_font, leading=21)
-        yr += 2
+        draw.text((right_x, y_right), pr.name, fill=text_color, font=font_for(15, bold=True))
+        y_right += 22
+        y_right = png_paragraph(draw, pr.details, right_x, y_right, 37, body_font, fill=text_color, leading=21)
+        y_right += 2
 
-
-def draw_png_template_b(draw: ImageDraw.ImageDraw, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], width: int, start_y: int) -> None:
-    left_x, left_w = 54, 290
-    right_x, right_w = 378, width - 432
-    draw.rectangle((left_x, start_y, left_x + left_w, 1680), fill=(246, 246, 246))
-    draw.line((left_x + left_w, start_y, left_x + left_w, 1680), fill=mix["secondary"], width=3)
-
-    section_font = font_for(18, bold=True)
-    body_font = font_for(16)
-
-    y = start_y + 10
-    y = png_section_title(draw, "Personal details", left_x + 12, y, left_w - 24, mix["primary"], section_font)
-    for row in [profile.location, profile.phone, profile.email, profile.linkedin]:
-        draw.text((left_x + 12, y), row, fill=(0, 0, 0), font=body_font)
-        y += 24
-
-    y += 6
-    y = png_section_title(draw, "Interests", left_x + 12, y, left_w - 24, mix["tertiary"], section_font)
-    y = png_paragraph(draw, ", ".join(profile.interests), left_x + 12, y, 23, body_font, leading=22)
-
-    y += 6
-    y = png_section_title(draw, "Skill level", left_x + 12, y, left_w - 24, mix["quaternary"], section_font)
-    for rate in profile.skill_ratings[:5]:
-        draw.text((left_x + 12, y), rate.name, fill=(0, 0, 0), font=font_for(15))
-        dx = left_x + 136
-        for j in range(5):
-            color_key = ("primary", "secondary", "tertiary", "quaternary", "primary")[j]
-            dot = mix[color_key] if j < rate.level else (222, 222, 222)
-            dot_x = dx + j * 20
-            draw.ellipse((dot_x, y + 6, dot_x + 8, y + 14), fill=dot)
-        y += 24
-
-    yr = start_y + 10
-    yr = png_section_title(draw, "Profile", right_x, yr, right_w, mix["primary"], section_font)
-    yr = png_paragraph(draw, profile.summary, right_x, yr, 71, body_font, leading=22)
-
-    yr += 6
-    yr = png_section_title(draw, "Work experience", right_x, yr, right_w, mix["secondary"], section_font)
-    timeline_x = right_x + 92
-    draw.line((timeline_x, yr, timeline_x, yr + 500), fill=mix["secondary"], width=2)
-    for idx, exp in enumerate(profile.experience[:2]):
-        key = ("primary", "secondary", "tertiary", "quaternary")[idx % 4]
-        draw.text((right_x, yr), exp.period, fill=(0, 0, 0), font=font_for(15))
-        draw.ellipse((timeline_x - 4, yr + 8, timeline_x + 4, yr + 16), fill=mix[key])
-        draw.text((timeline_x + 16, yr), exp.title, fill=(0, 0, 0), font=font_for(17, bold=True))
-        yr += 21
-        draw.text((timeline_x + 16, yr), f"{exp.company}, {exp.location}", fill=(35, 35, 35), font=font_for(15))
-        yr += 20
-        yr = png_bullets(draw, exp.bullets[:3], timeline_x + 16, yr, 56, mix[key], body_font, leading=21)
-        yr += 4
-
-    yr = png_section_title(draw, "Education", right_x, yr, right_w, mix["tertiary"], section_font)
-    for idx, edu in enumerate(profile.education[:2]):
-        key = ("tertiary", "quaternary")[idx % 2]
-        draw.text((right_x, yr), edu.period, fill=(0, 0, 0), font=font_for(15))
-        draw.ellipse((timeline_x - 4, yr + 8, timeline_x + 4, yr + 16), fill=mix[key])
-        draw.text((timeline_x + 16, yr), edu.degree, fill=(0, 0, 0), font=font_for(16, bold=True))
-        yr += 20
-        draw.text((timeline_x + 16, yr), edu.school, fill=(40, 40, 40), font=font_for(15))
-        yr += 19
-        yr = png_paragraph(draw, edu.details, timeline_x + 16, yr, 55, body_font, leading=21)
-        yr += 4
-
-    yr = png_section_title(draw, "Projects and certifications", right_x, yr, right_w, mix["quaternary"], section_font)
-    for pr in profile.projects[:1]:
-        draw.text((right_x, yr), pr.name, fill=(0, 0, 0), font=font_for(16, bold=True))
-        yr += 20
-        yr = png_paragraph(draw, pr.details, right_x, yr, 70, body_font, leading=21)
-    yr = png_bullets(draw, profile.certifications[:2], right_x, yr, 68, mix["quaternary"], body_font, leading=21)
-
-
-def draw_png_template_c(draw: ImageDraw.ImageDraw, profile: RoleProfile, mix: dict[str, tuple[int, int, int]], width: int, start_y: int) -> None:
-    section_font = font_for(18, bold=True)
-    body_font = font_for(16)
-    x_left = 54
-    x_mid = 292
-    x_text = 316
-    x_right = width - 54
-    y = start_y + 8
-
-    y = png_section_title(draw, "Personal details", x_left, y, x_right - x_left, mix["primary"], section_font)
-    labels = ["Name", "Address", "Phone", "Email", "Website", "LinkedIn"]
-    values = [profile.person_name, profile.location, profile.phone, profile.email, profile.website, profile.linkedin]
-    for label, value in zip(labels, values):
-        draw.text((x_left, y), label, fill=(30, 30, 30), font=font_for(15, bold=True))
-        draw.text((x_left + 140, y), value, fill=(0, 0, 0), font=body_font)
-        y += 23
-
-    y += 6
-    y = png_section_title(draw, "Profile", x_left, y, x_right - x_left, mix["secondary"], section_font)
-    y = png_paragraph(draw, profile.summary, x_left, y, 112, body_font, leading=22)
-
-    y += 5
-    y = png_section_title(draw, "Work experience", x_left, y, x_right - x_left, mix["tertiary"], section_font)
-    draw.line((x_mid, y, x_mid, y + 460), fill=mix["tertiary"], width=2)
-    for idx, exp in enumerate(profile.experience[:2]):
-        key = ("primary", "secondary", "tertiary", "quaternary")[idx % 4]
-        draw.text((x_left, y), exp.period, fill=(0, 0, 0), font=font_for(15))
-        draw.ellipse((x_mid - 4, y + 8, x_mid + 4, y + 16), fill=mix[key])
-        draw.text((x_text, y), exp.title, fill=(0, 0, 0), font=font_for(17, bold=True))
+    y = max(y_left, y_right) + 2
+    y = png_section_title(draw, "Education and Language", 54, y, width - 108, accent, section_font)
+    edu_x = 54
+    lang_x = 650
+    for edu in profile.education[:2]:
+        draw.text((edu_x, y), edu.period.replace(" - ", "–"), fill=text_color, font=font_for(14, bold=True))
+        draw.text((edu_x + 110, y), edu.degree, fill=text_color, font=font_for(15, bold=True))
+        y += 22
+        draw.text((edu_x + 110, y), edu.school, fill=text_color, font=font_for(14))
         y += 21
-        draw.text((x_text, y), f"{exp.company}, {exp.location}", fill=(35, 35, 35), font=font_for(15))
-        y += 20
-        y = png_bullets(draw, exp.bullets[:3], x_text, y, 68, mix[key], body_font, leading=21)
-        y += 4
 
-    y = png_section_title(draw, "Education and qualifications", x_left, y, x_right - x_left, mix["quaternary"], section_font)
-    draw.line((x_mid, y, x_mid, y + 220), fill=mix["quaternary"], width=2)
-    for idx, edu in enumerate(profile.education[:2]):
-        key = ("quaternary", "primary")[idx % 2]
-        draw.text((x_left, y), edu.period, fill=(0, 0, 0), font=font_for(15))
-        draw.ellipse((x_mid - 4, y + 8, x_mid + 4, y + 16), fill=mix[key])
-        draw.text((x_text, y), edu.degree, fill=(0, 0, 0), font=font_for(16, bold=True))
-        y += 20
-        draw.text((x_text, y), edu.school, fill=(35, 35, 35), font=font_for(15))
-        y += 19
-        y = png_paragraph(draw, edu.details, x_text, y, 66, body_font, leading=21)
-        y += 4
-
-    y = png_section_title(draw, "Skills", x_left, y, x_right - x_left, mix["primary"], section_font)
-    for idx, rate in enumerate(profile.skill_ratings[:5]):
-        draw.text((x_left, y), rate.name, fill=(0, 0, 0), font=font_for(15, bold=True))
-        dx = x_left + 150
-        for j in range(5):
-            key = ("primary", "secondary", "tertiary", "quaternary", "primary")[j]
-            dot = mix[key] if j < rate.level else (220, 220, 220)
-            draw.ellipse((dx + j * 22, y + 6, dx + j * 22 + 8, y + 14), fill=dot)
-        if idx < len(profile.languages):
-            draw.text((x_left + 290, y), profile.languages[idx], fill=(30, 30, 30), font=font_for(14))
-        y += 24
+    ly = y - 86
+    draw.text((lang_x, ly), "Languages", fill=text_color, font=font_for(15, bold=True))
+    ly += 24
+    for lang in profile.languages[:3]:
+        draw.text((lang_x, ly), lang, fill=text_color, font=font_for(14))
+        ly += 22
 
 
 def generate_png(profile: RoleProfile) -> Path:
@@ -1380,14 +1063,7 @@ def generate_png(profile: RoleProfile) -> Path:
     image = Image.new("RGB", (width, height), color=(255, 255, 255))
     draw = ImageDraw.Draw(image)
 
-    top_bar = profile.template == "B"
-    start_y = draw_png_header(draw, profile, mix, width, top_bar=top_bar)
-    if profile.template == "A":
-        draw_png_template_a(draw, profile, mix, width, height, start_y)
-    elif profile.template == "B":
-        draw_png_template_b(draw, profile, mix, width, start_y)
-    else:
-        draw_png_template_c(draw, profile, mix, width, start_y)
+    draw_png_resume(draw, profile, mix, width, height)
 
     image.save(out_file, format="PNG", optimize=True)
     return out_file
@@ -1406,7 +1082,7 @@ def generate_manifest() -> Path:
     data = {
         profile.slug: {
             "role_title": profile.role_title,
-            "template": profile.template,
+            "template": "classic-two-color-v1",
             "pdf": f"/assets/examples/{profile.slug}/sample.pdf",
             "preview": f"/assets/examples/{profile.slug}/preview.png",
             "colors": color_mix(profile.slug),
@@ -1425,7 +1101,7 @@ def main() -> None:
         generate_pdf(profile)
         generate_png(profile)
     generate_manifest()
-    print(f"Generated enriched assets for {len(PROFILES)} roles in {OUTPUT_ROOT}")
+    print(f"Generated classic two-color assets for {len(PROFILES)} roles in {OUTPUT_ROOT}")
 
 
 if __name__ == "__main__":
