@@ -31,9 +31,12 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap header-wrap">
+    <div class="wrap header-wrap has-toggle">
       <a href="/" class="logo">Pitch My CV</a>
-      <nav class="header-nav">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="header-nav" id="main-nav">
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <a href="/#upload-zone" class="btn btn-primary btn-sm">Scan Resume</a>
@@ -42,24 +45,63 @@
   </header>
 
   <main class="section-white">
-    <div class="wrap" style="max-width: 900px;">
+    <div class="wrap" style="max-width: 720px;">
       <h1 style="font-size: clamp(30px, 4vw, 46px); margin-bottom: 14px;">Privacy Policy</h1>
-      <p class="text-muted" style="margin-bottom: 24px;">Last updated: March 8, 2026</p>
+      <p class="text-muted" style="margin-bottom: 32px;">Last updated: March 2026</p>
 
-      <h2 style="margin-bottom: 10px;">Data we process</h2>
-      <p style="margin-bottom: 16px;">We process resume files and related inputs only to provide analysis and optimization features.</p>
+      <p style="margin-bottom: 24px;">Pitch My CV (“we”, “us”, “our”) operates the website and resume analysis services at pitchcv.app (and related domains). This Privacy Policy explains how we collect, use, store, and protect your personal data when you use our services. By using our website or services, you agree to the practices described here.</p>
 
-      <h2 style="margin-bottom: 10px;">How we use data</h2>
-      <p style="margin-bottom: 16px;">Data is used to generate ATS compatibility feedback, keyword recommendations, and improvement suggestions.</p>
+      <h2 style="margin-top: 32px; margin-bottom: 10px;">1. Data controller</h2>
+      <p style="margin-bottom: 16px;">The data controller responsible for your personal data is Pitch My CV. For privacy-related requests, contact us at <strong>privacy@pitchmycv.com</strong>.</p>
 
-      <h2 style="margin-bottom: 10px;">Retention and deletion</h2>
-      <p style="margin-bottom: 16px;">Uploaded files are retained only as needed for service delivery and security operations, then deleted according to internal retention schedules.</p>
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">2. Data we collect</h2>
+      <p style="margin-bottom: 10px;"><strong>Data you provide:</strong></p>
+      <ul style="margin-bottom: 16px; padding-left: 24px;">
+        <li><strong>Resume/CV files:</strong> When you upload a document for ATS analysis, we process the file to generate your score and feedback. File content is used solely to provide the service.</li>
+        <li><strong>Account and contact data:</strong> If you create an account or subscribe to a paid plan, we collect email address, payment information (processed by our payment provider), and any details you choose to provide.</li>
+      </ul>
+      <p style="margin-bottom: 10px;"><strong>Data we collect automatically:</strong></p>
+      <ul style="margin-bottom: 16px; padding-left: 24px;">
+        <li><strong>Usage and technical data:</strong> IP address, browser type, device type, pages visited, and similar information to operate the service, prevent abuse, and improve our product. This may include cookies and similar technologies as described below.</li>
+      </ul>
 
-      <h2 style="margin-bottom: 10px;">Your rights</h2>
-      <p style="margin-bottom: 16px;">You can request data access or deletion by contacting privacy@pitchmycv.com.</p>
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">3. Legal basis and purposes</h2>
+      <p style="margin-bottom: 16px;">We process your data only for: (a) providing resume scanning, scoring, and optimization services (performance of contract); (b) processing payments and managing your account; (c) communicating with you about the service; (d) improving our services and security (legitimate interest); (e) complying with applicable law. We do not sell your personal data or resume content to third parties for marketing or other purposes.</p>
 
-      <h2 style="margin-bottom: 10px;">Contact</h2>
-      <p>Questions about privacy can be sent to privacy@pitchmycv.com.</p>
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">4. Retention and deletion</h2>
+      <p style="margin-bottom: 16px;"><strong>Uploaded files:</strong> Resume/CV files are automatically deleted from our systems after analysis is complete. We do not retain copies of your documents longer than necessary to deliver the result.</p>
+      <p style="margin-bottom: 16px;"><strong>Account and usage data:</strong> We retain account and usage data for as long as your account is active or as needed to provide the service, resolve disputes, and comply with legal obligations. You may request deletion of your account and associated personal data subject to applicable law.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">5. Your rights</h2>
+      <p style="margin-bottom: 10px;">Depending on your location, you may have the right to:</p>
+      <ul style="margin-bottom: 16px; padding-left: 24px;">
+        <li>Access the personal data we hold about you</li>
+        <li>Rectify inaccurate data</li>
+        <li>Request erasure of your personal data, subject to legal and operational requirements</li>
+        <li>Object to or restrict certain processing</li>
+        <li>Data portability where technically feasible</li>
+        <li>Withdraw consent where processing is based on consent (without affecting the lawfulness of processing before withdrawal)</li>
+        <li>Lodge a complaint with a supervisory authority in your country</li>
+      </ul>
+      <p style="margin-bottom: 16px;">To exercise these rights, contact us at <strong>privacy@pitchmycv.com</strong>. We will respond within the timeframes required by applicable law.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">6. Cookies and similar technologies</h2>
+      <p style="margin-bottom: 16px;">We use essential cookies and similar technologies necessary for the operation of the website (e.g. session management, security). We may use analytics cookies to understand how the site is used and to improve it; where required by law, we obtain your consent before using non-essential cookies. You can control cookies through your browser settings.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">7. Sharing and third parties</h2>
+      <p style="margin-bottom: 16px;">We may share data only with: (a) service providers who assist in hosting, analytics, payment processing, or support, under strict confidentiality and data-processing agreements; (b) authorities when required by law or to protect our rights and safety. We do not sell or rent your data.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">8. Security and international transfers</h2>
+      <p style="margin-bottom: 16px;">We implement appropriate technical and organisational measures to protect your data against unauthorized access, loss, or alteration. Your data may be processed in countries outside your residence; where we transfer data internationally, we ensure appropriate safeguards (e.g. standard contractual clauses or adequacy decisions) as required by applicable law.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">9. Children</h2>
+      <p style="margin-bottom: 16px;">Our service is not directed at individuals under 16. We do not knowingly collect personal data from children. If you believe we have collected such data, please contact us and we will delete it promptly.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">10. Changes to this policy</h2>
+      <p style="margin-bottom: 16px;">We may update this Privacy Policy from time to time. We will post the updated version on this page and update the “Last updated” date. Continued use of the service after changes constitutes acceptance of the updated policy. For material changes, we may provide additional notice (e.g. by email or a notice on the site) where required by law.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">11. Contact</h2>
+      <p>For privacy-related requests, questions, or complaints: <strong>privacy@pitchmycv.com</strong>.</p>
     </div>
   </main>
 
@@ -73,5 +115,6 @@
       </p>
     </div>
   </footer>
+  <script src="../js/main.js"></script>
 </body>
 </html>

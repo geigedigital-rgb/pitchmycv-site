@@ -31,9 +31,12 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap header-wrap">
+    <div class="wrap header-wrap has-toggle">
       <a href="/" class="logo">Pitch My CV</a>
-      <nav class="header-nav">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="header-nav" id="main-nav">
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <a href="/#upload-zone" class="btn btn-primary btn-sm">Scan Resume</a>
@@ -42,24 +45,54 @@
   </header>
 
   <main class="section-white">
-    <div class="wrap" style="max-width: 900px;">
+    <div class="wrap" style="max-width: 720px;">
       <h1 style="font-size: clamp(30px, 4vw, 46px); margin-bottom: 14px;">Terms of Service</h1>
-      <p class="text-muted" style="margin-bottom: 24px;">Last updated: March 8, 2026</p>
+      <p class="text-muted" style="margin-bottom: 32px;">Last updated: March 2026</p>
 
-      <h2 style="margin-bottom: 10px;">Service scope</h2>
-      <p style="margin-bottom: 16px;">Pitch My CV provides resume analysis and optimization guidance for informational and career support purposes.</p>
+      <p style="margin-bottom: 24px;">These Terms of Service (“Terms”) govern your access to and use of the website and services operated by Pitch My CV (“we”, “us”, “our”) at pitchcv.app, including resume scanning, ATS scoring, and related tools (the “Service”). By accessing or using the Service, you agree to be bound by these Terms. If you do not agree, do not use the Service.</p>
 
-      <h2 style="margin-bottom: 10px;">Acceptable use</h2>
-      <p style="margin-bottom: 16px;">You agree not to misuse the service, attempt unauthorized access, or upload unlawful or harmful content.</p>
+      <h2 style="margin-top: 32px; margin-bottom: 10px;">1. Acceptance and changes</h2>
+      <p style="margin-bottom: 16px;">By using the Service, you confirm that you are at least 16 years old (or the age of majority in your jurisdiction) and have the authority to accept these Terms. We may modify these Terms at any time by posting the updated version on this page and updating the “Last updated” date. Your continued use of the Service after changes constitutes acceptance of the revised Terms. For material changes, we may provide additional notice (e.g. by email or a notice on the site) where required by law. If you do not agree to the new Terms, you must stop using the Service.</p>
 
-      <h2 style="margin-bottom: 10px;">Subscriptions and billing</h2>
-      <p style="margin-bottom: 16px;">Paid plans renew according to the selected billing cycle unless canceled before renewal.</p>
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">2. Description of the service</h2>
+      <p style="margin-bottom: 16px;">Pitch My CV provides tools to analyse resumes and CVs (e.g. ATS compatibility scoring, keyword and formatting feedback). The Service is provided for informational and self-improvement purposes. We do not guarantee that use of our tools will result in any specific outcome, including passing any particular applicant tracking system, receiving job interviews, or obtaining employment. Results depend on many factors outside our control, including employer systems, job market conditions, and your own applications.</p>
 
-      <h2 style="margin-bottom: 10px;">Disclaimer</h2>
-      <p style="margin-bottom: 16px;">We do not guarantee interview outcomes or job placement. Results depend on many external factors.</p>
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">3. No guarantee of results</h2>
+      <p style="margin-bottom: 16px;">The Service is provided “as is” and “as available.” We do not warrant that the Service will be uninterrupted, error-free, or that our analysis will accurately predict hiring outcomes. Our scores and recommendations are estimates and suggestions only. We are not a career advisor, recruiter, or employer; we do not guarantee that improving your resume according to our feedback will lead to interviews or job offers. You use the Service at your own risk.</p>
 
-      <h2 style="margin-bottom: 10px;">Contact</h2>
-      <p>Questions about these terms can be sent to support@pitchmycv.com.</p>
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">4. Your obligations and acceptable use</h2>
+      <p style="margin-bottom: 10px;">You agree to use the Service only for lawful purposes and in accordance with these Terms. You represent and warrant that you have the right to upload any document you submit (e.g. you own the content or have permission from the owner) and that your use does not violate any applicable law or third-party rights.</p>
+      <p style="margin-bottom: 10px;">You must not: upload content that is illegal, harmful, offensive, infringing, or that you do not have the right to use; attempt to gain unauthorized access to our systems or other users’ accounts; use the Service to distribute malware, spam, or to abuse or overload our infrastructure; scrape, reverse-engineer, or use automated means to access the Service except as we expressly permit.</p>
+      <p style="margin-bottom: 16px;">We reserve the right to refuse service, remove content, or suspend or terminate your access at any time if we believe you have violated these Terms or for any other reason at our discretion, without liability to you.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">5. Intellectual property and content</h2>
+      <p style="margin-bottom: 16px;">You retain ownership of the content you upload. By uploading content, you grant us a limited, non-exclusive, royalty-free licence to use, process, and store it only as necessary to provide the Service (e.g. to analyse your resume and return results). We do not claim ownership of your resume or CV. Our website, software, design, text, graphics, and other materials are owned by us or our licensors and are protected by intellectual property laws. You may not copy, modify, or distribute our materials without our prior written consent.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">6. Paid plans and refunds</h2>
+      <p style="margin-bottom: 16px;">If you subscribe to a paid plan, payment terms will be presented at the time of purchase. Fees are generally non-refundable unless otherwise stated in the offer or required by law. We may offer a money-back guarantee for certain plans as described on the pricing page; any such guarantee will be subject to the conditions stated there. Refund requests should be sent to the contact address published on our website.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">7. Limitation of liability</h2>
+      <p style="margin-bottom: 10px;">To the maximum extent permitted by applicable law:</p>
+      <ul style="margin-bottom: 10px; padding-left: 24px;">
+        <li>We and our affiliates, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages (including loss of profits, data, goodwill, or business opportunity) arising out of or related to your use or inability to use the Service, even if we have been advised of the possibility of such damages.</li>
+        <li>Our total liability for any claims arising out of or related to these Terms or the Service shall not exceed the amount you paid us in the twelve (12) months preceding the claim, or one hundred US dollars (USD 100), whichever is greater. If you have not paid us, our liability shall not exceed USD 100.</li>
+      </ul>
+      <p style="margin-bottom: 16px;">Some jurisdictions do not allow the exclusion or limitation of certain damages; in such jurisdictions, our liability will be limited to the maximum extent permitted by law. Nothing in these Terms excludes or limits our liability for death or personal injury caused by our negligence, fraud, or any other liability that cannot be excluded or limited by law.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">8. Indemnification</h2>
+      <p style="margin-bottom: 16px;">You agree to indemnify, defend, and hold harmless Pitch My CV and its affiliates, officers, directors, employees, and agents from and against any claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys’ fees) arising out of or related to: (a) your use of the Service; (b) content you upload or submit; (c) your violation of these Terms or any law or third-party right; or (d) any dispute between you and a third party. We reserve the right to assume the exclusive defence and control of any matter subject to indemnification by you, at your expense.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">9. Termination</h2>
+      <p style="margin-bottom: 16px;">We may suspend or terminate your access to the Service at any time, with or without cause or notice, including for violation of these Terms. Upon termination, your right to use the Service ceases immediately. Sections that by their nature should survive (including Limitation of Liability, Indemnification, and Governing Law) will survive termination.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">10. Governing law and disputes</h2>
+      <p style="margin-bottom: 16px;">These Terms are governed by the laws of the jurisdiction in which Pitch My CV operates, without regard to conflict of law principles. Any dispute arising out of or related to these Terms or the Service shall be resolved in the courts of competent jurisdiction in that location. You waive any objection to venue or jurisdiction in such courts to the extent permitted by law. If you are a consumer in the European Union or another jurisdiction with mandatory consumer protection laws, those laws may apply and you may have additional rights.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">11. General</h2>
+      <p style="margin-bottom: 16px;">If any provision of these Terms is held invalid or unenforceable, the remaining provisions will remain in effect. Our failure to enforce any right or provision does not constitute a waiver of that right or provision. These Terms constitute the entire agreement between you and Pitch My CV regarding the Service and supersede any prior agreements. We may assign our rights and obligations under these Terms; you may not assign without our prior written consent.</p>
+
+      <h2 style="margin-top: 28px; margin-bottom: 10px;">12. Contact</h2>
+      <p>For questions about these Terms: <strong>legal@pitchmycv.com</strong> or <strong>support@pitchmycv.com</strong>.</p>
     </div>
   </main>
 
@@ -73,5 +106,6 @@
       </p>
     </div>
   </footer>
+  <script src="../js/main.js"></script>
 </body>
 </html>

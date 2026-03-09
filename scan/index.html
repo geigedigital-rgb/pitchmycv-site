@@ -88,11 +88,17 @@
 </head>
 <body>
 
-  <header class="app-header">
-    <a href="/" class="logo">Pitch My CV</a>
-    <div class="app-header-actions">
-      <span class="file-name">Analyzing: resume_final_v2.pdf</span>
-      <a href="/" class="btn btn-outline btn-sm">Start Over</a>
+  <header class="site-header">
+    <div class="wrap header-wrap has-toggle">
+      <a href="/" class="logo">Pitch My CV</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="header-nav" id="main-nav">
+        <span class="file-name">Analyzing: resume_final_v2.pdf</span>
+        <a href="/" class="btn btn-outline btn-sm">Start Over</a>
+        <a href="/#upload-zone" class="btn btn-primary btn-sm">Scan Resume</a>
+      </nav>
     </div>
   </header>
 
@@ -192,5 +198,6 @@
     </main>
   </div>
 
+  <script src="../js/main.js"></script>
 </body>
 </html>

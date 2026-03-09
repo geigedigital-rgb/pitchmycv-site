@@ -63,8 +63,18 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap header-wrap">
+    <div class="wrap header-wrap has-toggle">
       <a href="/" class="logo">Pitch My CV</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="header-nav" id="main-nav">
+        <a href="/#upload-zone">Scan Resume</a>
+        <a href="/examples">Resume Examples</a>
+        <a href="/tools/ats-checker">ATS Checker</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#upload-zone" class="btn btn-primary btn-sm">Check ATS Score Free</a>
+      </nav>
     </div>
   </header>
 
@@ -153,5 +163,6 @@
       </p>
     </div>
   </footer>
+  <script src="../../js/main.js"></script>
 </body>
 </html>
