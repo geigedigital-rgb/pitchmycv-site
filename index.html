@@ -120,7 +120,7 @@
       <div class="wrap hero-grid">
         <div class="hero-content">
           <h1 class="hero-title">Stop getting auto-rejected.<br>Multiply your interview chances.</h1>
-          <p class="hero-sub">Don't let hidden ATS algorithms discard your application. Run a deep diagnostic scan to uncover exactly what's blocking your resume—and fix it to get noticed by real recruiters.</p>
+          <p class="hero-sub">Uncover the hidden mistakes holding your resume back. We'll show you the exact keywords and critical details to add to improve your CV, bypass ATS filters, and stand out from the competition.</p>
           <aside class="hero-trust" aria-label="Social proof and reviews">
             <ul class="hero-trust-list">
               <li class="hero-trust-item">
@@ -140,67 +140,177 @@
         
         <div class="hero-right">
           <div class="hero-right-glow" aria-hidden="true"></div>
-          <div class="score-gauge-wrap">
-            <div class="score-gauge" aria-hidden="true">
-              <svg viewBox="0 0 120 70" class="gauge-svg">
-                <defs>
-                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ef4444"/>
-                    <stop offset="25%" stop-color="#f59e0b"/>
-                    <stop offset="50%" stop-color="#eab308"/>
-                    <stop offset="75%" stop-color="#22c55e"/>
-                    <stop offset="100%" stop-color="#14b8a6"/>
-                  </linearGradient>
-                </defs>
-                <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
-                <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" class="gauge-fill"/>
-              </svg>
-              <span class="gauge-value">0%</span>
-            </div>
-            <span class="gauge-label">Interview chances</span>
-          </div>
-          <div class="upload-card upload-composer" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
-            <h3 id="resume-upload-title" itemprop="name">Check your resume now</h3>
-            <p class="upload-subline">Check your interview chances in under 1 minute</p>
+          <div class="compact-upload-card" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
+            <h3 id="resume-upload-title" itemprop="name" class="sr-only">Check your resume now</h3>
             <meta itemprop="description" content="Upload a resume file, add a job link, and run ATS analysis.">
             <meta itemprop="totalTime" content="PT1M">
 
-            <section class="upload-file-card" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
-              <meta itemprop="position" content="1">
-              <meta itemprop="name" content="Upload file">
-              <meta itemprop="text" content="Upload a resume in PDF, DOC, or DOCX format.">
-              <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
-              <div class="upload-dropzone" id="upload-dropzone" role="button" tabindex="0" aria-describedby="dropzone-help">
-                <span class="upload-dropzone-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"></path><polyline points="14 2 14 9 21 9"></polyline><path d="M12 18v-6"></path><path d="m9.5 14 2.5-2.5 2.5 2.5"></path></svg>
-                </span>
-                <strong id="dropzone-title">Upload resume file</strong>
-                <span id="dropzone-help">Click to select or drag and drop PDF, DOC, DOCX</span>
-              </div>
-              <p class="upload-file-meta" id="file-step-status" aria-live="polite">Max 5MB · 100% secure</p>
-            </section>
+            <div class="compact-upload-row">
+              <section class="compact-file-card" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                <meta itemprop="position" content="1">
+                <meta itemprop="name" content="Upload file">
+                <meta itemprop="text" content="Upload a resume in PDF, DOC, or DOCX format.">
+                <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
+                <div class="compact-dropzone" id="upload-dropzone" role="button" tabindex="0">
+                  <span class="upload-dropzone-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"></path><polyline points="14 2 14 9 21 9"></polyline><path d="M12 18v-6"></path><path d="m9.5 14 2.5-2.5 2.5 2.5"></path></svg>
+                  </span>
+                  <div class="compact-dropzone-text">
+                    <strong id="dropzone-title">Upload resume file</strong>
+                    <span id="dropzone-help">Click to select or drag and drop PDF, DOC, DOCX</span>
+                  </div>
+                </div>
+                <p class="sr-only" id="file-step-status" aria-live="polite"></p>
+              </section>
 
-            <section class="upload-link-card is-disabled" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="true">
-              <meta itemprop="position" content="2">
-              <meta itemprop="name" content="Add job link">
-              <meta itemprop="text" content="Paste a job posting link after a resume file is uploaded.">
-              <label class="sr-only" for="job-link-input">Job posting link</label>
-              <div class="upload-link-input-wrap">
-                <span class="upload-link-icon" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.4 4.53"></path><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 1 0 7.07 7.07l1.41-1.41"></path></svg>
-                </span>
-                <input type="url" id="job-link-input" class="upload-link-input" placeholder="Paste job link" disabled>
-                <span class="upload-link-send" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
-                </span>
-              </div>
-              <p class="upload-step-note" id="job-link-note">First upload file, then link</p>
-            </section>
+              <section class="compact-link-card is-disabled" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="true">
+                <meta itemprop="position" content="2">
+                <meta itemprop="name" content="Add job link">
+                <meta itemprop="text" content="Paste a job posting link after a resume file is uploaded.">
+                <div class="compact-link-overlay">First upload file</div>
+                <div class="compact-link-inner">
+                  <strong>Job posting link</strong>
+                  <label class="sr-only" for="job-link-input">Job posting link</label>
+                  <div class="upload-link-input-wrap">
+                    <span class="upload-link-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.4 4.53"></path><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 1 0 7.07 7.07l1.41-1.41"></path></svg>
+                    </span>
+                    <input type="url" id="job-link-input" class="upload-link-input" placeholder="Paste job link" disabled>
+                    <span class="upload-link-send" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg>
+                    </span>
+                  </div>
+                </div>
+                <p class="sr-only" id="job-link-note"></p>
+              </section>
+            </div>
 
-            <button type="button" class="btn btn-primary btn-full mt-4" id="analyze-resume-btn" disabled aria-disabled="true">Check interview chance</button>
-            <p class="upload-secure"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Files auto-deleted after analysis.</p>
+            <div class="compact-upload-bottom">
+              <div class="score-gauge-wrap compact-gauge">
+                <div class="score-gauge" aria-hidden="true">
+                  <svg viewBox="0 0 120 70" class="gauge-svg">
+                    <defs>
+                      <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#ef4444"/>
+                        <stop offset="25%" stop-color="#f59e0b"/>
+                        <stop offset="50%" stop-color="#eab308"/>
+                        <stop offset="75%" stop-color="#22c55e"/>
+                        <stop offset="100%" stop-color="#14b8a6"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
+                    <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" class="gauge-fill"/>
+                  </svg>
+                  <span class="gauge-value">0%</span>
+                </div>
+                <span class="gauge-label">Interview chances</span>
+              </div>
+
+              <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn" disabled aria-disabled="true">Check your resume now</button>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- BLOCK 1.5: Score Improvement -->
+    <section class="score-improvement">
+      <div class="wrap score-imp-grid">
+        
+        <!-- Left: Progress Card -->
+        <div class="imp-progress-card">
+          <div class="imp-progress-header">KEY RESUME MISTAKES</div>
+          <div class="imp-progress-list">
+            
+            <div class="imp-p-item active">
+              <div class="imp-p-icon check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="imp-p-content">
+                <div class="imp-p-row" style="margin-bottom: 0;">
+                  <span class="imp-p-title">Data Analytics</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="imp-p-item active">
+              <div class="imp-p-icon check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="imp-p-content">
+                <div class="imp-p-row" style="margin-bottom: 0;">
+                  <span class="imp-p-title">Communication</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="imp-p-item active">
+              <div class="imp-p-icon check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="imp-p-content">
+                <div class="imp-p-row" style="margin-bottom: 0;">
+                  <span class="imp-p-title">Project Management</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="imp-p-item error">
+              <div class="imp-p-icon cross">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </div>
+              <div class="imp-p-content">
+                <div class="imp-p-row" style="margin-bottom: 0;">
+                  <span class="imp-p-title">Excel & Spreadsheets</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="imp-p-item error">
+              <div class="imp-p-icon cross">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </div>
+              <div class="imp-p-content">
+                <div class="imp-p-row" style="margin-bottom: 0;">
+                  <span class="imp-p-title">Responsibility</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="imp-p-item error">
+              <div class="imp-p-icon cross">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </div>
+              <div class="imp-p-content">
+                <div class="imp-p-row" style="margin-bottom: 0;">
+                  <span class="imp-p-title">CRM Software</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Improvement Block -->
+        <div class="imp-action-card">
+          <div class="imp-action-content">
+            <h2>Improve your score in 5 mins</h2>
+            <p>Make small improvements to your resume score. A match rate of 85% or higher significantly boosts your interview chances.</p>
+            
+            <img src="assets/check-cv-fob-offer.svg" alt="Check CV Job Offer" style="display: block; width: 100%; max-width: 360px; margin-top: 24px;">
+          </div>
+          
+          <div class="imp-visual" aria-hidden="true">
+            <img src="assets/resume-example-1.png" alt="Resume Preview" class="imp-visual-resume">
+            <div class="imp-visual-score-wrapper">
+              <div class="imp-visual-score">
+                <div class="imp-visual-score-badge">15%</div>
+                <div class="imp-visual-score-text">ATS<br>Match</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -604,7 +714,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">PDF and DOCX, up to 5MB.</p>
+              <p itemprop="text">We support standard resume formats including PDF (.pdf), Microsoft Word (.doc, .docx). For the most accurate scanning and formatting preservation, we highly recommend uploading your resume as a PDF file. The maximum file size limit is 5MB.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -613,7 +723,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Yes. One free scan, no card required. Pro plans add unlimited scans and AI optimization.</p>
+              <p itemprop="text">Yes, absolutely. You can run one comprehensive ATS scan for free without entering any credit card details. This gives you a clear baseline score and highlights critical formatting issues. For users needing deeper insights, unlimited scans, and advanced AI rewriting, we offer flexible Pro and Lifetime plans.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -622,7 +732,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Usually under 30 seconds.</p>
+              <p itemprop="text">Our scanning engine is built for speed. In most cases, analyzing your resume against industry-standard ATS algorithms takes less than 30 seconds. Complex PDFs with unusual formatting might occasionally take slightly longer.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -631,7 +741,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">A score that estimates how well your resume will parse and match keywords in typical ATS systems. Higher score = better chance of passing filters.</p>
+              <p itemprop="text">An ATS (Applicant Tracking System) score is an estimate of how effectively parsing software can read and understand your resume. It evaluates factors like keyword density, section headers, formatting structure, and measurable impact. A higher score means a human recruiter is much more likely to actually see your application.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -640,7 +750,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">No. We suggest improvements; you decide what to accept, reject, or edit.</p>
+              <p itemprop="text">No, you remain in full control. We do not alter your original document. Instead, our AI provides actionable suggestions, identifies missing keywords, and offers targeted rewrite options for specific bullet points. You choose which recommendations to apply to craft the perfect narrative.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -649,7 +759,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Yes. Files are processed securely, not sold, and can be deleted anytime. See <a href="/privacy">Privacy Policy</a>.</p>
+              <p itemprop="text">Privacy is our top priority. We use secure encryption to process your files. We never sell your personal data or share your resume with third parties. Furthermore, files uploaded for the free scan are automatically deleted from our servers shortly after analysis. For full details, please review our <a href="/privacy">Privacy Policy</a>.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -658,7 +768,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">It finds missing keywords from the job description and suggests natural rewrites with stronger, metric-driven language.</p>
+              <p itemprop="text">Our AI compares your resume content directly against the specific job description you provide. It identifies crucial missing hard and soft skills, flags vague or weak action verbs, and suggests concrete, metric-driven language to make your achievements stand out to both software filters and hiring managers.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -667,7 +777,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">No. Results depend on many factors: employer systems, job market, your applications. We help optimize your resume for ATS filters.</p>
+              <p itemprop="text">While an optimized resume drastically improves your visibility, we cannot guarantee specific outcomes. Hiring decisions depend on numerous external factors including interview performance, market competition, and employer preferences. We guarantee to give you the best possible foundation to get past automated filters.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -676,7 +786,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Use terms from the job description: skills, tools, and qualifications. Our scan highlights missing keywords for the role you target.</p>
+              <p itemprop="text">The right keywords vary entirely by role. You should focus on specific technical tools, methodologies, and core competencies explicitly mentioned in the job description you're applying for. Our scanner automates this process by instantly extracting those vital keywords for you.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -685,7 +795,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Free: one scan. Pro: unlimited scans.</p>
+              <p itemprop="text">The free tier allows for a single baseline scan to experience the platform. If you are tailoring resumes for multiple different job postings—which is highly recommended for best results—our Pro plans offer unlimited scanning and optimization features.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -694,7 +804,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Yes. Cancel anytime in account settings. Access continues until the end of the billing period.</p>
+              <p itemprop="text">Yes, you can manage or cancel your subscription at any time directly from your account settings page. There are no hidden fees or lock-in contracts, and your premium access will remain active until the end of your current paid billing cycle.</p>
             </div>
           </div>
         </div>
