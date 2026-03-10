@@ -429,6 +429,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 .upload-file-card + .upload-link-card {
   margin-top: 10px;
 }
+.upload-purpose {
+  margin: 0 0 8px;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: #334155;
+}
 .upload-dropzone {
   min-height: 130px;
   border: 1.5px dashed #c4d1e3;
@@ -1791,6 +1797,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   .upload-dropzone span {
     font-size: 0.76rem;
   }
+  .upload-purpose {
+    font-size: 0.74rem;
+  }
   .upload-link-input-wrap {
     min-height: 42px;
   }
@@ -1827,6 +1836,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
   .upload-dropzone strong {
     font-size: 0.85rem;
+  }
+  .upload-purpose {
+    margin-bottom: 7px;
+    font-size: 0.72rem;
   }
   .upload-link-input {
     font-size: 0.84rem;

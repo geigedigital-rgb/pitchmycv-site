@@ -161,7 +161,7 @@
           </div>
           <div class="upload-card upload-composer" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
             <h3 id="resume-upload-title" itemprop="name">Check your resume now</h3>
-            <p class="upload-subline">File + job link. Fast ATS scan.</p>
+            <p class="upload-subline">Check your interview chances in under 1 minute</p>
             <meta itemprop="description" content="Upload a resume file, add a job link, and run ATS analysis.">
             <meta itemprop="totalTime" content="PT1M">
 
@@ -169,13 +169,14 @@
               <meta itemprop="position" content="1">
               <meta itemprop="name" content="Upload file">
               <meta itemprop="text" content="Upload a resume in PDF, DOC, or DOCX format.">
+              <p class="upload-purpose">Upload your resume so we can scan ATS parsing, structure, and missing keywords.</p>
               <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
               <div class="upload-dropzone" id="upload-dropzone" role="button" tabindex="0" aria-describedby="dropzone-help">
                 <span class="upload-dropzone-icon" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"></path><polyline points="14 2 14 9 21 9"></polyline><path d="M12 18v-6"></path><path d="m9.5 14 2.5-2.5 2.5 2.5"></path></svg>
                 </span>
-                <strong id="dropzone-title">Click to select resume</strong>
-                <span id="dropzone-help">or drag and drop PDF, DOC, DOCX</span>
+                <strong id="dropzone-title">Upload resume file</strong>
+                <span id="dropzone-help">Click to select or drag and drop PDF, DOC, DOCX</span>
               </div>
               <p class="upload-file-meta" id="file-step-status" aria-live="polite">Max 5MB · 100% secure</p>
             </section>
@@ -184,6 +185,7 @@
               <meta itemprop="position" content="2">
               <meta itemprop="name" content="Add job link">
               <meta itemprop="text" content="Paste a job posting link after a resume file is uploaded.">
+              <p class="upload-purpose">Paste a job link so we can match your resume to role requirements and estimate interview chance.</p>
               <label class="sr-only" for="job-link-input">Job posting link</label>
               <div class="upload-link-input-wrap">
                 <span class="upload-link-icon" aria-hidden="true">
@@ -197,7 +199,7 @@
               <p class="upload-step-note" id="job-link-note">First upload file, then link</p>
             </section>
 
-            <button type="button" class="btn btn-primary btn-full mt-4" id="analyze-resume-btn" disabled aria-disabled="true">Check ATS score</button>
+            <button type="button" class="btn btn-primary btn-full mt-4" id="analyze-resume-btn" disabled aria-disabled="true">Check interview chance</button>
             <p class="upload-secure"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Files auto-deleted after analysis.</p>
           </div>
         </div>

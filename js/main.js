@@ -206,16 +206,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const hasFile = Boolean(file);
 
       if (dropzoneTitle) {
-        dropzoneTitle.textContent = hasFile ? file.name : "Click to select resume";
+        dropzoneTitle.textContent = hasFile ? file.name : "Upload resume file";
       }
       if (fileStepStatus) {
-        fileStepStatus.textContent = hasFile ? "File uploaded" : "Max 5MB · 100% secure";
+        fileStepStatus.textContent = hasFile ? "Resume uploaded. Now add a job link." : "Max 5MB · 100% secure";
       }
       if (jobLinkInput) {
         jobLinkInput.disabled = !hasFile;
       }
       if (jobLinkNote) {
-        jobLinkNote.textContent = hasFile ? "Link is now available" : "First upload file, then link";
+        jobLinkNote.textContent = hasFile ? "Add link to calculate interview chance" : "First upload file, then link";
       }
       if (jobLinkStep) {
         jobLinkStep.classList.toggle("is-disabled", !hasFile);
@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         analyzeResumeBtn.disabled = true;
-        analyzeResumeBtn.textContent = "Analyzing...";
+        analyzeResumeBtn.textContent = "Calculating chance...";
 
         const jobLink = jobLinkInput ? jobLinkInput.value.trim() : "";
         const destination = jobLink ? `/scan?jobLink=${encodeURIComponent(jobLink)}` : "/scan";
