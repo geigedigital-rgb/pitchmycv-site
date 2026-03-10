@@ -267,7 +267,22 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* --- Header (Rezi-style) --- */
 .site-header { padding: 16px 0; border-bottom: 1px solid var(--border-color); background: var(--bg-white); }
 .header-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; }
-.logo { font-size: 1.35rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.03em; }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+}
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  display: block;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
 .header-nav { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .header-nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; padding: 8px 12px; border-radius: var(--radius-sm); transition: color 0.2s; white-space: nowrap; }
 .header-nav a:hover { color: var(--text-main); }
