@@ -90,6 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Drag & Drop interactive zone (Rezi style)
   const uploadZone = document.getElementById("upload-zone");
   const fileInput = document.getElementById("file-input");
+  const filePickerBtn = document.getElementById("file-picker-btn");
+  const fileStepStatus = document.getElementById("file-step-status");
+  const jobLinkStep = document.getElementById("job-link-step");
+  const jobLinkInput = document.getElementById("job-link-input");
+  const analyzeResumeBtn = document.getElementById("analyze-resume-btn");
 
   // Hero gauge intro animation (run once after full page load)
   const gaugeFill = document.querySelector(".gauge-fill");
@@ -181,6 +186,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (uploadZone && fileInput) {
+    const isTwoStepUploadFlow = Boolean(filePickerBtn && jobLinkStep && jobLinkInput && analyzeResumeBtn);
+    let selectedResumeFile = null;
+
+    const validTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ];
+
+    const setTwoStepState = file => {
+      if (!isTwoStepUploadFlow) {
+        return;
+      }
+      selectedResumeFile = file;
+      const hasFile = Boolean(file);
+
+      if (fileStepStatus) {
+        fileStepStatus.textContent = hasFile ? `Selected: ${file.name}` : "No file selected yet";
+      }
+      if (jobLinkInput) {
+        jobLinkInput.disabled = !hasFile;
+      }
+      if (jobLinkStep) {
+        jobLinkStep.classList.toggle("is-disabled", !hasFile);
+        jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+      }
+      if (analyzeResumeBtn) {
+        analyzeResumeBtn.disabled = !hasFile;
+        analyzeResumeBtn.setAttribute("aria-disabled", hasFile ? "false" : "true");
+      }
+    };
+
+    if (isTwoStepUploadFlow && filePickerBtn) {
+      filePickerBtn.addEventListener("click", () => {
+        fileInput.click();
+      });
+      setTwoStepState(null);
+    }
+
     // Prevent default drag behaviors
     ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
       uploadZone.addEventListener(eventName, preventDefaults, false);
@@ -226,27 +270,43 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleFiles(files) {
       if (files.length > 0) {
         const file = files[0];
-        
-        // Allowed formats: pdf, doc, docx
-        const validTypes = [
-          "application/pdf", 
-          "application/msword", 
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        ];
-        
+
         if (validTypes.includes(file.type) || file.name.match(/\.(pdf|doc|docx)$/i)) {
-          // Simulate a brief loading state, then redirect to the scan app
-          const btn = uploadZone.querySelector('button');
-          if(btn) {
-            btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> Analyzing...';
+          if (isTwoStepUploadFlow) {
+            setTwoStepState(file);
+            return;
+          }
+
+          // Fallback flow for legacy pages
+          const btn = uploadZone.querySelector("button");
+          if (btn) {
+            btn.textContent = "Analyzing...";
           }
           setTimeout(() => {
-            window.location.href = '/scan';
+            window.location.href = "/scan";
           }, 1500);
         } else {
           alert("Please upload a PDF or DOCX file.");
         }
       }
+    }
+
+    if (isTwoStepUploadFlow && analyzeResumeBtn) {
+      analyzeResumeBtn.addEventListener("click", () => {
+        if (!selectedResumeFile) {
+          return;
+        }
+
+        analyzeResumeBtn.disabled = true;
+        analyzeResumeBtn.textContent = "Analyzing...";
+
+        const jobLink = jobLinkInput ? jobLinkInput.value.trim() : "";
+        const destination = jobLink ? `/scan?jobLink=${encodeURIComponent(jobLink)}` : "/scan";
+
+        setTimeout(() => {
+          window.location.href = destination;
+        }, 800);
+      });
     }
   }
 
