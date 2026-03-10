@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fileStepStatus = document.getElementById("file-step-status");
   const jobLinkStep = document.getElementById("job-link-step");
   const jobLinkInput = document.getElementById("job-link-input");
+  const jobLinkNote = document.getElementById("job-link-note");
   const analyzeResumeBtn = document.getElementById("analyze-resume-btn");
 
   // Hero gauge intro animation (run once after full page load)
@@ -203,10 +204,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const hasFile = Boolean(file);
 
       if (fileStepStatus) {
-        fileStepStatus.textContent = hasFile ? `Selected: ${file.name}` : "No file selected yet";
+        fileStepStatus.textContent = hasFile ? `Selected: ${file.name}` : "No file selected";
       }
       if (jobLinkInput) {
         jobLinkInput.disabled = !hasFile;
+      }
+      if (jobLinkNote) {
+        jobLinkNote.textContent = hasFile ? "Link is now available" : "First upload file, then link";
       }
       if (jobLinkStep) {
         jobLinkStep.classList.toggle("is-disabled", !hasFile);
