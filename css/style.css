@@ -294,6 +294,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .header-nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; padding: 8px 12px; border-radius: var(--radius-sm); transition: color 0.2s; white-space: nowrap; }
 .header-nav a:hover { color: var(--text-main); }
 .header-nav .btn-primary { color: #fff; }
+.header-nav .burger-only-link { display: none; }
 .nav-toggle {
   display: none;
   width: 44px;
@@ -1759,6 +1760,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .m-step span { text-align: center; font-size: 0.74rem; line-height: 1.15; }
   .header-nav a { font-size: 0.95rem; padding: 10px 12px; width: 100%; justify-content: center; }
   .header-nav .btn-primary { margin-left: 0; }
+  .header-wrap.has-toggle .header-nav .burger-only-link { display: inline-flex; }
   .pricing-grid, .pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
   .pipeline-visual { flex-direction: column; gap: 24px; }
   .pipeline-arrow { transform: rotate(90deg); }
