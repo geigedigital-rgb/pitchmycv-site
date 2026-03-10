@@ -90,7 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Drag & Drop interactive zone (Rezi style)
   const uploadZone = document.getElementById("upload-zone");
   const fileInput = document.getElementById("file-input");
-  const filePickerBtn = document.getElementById("file-picker-btn");
+  const uploadDropzone = document.getElementById("upload-dropzone");
+  const dropzoneTitle = document.getElementById("dropzone-title");
   const fileStepStatus = document.getElementById("file-step-status");
   const jobLinkStep = document.getElementById("job-link-step");
   const jobLinkInput = document.getElementById("job-link-input");
@@ -187,7 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (uploadZone && fileInput) {
-    const isTwoStepUploadFlow = Boolean(filePickerBtn && jobLinkStep && jobLinkInput && analyzeResumeBtn);
+    const isTwoStepUploadFlow = Boolean(uploadDropzone && jobLinkStep && jobLinkInput && analyzeResumeBtn);
+    const dragTarget = uploadDropzone || uploadZone;
     let selectedResumeFile = null;
 
     const validTypes = [
@@ -203,8 +205,11 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedResumeFile = file;
       const hasFile = Boolean(file);
 
+      if (dropzoneTitle) {
+        dropzoneTitle.textContent = hasFile ? file.name : "Click to select resume";
+      }
       if (fileStepStatus) {
-        fileStepStatus.textContent = hasFile ? `Selected: ${file.name}` : "No file selected";
+        fileStepStatus.textContent = hasFile ? "File uploaded" : "Max 5MB · 100% secure";
       }
       if (jobLinkInput) {
         jobLinkInput.disabled = !hasFile;
@@ -222,16 +227,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    if (isTwoStepUploadFlow && filePickerBtn) {
-      filePickerBtn.addEventListener("click", () => {
+    if (isTwoStepUploadFlow && uploadDropzone) {
+      uploadDropzone.addEventListener("click", () => {
         fileInput.click();
+      });
+      uploadDropzone.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          fileInput.click();
+        }
       });
       setTwoStepState(null);
     }
 
     // Prevent default drag behaviors
     ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
-      uploadZone.addEventListener(eventName, preventDefaults, false);
+      dragTarget.addEventListener(eventName, preventDefaults, false);
       document.body.addEventListener(eventName, preventDefaults, false);
     });
 
@@ -242,23 +253,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Highlight drop zone when item is dragged over it
     ["dragenter", "dragover"].forEach(eventName => {
-      uploadZone.addEventListener(eventName, highlight, false);
+      dragTarget.addEventListener(eventName, highlight, false);
     });
 
     ["dragleave", "drop"].forEach(eventName => {
-      uploadZone.addEventListener(eventName, unhighlight, false);
+      dragTarget.addEventListener(eventName, unhighlight, false);
     });
 
     function highlight(e) {
-      uploadZone.classList.add("dragover");
+      if (uploadDropzone) {
+        uploadDropzone.classList.add("is-dragover");
+      } else {
+        uploadZone.classList.add("dragover");
+      }
     }
 
     function unhighlight(e) {
-      uploadZone.classList.remove("dragover");
+      if (uploadDropzone) {
+        uploadDropzone.classList.remove("is-dragover");
+      } else {
+        uploadZone.classList.remove("dragover");
+      }
     }
 
     // Handle dropped files
-    uploadZone.addEventListener("drop", handleDrop, false);
+    dragTarget.addEventListener("drop", handleDrop, false);
 
     function handleDrop(e) {
       const dt = e.dataTransfer;
@@ -290,6 +309,9 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/scan";
           }, 1500);
         } else {
+          if (isTwoStepUploadFlow && fileStepStatus) {
+            fileStepStatus.textContent = "Unsupported format. Use PDF, DOC, or DOCX";
+          }
           alert("Please upload a PDF or DOCX file.");
         }
       }
