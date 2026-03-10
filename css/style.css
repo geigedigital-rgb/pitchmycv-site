@@ -1474,16 +1474,22 @@ ul { margin: 0; padding: 0; list-style: none; }
 .pricing-card.featured { background: var(--bg-white); border: 2px solid var(--primary); box-shadow: var(--shadow-md); }
 .pricing-guarantee { font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; margin-bottom: 0; }
 
-/* --- BLOCK 10: FAQ --- */
-.faq-wrap { max-width: 800px; margin: 0 auto; }
-.faq-list { display: flex; flex-direction: column; gap: 16px; }
-.faq-item { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
-.faq-question { width: 100%; text-align: left; padding: 20px 24px; font-size: 1.1rem; font-weight: 600; background: none; border: none; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s ease; }
-.faq-question:hover { background: var(--bg-light); }
-.faq-icon { color: var(--primary); transition: transform 0.3s ease; }
+/* --- BLOCK 10: FAQ (compact) --- */
+.faq-wrap { max-width: 640px; margin: 0 auto; }
+.faq.section-light { padding: 40px 0 48px; }
+.faq-wrap .section-header { margin-bottom: 20px; }
+.faq-wrap .section-header h2 { font-size: 1.35rem; margin-bottom: 0; }
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item { border-bottom: 1px solid var(--border-color); }
+.faq-item:first-child { border-top: 1px solid var(--border-color); }
+.faq-question { width: 100%; text-align: left; padding: 14px 0; font-size: 0.98rem; font-weight: 500; background: none; border: none; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: color 0.2s; }
+.faq-question:hover { color: var(--primary); }
+.faq-icon { flex-shrink: 0; color: var(--primary); transition: transform 0.25s ease; }
 .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(180deg); }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-answer p { padding: 0 24px 24px; color: var(--text-muted); font-size: 1rem; }
+.faq-answer p { padding: 0 0 14px 0; margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+.faq-answer a { color: var(--primary); }
+.faq-answer a:hover { text-decoration: underline; }
 
 /* --- BLOCK 11: Final CTA (Rezi-style) --- */
 .final-cta { padding: 80px 0; }
