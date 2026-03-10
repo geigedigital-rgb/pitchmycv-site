@@ -270,18 +270,25 @@ ul { margin: 0; padding: 0; list-style: none; }
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.35rem;
+  gap: 8px;
+  font-size: 1.2rem;
   font-weight: 700;
+  line-height: 1;
   color: var(--text-main);
   letter-spacing: -0.03em;
 }
+.logo span {
+  display: block;
+  line-height: 1.04;
+}
 .logo-mark {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   display: block;
   border-radius: 8px;
   flex-shrink: 0;
+  align-self: center;
+  transform: translateY(1px);
 }
 .header-nav { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; min-width: 0; }
 .header-nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; padding: 8px 12px; border-radius: var(--radius-sm); transition: color 0.2s; white-space: nowrap; }
