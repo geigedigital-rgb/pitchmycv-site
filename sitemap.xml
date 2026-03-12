@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pitchcv.app/</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/pricing</loc>
@@ -10,7 +10,15 @@
   </url>
   <url>
     <loc>https://pitchcv.app/tools/ats-checker</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/resume-job-match</loc>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/resume-interview-chances</loc>
+    <lastmod>2026-03-12</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/examples</loc>
@@ -58,7 +66,27 @@
   </url>
   <url>
     <loc>https://pitchcv.app/resume-keyword-optimization</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/resume-keywords-for-ats</loc>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/how-to-pass-ats-resume</loc>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/how-to-check-resume-ats-score</loc>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/what-ats-score-is-good</loc>
+    <lastmod>2026-03-12</lastmod>
+  </url>
+  <url>
+    <loc>https://pitchcv.app/how-to-match-resume-with-job-description</loc>
+    <lastmod>2026-03-12</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/about</loc>
@@ -82,7 +110,7 @@
   </url>
   <url>
     <loc>https://pitchcv.app/blog</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-12</lastmod>
   </url>
   <url>
     <loc>https://pitchcv.app/resume-pelmeni-case</loc>
