@@ -22,7 +22,7 @@
   --color-warning: #f59e0b;
   --badge-green: #22c55e;
   --accent-soft-gradient: linear-gradient(120deg, #2563eb 0%, #3b82f6 52%, #60a5fa 100%);
-  --site-release-label: "v2026.03.09-rwd-09";
+  --site-release-label: "v2026.03.09-rwd-10";
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -388,6 +388,152 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
 }
 
+.compact-upload-card {
+  background: var(--bg-white);
+  border: 1px solid #dde4ef;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px -8px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 2;
+}
+.compact-upload-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.compact-btn {
+  font-size: 1.05rem;
+  padding: 12px 28px;
+  font-weight: 600;
+}
+.compact-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.compact-gauge::before {
+  display: none;
+}
+.compact-gauge .score-gauge {
+  width: 86px;
+  height: 50px;
+  margin-bottom: 0;
+}
+.compact-gauge .gauge-value {
+  font-size: 1.2rem;
+  bottom: 0;
+}
+.compact-gauge .gauge-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.compact-upload-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.compact-file-card,
+.compact-link-card {
+  border: 1.5px dashed #c4d1e3;
+  border-radius: 12px;
+  background: #f8fbff;
+  position: relative;
+  overflow: hidden;
+}
+.compact-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 120px;
+}
+.compact-dropzone:hover {
+  border-color: #7aa2e8;
+  background: #f2f7ff;
+}
+.compact-dropzone-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #eef2f7;
+  color: #334155;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.compact-dropzone-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.compact-dropzone-text span {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.compact-link-card {
+  border-style: solid;
+  border-color: #d6dfeb;
+  background: #fbfdff;
+}
+.compact-link-inner {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  min-height: 120px;
+}
+.compact-link-inner strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #0f172a;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.compact-link-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(241, 245, 249, 0.85);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.compact-link-card.is-disabled .compact-link-overlay {
+  display: flex;
+}
+
+@media (max-width: 640px) {
+  .compact-upload-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .upload-card {
   background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px 28px;
   box-shadow: var(--shadow-md); text-align: center; border: 2px dashed var(--border-color);
@@ -530,19 +676,21 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 0.73rem;
   color: #475569;
 }
-.upload-link-card.is-disabled {
+.upload-link-card.is-disabled, .compact-link-card.is-disabled {
   background: #f1f5f9;
   border-color: #d7dee8;
 }
-.upload-link-card.is-disabled .upload-link-input-wrap {
+.upload-link-card.is-disabled .upload-link-input-wrap, .compact-link-card.is-disabled .upload-link-input-wrap {
   background: #e8edf4;
   border-color: #d2dae5;
 }
-.upload-link-card.is-disabled .upload-link-input {
+.upload-link-card.is-disabled .upload-link-input, .compact-link-card.is-disabled .upload-link-input {
   color: #64748b;
 }
 .upload-link-card.is-disabled .upload-link-icon,
-.upload-link-card.is-disabled .upload-link-send {
+.upload-link-card.is-disabled .upload-link-send,
+.compact-link-card.is-disabled .upload-link-icon,
+.compact-link-card.is-disabled .upload-link-send {
   color: #7b8797;
 }
 #job-link-input:disabled {
@@ -560,6 +708,81 @@ ul { margin: 0; padding: 0; list-style: none; }
 .section-header { text-align: center; margin-bottom: 48px; max-width: 640px; margin-left: auto; margin-right: auto; }
 .section-header h2 { font-size: clamp(26px, 3.2vw, 38px); margin-bottom: 14px; letter-spacing: -0.02em; font-weight: 700; }
 .section-header p { color: var(--text-muted); font-size: 1.05rem; }
+
+/* --- BLOCK 1.5: Score Improvement --- */
+.score-improvement { padding: 40px 0 64px; background: var(--bg-white); }
+.score-imp-grid { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: stretch; }
+
+/* Left Card */
+.imp-progress-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px -10px rgba(0,0,0,0.05); }
+.imp-progress-header { text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: #1e293b; margin-bottom: 16px; }
+.imp-progress-list { display: flex; flex-direction: column; gap: 12px; }
+
+.imp-p-item { display: flex; gap: 12px; align-items: center; }
+.imp-p-icon { width: 30px; height: 30px; flex-shrink: 0; background: #f0f9ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0f172a; }
+.imp-p-item.active .imp-p-icon.check { background: #dcfce7; }
+.imp-p-item.error .imp-p-icon.cross { background: #fee2e2; }
+.imp-p-content { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+
+.imp-p-row { display: flex; justify-content: space-between; align-items: center; }
+.imp-p-title { font-size: 0.9rem; font-weight: 500; color: #334155; }
+
+/* Right Block */
+.imp-action-card { background: linear-gradient(105deg, #f0f7ff 0%, #fef2f2 100%); border-radius: 16px; padding: 40px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; min-height: 380px; }
+.imp-action-content { max-width: 420px; position: relative; z-index: 2; }
+.imp-action-badge { display: inline-block; background: #e0f2fe; color: #0284c7; font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; margin-bottom: 24px; }
+.imp-action-card h2 { font-size: 1.75rem; font-weight: 600; color: #0f172a; margin-bottom: 16px; letter-spacing: -0.02em; }
+.imp-action-card p { font-size: 1.05rem; color: #334155; line-height: 1.6; margin-bottom: 40px; }
+
+.imp-action-btn { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px 20px; display: inline-flex; align-items: center; justify-content: space-between; width: 100%; max-width: 340px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+.imp-action-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+.imp-action-btn-text { font-size: 1rem; font-weight: 500; color: #334155; }
+.imp-action-btn-val { font-size: 1rem; font-weight: 700; color: #16a34a; }
+
+.imp-visual { position: absolute; right: 0; top: 40px; bottom: 0; width: 280px; z-index: 1; text-align: right; }
+.imp-visual-resume { width: 100%; height: auto; background: #fff; box-shadow: -10px 10px 40px -10px rgba(0,0,0,0.15); border-top-left-radius: 4px; object-fit: cover; object-position: top; }
+.imp-visual-score-wrapper {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border: 1px solid #f1f5f9;
+}
+.imp-visual-score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.imp-visual-score-badge {
+  display: inline-block;
+  background: #fb7185;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+.imp-visual-score-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.2;
+}
+
+@media (max-width: 1024px) {
+  .score-imp-grid { grid-template-columns: 1fr; gap: 24px; }
+  .imp-visual { right: -60px; opacity: 0.5; }
+  .imp-action-content { max-width: 100%; }
+}
+@media (max-width: 640px) {
+  .imp-visual { display: none; }
+  .imp-action-card { padding: 32px 24px; }
+}
 
 /* --- BLOCK 2: Hiring System (Modern UI) --- */
 .hiring-system {
