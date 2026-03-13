@@ -329,7 +329,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    if (isTwoStepUploadFlow && analyzeResumeBtn) {
+    if (isTwoStepUploadFlow && analyzeResumeBtn && uploadZone) {
+      const loadingSteps = [
+        "Uploading resume…",
+        "Checking job link…",
+        "Preparing your analysis…",
+        "Almost there…",
+      ];
+
       analyzeResumeBtn.addEventListener("click", async () => {
         if (!selectedResumeFile) {
           return;
@@ -348,11 +355,37 @@ document.addEventListener("DOMContentLoaded", () => {
         analyzeResumeBtn.disabled = true;
         analyzeResumeBtn.textContent = "Saving…";
 
-        const formData = new FormData();
-        formData.append("resume", selectedResumeFile);
-        formData.append("job_url", jobUrl);
+        const overlay = document.createElement("div");
+        overlay.className = "upload-card-loading";
+        overlay.setAttribute("aria-live", "polite");
+        overlay.setAttribute("aria-busy", "true");
+        overlay.innerHTML = `
+          <div class="upload-card-loading-spinner" aria-hidden="true"></div>
+          <div class="upload-card-loading-text">${loadingSteps[0]}</div>
+        `;
+        const loadingTextEl = overlay.querySelector(".upload-card-loading-text");
+        uploadZone.appendChild(overlay);
+
+        let stepIndex = 0;
+        const stepInterval = setInterval(() => {
+          stepIndex = (stepIndex + 1) % loadingSteps.length;
+          if (loadingTextEl) {
+            loadingTextEl.textContent = loadingSteps[stepIndex];
+          }
+        }, 600);
+
+        const hideOverlay = () => {
+          clearInterval(stepInterval);
+          overlay.remove();
+          analyzeResumeBtn.disabled = false;
+          analyzeResumeBtn.textContent = "Check your resume now";
+        };
 
         try {
+          const formData = new FormData();
+          formData.append("resume", selectedResumeFile);
+          formData.append("job_url", jobUrl);
+
           const response = await fetch(`${LANDING_API_BASE}/api/landing/save`, {
             method: "POST",
             body: formData,
@@ -379,10 +412,12 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!token) {
             throw new Error("No token received.");
           }
+          if (loadingTextEl) {
+            loadingTextEl.textContent = "Redirecting to your dashboard…";
+          }
           window.location.href = `${LANDING_API_BASE}/login?pending=${encodeURIComponent(token)}`;
         } catch (err) {
-          analyzeResumeBtn.disabled = false;
-          analyzeResumeBtn.textContent = "Check your resume now";
+          hideOverlay();
           alert(err.message || "Could not save. Please try again.");
         }
       });
