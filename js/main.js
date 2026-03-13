@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropzoneTitle = document.getElementById("dropzone-title");
   const fileStepStatus = document.getElementById("file-step-status");
   const jobLinkStep = document.getElementById("job-link-step");
-  const jobLinkInput = document.getElementById("job-link-input");
+  const jobTextInput = document.getElementById("job-text-input");
   const jobLinkNote = document.getElementById("job-link-note");
   const analyzeResumeBtn = document.getElementById("analyze-resume-btn");
 
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (uploadZone && fileInput) {
-    const isTwoStepUploadFlow = Boolean(uploadDropzone && jobLinkStep && jobLinkInput && analyzeResumeBtn);
+    const isTwoStepUploadFlow = Boolean(uploadDropzone && jobLinkStep && jobTextInput && analyzeResumeBtn);
     const dragTarget = uploadDropzone || uploadZone;
     let selectedResumeFile = null;
 
@@ -215,11 +215,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (fileStepStatus) {
         fileStepStatus.textContent = hasFile ? "Resume uploaded. Now add a job link." : "Max 5MB · 100% secure";
       }
-      if (jobLinkInput) {
-        jobLinkInput.disabled = !hasFile;
+      if (jobTextInput) {
+        jobTextInput.disabled = !hasFile;
       }
       if (jobLinkNote) {
-        jobLinkNote.textContent = hasFile ? "Add link to calculate interview chance" : "First upload file, then link";
+        jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "First upload file, then paste job text";
       }
       if (jobLinkStep) {
         jobLinkStep.classList.toggle("is-disabled", !hasFile);
@@ -231,8 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    if (isTwoStepUploadFlow && jobLinkInput && jobLinkNote) {
-      jobLinkInput.addEventListener("input", () => {
+    if (isTwoStepUploadFlow && jobTextInput && jobLinkNote) {
+      jobTextInput.addEventListener("input", () => {
         jobLinkNote.textContent = "";
         jobLinkNote.classList.add("sr-only");
         jobLinkNote.classList.remove("upload-link-note");
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isTwoStepUploadFlow && analyzeResumeBtn && uploadZone) {
       const loadingSteps = [
         "Uploading resume…",
-        "Checking job link…",
+        "Checking job description…",
         "Preparing your analysis…",
         "Almost there…",
       ];
@@ -342,10 +342,10 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        const jobUrl = jobLinkInput ? jobLinkInput.value.trim() : "";
-        if (!jobUrl) {
+        const jobText = jobTextInput ? jobTextInput.value.trim() : "";
+        if (!jobText) {
           if (jobLinkNote) {
-            jobLinkNote.textContent = "Please paste the job posting link to continue.";
+            jobLinkNote.textContent = "Please paste the job vacancy text to continue.";
             jobLinkNote.classList.remove("sr-only");
             jobLinkNote.classList.add("upload-link-note");
           }
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
           const formData = new FormData();
           formData.append("resume", selectedResumeFile);
-          formData.append("job_url", jobUrl);
+          formData.append("job_text", jobText);
 
           const response = await fetch(`${LANDING_API_BASE}/api/landing/save`, {
             method: "POST",

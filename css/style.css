@@ -542,8 +542,46 @@ ul { margin: 0; padding: 0; list-style: none; }
   display: block;
   font-size: 0.95rem;
   color: #0f172a;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   text-align: center;
+}
+.compact-job-text-hint {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0 0 10px;
+  text-align: center;
+}
+.upload-job-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px 14px;
+  border: 1px solid #d4deeb;
+  border-radius: 10px;
+  background: #f8fafd;
+  font-size: 0.9rem;
+  color: #0f172a;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.upload-job-textarea::placeholder {
+  color: #64748b;
+}
+.upload-job-textarea:focus {
+  border-color: #7aa2e8;
+  background: #fff;
+}
+.upload-job-textarea:disabled {
+  background: #e8edf4;
+  border-color: #d2dae5;
+  color: #64748b;
+  cursor: not-allowed;
+}
+.compact-link-card.is-disabled .upload-job-textarea {
+  background: #e8edf4;
+  border-color: #d2dae5;
+  color: #64748b;
 }
 .compact-link-overlay {
   position: absolute;
@@ -760,6 +798,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .compact-link-card.is-disabled .upload-link-send {
   color: #7b8797;
 }
+#job-text-input:disabled,
 #job-link-input:disabled {
   cursor: not-allowed;
 }

@@ -165,18 +165,14 @@
 
               <section class="compact-link-card is-disabled" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="true">
                 <meta itemprop="position" content="2">
-                <meta itemprop="name" content="Add job link">
-                <meta itemprop="text" content="Paste a job posting link after a resume file is uploaded.">
+                <meta itemprop="name" content="Paste job description">
+                <meta itemprop="text" content="Paste the job vacancy text after a resume file is uploaded.">
                 <div class="compact-link-overlay">First upload file</div>
                 <div class="compact-link-inner">
-                  <strong>Job posting link</strong>
-                  <label class="sr-only" for="job-link-input">Job posting link</label>
-                  <div class="upload-link-input-wrap">
-                    <span class="upload-link-icon" aria-hidden="true">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.4 4.53"></path><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 1 0 7.07 7.07l1.41-1.41"></path></svg>
-                    </span>
-                    <input type="url" id="job-link-input" class="upload-link-input" placeholder="Paste job link" disabled>
-                  </div>
+                  <strong>Paste job vacancy text</strong>
+                  <p class="compact-job-text-hint">Insert the full job description or requirements.</p>
+                  <label class="sr-only" for="job-text-input">Job vacancy text</label>
+                  <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste job description here…" rows="4" disabled></textarea>
                 </div>
                 <p class="sr-only" id="job-link-note"></p>
               </section>
