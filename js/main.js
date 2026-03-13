@@ -425,6 +425,92 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Review timestamps: разница между сегодня и датой публикации (фиксированные даты в data-review-date)
+  const reviewAgoEls = document.querySelectorAll(".review-ago[data-review-date]");
+  const formatReviewAgo = (date) => {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffM = Math.floor(Math.abs(diffMs) / 60000);
+    const diffH = Math.floor(Math.abs(diffMs) / 3600000);
+    const diffD = Math.floor(Math.abs(diffMs) / 86400000);
+    const diffW = Math.floor(diffD / 7);
+    const past = diffMs >= 0;
+    const suffix = past ? " ago" : " from now";
+    const prefix = past ? "" : "in ";
+    if (diffMs >= 0) {
+      if (diffM < 1) return "just now";
+      if (diffM < 60) return diffM === 1 ? "1 minute ago" : `${diffM} minutes ago`;
+      if (diffH < 24) return diffH === 1 ? "about 1 hour ago" : `about ${diffH} hours ago`;
+      if (diffD === 1) return "1 day ago";
+      if (diffD < 7) return `${diffD} days ago`;
+      if (diffW === 1) return "1 week ago";
+      if (diffW < 4) return `${diffW} weeks ago`;
+      return date.toLocaleDateString();
+    }
+    if (diffD < 1) return diffH <= 1 ? "in about 1 hour" : `in about ${diffH} hours`;
+    if (diffD === 1) return "in 1 day";
+    if (diffD < 7) return `in ${diffD} days`;
+    if (diffW === 1) return "in 1 week";
+    if (diffW < 4) return `in ${diffW} weeks`;
+    return date.toLocaleDateString();
+  };
+  reviewAgoEls.forEach((el) => {
+    const iso = el.getAttribute("data-review-date");
+    if (!iso) return;
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return;
+    el.textContent = formatReviewAgo(date);
+  });
+
+  // CTA typewriter: 10 job titles, type then erase with blinking cursor
+  const ctaJobEl = document.getElementById("cta-typewriter-job");
+  const ctaJobs = [
+    "Software Engineer",
+    "Product Manager",
+    "Data Scientist",
+    "Marketing Manager",
+    "Sales Manager",
+    "Project Manager",
+    "UX Designer",
+    "Content Writer",
+    "Digital Marketing Specialist",
+    "Event Planner",
+  ];
+  if (ctaJobEl) {
+    let jobIndex = 0;
+    let isTyping = true;
+    let charIndex = 0;
+    const typeSpeed = 90;
+    const eraseSpeed = 50;
+    const pauseAfterType = 2200;
+    const pauseAfterErase = 600;
+
+    const tick = () => {
+      const job = ctaJobs[jobIndex];
+      if (isTyping) {
+        if (charIndex <= job.length) {
+          ctaJobEl.textContent = job.slice(0, charIndex);
+          charIndex++;
+          setTimeout(tick, typeSpeed);
+        } else {
+          isTyping = false;
+          setTimeout(tick, pauseAfterType);
+        }
+      } else {
+        if (charIndex > 0) {
+          charIndex--;
+          ctaJobEl.textContent = job.slice(0, charIndex);
+          setTimeout(tick, eraseSpeed);
+        } else {
+          isTyping = true;
+          jobIndex = (jobIndex + 1) % ctaJobs.length;
+          setTimeout(tick, pauseAfterErase);
+        }
+      }
+    };
+    setTimeout(tick, 400);
+  }
+
   // Reviews horizontal slider
   const reviewsTrack = document.getElementById("reviews-track");
   const reviewsPrevBtn = document.querySelector('[data-reviews-nav="prev"]');

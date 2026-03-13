@@ -1879,6 +1879,26 @@ ul { margin: 0; padding: 0; list-style: none; }
   margin-bottom: 14px;
 }
 
+.cta-typewriter-wrap {
+  display: block;
+}
+.cta-typewriter-job {
+  display: inline-block;
+  min-width: 0.3em;
+  color: #c7d2fe;
+  border-bottom: 2px solid #818cf8;
+}
+.cta-typewriter-cursor {
+  display: inline-block;
+  color: #818cf8;
+  font-weight: 300;
+  animation: cta-cursor-blink 1s step-end infinite;
+  margin-left: 1px;
+}
+@keyframes cta-cursor-blink {
+  50% { opacity: 0; }
+}
+
 .cta-banner-sub {
   color: rgba(255, 255, 255, 0.88);
   font-size: 1.25rem;

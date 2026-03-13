@@ -1,0 +1,29 @@
+{
+  "name": "pitchmycv-site",
+  "version": "1.0.0",
+  "description": "Conversion-focused landing page for an AI resume optimization product (Rezi/Enhancv style).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geigedigital-rgb/pitchmycv-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/geigedigital-rgb/pitchmycv-site/issues"
+  },
+  "homepage": "https://github.com/geigedigital-rgb/pitchmycv-site#readme",
+  "devDependencies": {
+    "sharp": "^0.34.5",
+    "to-ico": "^1.1.5"
+  }
+}
