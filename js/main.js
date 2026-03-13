@@ -47,13 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
     consentBanner.innerHTML = `
       <div class="cookie-consent-card">
         <p class="cookie-consent-text">
-          Мы используем необходимые cookies и данные взаимодействия с сайтом, чтобы предоставлять сервис и улучшать аналитику резюме.
-          Продолжая использование сайта, вы принимаете
-          <a href="/privacy">Политику конфиденциальности</a>,
-          <a href="/data-processing">Политику обработки данных</a> и
-          <a href="/terms">Публичную оферту</a>.
+          We use necessary cookies and site interaction data to provide the service and improve resume analytics.
+          By continuing to use the site, you accept the
+          <a href="/privacy">Privacy Policy</a>,
+          <a href="/data-processing">Data Processing Policy</a>, and
+          <a href="/terms">Terms of Service</a>.
         </p>
-        <button type="button" class="cookie-consent-accept">Принять</button>
+        <button type="button" class="cookie-consent-accept">Accept</button>
       </div>
     `;
 
