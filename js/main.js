@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Landing API: save resume + job → redirect to app login (analysis runs after login).
+  // Landing API: save → redirect to app login. See docs/LANDIND_API.md (§2, §10–11).
   // For local backend use: "http://localhost:8000"
   const LANDING_API_BASE = "https://my.pitchcv.app";
 
