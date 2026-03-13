@@ -1882,24 +1882,23 @@ ul { margin: 0; padding: 0; list-style: none; }
 .cta-typewriter-wrap {
   display: block;
 }
-.cta-typewriter-job {
-  display: inline-block;
-  min-width: 16em;
-  max-width: 100%;
-  color: #c7d2fe;
-  border-bottom: 2px solid #818cf8;
+.cta-typewriter-inline {
+  display: inline;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
-  vertical-align: bottom;
+}
+.cta-typewriter-job {
+  display: inline;
+  color: #c7d2fe;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #818cf8;
 }
 .cta-typewriter-cursor {
-  display: inline-block;
+  display: inline;
   color: #818cf8;
   font-weight: 300;
   animation: cta-cursor-blink 1s step-end infinite;
-  margin-left: 1px;
-  vertical-align: bottom;
+  margin-left: 2px;
 }
 @keyframes cta-cursor-blink {
   50% { opacity: 0; }
