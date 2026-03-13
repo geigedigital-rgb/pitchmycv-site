@@ -660,6 +660,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 .upload-link-input::placeholder {
   color: #64748b;
 }
+
+.upload-link-note {
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: #b91c1c;
+}
 .upload-link-send {
   width: 26px;
   height: 26px;

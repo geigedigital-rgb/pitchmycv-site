@@ -87,6 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Landing API: save resume + job → redirect to app login (analysis runs after login).
+  // For local backend use: "http://localhost:8000"
+  const LANDING_API_BASE = "https://my.pitchcv.app";
+
   // Drag & Drop interactive zone (Rezi style)
   const uploadZone = document.getElementById("upload-zone");
   const fileInput = document.getElementById("file-input");
@@ -227,6 +231,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    if (isTwoStepUploadFlow && jobLinkInput && jobLinkNote) {
+      jobLinkInput.addEventListener("input", () => {
+        jobLinkNote.textContent = "";
+        jobLinkNote.classList.add("sr-only");
+        jobLinkNote.classList.remove("upload-link-note");
+      });
+    }
+
     if (isTwoStepUploadFlow && uploadDropzone) {
       uploadDropzone.addEventListener("click", () => {
         fileInput.click();
@@ -318,20 +330,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (isTwoStepUploadFlow && analyzeResumeBtn) {
-      analyzeResumeBtn.addEventListener("click", () => {
+      analyzeResumeBtn.addEventListener("click", async () => {
         if (!selectedResumeFile) {
           return;
         }
 
+        const jobUrl = jobLinkInput ? jobLinkInput.value.trim() : "";
+        if (!jobUrl) {
+          if (jobLinkNote) {
+            jobLinkNote.textContent = "Please paste the job posting link to continue.";
+            jobLinkNote.classList.remove("sr-only");
+            jobLinkNote.classList.add("upload-link-note");
+          }
+          return;
+        }
+
         analyzeResumeBtn.disabled = true;
-        analyzeResumeBtn.textContent = "Calculating chance...";
+        analyzeResumeBtn.textContent = "Saving…";
 
-        const jobLink = jobLinkInput ? jobLinkInput.value.trim() : "";
-        const destination = jobLink ? `/scan?jobLink=${encodeURIComponent(jobLink)}` : "/scan";
+        const formData = new FormData();
+        formData.append("resume", selectedResumeFile);
+        formData.append("job_url", jobUrl);
 
-        setTimeout(() => {
-          window.location.href = destination;
-        }, 800);
+        try {
+          const response = await fetch(`${LANDING_API_BASE}/api/landing/save`, {
+            method: "POST",
+            body: formData,
+            credentials: "omit",
+          });
+
+          if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            let message = "Something went wrong. Please try again.";
+            if (typeof err.detail === "string") {
+              message = err.detail;
+            } else if (Array.isArray(err.detail) && err.detail[0]) {
+              message = err.detail[0].msg || "Invalid input.";
+            } else if (err.detail) {
+              message = String(err.detail);
+            } else if (response.statusText) {
+              message = response.statusText;
+            }
+            throw new Error(message);
+          }
+
+          const data = await response.json();
+          const token = data.token;
+          if (!token) {
+            throw new Error("No token received.");
+          }
+          window.location.href = `${LANDING_API_BASE}/login?pending=${encodeURIComponent(token)}`;
+        } catch (err) {
+          analyzeResumeBtn.disabled = false;
+          analyzeResumeBtn.textContent = "Check your resume now";
+          alert(err.message || "Could not save. Please try again.");
+        }
       });
     }
   }
