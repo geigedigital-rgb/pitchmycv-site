@@ -534,6 +534,32 @@ ul { margin: 0; padding: 0; list-style: none; }
   }
 }
 
+/* Mobile: gauge (0% + Interview chances) at top center of upload card */
+@media (max-width: 768px) {
+  .compact-upload-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .compact-upload-bottom {
+    display: contents;
+  }
+  .compact-upload-bottom .score-gauge-wrap.compact-gauge {
+    order: -1;
+    margin-bottom: 16px;
+  }
+  .compact-upload-row {
+    order: 0;
+    width: 100%;
+  }
+  .compact-upload-bottom .compact-btn {
+    order: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
 .upload-card {
   background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px 28px;
   box-shadow: var(--shadow-md); text-align: center; border: 2px dashed var(--border-color);
