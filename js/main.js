@@ -368,9 +368,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let stepIndex = 0;
         const stepInterval = setInterval(() => {
-          stepIndex = (stepIndex + 1) % loadingSteps.length;
+          stepIndex = Math.min(stepIndex + 1, loadingSteps.length - 1);
           if (loadingTextEl) {
             loadingTextEl.textContent = loadingSteps[stepIndex];
+          }
+          if (stepIndex >= loadingSteps.length - 1) {
+            clearInterval(stepInterval);
           }
         }, 600);
 
