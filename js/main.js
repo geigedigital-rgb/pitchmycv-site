@@ -412,6 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!token) {
             throw new Error("No token received.");
           }
+          clearInterval(stepInterval);
           if (loadingTextEl) {
             loadingTextEl.textContent = "Redirecting to your dashboard…";
           }
