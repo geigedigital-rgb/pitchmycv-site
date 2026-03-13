@@ -2,12 +2,12 @@
   "name": "pitchmycv-site",
   "version": "1.0.0",
   "description": "Conversion-focused landing page for an AI resume optimization product (Rezi/Enhancv style).",
-  "main": "index.js",
   "directories": {
     "doc": "docs",
     "example": "examples"
   },
   "scripts": {
+    "start": "serve -s . -l ${PORT:-3000}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +22,9 @@
     "url": "https://github.com/geigedigital-rgb/pitchmycv-site/issues"
   },
   "homepage": "https://github.com/geigedigital-rgb/pitchmycv-site#readme",
+  "dependencies": {
+    "serve": "^14.2.4"
+  },
   "devDependencies": {
     "sharp": "^0.34.5",
     "to-ico": "^1.1.5"
