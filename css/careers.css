@@ -283,19 +283,17 @@
   position: absolute;
   inset: 0;
   border-radius: 14px;
-  z-index: 1;
-}
-
-.careers-card h2,
-.careers-card p,
-.careers-card .btn {
-  position: relative;
   z-index: 2;
 }
 
 .careers-card-overlay:focus-visible {
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
+}
+
+.careers-card .btn {
+  position: relative;
+  z-index: 3;
 }
 
 .careers-card h2 {
