@@ -58,7 +58,7 @@
   margin: 0 auto;
   padding: 28px 24px 56px;
   display: grid;
-  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   gap: 26px;
   align-items: start;
   overflow: visible;
@@ -74,6 +74,8 @@
   position: sticky !important;
   top: var(--toc-top-offset, 16px) !important;
   align-self: start;
+  width: 100%;
+  box-sizing: border-box;
   height: fit-content;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -112,7 +114,7 @@
   position: fixed !important;
   top: var(--toc-top-offset, 16px) !important;
   left: var(--toc-left, 0px);
-  width: var(--toc-width, 220px);
+  width: var(--toc-width, 300px);
 }
 
 .career-toc.toc-bottom {
@@ -120,7 +122,7 @@
   top: auto !important;
   bottom: 56px;
   left: 0;
-  width: var(--toc-width, 220px);
+  width: var(--toc-width, 300px);
 }
 
 .career-keyline {
@@ -151,6 +153,14 @@
 
 .career-insight-block p:last-child {
   margin-bottom: 0;
+}
+
+/* Let the upload block use full article width on career pages (override global max-width: 480px) */
+.career-article .hero-right {
+  align-items: stretch;
+}
+.career-article .compact-upload-card {
+  max-width: 100%;
 }
 
 .career-article section {
@@ -259,6 +269,46 @@
   background: #f8fafc;
 }
 
+@media (min-width: 861px) {
+  .career-article .compact-upload-bottom {
+    display: grid;
+    grid-template-columns: 92px minmax(220px, 1fr) auto;
+    align-items: stretch;
+    column-gap: 16px;
+    row-gap: 0;
+  }
+
+  .career-article .compact-upload-bottom::before {
+    content: "ATS reads your resume before HR: clear role title, exact keywords, and measurable impact improve your match.";
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #dbe4f1;
+    padding-left: 12px;
+    min-height: 52px;
+    max-width: 320px;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: #94a3b8;
+    font-weight: 500;
+    justify-self: start;
+  }
+
+  .career-article .compact-upload-bottom .compact-gauge {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .career-article .compact-upload-bottom .compact-btn {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    justify-self: end;
+  }
+}
+
 .careers-index {
   max-width: 1100px;
   margin: 0 auto;
@@ -308,7 +358,7 @@
 
 @media (max-width: 1180px) {
   .career-layout {
-    grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
     gap: 18px;
   }
 }
