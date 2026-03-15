@@ -87,6 +87,142 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Career page TOC: keep active section highlighted while scrolling.
+  const careerToc = document.querySelector(".career-toc");
+  if (careerToc) {
+    const siteHeader = document.querySelector(".site-header");
+    const careerLayout = careerToc.closest(".career-layout");
+    const careerArticle = document.querySelector(".career-article");
+    const fallbackMinWidth = 861;
+    let tocPlaceholder = null;
+
+    const ensureTocPlaceholder = () => {
+      if (tocPlaceholder || !careerToc.parentNode) return;
+      tocPlaceholder = document.createElement("div");
+      tocPlaceholder.className = "career-toc-placeholder";
+      tocPlaceholder.style.width = `${careerToc.offsetWidth}px`;
+      tocPlaceholder.style.height = `${careerToc.offsetHeight}px`;
+      careerToc.parentNode.insertBefore(tocPlaceholder, careerToc);
+    };
+
+    const removeTocPlaceholder = () => {
+      if (!tocPlaceholder) return;
+      tocPlaceholder.remove();
+      tocPlaceholder = null;
+    };
+
+    const updateTocOffset = () => {
+      const headerHeight = siteHeader ? Math.round(siteHeader.getBoundingClientRect().height) : 0;
+      // Keep TOC close to its original start position.
+      // Header is not fixed, so large offsets look visually detached.
+      const topOffset = headerHeight > 72 ? 12 : 8;
+      careerToc.style.setProperty("--toc-top-offset", `${topOffset}px`);
+    };
+
+    const resetTocFallbackState = () => {
+      careerToc.classList.remove("toc-fixed", "toc-bottom");
+      careerToc.style.removeProperty("--toc-left");
+      careerToc.style.removeProperty("--toc-width");
+      removeTocPlaceholder();
+    };
+
+    const updateTocStickyFallback = () => {
+      if (!careerLayout || !careerArticle || window.innerWidth < fallbackMinWidth) {
+        resetTocFallbackState();
+        return;
+      }
+
+      const topOffset = parseInt(getComputedStyle(careerToc).getPropertyValue("--toc-top-offset"), 10) || 16;
+      const layoutRect = careerLayout.getBoundingClientRect();
+      const articleRect = careerArticle.getBoundingClientRect();
+      const tocRect = careerToc.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset;
+      const layoutTopAbs = layoutRect.top + scrollY;
+      const articleBottomAbs = articleRect.bottom + scrollY;
+
+      const startY = layoutTopAbs - topOffset;
+      const endY = articleBottomAbs - tocRect.height - topOffset - 24;
+
+      if (scrollY > startY && scrollY < endY) {
+        ensureTocPlaceholder();
+        const placeholderRect = tocPlaceholder.getBoundingClientRect();
+        careerToc.style.setProperty("--toc-left", `${Math.round(placeholderRect.left)}px`);
+        careerToc.style.setProperty("--toc-width", `${Math.round(placeholderRect.width)}px`);
+        careerToc.classList.add("toc-fixed");
+        careerToc.classList.remove("toc-bottom");
+      } else if (scrollY >= endY) {
+        ensureTocPlaceholder();
+        const placeholderRect = tocPlaceholder.getBoundingClientRect();
+        careerToc.style.setProperty("--toc-width", `${Math.round(placeholderRect.width)}px`);
+        careerToc.classList.remove("toc-fixed");
+        careerToc.classList.add("toc-bottom");
+      } else {
+        resetTocFallbackState();
+      }
+    };
+
+    updateTocOffset();
+    updateTocStickyFallback();
+    window.addEventListener("resize", () => {
+      updateTocOffset();
+      updateTocStickyFallback();
+    });
+    window.addEventListener("scroll", updateTocStickyFallback, { passive: true });
+
+    const tocLinks = Array.from(careerToc.querySelectorAll('a[href^="#"]'));
+    const linkSectionPairs = tocLinks
+      .map(link => {
+        const href = link.getAttribute("href");
+        if (!href || href.length < 2) return null;
+        const section = document.querySelector(href);
+        if (!section) return null;
+        return { link, section, id: href.slice(1) };
+      })
+      .filter(Boolean);
+
+    if (linkSectionPairs.length > 0) {
+      const setActiveLink = activeId => {
+        linkSectionPairs.forEach(({ link, id }) => {
+          const isActive = id === activeId;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "true");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      };
+
+      const resolveActiveId = () => {
+        const activationOffset = 140;
+        let activeId = linkSectionPairs[0].id;
+
+        linkSectionPairs.forEach(({ section, id }) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= activationOffset) {
+            activeId = id;
+          }
+        });
+
+        return activeId;
+      };
+
+      let ticking = false;
+      const updateActiveFromScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          setActiveLink(resolveActiveId());
+          ticking = false;
+        });
+      };
+
+      updateActiveFromScroll();
+      window.addEventListener("scroll", updateActiveFromScroll, { passive: true });
+      window.addEventListener("resize", updateActiveFromScroll);
+    }
+  }
+
   // Landing API: save → redirect to app login. See docs/LANDIND_API.md (§2, §10–11).
   // For local backend use: "http://localhost:8000"
   const LANDING_API_BASE = "https://my.pitchcv.app";
