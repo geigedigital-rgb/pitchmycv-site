@@ -381,15 +381,51 @@ Data Analyst Resume Guide (Skills, Tips + Example)
 
 Clearly explain what the page provides.
 
+Hard rule:
+
+- every career page meta description must be between 140 and 160 characters (inclusive)
+- if length is outside this range, the page fails QA and must be revised.
+
 Example:
 
 Learn how to write a strong data analyst resume. Discover key skills, recruiter expectations, and ATS optimization tips.
 
 ---
 
+## Social Description Consistency
+
+For every career detail page (`/careers/[profession]-resume`):
+
+- `meta name="description"`, `meta property="og:description"`, and `meta name="twitter:description"` must use the same text
+- this shared description must stay within 140–160 characters
+- the wording should match search intent (ATS + recruiter/HR expectations + practical value).
+
+For the category page (`/careers`):
+
+- keep `description`, `og:description`, and `twitter:description` aligned in intent and wording
+- include explicit ATS + HR/recruiter + mistakes + interview-chance framing.
+
+---
+
 ## Canonical URL
 
 Construct using base domain + slug.
+
+---
+
+## Career Category Intro Intent (`/careers`)
+
+The category page intro must target search intent, not only generic copy.
+
+Required intent signals in the intro paragraph:
+
+- role-based resume guides / career resume guides
+- what ATS checks first
+- what HR/recruiters check first
+- common mistakes that reduce interview chances
+- practical examples or actionable tips.
+
+The intro should remain human, concise, and readable (avoid robotic keyword stuffing).
 
 ---
 
@@ -507,6 +543,9 @@ Before finalizing the page, verify:
 5. CTA wording is not reused across many pages.
 6. Image alt texts are descriptive.
 7. SEO metadata fields exist.
+8. Meta description length is 140–160 characters (inclusive).
+9. `/careers` intro includes explicit ATS + HR/recruiter + mistakes + interview-chance intent signals.
+10. `description`, `og:description`, and `twitter:description` are synchronized on career pages.
 
 If any check fails, revise the page.
 
