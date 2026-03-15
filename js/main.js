@@ -1,4 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Production routing safety:
+  // If hosting fallback serves home for nested static routes (/privacy, /careers, etc),
+  // normalize to folder URL and then to /index.html as a last resort.
+  const fixStaticRouteFallback = () => {
+    const path = window.location.pathname;
+    if (path === "/" || /\.[a-z0-9]+$/i.test(path)) return false;
+
+    const canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) return false;
+
+    let canonicalPath = "";
+    try {
+      canonicalPath = new URL(canonicalEl.getAttribute("href"), window.location.origin).pathname;
+    } catch (error) {
+      return false;
+    }
+
+    // Real nested pages have their own canonical path.
+    // If we are on a nested URL but canonical is home, likely fallback misrouting occurred.
+    if (canonicalPath !== "/") return false;
+
+    const nextPath = path.endsWith("/") ? `${path}index.html` : `${path}/`;
+    const targetUrl = `${nextPath}${window.location.search}${window.location.hash}`;
+    const attemptKey = `pmcv-route-fix:${path}${window.location.search}`;
+
+    try {
+      const previousAttempt = window.sessionStorage.getItem(attemptKey);
+      if (previousAttempt === targetUrl) return false;
+      window.sessionStorage.setItem(attemptKey, targetUrl);
+    } catch (error) {
+      // No-op if session storage is unavailable.
+    }
+
+    window.location.replace(targetUrl);
+    return true;
+  };
+
+  if (fixStaticRouteFallback()) {
+    return;
+  }
+
   // Mobile burger nav
   const navToggle = document.querySelector(".nav-toggle");
   const headerNav = document.querySelector(".header-nav");

@@ -92,3 +92,11 @@ hotel manager
 - [x] sales manager (`/careers/sales-manager-resume`)
 - [x] account manager (`/careers/account-manager-resume`)
 - [x] customer success manager (`/careers/customer-success-manager-resume`)
+
+## Completed (Batch 3)
+
+- [x] financial analyst (`/careers/financial-analyst-resume`)
+- [x] accountant (`/careers/accountant-resume`)
+- [x] investment analyst (`/careers/investment-analyst-resume`)
+- [x] operations manager (`/careers/operations-manager-resume`)
+- [x] supply chain manager (`/careers/supply-chain-manager-resume`)
