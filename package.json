@@ -7,7 +7,7 @@
     "example": "examples"
   },
   "scripts": {
-    "start": "serve -s . -l ${PORT:-3000}",
+    "start": "serve . -l ${PORT:-3000}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
