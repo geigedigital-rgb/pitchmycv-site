@@ -517,7 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(stepInterval);
           overlay.remove();
           analyzeResumeBtn.disabled = false;
-          analyzeResumeBtn.textContent = "Check your resume now";
+          analyzeResumeBtn.textContent = "Check your resume for free";
         };
 
         try {
