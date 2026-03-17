@@ -1986,7 +1986,46 @@ ul { margin: 0; padding: 0; list-style: none; }
 .pricing-card ul { margin-bottom: 28px; text-align: left; }
 .pricing-card li { margin-bottom: 12px; padding-left: 24px; position: relative; color: var(--text-muted); font-size: 0.95rem; }
 .pricing-card li::before { content: "✓"; position: absolute; left: 0; color: var(--color-success); font-weight: bold; }
-.pricing-card.featured { background: var(--bg-white); border: 2px solid var(--primary); box-shadow: var(--shadow-md); }
+.pricing-card.featured {
+  background: linear-gradient(145deg, #f5f3ff 0%, #eef2ff 46%, #fdf2f8 100%);
+  border: 2px solid #c4b5fd;
+  box-shadow: 0 14px 36px -18px rgba(99, 102, 241, 0.45);
+}
+.pricing-card.featured h3,
+.pricing-card.featured .price { color: #312e81; }
+.pricing-card.featured li { color: #3730a3; }
+.pricing-card.featured li::before { color: #7c3aed; }
+.pricing-card.featured .btn-primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 52%, #ec4899 100%);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 10px 22px -12px rgba(99, 102, 241, 0.65);
+}
+.pricing-card.featured .btn-primary:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 52%, #db2777 100%);
+  transform: translateY(-1px);
+}
+.pricing-badge-featured {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #4c1d95;
+  font-weight: 700;
+}
+.pricing-note {
+  font-size: 0.92rem;
+  color: #475569;
+  margin: -10px 0 18px;
+}
+.pricing-note-small {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #6366f1;
+  margin-top: -8px;
+}
 .pricing-guarantee { font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; margin-bottom: 0; }
 
 /* --- BLOCK 10: FAQ (compact) --- */
