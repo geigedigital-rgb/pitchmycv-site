@@ -717,7 +717,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Resumes Created Counter Animation
   const resumesCounter = document.getElementById("resumes-counter");
   if (resumesCounter) {
-    let baseNumber = 1638;
+    let baseNumber = 203;
     const formatCounter = value => value.toLocaleString("en-US");
     let displayedCounter = baseNumber;
     let finalizeCounterTimer = null;
