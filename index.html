@@ -115,93 +115,102 @@
   </header>
 
   <main>
-    <!-- BLOCK 1: Hero (Rezi-style: headline + CTA left, score gauge + import right) -->
+    <!-- BLOCK 1: Hero — checker-style layout: left = copy + upload panel, right = product preview -->
     <section class="hero" id="hero">
       <div class="wrap hero-grid">
         <div class="hero-content">
+          <p class="hero-eyebrow">Free ATS resume check</p>
           <h1 class="hero-title">Match your resume to any job in seconds</h1>
-          <p class="hero-sub">We compare your resume to real job requirements<br>and show exactly what's missing — before you apply</p>
-          <aside class="hero-trust" aria-label="Social proof and reviews">
-            <ul class="hero-trust-list">
-              <li class="hero-trust-item">
-                <span class="hero-trust-icon" aria-hidden="true">
-                  <i class="ph ph-check" style="font-size:12px" aria-hidden="true"></i>
-                </span>
-                <span><strong>39%</strong> more likely to land interviews</span>
-              </li>
-              <li class="hero-trust-item" itemscope itemtype="https://schema.org/AggregateRating">
-                <span class="hero-trust-star" aria-hidden="true">★</span>
-                <a href="https://www.trustpilot.com/review/pitchmycv.com" class="hero-trust-brand" rel="noopener noreferrer" target="_blank">Trustpilot</a>
-                <span><span itemprop="ratingValue">4.4</span> out of <span itemprop="bestRating">5</span> <span aria-hidden="true">|</span> <span itemprop="ratingCount">342</span> reviews</span>
-              </li>
-            </ul>
-          </aside>
-        </div>
-        
-        <div class="hero-right">
-          <div class="hero-right-glow" aria-hidden="true"></div>
-          <div class="compact-upload-card" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
-            <h3 id="resume-upload-title" itemprop="name" class="sr-only">Check your resume for free</h3>
-            <meta itemprop="description" content="Upload a resume file, add a job link, and run ATS analysis.">
-            <meta itemprop="totalTime" content="PT1M">
+          <p class="hero-sub">Upload your resume, paste the job description, and see what is missing for that role — keywords, structure, and ATS signals — before you apply. Takes under a minute.</p>
 
-            <div class="compact-upload-row">
-              <section class="compact-file-card" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
-                <meta itemprop="position" content="1">
-                <meta itemprop="name" content="Upload file">
-                <meta itemprop="text" content="Upload a resume in PDF, DOC, or DOCX format.">
-                <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
-                <div class="compact-dropzone" id="upload-dropzone" role="button" tabindex="0">
-                  <span class="upload-dropzone-icon" aria-hidden="true">
-                    <i class="ph ph-file-arrow-up" style="font-size:20px" aria-hidden="true"></i>
-                  </span>
-                  <div class="compact-dropzone-text">
-                    <strong id="dropzone-title">Upload resume file</strong>
-                    <span id="dropzone-help"><span class="dropzone-help-desktop">Click to select or drag and drop PDF, DOC, DOCX</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5MB</span></span>
+          <div class="hero-upload-panel">
+            <div class="compact-upload-card" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
+              <h3 id="resume-upload-title" itemprop="name" class="sr-only">Check your resume for free</h3>
+              <meta itemprop="description" content="Upload a resume file, add a job link, and run ATS analysis.">
+              <meta itemprop="totalTime" content="PT1M">
+
+              <div class="compact-upload-stack">
+                <section class="compact-file-card compact-file-card-unified" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                  <meta itemprop="position" content="1">
+                  <meta itemprop="name" content="Upload file">
+                  <meta itemprop="text" content="Upload a resume in PDF, DOC, or DOCX format.">
+                  <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
+                  <div class="compact-resume-row" id="resume-drop-row">
+                    <div class="compact-dropzone compact-dropzone-compact" id="upload-dropzone" role="button" tabindex="0">
+                      <span class="upload-dropzone-icon" aria-hidden="true">
+                        <i class="ph ph-file-arrow-up" aria-hidden="true"></i>
+                      </span>
+                      <div class="compact-dropzone-text">
+                        <strong id="dropzone-title">Drop your resume here or click to upload</strong>
+                        <span id="dropzone-help"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <label for="file-input" class="btn btn-primary compact-upload-pick-btn">Upload resume to check</label>
-                <p class="sr-only" id="file-step-status" aria-live="polite"></p>
-              </section>
+                  <p class="sr-only" id="file-step-status" aria-live="polite"></p>
+                  <label for="file-input" class="btn btn-primary compact-upload-pick-btn">Upload resume to check</label>
+                </section>
 
-              <section class="compact-link-card is-disabled" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="true">
-                <meta itemprop="position" content="2">
-                <meta itemprop="name" content="Paste job description">
-                <meta itemprop="text" content="Paste the job vacancy text after a resume file is uploaded.">
-                <div class="compact-link-overlay">First upload file</div>
-                <div class="compact-link-inner">
-                  <strong>Paste job vacancy text</strong>
-                  <p class="compact-job-text-hint">Insert the full job description or requirements.</p>
-                  <label class="sr-only" for="job-text-input">Job vacancy text</label>
-                  <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste job description here…" rows="4" disabled></textarea>
+                <div id="compact-job-wrapper" class="compact-job-wrapper" hidden>
+                  <p class="compact-job-lead">Now paste the job posting to check how well your resume matches this role.</p>
+                  <section class="compact-link-card" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="false">
+                    <meta itemprop="position" content="2">
+                    <meta itemprop="name" content="Paste job description">
+                    <meta itemprop="text" content="Paste the job vacancy text after a resume file is uploaded.">
+                    <div class="compact-link-inner">
+                      <strong>Paste job vacancy text</strong>
+                      <p class="compact-job-text-hint">Use the full description so we can match skills and keywords.</p>
+                      <label class="sr-only" for="job-text-input">Job vacancy text</label>
+                      <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste job description here…" rows="3" disabled></textarea>
+                    </div>
+                    <p class="sr-only" id="job-link-note"></p>
+                  </section>
                 </div>
-                <p class="sr-only" id="job-link-note"></p>
-              </section>
-            </div>
-
-            <div class="compact-upload-bottom">
-              <div class="score-gauge-wrap compact-gauge">
-                <div class="score-gauge" aria-hidden="true">
-                  <svg viewBox="0 0 120 70" class="gauge-svg">
-                    <defs>
-                      <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#ef4444"/>
-                        <stop offset="25%" stop-color="#f59e0b"/>
-                        <stop offset="50%" stop-color="#eab308"/>
-                        <stop offset="75%" stop-color="#22c55e"/>
-                        <stop offset="100%" stop-color="#14b8a6"/>
-                      </linearGradient>
-                    </defs>
-                    <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
-                    <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" class="gauge-fill"/>
-                  </svg>
-                  <span class="gauge-value">0%</span>
-                </div>
-                <span class="gauge-label">Interview chances</span>
               </div>
 
-              <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn" disabled aria-disabled="true">Check your resume for free</button>
+              <div class="compact-upload-bottom">
+                <div class="score-gauge-wrap compact-gauge">
+                  <div class="score-gauge" aria-hidden="true">
+                    <svg viewBox="0 0 120 70" class="gauge-svg">
+                      <defs>
+                        <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#ef4444"/>
+                          <stop offset="25%" stop-color="#f59e0b"/>
+                          <stop offset="50%" stop-color="#eab308"/>
+                          <stop offset="75%" stop-color="#22c55e"/>
+                          <stop offset="100%" stop-color="#14b8a6"/>
+                        </linearGradient>
+                      </defs>
+                      <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
+                      <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" class="gauge-fill"/>
+                    </svg>
+                    <span class="gauge-value">0%</span>
+                  </div>
+                  <span class="gauge-label">Interview chances</span>
+                </div>
+
+                <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn" disabled aria-disabled="true">Check your resume for free</button>
+              </div>
             </div>
+            <p class="hero-privacy"><i class="ph ph-lock" style="font-size:1rem" aria-hidden="true"></i><span>Privacy guaranteed — your resume is processed securely and never sold.</span></p>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-visual-glow"></div>
+          <div class="hero-preview">
+            <div class="hero-preview-doc">
+              <img src="assets/man-check-cv-aprove.png" alt="" width="400" height="320" loading="lazy">
+            </div>
+            <div class="hero-preview-float hero-preview-score">
+              <span class="hero-preview-score-val">82</span>
+              <span class="hero-preview-score-label">ATS match</span>
+              <span class="hero-preview-score-sub">Good</span>
+            </div>
+            <ul class="hero-preview-checklist">
+              <li><i class="ph ph-check" aria-hidden="true"></i> Keywords</li>
+              <li><i class="ph ph-check" aria-hidden="true"></i> Structure</li>
+              <li class="is-warn"><i class="ph ph-warning-circle" aria-hidden="true"></i> Format hints</li>
+            </ul>
           </div>
         </div>
       </div>

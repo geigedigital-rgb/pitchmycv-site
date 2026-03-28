@@ -327,9 +327,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function setupCompactUploadLayoutEnhancements() {
+    const zone = document.getElementById("upload-zone");
+    const fileInputEl = document.getElementById("file-input");
+    if (!zone || !fileInputEl) {
+      return;
+    }
+
+    const fileCardRoot = zone.querySelector(".compact-file-card");
+    if (fileCardRoot) {
+      fileCardRoot.classList.add("compact-file-card-unified");
+    }
+
+    const stack = zone.querySelector(".compact-upload-row, .compact-upload-stack");
+    if (stack && !stack.classList.contains("compact-upload-stack")) {
+      stack.classList.add("compact-upload-stack");
+    }
+
+    let jobLinkStepEl = document.getElementById("job-link-step");
+    if (jobLinkStepEl && !document.getElementById("compact-job-wrapper")) {
+      const overlay = jobLinkStepEl.querySelector(".compact-link-overlay");
+      if (overlay) {
+        overlay.remove();
+      }
+      jobLinkStepEl.classList.remove("is-disabled");
+      jobLinkStepEl.removeAttribute("aria-disabled");
+
+      const wrapper = document.createElement("div");
+      wrapper.id = "compact-job-wrapper";
+      wrapper.className = "compact-job-wrapper";
+      wrapper.hidden = true;
+
+      const lead = document.createElement("p");
+      lead.className = "compact-job-lead";
+      lead.textContent =
+        "Now paste the job posting to check how well your resume matches this role.";
+
+      jobLinkStepEl.parentNode.insertBefore(wrapper, jobLinkStepEl);
+      wrapper.appendChild(lead);
+      wrapper.appendChild(jobLinkStepEl);
+    }
+
+    const dropzoneEl = document.getElementById("upload-dropzone");
+    const fileCard = zone.querySelector(".compact-file-card");
+    if (dropzoneEl && fileCard && !fileCard.querySelector(".compact-resume-row")) {
+      const row = document.createElement("div");
+      row.className = "compact-resume-row";
+      row.id = "resume-drop-row";
+      dropzoneEl.parentNode.insertBefore(row, dropzoneEl);
+      row.appendChild(dropzoneEl);
+      dropzoneEl.classList.add("compact-dropzone-compact");
+    } else {
+      const existingRow = zone.querySelector(".compact-resume-row");
+      if (existingRow && !existingRow.id) {
+        existingRow.id = "resume-drop-row";
+      }
+    }
+  }
+
   if (uploadZone && fileInput) {
-    const isTwoStepUploadFlow = Boolean(uploadDropzone && jobLinkStep && jobTextInput && analyzeResumeBtn);
-    const dragTarget = uploadDropzone || uploadZone;
+    setupCompactUploadLayoutEnhancements();
+
+    const isTwoStepUploadFlow = Boolean(
+      document.getElementById("upload-dropzone")
+        && document.getElementById("job-link-step")
+        && document.getElementById("job-text-input")
+        && document.getElementById("analyze-resume-btn")
+    );
+    const resumeDropRow = document.getElementById("resume-drop-row");
+    const dragTarget = resumeDropRow || uploadDropzone || uploadZone;
     let selectedResumeFile = null;
 
     const validTypes = [
@@ -344,22 +410,31 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       selectedResumeFile = file;
       const hasFile = Boolean(file);
+      const jobWrapperEl = document.getElementById("compact-job-wrapper");
 
       if (dropzoneTitle) {
-        dropzoneTitle.textContent = hasFile ? file.name : "Upload resume file";
+        dropzoneTitle.textContent = hasFile ? file.name : "Drop your resume here or click to upload";
       }
       if (fileStepStatus) {
-        fileStepStatus.textContent = hasFile ? "Resume uploaded. Now add a job link." : "Max 5MB · 100% secure";
+        fileStepStatus.textContent = "";
       }
       if (jobTextInput) {
         jobTextInput.disabled = !hasFile;
       }
       if (jobLinkNote) {
-        jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "First upload file, then paste job text";
+        jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "";
+      }
+      if (jobWrapperEl) {
+        jobWrapperEl.hidden = !hasFile;
       }
       if (jobLinkStep) {
-        jobLinkStep.classList.toggle("is-disabled", !hasFile);
-        jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+        if (jobWrapperEl) {
+          jobLinkStep.classList.remove("is-disabled");
+          jobLinkStep.setAttribute("aria-disabled", "false");
+        } else {
+          jobLinkStep.classList.toggle("is-disabled", !hasFile);
+          jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+        }
       }
       if (analyzeResumeBtn) {
         analyzeResumeBtn.disabled = !hasFile;
@@ -408,16 +483,20 @@ document.addEventListener("DOMContentLoaded", () => {
       dragTarget.addEventListener(eventName, unhighlight, false);
     });
 
-    function highlight(e) {
-      if (uploadDropzone) {
+    function highlight() {
+      if (resumeDropRow) {
+        resumeDropRow.classList.add("is-dragover");
+      } else if (uploadDropzone) {
         uploadDropzone.classList.add("is-dragover");
       } else {
         uploadZone.classList.add("dragover");
       }
     }
 
-    function unhighlight(e) {
-      if (uploadDropzone) {
+    function unhighlight() {
+      if (resumeDropRow) {
+        resumeDropRow.classList.remove("is-dragover");
+      } else if (uploadDropzone) {
         uploadDropzone.classList.remove("is-dragover");
       } else {
         uploadZone.classList.remove("dragover");
