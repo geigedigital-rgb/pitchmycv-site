@@ -327,6 +327,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function ensureReplaceResumeControl() {
+    const dz = document.getElementById("upload-dropzone");
+    if (!dz || document.getElementById("replace-resume-btn")) {
+      return;
+    }
+    const textWrap = dz.querySelector(".compact-dropzone-text");
+    if (!textWrap) {
+      return;
+    }
+    if (!textWrap.querySelector(".compact-dropzone-text-body")) {
+      const body = document.createElement("div");
+      body.className = "compact-dropzone-text-body";
+      while (textWrap.firstChild) {
+        body.appendChild(textWrap.firstChild);
+      }
+      textWrap.appendChild(body);
+    }
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.id = "replace-resume-btn";
+    btn.className = "compact-resume-replace-btn";
+    btn.hidden = true;
+    btn.setAttribute("aria-label", "Replace resume file");
+    btn.setAttribute("title", "Replace resume");
+    btn.innerHTML = '<i class="ph ph-arrows-clockwise" aria-hidden="true"></i>';
+    textWrap.appendChild(btn);
+  }
+
   function setupCompactUploadLayoutEnhancements() {
     const zone = document.getElementById("upload-zone");
     const fileInputEl = document.getElementById("file-input");
@@ -358,15 +386,11 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.className = "compact-job-wrapper";
       wrapper.hidden = true;
 
-      const lead = document.createElement("p");
-      lead.className = "compact-job-lead";
-      lead.textContent =
-        "Now paste the job posting to check how well your resume matches this role.";
-
       jobLinkStepEl.parentNode.insertBefore(wrapper, jobLinkStepEl);
-      wrapper.appendChild(lead);
       wrapper.appendChild(jobLinkStepEl);
     }
+
+    ensureReplaceResumeControl();
 
     const dropzoneEl = document.getElementById("upload-dropzone");
     const fileCard = zone.querySelector(".compact-file-card");
@@ -398,11 +422,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const dragTarget = resumeDropRow || uploadDropzone || uploadZone;
     let selectedResumeFile = null;
 
+    const replaceResumeBtn = document.getElementById("replace-resume-btn");
+    if (replaceResumeBtn && fileInput) {
+      replaceResumeBtn.addEventListener("click", event => {
+        event.stopPropagation();
+        fileInput.click();
+      });
+    }
+
+    const dropzoneEmptyLabel = (() => {
+      if (!dropzoneTitle) {
+        return "Drop your resume here or click to upload";
+      }
+      const fromData = dropzoneTitle.getAttribute("data-empty-label")?.trim();
+      if (fromData) {
+        return fromData;
+      }
+      const fromSpan = dropzoneTitle.querySelector(".dropzone-title-desktop-only")?.textContent?.trim();
+      if (fromSpan) {
+        return fromSpan;
+      }
+      const plain = dropzoneTitle.textContent.trim();
+      return plain || "Drop your resume here or click to upload";
+    })();
+
     const validTypes = [
       "application/pdf",
       "application/msword",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     ];
+
+    const updateAnalyzeResumeButtonState = () => {
+      if (!isTwoStepUploadFlow || !analyzeResumeBtn) {
+        return;
+      }
+      const hasFile = Boolean(selectedResumeFile);
+      const hasJobText = Boolean(jobTextInput?.value.trim());
+      const enabled = hasFile && hasJobText;
+      analyzeResumeBtn.disabled = !enabled;
+      analyzeResumeBtn.setAttribute("aria-disabled", enabled ? "false" : "true");
+    };
 
     const setTwoStepState = file => {
       if (!isTwoStepUploadFlow) {
@@ -413,7 +472,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const jobWrapperEl = document.getElementById("compact-job-wrapper");
 
       if (dropzoneTitle) {
-        dropzoneTitle.textContent = hasFile ? file.name : "Drop your resume here or click to upload";
+        if (hasFile) {
+          dropzoneTitle.textContent = file.name;
+          dropzoneTitle.classList.add("has-selected-file");
+        } else {
+          dropzoneTitle.classList.remove("has-selected-file");
+          const span = document.createElement("span");
+          span.className = "dropzone-title-desktop-only";
+          span.textContent = dropzoneEmptyLabel;
+          dropzoneTitle.replaceChildren(span);
+        }
       }
       if (fileStepStatus) {
         fileStepStatus.textContent = "";
@@ -436,10 +504,14 @@ document.addEventListener("DOMContentLoaded", () => {
           jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
         }
       }
-      if (analyzeResumeBtn) {
-        analyzeResumeBtn.disabled = !hasFile;
-        analyzeResumeBtn.setAttribute("aria-disabled", hasFile ? "false" : "true");
+      if (uploadZone) {
+        uploadZone.classList.toggle("has-resume-file", hasFile);
       }
+      const replaceBtn = document.getElementById("replace-resume-btn");
+      if (replaceBtn) {
+        replaceBtn.hidden = !hasFile;
+      }
+      updateAnalyzeResumeButtonState();
     };
 
     if (isTwoStepUploadFlow && jobTextInput && jobLinkNote) {
@@ -447,6 +519,7 @@ document.addEventListener("DOMContentLoaded", () => {
         jobLinkNote.textContent = "";
         jobLinkNote.classList.add("sr-only");
         jobLinkNote.classList.remove("upload-link-note");
+        updateAnalyzeResumeButtonState();
       });
     }
 
@@ -595,8 +668,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const hideOverlay = () => {
           clearInterval(stepInterval);
           overlay.remove();
-          analyzeResumeBtn.disabled = false;
           analyzeResumeBtn.textContent = "Check your resume for free";
+          updateAnalyzeResumeButtonState();
         };
 
         try {

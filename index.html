@@ -141,8 +141,13 @@
                         <i class="ph ph-file-arrow-up" aria-hidden="true"></i>
                       </span>
                       <div class="compact-dropzone-text">
-                        <strong id="dropzone-title">Drop your resume here or click to upload</strong>
-                        <span id="dropzone-help"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
+                        <div class="compact-dropzone-text-body">
+                          <strong id="dropzone-title"><span class="dropzone-title-desktop-only">Drop your resume here or click to upload</span></strong>
+                          <span id="dropzone-help"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
+                        </div>
+                        <button type="button" class="compact-resume-replace-btn" id="replace-resume-btn" hidden aria-label="Replace resume file" title="Replace resume">
+                          <i class="ph ph-arrows-clockwise" aria-hidden="true"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -151,16 +156,15 @@
                 </section>
 
                 <div id="compact-job-wrapper" class="compact-job-wrapper" hidden>
-                  <p class="compact-job-lead">Now paste the job posting to check how well your resume matches this role.</p>
                   <section class="compact-link-card" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="false">
                     <meta itemprop="position" content="2">
                     <meta itemprop="name" content="Paste job description">
-                    <meta itemprop="text" content="Paste the job vacancy text after a resume file is uploaded.">
+                    <meta itemprop="text" content="Paste the job posting to check resume match.">
                     <div class="compact-link-inner">
-                      <strong>Paste job vacancy text</strong>
-                      <p class="compact-job-text-hint">Use the full description so we can match skills and keywords.</p>
-                      <label class="sr-only" for="job-text-input">Job vacancy text</label>
-                      <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste job description here…" rows="3" disabled></textarea>
+                      <strong>Job posting (for match check)</strong>
+                      <p class="compact-job-text-hint">Paste the full text so we can compare keywords and fit.</p>
+                      <label class="sr-only" for="job-text-input">Job posting for match check</label>
+                      <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste job posting here…" rows="3" disabled></textarea>
                     </div>
                     <p class="sr-only" id="job-link-note"></p>
                   </section>

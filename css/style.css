@@ -680,32 +680,73 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 26px;
 }
 
+.compact-dropzone-compact .compact-dropzone-text {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.compact-dropzone-text-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.compact-dropzone-compact .compact-dropzone-text-body strong,
 .compact-dropzone-compact .compact-dropzone-text strong {
   font-size: 0.9rem;
 }
 
+.compact-dropzone-compact .compact-dropzone-text-body span,
 .compact-dropzone-compact .compact-dropzone-text span {
   font-size: 0.76rem;
+}
+
+.compact-resume-replace-btn {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid #d4deeb;
+  background: #fff;
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.compact-resume-replace-btn:hover {
+  border-color: #7aa2e8;
+  color: var(--primary);
+  background: #f8fafc;
+}
+
+.compact-resume-replace-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.compact-resume-replace-btn i.ph {
+  font-size: 20px;
 }
 
 .compact-job-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
   width: 100%;
 }
 
 .compact-job-wrapper[hidden] {
   display: none !important;
-}
-
-.compact-job-lead {
-  margin: 0;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: #475569;
-  line-height: 1.4;
-  padding: 0 2px;
 }
 .compact-file-card,
 .compact-link-card {
@@ -884,6 +925,11 @@ ul { margin: 0; padding: 0; list-style: none; }
     align-items: stretch;
   }
 
+  /* Drag-and-drop line is pointless on small screens; formats + CTA are enough */
+  #dropzone-title:not(.has-selected-file) {
+    display: none;
+  }
+
   .compact-dropzone.compact-dropzone-compact {
     min-height: 64px;
     width: 100%;
@@ -896,6 +942,15 @@ ul { margin: 0; padding: 0; list-style: none; }
     width: calc(100% - 32px);
     margin: 8px 16px 12px;
     align-self: center;
+  }
+
+  #upload-zone.has-resume-file .compact-upload-pick-btn {
+    display: none !important;
+  }
+
+  /* Main CTA only after resume step; use Upload resume to check first */
+  #upload-zone:not(.has-resume-file) #analyze-resume-btn {
+    display: none !important;
   }
 
   .dropzone-help-desktop {
