@@ -350,7 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.className = "compact-resume-replace-btn";
     btn.hidden = true;
     btn.setAttribute("aria-label", "Replace resume file");
-    btn.setAttribute("title", "Replace resume");
     btn.innerHTML = '<i class="ph ph-arrows-clockwise" aria-hidden="true"></i>';
     textWrap.appendChild(btn);
   }
