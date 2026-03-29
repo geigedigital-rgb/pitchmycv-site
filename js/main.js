@@ -673,7 +673,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const hideOverlay = () => {
           clearInterval(stepInterval);
           overlay.remove();
-          analyzeResumeBtn.textContent = "Check your resume for free";
+          analyzeResumeBtn.textContent = "Check your resume free";
           updateAnalyzeResumeButtonState();
         };
 
