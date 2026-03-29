@@ -2472,9 +2472,137 @@ ul { margin: 0; padding: 0; list-style: none; }
 .faq-answer a { color: var(--primary); }
 .faq-answer a:hover { text-decoration: underline; }
 
-/* --- BLOCK 11: Final CTA (Rezi-style) --- */
+/* --- BLOCK 11: Final CTA (Rezi-style) — full-bleed dark band like cta-banner-card --- */
 .final-cta { padding: 80px 0; }
 .final-cta h2 { font-size: clamp(28px, 3.5vw, 40px); margin-bottom: 20px; letter-spacing: -0.02em; font-weight: 700; }
+.final-cta-sub { max-width: 560px; margin: 0 auto 28px; }
+.final-cta-upload { max-width: 640px; margin: 0 auto; text-align: left; }
+.final-cta-upload-panel { margin-top: 0; }
+.compact-upload-bottom-no-gauge {
+  justify-content: center;
+}
+
+.final-cta-dark {
+  background: linear-gradient(115deg, #061a61 0%, #0a2b85 52%, #1b43a7 100%);
+  color: #e2e8f0;
+}
+.final-cta-dark h2 {
+  color: #ffffff;
+  letter-spacing: -0.03em;
+}
+.final-cta-dark .final-cta-sub {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.12rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.final-cta-dark .hero-upload-panel {
+  border-color: rgba(147, 197, 253, 0.45);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 55%);
+}
+.final-cta-dark .hero-privacy {
+  border-top-color: rgba(255, 255, 255, 0.22);
+  color: rgba(226, 232, 240, 0.85);
+}
+.final-cta-dark .hero-privacy i.ph {
+  color: #a5b4fc;
+}
+.final-cta-dark .compact-file-card-unified .compact-resume-row {
+  border-color: rgba(186, 230, 253, 0.45);
+  background: rgba(15, 23, 42, 0.35);
+}
+.final-cta-dark .compact-resume-row.is-dragover {
+  border-color: #93c5fd;
+  background: rgba(30, 58, 138, 0.55);
+}
+.final-cta-dark .compact-dropzone.compact-dropzone-compact:hover {
+  background: transparent;
+}
+.final-cta-dark .upload-dropzone-icon {
+  background: rgba(255, 255, 255, 0.14);
+  color: #c7d2fe;
+}
+.final-cta-dark .compact-dropzone-text strong,
+.final-cta-dark .compact-dropzone-text-body strong {
+  color: #f1f5f9;
+}
+.final-cta-dark .compact-dropzone-text span,
+.final-cta-dark .compact-dropzone-text-body span {
+  color: rgba(226, 232, 240, 0.78);
+}
+.final-cta-dark .compact-link-card {
+  border-color: rgba(147, 197, 253, 0.35);
+  background: rgba(15, 23, 42, 0.4);
+}
+.final-cta-dark .compact-link-inner {
+  text-align: left;
+}
+.final-cta-dark .compact-link-inner strong {
+  color: #f8fafc;
+  text-align: left;
+}
+.final-cta-dark .compact-job-text-hint {
+  color: rgba(203, 213, 225, 0.9);
+  text-align: left;
+}
+.final-cta-dark .upload-job-textarea {
+  border-color: rgba(147, 197, 253, 0.35);
+  background: rgba(2, 6, 23, 0.55);
+  color: #f1f5f9;
+}
+.final-cta-dark .upload-job-textarea::placeholder {
+  color: rgba(148, 163, 184, 0.95);
+}
+.final-cta-dark .upload-job-textarea:focus {
+  border-color: #818cf8;
+  background: rgba(2, 6, 23, 0.75);
+}
+.final-cta-dark .upload-job-textarea:disabled {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(148, 163, 184, 0.25);
+  color: rgba(148, 163, 184, 0.75);
+}
+.final-cta-dark #upload-zone-cta.has-resume-file .compact-file-card-unified .compact-resume-row {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.35) 0%, rgba(37, 99, 235, 0.22) 100%);
+  border-color: rgba(147, 197, 253, 0.75);
+}
+.final-cta-dark #upload-zone-cta.has-resume-file .compact-file-card-unified .compact-resume-row.is-dragover {
+  border-color: #93c5fd;
+  background: linear-gradient(180deg, rgba(96, 165, 250, 0.4) 0%, rgba(59, 130, 246, 0.28) 100%);
+}
+.final-cta-dark #upload-zone-cta.has-resume-file .upload-dropzone-icon {
+  background: rgba(30, 58, 138, 0.85);
+  color: #e0e7ff;
+}
+.final-cta-dark .btn-primary.compact-btn,
+.final-cta-dark label.btn-primary.compact-upload-pick-btn {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+.final-cta-dark .btn-primary.compact-btn:hover,
+.final-cta-dark label.btn-primary.compact-upload-pick-btn:hover {
+  background: #4338ca;
+  border-color: #4338ca;
+  color: #ffffff;
+}
+.final-cta-dark .btn-primary.compact-btn:disabled {
+  background: rgba(79, 70, 229, 0.45);
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.75);
+}
+.final-cta-dark .upload-card-loading {
+  background: rgba(2, 6, 23, 0.82);
+}
+.final-cta-dark .upload-card-loading-text {
+  color: #e2e8f0;
+}
+.final-cta-dark #file-step-status-cta {
+  color: #fecaca;
+}
+.final-cta-dark #job-link-note-cta.upload-link-note {
+  color: #fecaca;
+}
 .site-footer { padding: 48px 0 32px; border-top: 1px solid var(--border-color); background: var(--bg-white); text-align: left; }
 .site-footer::after {
   content: "Release " var(--site-release-label);

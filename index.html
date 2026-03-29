@@ -750,12 +750,56 @@
       </div>
     </section>
 
-    <!-- BLOCK 11: Final Conversion (Rezi-style) -->
-    <section class="final-cta section-white text-center">
+    <!-- BLOCK 11: Final Conversion (Rezi-style) — same upload flow as hero, no gauge -->
+    <section class="final-cta final-cta-dark text-center">
       <div class="wrap">
         <h2>Ready to improve your resume?</h2>
-        <p class="mb-4 text-muted" style="max-width: 560px; margin: 0 auto 28px;">Scan your resume now to see your ATS score and fix what's holding you back.</p>
-        <a href="#upload-zone" class="btn btn-primary btn-large">Check ATS score free</a>
+        <p class="final-cta-sub">Scan your resume now to see your ATS score and fix what's holding you back.</p>
+        <div class="final-cta-upload">
+          <div class="hero-upload-panel final-cta-upload-panel">
+            <div class="compact-upload-card" id="upload-zone-cta">
+              <h3 id="resume-upload-title-cta" class="sr-only">Check your resume free</h3>
+              <div class="compact-upload-stack">
+                <section class="compact-file-card compact-file-card-unified">
+                  <input type="file" id="file-input-cta" accept=".pdf,.doc,.docx" hidden>
+                  <div class="compact-resume-row" id="resume-drop-row-cta">
+                    <div class="compact-dropzone compact-dropzone-compact" id="upload-dropzone-cta" role="button" tabindex="0">
+                      <span class="upload-dropzone-icon" aria-hidden="true">
+                        <i class="ph ph-file-arrow-up icon-resume-upload" aria-hidden="true"></i>
+                        <i class="ph ph-arrows-clockwise icon-resume-replace" aria-hidden="true"></i>
+                      </span>
+                      <div class="compact-dropzone-text">
+                        <div class="compact-dropzone-text-body">
+                          <strong id="dropzone-title-cta"><span class="dropzone-title-desktop-only">Drop your resume here or click to upload</span></strong>
+                          <span id="dropzone-help-cta"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="sr-only" id="file-step-status-cta" aria-live="polite"></p>
+                  <label for="file-input-cta" class="btn btn-primary compact-upload-pick-btn">Upload resume to check</label>
+                </section>
+
+                <div id="compact-job-wrapper-cta" class="compact-job-wrapper" hidden>
+                  <section class="compact-link-card" id="job-link-step-cta" aria-disabled="false">
+                    <div class="compact-link-inner">
+                      <strong>Описание вашей вакансии</strong>
+                      <p class="compact-job-text-hint">Copy the vacancy text from the job site (the listing page) and paste the full text here.</p>
+                      <label class="sr-only" for="job-text-input-cta">Описание вашей вакансии</label>
+                      <textarea id="job-text-input-cta" class="upload-job-textarea" placeholder="Paste job posting here…" rows="3" disabled></textarea>
+                    </div>
+                    <p class="sr-only" id="job-link-note-cta"></p>
+                  </section>
+                </div>
+              </div>
+
+              <div class="compact-upload-bottom compact-upload-bottom-no-gauge">
+                <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn-cta" disabled aria-disabled="true">Check your resume free</button>
+              </div>
+            </div>
+            <p class="hero-privacy"><i class="ph ph-lock" style="font-size:1rem" aria-hidden="true"></i><span>Privacy guaranteed — your resume is processed securely and never sold.</span></p>
+          </div>
+        </div>
       </div>
     </section>
   </main>

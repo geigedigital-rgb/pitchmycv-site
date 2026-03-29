@@ -227,16 +227,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // For local backend use: "http://localhost:8000"
   const LANDING_API_BASE = "https://my.pitchcv.app";
 
-  // Drag & Drop interactive zone (Rezi style)
-  const uploadZone = document.getElementById("upload-zone");
-  const fileInput = document.getElementById("file-input");
-  const uploadDropzone = document.getElementById("upload-dropzone");
-  const dropzoneTitle = document.getElementById("dropzone-title");
-  const fileStepStatus = document.getElementById("file-step-status");
-  const jobLinkStep = document.getElementById("job-link-step");
-  const jobTextInput = document.getElementById("job-text-input");
-  const jobLinkNote = document.getElementById("job-link-note");
-  const analyzeResumeBtn = document.getElementById("analyze-resume-btn");
+  // Drag & Drop interactive zone (Rezi style) — hero + optional footer CTA duplicate
+  function qid(suffix, base) {
+    return document.getElementById(`${base}${suffix}`);
+  }
+
+  const LANDING_UPLOAD_ZONES = [
+    { suffix: "", zoneId: "upload-zone" },
+    { suffix: "-cta", zoneId: "upload-zone-cta" },
+  ];
+  const uploadInstances = LANDING_UPLOAD_ZONES.map(({ suffix, zoneId }) => {
+    const zone = document.getElementById(zoneId);
+    const fileInput = qid(suffix, "file-input");
+    if (!zone || !fileInput) {
+      return null;
+    }
+    return { suffix, zoneId, zone, fileInput };
+  }).filter(Boolean);
 
   // Hero gauge: full gradient arc static; slider thumb moves along the arc
   const gaugeArcPath = document.querySelector(".gauge-svg-thumb .gauge-gradient-arc");
@@ -338,8 +345,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function ensureResumeDropzoneLayout() {
-    const dz = document.getElementById("upload-dropzone");
+  function ensureResumeDropzoneLayout(dropzoneEl) {
+    const dz = dropzoneEl || document.getElementById("upload-dropzone");
     if (!dz) {
       return;
     }
@@ -372,9 +379,8 @@ document.addEventListener("DOMContentLoaded", () => {
     iconWrap.appendChild(rep);
   }
 
-  function setupCompactUploadLayoutEnhancements() {
-    const zone = document.getElementById("upload-zone");
-    const fileInputEl = document.getElementById("file-input");
+  function setupCompactUploadLayoutEnhancements(zone, suffix) {
+    const fileInputEl = qid(suffix, "file-input");
     if (!zone || !fileInputEl) {
       return;
     }
@@ -389,8 +395,9 @@ document.addEventListener("DOMContentLoaded", () => {
       stack.classList.add("compact-upload-stack");
     }
 
-    let jobLinkStepEl = document.getElementById("job-link-step");
-    if (jobLinkStepEl && !document.getElementById("compact-job-wrapper")) {
+    const jobWrapperId = `compact-job-wrapper${suffix}`;
+    let jobLinkStepEl = qid(suffix, "job-link-step");
+    if (jobLinkStepEl && !document.getElementById(jobWrapperId)) {
       const overlay = jobLinkStepEl.querySelector(".compact-link-overlay");
       if (overlay) {
         overlay.remove();
@@ -399,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
       jobLinkStepEl.removeAttribute("aria-disabled");
 
       const wrapper = document.createElement("div");
-      wrapper.id = "compact-job-wrapper";
+      wrapper.id = jobWrapperId;
       wrapper.className = "compact-job-wrapper";
       wrapper.hidden = true;
 
@@ -407,51 +414,70 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.appendChild(jobLinkStepEl);
     }
 
-    ensureResumeDropzoneLayout();
+    ensureResumeDropzoneLayout(qid(suffix, "upload-dropzone"));
 
-    const dropzoneEl = document.getElementById("upload-dropzone");
+    const dropzoneEl = qid(suffix, "upload-dropzone");
     const fileCard = zone.querySelector(".compact-file-card");
+    const rowId = `resume-drop-row${suffix}`;
     if (dropzoneEl && fileCard && !fileCard.querySelector(".compact-resume-row")) {
       const row = document.createElement("div");
       row.className = "compact-resume-row";
-      row.id = "resume-drop-row";
+      row.id = rowId;
       dropzoneEl.parentNode.insertBefore(row, dropzoneEl);
       row.appendChild(dropzoneEl);
       dropzoneEl.classList.add("compact-dropzone-compact");
     } else {
       const existingRow = zone.querySelector(".compact-resume-row");
       if (existingRow && !existingRow.id) {
-        existingRow.id = "resume-drop-row";
+        existingRow.id = rowId;
       }
     }
   }
 
-  if (uploadZone && fileInput) {
-    setupCompactUploadLayoutEnhancements();
+  if (uploadInstances.length > 0) {
+    uploadInstances.forEach(({ zone, suffix }) => setupCompactUploadLayoutEnhancements(zone, suffix));
 
+    const primary = uploadInstances[0];
     const isTwoStepUploadFlow = Boolean(
-      document.getElementById("upload-dropzone")
-        && document.getElementById("job-link-step")
-        && document.getElementById("job-text-input")
-        && document.getElementById("analyze-resume-btn")
+      qid(primary.suffix, "upload-dropzone")
+        && qid(primary.suffix, "job-link-step")
+        && qid(primary.suffix, "job-text-input")
+        && qid(primary.suffix, "analyze-resume-btn")
     );
-    const resumeDropRow = document.getElementById("resume-drop-row");
-    const dragTarget = resumeDropRow || uploadDropzone || uploadZone;
+
+    const getEls = suffix => ({
+      uploadDropzone: qid(suffix, "upload-dropzone"),
+      dropzoneTitle: qid(suffix, "dropzone-title"),
+      fileStepStatus: qid(suffix, "file-step-status"),
+      jobLinkStep: qid(suffix, "job-link-step"),
+      jobTextInput: qid(suffix, "job-text-input"),
+      jobLinkNote: qid(suffix, "job-link-note"),
+      analyzeResumeBtn: qid(suffix, "analyze-resume-btn"),
+      resumeDropRow: qid(suffix, "resume-drop-row"),
+      fileInput: qid(suffix, "file-input"),
+      zone: document.getElementById(suffix ? `upload-zone${suffix}` : "upload-zone"),
+    });
+
+    const dropzoneTitlePrimary = qid(primary.suffix, "dropzone-title");
+    const dragTargets = uploadInstances.map(inst => {
+      const e = getEls(inst.suffix);
+      return e.resumeDropRow || e.uploadDropzone || e.zone;
+    }).filter(Boolean);
     let selectedResumeFile = null;
 
     const dropzoneEmptyLabel = (() => {
-      if (!dropzoneTitle) {
+      if (!dropzoneTitlePrimary) {
         return "Drop your resume here or click to upload";
       }
-      const fromData = dropzoneTitle.getAttribute("data-empty-label")?.trim();
+      const fromData = dropzoneTitlePrimary.getAttribute("data-empty-label")?.trim();
       if (fromData) {
         return fromData;
       }
-      const fromSpan = dropzoneTitle.querySelector(".dropzone-title-desktop-only")?.textContent?.trim();
+      const fromSpan = dropzoneTitlePrimary.querySelector(".dropzone-title-desktop-only")?.textContent?.trim();
       if (fromSpan) {
         return fromSpan;
       }
-      const plain = dropzoneTitle.textContent.trim();
+      const plain = dropzoneTitlePrimary.textContent.trim();
       return plain || "Drop your resume here or click to upload";
     })();
 
@@ -462,14 +488,21 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const updateAnalyzeResumeButtonState = () => {
-      if (!isTwoStepUploadFlow || !analyzeResumeBtn) {
+      if (!isTwoStepUploadFlow) {
         return;
       }
       const hasFile = Boolean(selectedResumeFile);
-      const hasJobText = Boolean(jobTextInput?.value.trim());
+      const primaryJobInput = qid(primary.suffix, "job-text-input");
+      const hasJobText = Boolean(primaryJobInput?.value.trim());
       const enabled = hasFile && hasJobText;
-      analyzeResumeBtn.disabled = !enabled;
-      analyzeResumeBtn.setAttribute("aria-disabled", enabled ? "false" : "true");
+      uploadInstances.forEach(inst => {
+        const btn = qid(inst.suffix, "analyze-resume-btn");
+        if (!btn) {
+          return;
+        }
+        btn.disabled = !enabled;
+        btn.setAttribute("aria-disabled", enabled ? "false" : "true");
+      });
     };
 
     const setTwoStepState = file => {
@@ -478,121 +511,167 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       selectedResumeFile = file;
       const hasFile = Boolean(file);
-      const jobWrapperEl = document.getElementById("compact-job-wrapper");
 
-      if (dropzoneTitle) {
-        if (hasFile) {
-          dropzoneTitle.textContent = file.name;
-          dropzoneTitle.classList.add("has-selected-file");
-        } else {
-          dropzoneTitle.classList.remove("has-selected-file");
-          const span = document.createElement("span");
-          span.className = "dropzone-title-desktop-only";
-          span.textContent = dropzoneEmptyLabel;
-          dropzoneTitle.replaceChildren(span);
+      uploadInstances.forEach(inst => {
+        const e = getEls(inst.suffix);
+        const jobWrapperEl = document.getElementById(`compact-job-wrapper${inst.suffix}`);
+
+        if (e.dropzoneTitle) {
+          if (hasFile) {
+            e.dropzoneTitle.textContent = file.name;
+            e.dropzoneTitle.classList.add("has-selected-file");
+          } else {
+            e.dropzoneTitle.classList.remove("has-selected-file");
+            const span = document.createElement("span");
+            span.className = "dropzone-title-desktop-only";
+            span.textContent = dropzoneEmptyLabel;
+            e.dropzoneTitle.replaceChildren(span);
+          }
         }
-      }
-      if (fileStepStatus) {
-        fileStepStatus.textContent = "";
-      }
-      if (jobTextInput) {
-        jobTextInput.disabled = !hasFile;
-      }
-      if (jobLinkNote) {
-        jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "";
-      }
-      if (jobWrapperEl) {
-        jobWrapperEl.hidden = !hasFile;
-      }
-      if (jobLinkStep) {
+        if (e.fileStepStatus) {
+          e.fileStepStatus.textContent = "";
+        }
+        if (e.jobTextInput) {
+          e.jobTextInput.disabled = !hasFile;
+        }
+        if (e.jobLinkNote) {
+          e.jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "";
+        }
         if (jobWrapperEl) {
-          jobLinkStep.classList.remove("is-disabled");
-          jobLinkStep.setAttribute("aria-disabled", "false");
-        } else {
-          jobLinkStep.classList.toggle("is-disabled", !hasFile);
-          jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+          jobWrapperEl.hidden = !hasFile;
         }
-      }
-      if (uploadZone) {
-        uploadZone.classList.toggle("has-resume-file", hasFile);
-      }
+        if (e.jobLinkStep) {
+          if (jobWrapperEl) {
+            e.jobLinkStep.classList.remove("is-disabled");
+            e.jobLinkStep.setAttribute("aria-disabled", "false");
+          } else {
+            e.jobLinkStep.classList.toggle("is-disabled", !hasFile);
+            e.jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+          }
+        }
+        if (e.zone) {
+          e.zone.classList.toggle("has-resume-file", hasFile);
+        }
+      });
       updateAnalyzeResumeButtonState();
     };
 
-    if (isTwoStepUploadFlow && jobTextInput && jobLinkNote) {
-      jobTextInput.addEventListener("input", () => {
-        jobLinkNote.textContent = "";
-        jobLinkNote.classList.add("sr-only");
-        jobLinkNote.classList.remove("upload-link-note");
-        updateAnalyzeResumeButtonState();
+    const syncJobTextFrom = sourceInput => {
+      if (!sourceInput) {
+        return;
+      }
+      const value = sourceInput.value;
+      uploadInstances.forEach(inst => {
+        const jt = qid(inst.suffix, "job-text-input");
+        if (jt && jt !== sourceInput) {
+          jt.value = value;
+        }
+      });
+    };
+
+    if (isTwoStepUploadFlow) {
+      uploadInstances.forEach(inst => {
+        const e = getEls(inst.suffix);
+        if (!e.jobTextInput || !e.jobLinkNote) {
+          return;
+        }
+        e.jobTextInput.addEventListener("input", () => {
+          syncJobTextFrom(e.jobTextInput);
+          uploadInstances.forEach(i => {
+            const n = qid(i.suffix, "job-link-note");
+            if (n) {
+              n.textContent = "";
+              n.classList.add("sr-only");
+              n.classList.remove("upload-link-note");
+            }
+          });
+          updateAnalyzeResumeButtonState();
+        });
       });
     }
 
-    if (isTwoStepUploadFlow && uploadDropzone) {
-      uploadDropzone.addEventListener("click", () => {
-        fileInput.click();
-      });
-      uploadDropzone.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          fileInput.click();
+    if (isTwoStepUploadFlow) {
+      uploadInstances.forEach(inst => {
+        const e = getEls(inst.suffix);
+        if (!e.uploadDropzone || !e.fileInput) {
+          return;
         }
+        e.uploadDropzone.addEventListener("click", () => {
+          e.fileInput.click();
+        });
+        e.uploadDropzone.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            e.fileInput.click();
+          }
+        });
       });
       setTwoStepState(null);
     }
-
-    // Prevent default drag behaviors
-    ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
-      dragTarget.addEventListener(eventName, preventDefaults, false);
-      document.body.addEventListener(eventName, preventDefaults, false);
-    });
 
     function preventDefaults(e) {
       e.preventDefault();
       e.stopPropagation();
     }
 
-    // Highlight drop zone when item is dragged over it
-    ["dragenter", "dragover"].forEach(eventName => {
-      dragTarget.addEventListener(eventName, highlight, false);
+    ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+      document.body.addEventListener(eventName, preventDefaults, false);
     });
 
-    ["dragleave", "drop"].forEach(eventName => {
-      dragTarget.addEventListener(eventName, unhighlight, false);
+    uploadInstances.forEach((inst, idx) => {
+      const target = dragTargets[idx];
+      if (!target) {
+        return;
+      }
+      const e = getEls(inst.suffix);
+
+      ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+        target.addEventListener(eventName, preventDefaults, false);
+      });
+
+      const highlightInst = () => {
+        if (e.resumeDropRow) {
+          e.resumeDropRow.classList.add("is-dragover");
+        } else if (e.uploadDropzone) {
+          e.uploadDropzone.classList.add("is-dragover");
+        } else if (e.zone) {
+          e.zone.classList.add("dragover");
+        }
+      };
+
+      const unhighlightInst = () => {
+        if (e.resumeDropRow) {
+          e.resumeDropRow.classList.remove("is-dragover");
+        } else if (e.uploadDropzone) {
+          e.uploadDropzone.classList.remove("is-dragover");
+        } else if (e.zone) {
+          e.zone.classList.remove("dragover");
+        }
+      };
+
+      ["dragenter", "dragover"].forEach(eventName => {
+        target.addEventListener(eventName, highlightInst, false);
+      });
+
+      ["dragleave", "drop"].forEach(eventName => {
+        target.addEventListener(eventName, unhighlightInst, false);
+      });
+
+      target.addEventListener("drop", evt => {
+        const dt = evt.dataTransfer;
+        if (dt.files?.length) {
+          handleFiles(dt.files);
+        }
+      }, false);
     });
 
-    function highlight() {
-      if (resumeDropRow) {
-        resumeDropRow.classList.add("is-dragover");
-      } else if (uploadDropzone) {
-        uploadDropzone.classList.add("is-dragover");
-      } else {
-        uploadZone.classList.add("dragover");
+    uploadInstances.forEach(inst => {
+      if (!inst.fileInput) {
+        return;
       }
-    }
-
-    function unhighlight() {
-      if (resumeDropRow) {
-        resumeDropRow.classList.remove("is-dragover");
-      } else if (uploadDropzone) {
-        uploadDropzone.classList.remove("is-dragover");
-      } else {
-        uploadZone.classList.remove("dragover");
-      }
-    }
-
-    // Handle dropped files
-    dragTarget.addEventListener("drop", handleDrop, false);
-
-    function handleDrop(e) {
-      const dt = e.dataTransfer;
-      const files = dt.files;
-      handleFiles(files);
-    }
-
-    // Handle selected files from input
-    fileInput.addEventListener("change", function () {
-      handleFiles(this.files);
+      inst.fileInput.addEventListener("change", function () {
+        handleFiles(this.files);
+      });
     });
 
     function handleFiles(files) {
@@ -605,8 +684,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
           }
 
-          // Fallback flow for legacy pages
-          const btn = uploadZone.querySelector("button");
+          const z = uploadInstances[0]?.zone;
+          const btn = z?.querySelector("button");
           if (btn) {
             btn.textContent = "Analyzing...";
           }
@@ -614,15 +693,20 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/scan";
           }, 1500);
         } else {
-          if (isTwoStepUploadFlow && fileStepStatus) {
-            fileStepStatus.textContent = "Unsupported format. Use PDF, DOC, or DOCX";
+          if (isTwoStepUploadFlow) {
+            uploadInstances.forEach(inst => {
+              const fs = qid(inst.suffix, "file-step-status");
+              if (fs) {
+                fs.textContent = "Unsupported format. Use PDF, DOC, or DOCX";
+              }
+            });
           }
           alert("Please upload a PDF or DOCX file.");
         }
       }
     }
 
-    if (isTwoStepUploadFlow && analyzeResumeBtn && uploadZone) {
+    if (isTwoStepUploadFlow) {
       const loadingSteps = [
         "Uploading resume…",
         "Checking job description…",
@@ -630,94 +714,117 @@ document.addEventListener("DOMContentLoaded", () => {
         "Almost there…",
       ];
 
-      analyzeResumeBtn.addEventListener("click", async () => {
-        if (!selectedResumeFile) {
+      const attachAnalyze = inst => {
+        const btn = qid(inst.suffix, "analyze-resume-btn");
+        const zoneRoot = inst.zone;
+        if (!btn || !zoneRoot) {
           return;
         }
 
-        const jobText = jobTextInput ? jobTextInput.value.trim() : "";
-        if (!jobText) {
-          if (jobLinkNote) {
-            jobLinkNote.textContent = "Please paste the job vacancy text to continue.";
-            jobLinkNote.classList.remove("sr-only");
-            jobLinkNote.classList.add("upload-link-note");
+        btn.addEventListener("click", async () => {
+          if (!selectedResumeFile) {
+            return;
           }
-          return;
-        }
 
-        analyzeResumeBtn.disabled = true;
-        analyzeResumeBtn.textContent = "Saving…";
+          const jobText = qid(primary.suffix, "job-text-input")?.value.trim() || "";
+          if (!jobText) {
+            uploadInstances.forEach(i => {
+              const note = qid(i.suffix, "job-link-note");
+              if (note) {
+                note.textContent = "Please paste the job vacancy text to continue.";
+                note.classList.remove("sr-only");
+                note.classList.add("upload-link-note");
+              }
+            });
+            return;
+          }
 
-        const overlay = document.createElement("div");
-        overlay.className = "upload-card-loading";
-        overlay.setAttribute("aria-live", "polite");
-        overlay.setAttribute("aria-busy", "true");
-        overlay.innerHTML = `
+          uploadInstances.forEach(i => {
+            const b = qid(i.suffix, "analyze-resume-btn");
+            if (b) {
+              b.disabled = true;
+              b.textContent = "Saving…";
+            }
+          });
+
+          const overlay = document.createElement("div");
+          overlay.className = "upload-card-loading";
+          overlay.setAttribute("aria-live", "polite");
+          overlay.setAttribute("aria-busy", "true");
+          overlay.innerHTML = `
           <div class="upload-card-loading-spinner" aria-hidden="true"></div>
           <div class="upload-card-loading-text">${loadingSteps[0]}</div>
         `;
-        const loadingTextEl = overlay.querySelector(".upload-card-loading-text");
-        uploadZone.appendChild(overlay);
+          const loadingTextEl = overlay.querySelector(".upload-card-loading-text");
+          zoneRoot.appendChild(overlay);
 
-        let stepIndex = 0;
-        const stepInterval = setInterval(() => {
-          stepIndex = Math.min(stepIndex + 1, loadingSteps.length - 1);
-          if (loadingTextEl) {
-            loadingTextEl.textContent = loadingSteps[stepIndex];
-          }
-          if (stepIndex >= loadingSteps.length - 1) {
-            clearInterval(stepInterval);
-          }
-        }, 600);
-
-        const hideOverlay = () => {
-          clearInterval(stepInterval);
-          overlay.remove();
-          analyzeResumeBtn.textContent = "Check your resume free";
-          updateAnalyzeResumeButtonState();
-        };
-
-        try {
-          const formData = new FormData();
-          formData.append("resume", selectedResumeFile);
-          formData.append("job_text", jobText);
-
-          const response = await fetch(`${LANDING_API_BASE}/api/landing/save`, {
-            method: "POST",
-            body: formData,
-            credentials: "omit",
-          });
-
-          if (!response.ok) {
-            const err = await response.json().catch(() => ({}));
-            let message = "Something went wrong. Please try again.";
-            if (typeof err.detail === "string") {
-              message = err.detail;
-            } else if (Array.isArray(err.detail) && err.detail[0]) {
-              message = err.detail[0].msg || "Invalid input.";
-            } else if (err.detail) {
-              message = String(err.detail);
-            } else if (response.statusText) {
-              message = response.statusText;
+          let stepIndex = 0;
+          const stepInterval = setInterval(() => {
+            stepIndex = Math.min(stepIndex + 1, loadingSteps.length - 1);
+            if (loadingTextEl) {
+              loadingTextEl.textContent = loadingSteps[stepIndex];
             }
-            throw new Error(message);
-          }
+            if (stepIndex >= loadingSteps.length - 1) {
+              clearInterval(stepInterval);
+            }
+          }, 600);
 
-          const data = await response.json();
-          const token = data.token;
-          if (!token) {
-            throw new Error("No token received.");
+          const hideOverlay = () => {
+            clearInterval(stepInterval);
+            overlay.remove();
+            uploadInstances.forEach(i => {
+              const b = qid(i.suffix, "analyze-resume-btn");
+              if (b) {
+                b.textContent = "Check your resume free";
+              }
+            });
+            updateAnalyzeResumeButtonState();
+          };
+
+          try {
+            const formData = new FormData();
+            formData.append("resume", selectedResumeFile);
+            formData.append("job_text", jobText);
+
+            const response = await fetch(`${LANDING_API_BASE}/api/landing/save`, {
+              method: "POST",
+              body: formData,
+              credentials: "omit",
+            });
+
+            if (!response.ok) {
+              const err = await response.json().catch(() => ({}));
+              let message = "Something went wrong. Please try again.";
+              if (typeof err.detail === "string") {
+                message = err.detail;
+              } else if (Array.isArray(err.detail) && err.detail[0]) {
+                message = err.detail[0].msg || "Invalid input.";
+              } else if (err.detail) {
+                message = String(err.detail);
+              } else if (response.statusText) {
+                message = response.statusText;
+              }
+              throw new Error(message);
+            }
+
+            const data = await response.json();
+            const token = data.token;
+            if (!token) {
+              throw new Error("No token received.");
+            }
+            clearInterval(stepInterval);
+            if (loadingTextEl) {
+              loadingTextEl.textContent = "Redirecting to your dashboard…";
+            }
+            window.location.href = `${LANDING_API_BASE}/login?pending=${encodeURIComponent(token)}`;
+          } catch (err) {
+            hideOverlay();
+            alert(err.message || "Could not save. Please try again.");
           }
-          clearInterval(stepInterval);
-          if (loadingTextEl) {
-            loadingTextEl.textContent = "Redirecting to your dashboard…";
-          }
-          window.location.href = `${LANDING_API_BASE}/login?pending=${encodeURIComponent(token)}`;
-        } catch (err) {
-          hideOverlay();
-          alert(err.message || "Could not save. Please try again.");
-        }
-      });
+        });
+      };
+
+      uploadInstances.forEach(attachAnalyze);
     }
   }
 
