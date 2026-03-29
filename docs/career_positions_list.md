@@ -27,6 +27,20 @@ investment analyst
 operations manager  
 supply chain manager  
 
+construction manager  
+civil engineer  
+mechanical engineer  
+electrical engineer 
+HR manager   
+
+
+logistics coordinator
+recruiter  
+talent acquisition specialist
+restaurant manager  
+hotel manager
+
+
 UX designer  
 UI designer  
 graphic designer  
@@ -42,11 +56,7 @@ devops engineer
 data scientist  
 machine learning engineer  
 AI engineer  
-database administrator  
-
-HR manager  
-recruiter  
-talent acquisition specialist  
+database administrator   
 
 nurse  
 medical assistant  
@@ -59,21 +69,12 @@ elementary school teacher
 paralegal  
 lawyer  
 legal assistant  
-
-construction manager  
-civil engineer  
-mechanical engineer  
-electrical engineer  
-
-logistics coordinator  
+  
 warehouse manager  
 procurement manager  
 
 real estate agent  
 property manager  
-
-restaurant manager  
-hotel manager
 
 ---
 

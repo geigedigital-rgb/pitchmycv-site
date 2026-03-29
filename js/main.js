@@ -238,16 +238,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const jobLinkNote = document.getElementById("job-link-note");
   const analyzeResumeBtn = document.getElementById("analyze-resume-btn");
 
-  // Hero gauge: full gradient arc static; only the needle animates
-  const gaugeNeedleGroup = document.querySelector(".gauge-svg-needle .gauge-needle-group");
+  // Hero gauge: full gradient arc static; slider thumb moves along the arc
+  const gaugeArcPath = document.querySelector(".gauge-svg-thumb .gauge-gradient-arc");
+  const gaugeThumbGroup = document.querySelector(".gauge-svg-thumb .gauge-thumb-group");
   const gaugeValue = document.querySelector(".gauge-value");
   const gaugeWrap = document.querySelector(".score-gauge-wrap");
 
-  if (gaugeNeedleGroup && gaugeValue && gaugeWrap) {
+  if (gaugeArcPath && gaugeThumbGroup && gaugeValue && gaugeWrap) {
     const maxPercent = 100;
     const upDurationMs = 2200;
     const holdAtMaxMs = 2000;
     const downDurationMs = 1800;
+    const arcLength = typeof gaugeArcPath.getTotalLength === "function"
+      ? gaugeArcPath.getTotalLength()
+      : 157;
+    const arcEps = 1.5;
 
     const easeInOutCubic = t => (
       t < 0.5
@@ -268,9 +273,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const glowAlpha = Math.min(0.34, glowAlphaBase + nearMaxBoost);
       const glowScale = 0.9 + progress * 0.12;
 
-      gaugeNeedleGroup.setAttribute(
+      const L = arcLength;
+      const d = arcEps + (L - 2 * arcEps) * progress;
+      const p = gaugeArcPath.getPointAtLength(d);
+      const dA = Math.min(L - arcEps, d + 2.5);
+      const dB = Math.max(arcEps, d - 2.5);
+      const pA = gaugeArcPath.getPointAtLength(dA);
+      const pB = gaugeArcPath.getPointAtLength(dB);
+      const angleDeg = Math.atan2(pA.y - pB.y, pA.x - pB.x) * (180 / Math.PI);
+
+      gaugeThumbGroup.setAttribute(
         "transform",
-        `translate(60,60) rotate(${progress * 180})`
+        `translate(${p.x.toFixed(2)},${p.y.toFixed(2)}) rotate(${angleDeg.toFixed(2)})`
       );
       gaugeValue.textContent = `${Math.round(safePercent)}%`;
 
