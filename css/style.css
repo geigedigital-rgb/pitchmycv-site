@@ -333,13 +333,78 @@ ul { margin: 0; padding: 0; list-style: none; }
 .nav-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: var(--badge-green); background: #dcfce7; padding: 2px 8px; border-radius: var(--radius-full); margin-left: 4px; }
 
 /* --- BLOCK 1: Hero (checker-style: left panel + right preview) --- */
-.hero { padding: 56px 0 72px; background: var(--bg-white); }
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding: 56px 0 72px;
+  background: var(--bg-white);
+  overflow-x: clip;
+}
+/* Full-bleed soft glow (viewport-wide), avoids right-edge cutoff inside narrow grid column */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 95% 78% at 88% 36%, rgba(37, 99, 235, 0.13) 0%, transparent 58%),
+    radial-gradient(ellipse 85% 72% at 8% 58%, rgba(96, 165, 250, 0.1) 0%, transparent 56%),
+    radial-gradient(ellipse 70% 55% at 98% 52%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 45% at 72% 78%, rgba(147, 197, 253, 0.06) 0%, transparent 48%);
+  pointer-events: none;
+  z-index: 0;
+}
 .hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 48px 56px;
-  align-items: start;
+  align-items: center;
 }
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 0;
+  z-index: 1;
+}
+.hero-preview {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(560px, 100%);
+}
+.hero-preview:is(figure) {
+  margin: 0;
+}
+.hero-preview img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Desktop: hero illustration slightly larger, shifted right, may bleed past grid column */
+@media (min-width: 1025px) {
+  .hero {
+    overflow-x: visible;
+  }
+  .hero > .wrap.hero-grid {
+    overflow: visible;
+  }
+  .hero-visual {
+    overflow: visible;
+    margin-right: calc(-1 * clamp(20px, 4vw, 48px));
+  }
+  .hero-preview {
+    max-width: min(600px, 118%);
+  }
+  .hero-preview img {
+    transform: scale(1.09) translateX(clamp(14px, 2.2vw, 42px));
+    transform-origin: center center;
+  }
+}
+
 .hero-content {
   max-width: 560px;
 }
@@ -391,122 +456,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-features svg,
 .hero-features i.ph { color: var(--primary); flex-shrink: 0; }
 
-.hero-visual {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 420px;
-  z-index: 1;
-}
-.hero-visual-glow {
-  position: absolute;
-  inset: -8% -12% 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 72% 38%, rgba(37, 99, 235, 0.14) 0%, transparent 58%),
-    radial-gradient(ellipse 55% 50% at 28% 62%, rgba(96, 165, 250, 0.1) 0%, transparent 55%);
-  z-index: 0;
-  pointer-events: none;
-  border-radius: 24px;
-}
-.hero-preview {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 380px;
-}
-.hero-preview-doc {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 24px 48px -20px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(226, 232, 240, 0.9);
-  transform: rotate(-2deg);
-  background: #fff;
-}
-.hero-preview-doc img {
-  display: block;
-  width: 100%;
-  height: auto;
-  vertical-align: middle;
-}
-.hero-preview-float {
-  position: absolute;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.2);
-  border: 1px solid #e2e8f0;
-}
-.hero-preview-score {
-  right: -6px;
-  top: 18%;
-  width: 118px;
-  padding: 14px 14px 12px;
-  text-align: center;
-}
-.hero-preview-score-val {
-  display: block;
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-main);
-  line-height: 1;
-}
-.hero-preview-score-label {
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #64748b;
-  margin-top: 6px;
-}
-.hero-preview-score-sub {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #16a34a;
-  background: #dcfce7;
-  padding: 3px 10px;
-  border-radius: 999px;
-}
-.hero-preview-checklist {
-  list-style: none;
-  margin: 0;
-  padding: 12px 14px;
-  position: absolute;
-  left: -8px;
-  bottom: 12%;
-  width: min(200px, 52%);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 12px 32px -14px rgba(15, 23, 42, 0.15);
-  font-size: 0.78rem;
-  color: #334155;
-}
-.hero-preview-checklist li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 0;
-  border-bottom: 1px solid #f1f5f9;
-}
-.hero-preview-checklist li:last-child {
-  border-bottom: none;
-}
-.hero-preview-checklist li.is-warn {
-  color: #b45309;
-}
-.hero-preview-checklist i.ph {
-  flex-shrink: 0;
-  font-size: 14px;
-  color: #16a34a;
-}
-.hero-preview-checklist li.is-warn i.ph {
-  color: #d97706;
-}
 .score-gauge-wrap {
   text-align: center;
   position: relative;
@@ -2550,9 +2499,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero-content { max-width: none; margin: 0 auto; }
   .hero-content .hero-sub { margin-left: auto; margin-right: auto; max-width: 560px; }
   .hero-upload-panel { text-align: left; }
-  .hero-visual { min-height: 0; margin: 0 auto; max-width: 360px; }
-  .hero-preview-score { right: 4px; }
-  .hero-preview-checklist { left: 4px; bottom: 8%; width: 56%; }
+  .hero-visual { margin: 0 auto; max-width: min(480px, 100%); justify-content: center; }
   .header-wrap { align-items: flex-start; flex-wrap: wrap; gap: 14px; }
   .header-nav {
     width: 100%;
@@ -2682,9 +2629,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 @media (max-width: 480px) {
-  .hero-preview-doc { transform: none; }
-  .hero-preview-score { position: relative; right: auto; top: auto; margin: -32px auto 0; width: 100%; max-width: 200px; }
-  .hero-preview-checklist { position: relative; left: auto; bottom: auto; width: 100%; margin-top: 12px; }
   .hero-preview { max-width: 100%; }
   .btn-large { width: 100%; padding: 14px 20px; }
   .upload-card { padding: 24px 18px; }
