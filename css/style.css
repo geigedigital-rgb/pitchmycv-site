@@ -677,6 +677,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   display: none !important;
 }
 
+#upload-zone.has-resume-file #dropzone-help,
+#upload-zone-cta.has-resume-file #dropzone-help-cta {
+  display: none !important;
+}
+
 .compact-job-wrapper {
   display: flex;
   flex-direction: column;
@@ -2518,9 +2523,34 @@ ul { margin: 0; padding: 0; list-style: none; }
 .final-cta-dark .compact-dropzone.compact-dropzone-compact:hover {
   background: transparent;
 }
-.final-cta-dark .upload-dropzone-icon {
+.final-cta-dark #upload-zone-cta .upload-dropzone-icon {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.final-cta-dark #upload-zone-cta .upload-dropzone-icon i.ph {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.14);
   color: #c7d2fe;
+  font-size: 22px;
+}
+
+.final-cta-dark #upload-zone-cta .icon-resume-upload,
+.final-cta-dark #upload-zone-cta .icon-resume-replace {
+  display: inline-flex !important;
 }
 .final-cta-dark .compact-dropzone-text strong,
 .final-cta-dark .compact-dropzone-text-body strong {
@@ -2570,7 +2600,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-color: #93c5fd;
   background: linear-gradient(180deg, rgba(96, 165, 250, 0.4) 0%, rgba(59, 130, 246, 0.28) 100%);
 }
-.final-cta-dark #upload-zone-cta.has-resume-file .upload-dropzone-icon {
+.final-cta-dark #upload-zone-cta.has-resume-file .upload-dropzone-icon i.ph {
   background: rgba(30, 58, 138, 0.85);
   color: #e0e7ff;
 }
@@ -2590,6 +2620,24 @@ ul { margin: 0; padding: 0; list-style: none; }
   background: rgba(79, 70, 229, 0.45);
   border-color: transparent;
   color: rgba(255, 255, 255, 0.75);
+}
+.final-cta-dark #analyze-resume-btn-cta.btn-primary.compact-btn {
+  background: #ffffff;
+  color: #0f172a;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.28);
+  font-weight: 700;
+}
+.final-cta-dark #analyze-resume-btn-cta.btn-primary.compact-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #020617;
+  border-color: #f1f5f9;
+}
+.final-cta-dark #analyze-resume-btn-cta.btn-primary.compact-btn:disabled {
+  background: rgba(255, 255, 255, 0.32);
+  color: rgba(15, 23, 42, 0.5);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
 }
 .final-cta-dark .upload-card-loading {
   background: rgba(2, 6, 23, 0.82);
