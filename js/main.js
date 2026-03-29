@@ -238,19 +238,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const jobLinkNote = document.getElementById("job-link-note");
   const analyzeResumeBtn = document.getElementById("analyze-resume-btn");
 
-  // Hero gauge intro animation (run once after full page load)
-  const gaugeFill = document.querySelector(".gauge-fill");
+  // Hero gauge: full gradient arc static; only the needle animates
+  const gaugeNeedleGroup = document.querySelector(".gauge-svg-needle .gauge-needle-group");
   const gaugeValue = document.querySelector(".gauge-value");
   const gaugeWrap = document.querySelector(".score-gauge-wrap");
 
-  if (gaugeFill && gaugeValue && gaugeWrap) {
+  if (gaugeNeedleGroup && gaugeValue && gaugeWrap) {
     const maxPercent = 100;
     const upDurationMs = 2200;
     const holdAtMaxMs = 2000;
     const downDurationMs = 1800;
-    const totalLength = typeof gaugeFill.getTotalLength === "function"
-      ? gaugeFill.getTotalLength()
-      : 157;
 
     const easeInOutCubic = t => (
       t < 0.5
@@ -271,8 +268,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const glowAlpha = Math.min(0.34, glowAlphaBase + nearMaxBoost);
       const glowScale = 0.9 + progress * 0.12;
 
-      gaugeFill.style.strokeDasharray = `${totalLength}`;
-      gaugeFill.style.strokeDashoffset = `${totalLength * (1 - progress)}`;
+      gaugeNeedleGroup.setAttribute(
+        "transform",
+        `translate(60,60) rotate(${progress * 180})`
+      );
       gaugeValue.textContent = `${Math.round(safePercent)}%`;
 
       gaugeWrap.style.setProperty("--gauge-glow-rgb", `${r}, ${g}, ${b}`);
@@ -309,8 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const runGaugeIntroAnimation = () => {
-      // Disable CSS transition to avoid conflict with frame-by-frame animation.
-      gaugeFill.style.transition = "none";
       setGaugeState(0);
 
       animateRange(0, maxPercent, upDurationMs, () => {
@@ -327,16 +324,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function ensureReplaceResumeControl() {
+  function ensureResumeDropzoneLayout() {
     const dz = document.getElementById("upload-dropzone");
-    if (!dz || document.getElementById("replace-resume-btn")) {
+    if (!dz) {
       return;
     }
     const textWrap = dz.querySelector(".compact-dropzone-text");
-    if (!textWrap) {
-      return;
-    }
-    if (!textWrap.querySelector(".compact-dropzone-text-body")) {
+    if (textWrap && !textWrap.querySelector(".compact-dropzone-text-body")) {
       const body = document.createElement("div");
       body.className = "compact-dropzone-text-body";
       while (textWrap.firstChild) {
@@ -344,14 +338,24 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       textWrap.appendChild(body);
     }
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.id = "replace-resume-btn";
-    btn.className = "compact-resume-replace-btn";
-    btn.hidden = true;
-    btn.setAttribute("aria-label", "Replace resume file");
-    btn.innerHTML = '<i class="ph ph-arrows-clockwise" aria-hidden="true"></i>';
-    textWrap.appendChild(btn);
+    const iconWrap = dz.querySelector(".upload-dropzone-icon");
+    if (!iconWrap || iconWrap.querySelector(".icon-resume-replace")) {
+      return;
+    }
+    const uploadIcon = iconWrap.querySelector(".ph-file-arrow-up, .icon-resume-upload");
+    if (uploadIcon && !uploadIcon.classList.contains("icon-resume-upload")) {
+      uploadIcon.classList.add("icon-resume-upload");
+    }
+    if (!iconWrap.querySelector(".icon-resume-upload")) {
+      const up = document.createElement("i");
+      up.className = "ph ph-file-arrow-up icon-resume-upload";
+      up.setAttribute("aria-hidden", "true");
+      iconWrap.insertBefore(up, iconWrap.firstChild);
+    }
+    const rep = document.createElement("i");
+    rep.className = "ph ph-arrows-clockwise icon-resume-replace";
+    rep.setAttribute("aria-hidden", "true");
+    iconWrap.appendChild(rep);
   }
 
   function setupCompactUploadLayoutEnhancements() {
@@ -389,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.appendChild(jobLinkStepEl);
     }
 
-    ensureReplaceResumeControl();
+    ensureResumeDropzoneLayout();
 
     const dropzoneEl = document.getElementById("upload-dropzone");
     const fileCard = zone.querySelector(".compact-file-card");
@@ -420,14 +424,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const resumeDropRow = document.getElementById("resume-drop-row");
     const dragTarget = resumeDropRow || uploadDropzone || uploadZone;
     let selectedResumeFile = null;
-
-    const replaceResumeBtn = document.getElementById("replace-resume-btn");
-    if (replaceResumeBtn && fileInput) {
-      replaceResumeBtn.addEventListener("click", event => {
-        event.stopPropagation();
-        fileInput.click();
-      });
-    }
 
     const dropzoneEmptyLabel = (() => {
       if (!dropzoneTitle) {
@@ -505,10 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (uploadZone) {
         uploadZone.classList.toggle("has-resume-file", hasFile);
-      }
-      const replaceBtn = document.getElementById("replace-resume-btn");
-      if (replaceBtn) {
-        replaceBtn.hidden = !hasFile;
       }
       updateAnalyzeResumeButtonState();
     };

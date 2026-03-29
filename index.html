@@ -121,7 +121,7 @@
         <div class="hero-content">
           <p class="hero-eyebrow">Free ATS resume check</p>
           <h1 class="hero-title">Match your resume to any job in seconds</h1>
-          <p class="hero-sub">Upload your resume, paste the job description, and see what is missing for that role — keywords, structure, and ATS signals — before you apply. Takes under a minute.</p>
+          <p class="hero-sub">In 2026, a polished resume is not enough — how well you match the vacancy decides who gets shortlisted. Upload your resume, add the job description, and see what is missing for that role: keywords, structure, and ATS signals. Takes under a minute.</p>
 
           <div class="hero-upload-panel">
             <div class="compact-upload-card" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
@@ -138,16 +138,14 @@
                   <div class="compact-resume-row" id="resume-drop-row">
                     <div class="compact-dropzone compact-dropzone-compact" id="upload-dropzone" role="button" tabindex="0">
                       <span class="upload-dropzone-icon" aria-hidden="true">
-                        <i class="ph ph-file-arrow-up" aria-hidden="true"></i>
+                        <i class="ph ph-file-arrow-up icon-resume-upload" aria-hidden="true"></i>
+                        <i class="ph ph-arrows-clockwise icon-resume-replace" aria-hidden="true"></i>
                       </span>
                       <div class="compact-dropzone-text">
                         <div class="compact-dropzone-text-body">
                           <strong id="dropzone-title"><span class="dropzone-title-desktop-only">Drop your resume here or click to upload</span></strong>
                           <span id="dropzone-help"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
                         </div>
-                        <button type="button" class="compact-resume-replace-btn" id="replace-resume-btn" hidden aria-label="Replace resume file">
-                          <i class="ph ph-arrows-clockwise" aria-hidden="true"></i>
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -161,9 +159,9 @@
                     <meta itemprop="name" content="Paste job description">
                     <meta itemprop="text" content="Paste the job posting to check resume match.">
                     <div class="compact-link-inner">
-                      <strong>Job posting (for match check)</strong>
+                      <strong>Описание вашей вакансии</strong>
                       <p class="compact-job-text-hint">Copy the vacancy text from the job site (the listing page) and paste the full text here.</p>
-                      <label class="sr-only" for="job-text-input">Job posting for match check</label>
+                      <label class="sr-only" for="job-text-input">Описание вашей вакансии</label>
                       <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste job posting here…" rows="3" disabled></textarea>
                     </div>
                     <p class="sr-only" id="job-link-note"></p>
@@ -174,18 +172,23 @@
               <div class="compact-upload-bottom">
                 <div class="score-gauge-wrap compact-gauge">
                   <div class="score-gauge" aria-hidden="true">
-                    <svg viewBox="0 0 120 70" class="gauge-svg">
+                    <svg viewBox="0 0 120 72" class="gauge-svg gauge-svg-needle">
                       <defs>
-                        <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient id="gaugeGradHero" x1="0%" y1="0%" x2="100%" y2="0%">
                           <stop offset="0%" stop-color="#ef4444"/>
-                          <stop offset="25%" stop-color="#f59e0b"/>
-                          <stop offset="50%" stop-color="#eab308"/>
-                          <stop offset="75%" stop-color="#22c55e"/>
-                          <stop offset="100%" stop-color="#14b8a6"/>
+                          <stop offset="34%" stop-color="#f59e0b"/>
+                          <stop offset="67%" stop-color="#eab308"/>
+                          <stop offset="100%" stop-color="#22c55e"/>
                         </linearGradient>
                       </defs>
-                      <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="var(--border-color)" stroke-width="10" stroke-linecap="round"/>
-                      <path d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" class="gauge-fill"/>
+                      <path class="gauge-track-bg" d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+                      <path class="gauge-gradient-arc" d="M 10 60 A 50 50 0 0 1 110 60" fill="none" stroke="url(#gaugeGradHero)" stroke-width="12" stroke-linecap="round"/>
+                      <line class="gauge-zone-split" x1="36" y1="52" x2="32" y2="46" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round"/>
+                      <line class="gauge-zone-split" x1="84" y1="52" x2="88" y2="46" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linecap="round"/>
+                      <g class="gauge-needle-group" transform="translate(60,60)">
+                        <line class="gauge-needle" x1="0" y1="0" x2="-44" y2="0" stroke="#0f172a" stroke-width="2.75" stroke-linecap="round"/>
+                        <circle class="gauge-needle-hub" cx="0" cy="0" r="4" fill="#0f172a"/>
+                      </g>
                     </svg>
                     <span class="gauge-value">0%</span>
                   </div>
@@ -222,102 +225,25 @@
 
     <!-- BLOCK 1.5: Score Improvement -->
     <section class="score-improvement">
-      <div class="wrap score-imp-grid">
-        
-        <!-- Left: Progress Card -->
-        <div class="imp-progress-card">
-          <div class="imp-progress-header">KEY RESUME MISTAKES</div>
-          <div class="imp-progress-list">
-            
-            <div class="imp-p-item active">
-              <div class="imp-p-icon check">
-                <i class="ph ph-check" style="font-size:16px;color:#16a34a" aria-hidden="true"></i>
-              </div>
-              <div class="imp-p-content">
-                <div class="imp-p-row" style="margin-bottom: 0;">
-                  <span class="imp-p-title">Data Analytics</span>
-                </div>
-              </div>
+      <div class="wrap score-imp-wide">
+        <div class="imp-action-card imp-action-card-wide">
+          <div class="imp-wide-inner">
+            <div class="imp-action-content imp-action-content-wide">
+              <h2>Improve your score in 5 mins</h2>
+              <p>Make small improvements to your resume score. A match rate of 85% or higher significantly boosts your interview chances.</p>
+              <img src="assets/check-cv-fob-offer.svg" alt="" width="360" height="200" loading="lazy" class="imp-wide-illustration">
             </div>
-
-            <div class="imp-p-item active">
-              <div class="imp-p-icon check">
-                <i class="ph ph-check" style="font-size:16px;color:#16a34a" aria-hidden="true"></i>
-              </div>
-              <div class="imp-p-content">
-                <div class="imp-p-row" style="margin-bottom: 0;">
-                  <span class="imp-p-title">Communication</span>
+            <div class="imp-visual imp-visual-wide" aria-hidden="true">
+              <img src="assets/resume-example-1.png" alt="" class="imp-visual-resume" width="280" height="360" loading="lazy">
+              <div class="imp-visual-score-wrapper">
+                <div class="imp-visual-score">
+                  <div class="imp-visual-score-badge">15%</div>
+                  <div class="imp-visual-score-text">ATS<br>Match</div>
                 </div>
-              </div>
-            </div>
-            
-            <div class="imp-p-item active">
-              <div class="imp-p-icon check">
-                <i class="ph ph-check" style="font-size:16px;color:#16a34a" aria-hidden="true"></i>
-              </div>
-              <div class="imp-p-content">
-                <div class="imp-p-row" style="margin-bottom: 0;">
-                  <span class="imp-p-title">Project Management</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="imp-p-item error">
-              <div class="imp-p-icon cross">
-                <i class="ph ph-x" style="font-size:16px;color:#ef4444" aria-hidden="true"></i>
-              </div>
-              <div class="imp-p-content">
-                <div class="imp-p-row" style="margin-bottom: 0;">
-                  <span class="imp-p-title">Excel & Spreadsheets</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="imp-p-item error">
-              <div class="imp-p-icon cross">
-                <i class="ph ph-x" style="font-size:16px;color:#ef4444" aria-hidden="true"></i>
-              </div>
-              <div class="imp-p-content">
-                <div class="imp-p-row" style="margin-bottom: 0;">
-                  <span class="imp-p-title">Responsibility</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="imp-p-item error">
-              <div class="imp-p-icon cross">
-                <i class="ph ph-x" style="font-size:16px;color:#ef4444" aria-hidden="true"></i>
-              </div>
-              <div class="imp-p-content">
-                <div class="imp-p-row" style="margin-bottom: 0;">
-                  <span class="imp-p-title">CRM Software</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Right: Improvement Block -->
-        <div class="imp-action-card">
-          <div class="imp-action-content">
-            <h2>Improve your score in 5 mins</h2>
-            <p>Make small improvements to your resume score. A match rate of 85% or higher significantly boosts your interview chances.</p>
-            
-            <img src="assets/check-cv-fob-offer.svg" alt="Check CV Job Offer" style="display: block; width: 100%; max-width: 360px; margin-top: 24px;">
-          </div>
-          
-          <div class="imp-visual" aria-hidden="true">
-            <img src="assets/resume-example-1.png" alt="Resume Preview" class="imp-visual-resume">
-            <div class="imp-visual-score-wrapper">
-              <div class="imp-visual-score">
-                <div class="imp-visual-score-badge">15%</div>
-                <div class="imp-visual-score-text">ATS<br>Match</div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
