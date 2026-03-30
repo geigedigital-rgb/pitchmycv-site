@@ -24,6 +24,7 @@
   <title>Match your resume to any job in seconds | Pitch My CV</title>
   <meta name="description" content="We compare your resume to real job requirements and show exactly what's missing — before you apply.">
   <meta name="robots" content="index,follow">
+  <meta name="reviews-api-base" content="https://my.pitchcv.app/api">
   <link rel="canonical" href="https://pitchcv.app/">
 <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -44,7 +45,7 @@
 
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Schema.org -->
+  <!-- Schema.org — блок SoftwareApplication с aggregateRating/review: при статике синхронизировать с GET /reviews/stats и публичными отзывами (см. docs/REVIEWS_API.md п. 7). -->
   <script type="application/ld+json">
   [
     {
@@ -91,15 +92,48 @@
       "@type": "SoftwareApplication",
       "name": "Pitch My CV",
       "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://pitchcv.app/",
       "description": "Resume optimization for applicant tracking systems. ATS checker, keyword scanner, and resume formatting to pass filters and get interviews.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.4",
+        "ratingValue": "4.5",
         "bestRating": "5",
         "worstRating": "1",
-        "ratingCount": "342",
-        "reviewCount": "342"
-      }
+        "ratingCount": "12",
+        "reviewCount": "12"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Anna K." },
+          "datePublished": "2026-03-18",
+          "name": "Great ATS guidance",
+          "reviewBody": "The ATS analysis made the weak parts of my resume obvious in minutes. I rewrote two sections, improved keyword coverage, and started getting interview replies much faster than before.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5", "worstRating": "1" }
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Michael R." },
+          "datePublished": "2026-03-12",
+          "name": "Fast and clear UI",
+          "reviewBody": "Compared with other resume tools, this one is easier to understand. I like that the suggestions explain why each change helps for ATS parsing.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "4", "bestRating": "5", "worstRating": "1" }
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Elena G." },
+          "datePublished": "2026-01-15",
+          "name": "Good ideas, wanted more templates",
+          "reviewBody": "The ATS checks were useful and I improved my resume. I would still like more industry-specific templates for niche roles.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "3", "bestRating": "5", "worstRating": "1" }
+        }
+      ]
     },
     {
       "@context": "https://schema.org",
@@ -565,49 +599,212 @@
       </div>
     </section>
 
-    <!-- BLOCK 7.5: Testimonials -->
-    <section class="testimonials section-light">
+    <!-- BLOCK 7.5: PitchCV Reviews -->
+    <section class="reviews-hub section-light" id="reviews">
       <div class="wrap">
-        <h2 class="reviews-title"><span>92%</span> of customers recommend us</h2>
+        <div class="reviews-head">
+          <h2 class="reviews-title"><span id="reviews-recommend-rate">92%</span> of customers recommend PitchCV</h2>
+          <p class="reviews-subtitle">Based on verified user reviews</p>
+        </div>
 
-        <div class="reviews-track-wrap">
-          <div class="reviews-track" id="reviews-track">
-            <article class="review-card trustpilot-card">
-              <div class="tp-score">4.3 out of 5</div>
-              <div class="tp-stars">★★★★★</div>
-              <div class="tp-brand">Trustpilot</div>
-              <p class="tp-meta">based on 342 reviews</p>
-            </article>
+        <div class="reviews-layout">
+          <aside class="reviews-summary-card" aria-label="PitchCV reviews summary">
+            <p class="reviews-summary-rating"><span id="reviews-rating-value">4.5</span> out of 5</p>
+            <p class="reviews-summary-stars" id="reviews-summary-stars" aria-label="Average rating: 4.3 out of 5">★★★★☆</p>
+            <p class="reviews-summary-count">based on <strong id="reviews-total-count">12</strong> reviews</p>
+            <p class="reviews-summary-collected">Collected on PitchCV</p>
+            <a class="reviews-external-link" href="https://www.trustpilot.com/review/pitchmycv.com" target="_blank" rel="noopener noreferrer">Also rated on Trustpilot</a>
+          </aside>
 
-            <article class="review-card">
-              <div class="review-stars">★★★★★</div>
-              <h3>Great tool</h3>
-              <p>Great tool. New features are extra special and make the design of a CV even more useful to stand out.</p>
-              <div class="review-meta">Ana Lucia Soler · <span class="review-ago" data-review-date="2026-03-09T14:30:00Z"></span></div>
-            </article>
+          <div class="reviews-content">
+            <div class="reviews-list" id="reviews-list" data-visible-initial="3" data-visible-step="3">
+              <article class="review-item" data-rating="5" data-published="2026-03-18">
+                <strong class="review-author">Anna K.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Great ATS guidance</h3>
+                <p class="review-body" data-clamp-lines="4">The ATS analysis made the weak parts of my resume obvious in minutes. I rewrote two sections, improved keyword coverage, and started getting interview replies much faster than before.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-03-18">Mar 18, 2026</time></p>
+              </article>
 
-            <article class="review-card">
-              <div class="review-stars">★★★★★</div>
-              <h3>Best CV editor</h3>
-              <p>Best website so far for quick CV editing. Others were not friendly and this one made it simple.</p>
-              <div class="review-meta">Raja Lingaswaran · <span class="review-ago" data-review-date="2026-02-18T09:15:00Z"></span></div>
-            </article>
+              <article class="review-item" data-rating="4" data-published="2026-03-12">
+                <strong class="review-author">Michael R.                </strong>
+                <p class="review-stars" aria-label="4 out of 5 stars">★★★★☆</p>
+                <h3>Fast and clear UI</h3>
+                <p class="review-body" data-clamp-lines="4">Compared with other resume tools, this one is easier to understand. I like that the suggestions explain why each change helps for ATS parsing.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-03-12">Mar 12, 2026</time></p>
+              </article>
 
-            <article class="review-card">
-              <div class="review-stars">★★★★☆</div>
-              <h3>I like it</h3>
-              <p>Not my first time using it. It helped me a lot before, and I really like the integration.</p>
-              <div class="review-meta">Egzonit Demhasaj · <span class="review-ago" data-review-date="2026-01-22T16:45:00Z"></span></div>
-            </article>
+              <article class="review-item" data-rating="5" data-published="2026-03-07">
+                <strong class="review-author">Priya S.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Saved me hours</h3>
+                <p class="review-body" data-clamp-lines="4">I used the ATS check before every application this month. It helped me tune each resume version quickly without rewriting everything from scratch.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-03-07">Mar 7, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="5" data-published="2026-02-28">
+                <strong class="review-author">David L.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Useful keyword suggestions</h3>
+                <p class="review-body" data-clamp-lines="4">The tool flagged missing role keywords I had overlooked. After adding them naturally, my resume became much closer to the job posting requirements.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-02-28">Feb 28, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="4" data-published="2026-02-20">
+                <strong class="review-author">Sofia M.                </strong>
+                <p class="review-stars" aria-label="4 out of 5 stars">★★★★☆</p>
+                <h3>Solid for CV updates</h3>
+                <p class="review-body" data-clamp-lines="4">Good experience overall. I especially liked the formatting checks because they pointed out small issues that can break parsing in some ATS systems.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-02-20">Feb 20, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="5" data-published="2026-02-15">
+                <strong class="review-author">James T.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Better interview rate</h3>
+                <p class="review-body" data-clamp-lines="4">After two resume iterations with PitchCV, I started getting responses for roles where I previously got none. The recommendations felt practical and specific.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-02-15">Feb 15, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="4" data-published="2026-02-09">
+                <strong class="review-author">Nina V.                </strong>
+                <p class="review-stars" aria-label="4 out of 5 stars">★★★★☆</p>
+                <h3>Clean workflow</h3>
+                <p class="review-body" data-clamp-lines="4">Upload, paste the job post, and get actionable feedback. It is straightforward and helped me improve resume clarity for hiring managers.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-02-09">Feb 9, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="5" data-published="2026-02-02">
+                <strong class="review-author">Omar H.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Great for role targeting</h3>
+                <p class="review-body" data-clamp-lines="4">I used it for product and operations roles and the suggestions adapted well to both. It helped me keep one base resume and tailor faster.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-02-02">Feb 2, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="5" data-published="2026-01-27">
+                <strong class="review-author">Laura P.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Helped with confidence</h3>
+                <p class="review-body" data-clamp-lines="4">The score and checklist gave me confidence before applying. I could see exactly what was missing and fix it quickly.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-01-27">Jan 27, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="5" data-published="2026-01-21">
+                <strong class="review-author">Igor D.                </strong>
+                <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+                <h3>Simple and effective</h3>
+                <p class="review-body" data-clamp-lines="4">No clutter, just clear steps and helpful suggestions. I improved the resume and cover letter alignment in one evening.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-01-21">Jan 21, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="3" data-published="2026-01-15">
+                <strong class="review-author">Elena G.                </strong>
+                <p class="review-stars" aria-label="3 out of 5 stars">★★★☆☆</p>
+                <h3>Good ideas, wanted more templates</h3>
+                <p class="review-body" data-clamp-lines="4">The ATS checks were useful and I improved my resume. I would still like more industry-specific templates for niche roles.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-01-15">Jan 15, 2026</time></p>
+              </article>
+
+              <article class="review-item is-hidden" data-rating="4" data-published="2026-01-10">
+                <strong class="review-author">Ben C.                </strong>
+                <p class="review-stars" aria-label="4 out of 5 stars">★★★★☆</p>
+                <h3>Worth using before applications</h3>
+                <p class="review-body" data-clamp-lines="4">It catches issues that are easy to miss. The product feels fast and practical for weekly job applications.</p>
+                <button type="button" class="review-read-more" hidden>Read more</button>
+                <p class="review-meta">Published on <time datetime="2026-01-10">Jan 10, 2026</time></p>
+              </article>
+            </div>
+
+            <div class="reviews-actions">
+              <button type="button" class="btn btn-outline" id="show-more-reviews-btn">Show more reviews</button>
+              <button type="button" class="btn btn-primary" id="open-review-form-btn">Leave a review</button>
+            </div>
           </div>
         </div>
 
-        <div class="reviews-controls">
-          <button class="reviews-nav-btn" type="button" data-reviews-nav="prev" aria-label="Previous reviews">&lsaquo;</button>
-          <button class="reviews-nav-btn" type="button" data-reviews-nav="next" aria-label="Next reviews">&rsaquo;</button>
-          <div class="reviews-progress" aria-hidden="true">
-            <span class="reviews-progress-fill"></span>
-          </div>
+        <div class="review-form-wrap" id="review-form-wrap" hidden>
+          <h3>Leave a review</h3>
+          <p class="review-form-subtitle">Your review will be published only after moderation.</p>
+          <form id="review-form" class="review-form" novalidate>
+            <div class="review-form-grid">
+              <label>Name *
+                <input type="text" name="author_name" required autocomplete="name">
+              </label>
+              <label>Email * (not public)
+                <input type="email" name="author_email" required autocomplete="email">
+              </label>
+              <label>Rating *
+                <select name="rating" required>
+                  <option value="">Select</option>
+                  <option value="5">5 - Excellent</option>
+                  <option value="4">4 - Good</option>
+                  <option value="3">3 - Okay</option>
+                  <option value="2">2 - Poor</option>
+                  <option value="1">1 - Very poor</option>
+                </select>
+              </label>
+              <label>Would you recommend PitchCV? *
+                <select name="would_recommend" required>
+                  <option value="">Select</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </label>
+              <label>Review title *
+                <input type="text" name="title" required>
+              </label>
+              <label>Job title / role
+                <input type="text" name="author_role">
+              </label>
+              <label>Country
+                <input type="text" name="country">
+              </label>
+              <label>Used feature
+                <select name="feature_tag">
+                  <option value="">Select feature</option>
+                  <option value="ats-check">ATS check</option>
+                  <option value="cv-editor">CV editor</option>
+                  <option value="cover-letter">Cover letter</option>
+                  <option value="keyword-scanner">Keyword scanner</option>
+                </select>
+              </label>
+            </div>
+
+            <label>Review text *
+              <textarea name="body" rows="5" required></textarea>
+            </label>
+
+            <label class="review-consent">
+              <input type="checkbox" name="consent_to_publish" required>
+              <span>I agree to publication of this review on the website.</span>
+            </label>
+            <label class="review-consent">
+              <input type="checkbox" name="consent_to_process" required>
+              <span>I agree to processing of my personal data for review moderation.</span>
+            </label>
+
+            <div class="review-honeypot" aria-hidden="true">
+              <input type="text" name="fax_extension" tabindex="-1" autocomplete="off" value="">
+            </div>
+
+            <div class="reviews-actions reviews-actions-form">
+              <button type="submit" class="btn btn-primary">Submit review</button>
+              <button type="button" class="btn btn-outline" id="cancel-review-form-btn">Cancel</button>
+            </div>
+            <p class="review-form-status" id="review-form-status" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>

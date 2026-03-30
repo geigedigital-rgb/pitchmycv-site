@@ -828,42 +828,108 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Review timestamps: разница между сегодня и датой публикации (фиксированные даты в data-review-date)
-  const reviewAgoEls = document.querySelectorAll(".review-ago[data-review-date]");
-  const formatReviewAgo = (date) => {
-    const now = new Date();
-    const diffMs = now - date;
-    const diffM = Math.floor(Math.abs(diffMs) / 60000);
-    const diffH = Math.floor(Math.abs(diffMs) / 3600000);
-    const diffD = Math.floor(Math.abs(diffMs) / 86400000);
-    const diffW = Math.floor(diffD / 7);
-    const past = diffMs >= 0;
-    const suffix = past ? " ago" : " from now";
-    const prefix = past ? "" : "in ";
-    if (diffMs >= 0) {
-      if (diffM < 1) return "just now";
-      if (diffM < 60) return diffM === 1 ? "1 minute ago" : `${diffM} minutes ago`;
-      if (diffH < 24) return diffH === 1 ? "about 1 hour ago" : `about ${diffH} hours ago`;
-      if (diffD === 1) return "1 day ago";
-      if (diffD < 7) return `${diffD} days ago`;
-      if (diffW === 1) return "1 week ago";
-      if (diffW < 4) return `${diffW} weeks ago`;
-      return date.toLocaleDateString();
+  // Reviews block: aggregate stats, show more, read more, and local form flow
+  const reviewList = document.getElementById("reviews-list");
+  const showMoreReviewsBtn = document.getElementById("show-more-reviews-btn");
+  const recommendRateEl = document.getElementById("reviews-recommend-rate");
+  const ratingValueEl = document.getElementById("reviews-rating-value");
+  const totalCountEl = document.getElementById("reviews-total-count");
+  const summaryStarsEl = document.getElementById("reviews-summary-stars");
+  const openReviewFormBtn = document.getElementById("open-review-form-btn");
+  const cancelReviewFormBtn = document.getElementById("cancel-review-form-btn");
+  const reviewFormWrap = document.getElementById("review-form-wrap");
+  const reviewForm = document.getElementById("review-form");
+  const reviewFormStatus = document.getElementById("review-form-status");
+
+  if (reviewList) {
+    const reviewItems = Array.from(reviewList.querySelectorAll(".review-item"));
+    const hiddenClass = "is-hidden";
+    const initialVisible = Number.parseInt(reviewList.dataset.visibleInitial || "3", 10);
+    const visibleStep = Number.parseInt(reviewList.dataset.visibleStep || "3", 10);
+
+    const calcSummary = () => {
+      const ratings = reviewItems
+        .map((item) => Number.parseInt(item.dataset.rating || "", 10))
+        .filter((value) => Number.isFinite(value) && value >= 1 && value <= 5);
+      if (!ratings.length) return;
+      const total = ratings.length;
+      const average = ratings.reduce((sum, value) => sum + value, 0) / total;
+      const recommend = ratings.filter((value) => value >= 4).length;
+      const recommendRate = Math.round((recommend / total) * 100);
+      if (ratingValueEl) ratingValueEl.textContent = average.toFixed(1);
+      if (totalCountEl) totalCountEl.textContent = String(total);
+      if (recommendRateEl) recommendRateEl.textContent = `${recommendRate}%`;
+      if (summaryStarsEl) {
+        const rounded = Math.round(average);
+        summaryStarsEl.textContent = `${"★".repeat(rounded)}${"☆".repeat(5 - rounded)}`;
+        summaryStarsEl.setAttribute("aria-label", `Average rating: ${average.toFixed(1)} out of 5`);
+      }
+    };
+
+    let currentlyVisible = 0;
+    const showNextReviews = (step) => {
+      const hiddenItems = reviewItems.filter((item) => item.classList.contains(hiddenClass));
+      hiddenItems.slice(0, step).forEach((item) => item.classList.remove(hiddenClass));
+      currentlyVisible = reviewItems.filter((item) => !item.classList.contains(hiddenClass)).length;
+      if (showMoreReviewsBtn) {
+        const hasHidden = reviewItems.some((item) => item.classList.contains(hiddenClass));
+        showMoreReviewsBtn.hidden = !hasHidden;
+      }
+    };
+
+    const desktopMedia = window.matchMedia("(min-width: 769px)");
+    const applyReviewLayoutMode = () => {
+      if (desktopMedia.matches) {
+        reviewItems.forEach((item, index) => {
+          if (index < initialVisible) item.classList.remove(hiddenClass);
+          else item.classList.add(hiddenClass);
+        });
+        currentlyVisible = initialVisible;
+        if (showMoreReviewsBtn) {
+          showMoreReviewsBtn.hidden = reviewItems.length <= initialVisible;
+        }
+      } else {
+        reviewItems.forEach((item) => item.classList.remove(hiddenClass));
+        currentlyVisible = reviewItems.length;
+        if (showMoreReviewsBtn) showMoreReviewsBtn.hidden = true;
+      }
+    };
+
+    // Keep desktop concise while preserving swipe-able full list on mobile.
+    applyReviewLayoutMode();
+    desktopMedia.addEventListener("change", applyReviewLayoutMode);
+
+    if (showMoreReviewsBtn) {
+      showMoreReviewsBtn.addEventListener("click", () => {
+        showNextReviews(visibleStep);
+        if (window.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: "click_show_more_reviews", visible_reviews: currentlyVisible });
+        }
+      });
     }
-    if (diffD < 1) return diffH <= 1 ? "in about 1 hour" : `in about ${diffH} hours`;
-    if (diffD === 1) return "in 1 day";
-    if (diffD < 7) return `in ${diffD} days`;
-    if (diffW === 1) return "in 1 week";
-    if (diffW < 4) return `in ${diffW} weeks`;
-    return date.toLocaleDateString();
-  };
-  reviewAgoEls.forEach((el) => {
-    const iso = el.getAttribute("data-review-date");
-    if (!iso) return;
-    const date = new Date(iso);
-    if (Number.isNaN(date.getTime())) return;
-    el.textContent = formatReviewAgo(date);
-  });
+
+    const handleReadMore = (btn) => {
+      const card = btn.closest(".review-item");
+      if (!card) return;
+      const expanded = card.classList.toggle("is-expanded");
+      btn.textContent = expanded ? "Show less" : "Read more";
+      if (window.dataLayer && Array.isArray(window.dataLayer) && expanded) {
+        window.dataLayer.push({ event: "read_more_review" });
+      }
+    };
+
+    reviewItems.forEach((item) => {
+      const body = item.querySelector(".review-body");
+      const btn = item.querySelector(".review-read-more");
+      if (!body || !btn) return;
+      if ((body.textContent || "").trim().length > 175) {
+        btn.hidden = false;
+        btn.addEventListener("click", () => handleReadMore(btn));
+      }
+    });
+
+    calcSummary();
+  }
 
   // CTA typewriter: 10 job titles, type then erase with blinking cursor
   const ctaJobEl = document.getElementById("cta-typewriter-job");
@@ -914,46 +980,123 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(tick, 400);
   }
 
-  // Reviews horizontal slider
-  const reviewsTrack = document.getElementById("reviews-track");
-  const reviewsPrevBtn = document.querySelector('[data-reviews-nav="prev"]');
-  const reviewsNextBtn = document.querySelector('[data-reviews-nav="next"]');
-  const reviewsProgressFill = document.querySelector(".reviews-progress-fill");
-  const reviewsControls = document.querySelector(".reviews-controls");
-
-  if (reviewsTrack && reviewsPrevBtn && reviewsNextBtn && reviewsProgressFill && reviewsControls) {
-    let isScrollable = false;
-
-    const getScrollStep = () => {
-      const card = reviewsTrack.querySelector(".review-card");
-      if (!card) return 280;
-      const styles = window.getComputedStyle(reviewsTrack);
-      const gap = parseFloat(styles.columnGap || styles.gap || "16");
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    const updateReviewsProgress = () => {
-      const maxScroll = reviewsTrack.scrollWidth - reviewsTrack.clientWidth;
-      isScrollable = maxScroll > 4;
-      reviewsControls.style.display = isScrollable ? "flex" : "none";
-      const ratio = maxScroll > 0 ? reviewsTrack.scrollLeft / maxScroll : 0;
-      const fillPercent = 20 + ratio * 80;
-      reviewsProgressFill.style.width = `${fillPercent}%`;
-    };
-
-    reviewsPrevBtn.addEventListener("click", () => {
-      if (!isScrollable) return;
-      reviewsTrack.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+  if (openReviewFormBtn && reviewFormWrap) {
+    openReviewFormBtn.addEventListener("click", () => {
+      reviewFormWrap.hidden = false;
+      openReviewFormBtn.hidden = true;
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({ event: "open_review_form" });
+      }
     });
+  }
 
-    reviewsNextBtn.addEventListener("click", () => {
-      if (!isScrollable) return;
-      reviewsTrack.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+  if (cancelReviewFormBtn && reviewFormWrap && openReviewFormBtn) {
+    cancelReviewFormBtn.addEventListener("click", () => {
+      reviewFormWrap.hidden = true;
+      openReviewFormBtn.hidden = false;
+      if (reviewFormStatus) reviewFormStatus.textContent = "";
     });
+  }
 
-    reviewsTrack.addEventListener("scroll", updateReviewsProgress);
-    window.addEventListener("resize", updateReviewsProgress);
-    updateReviewsProgress();
+  const getReviewsApiBase = () => {
+    const w = window;
+    const fromWindow =
+      (typeof w.REVIEWS_API_BASE === "string" && w.REVIEWS_API_BASE.trim()) ||
+      (typeof w.__REVIEWS_API_BASE__ === "string" && w.__REVIEWS_API_BASE__.trim());
+    if (fromWindow) return fromWindow.replace(/\/$/, "");
+    const meta = document.querySelector('meta[name="reviews-api-base"]');
+    const fromMeta = meta && meta.getAttribute("content") ? meta.getAttribute("content").trim() : "";
+    if (fromMeta) return fromMeta.replace(/\/$/, "");
+    return "https://my.pitchcv.app/api";
+  };
+
+  if (reviewForm) {
+    reviewForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (reviewFormStatus) reviewFormStatus.textContent = "";
+
+      const formData = new FormData(reviewForm);
+      const honeypot = String(formData.get("fax_extension") || "").trim();
+      if (honeypot) return;
+
+      if (!reviewForm.checkValidity()) {
+        reviewForm.reportValidity();
+        return;
+      }
+
+      const latestSubmit = Number.parseInt(localStorage.getItem("pitchcv-review-submit-at") || "0", 10);
+      const now = Date.now();
+      const thirtySeconds = 30000;
+      if (Number.isFinite(latestSubmit) && now - latestSubmit < thirtySeconds) {
+        if (reviewFormStatus) {
+          reviewFormStatus.textContent = "Please wait a few seconds before submitting another review.";
+          reviewFormStatus.style.color = "#b45309";
+        }
+        return;
+      }
+
+      const rating = Number.parseInt(String(formData.get("rating")), 10);
+      const wouldRecommend = String(formData.get("would_recommend") || "");
+      const payload = {
+        author_name: String(formData.get("author_name") || "").trim(),
+        author_email: String(formData.get("author_email") || "").trim(),
+        rating,
+        would_recommend: wouldRecommend,
+        title: String(formData.get("title") || "").trim(),
+        body: String(formData.get("body") || "").trim(),
+        consent_to_publish: formData.get("consent_to_publish") === "on",
+        consent_to_process: formData.get("consent_to_process") === "on",
+      };
+      const role = String(formData.get("author_role") || "").trim();
+      if (role) payload.author_role = role;
+      const country = String(formData.get("country") || "").trim();
+      if (country) payload.country = country;
+      const featureTag = String(formData.get("feature_tag") || "").trim();
+      if (featureTag) payload.feature_tag = featureTag;
+
+      const base = getReviewsApiBase();
+      const submitBtn = reviewForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(`${base}/reviews`, {
+          method: "POST",
+          headers: { Accept: "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          let detail = response.statusText;
+          try {
+            const errBody = await response.json();
+            if (errBody && (errBody.detail || errBody.message)) detail = errBody.detail || errBody.message;
+          } catch {
+            /* ignore */
+          }
+          throw new Error(detail);
+        }
+
+        localStorage.setItem("pitchcv-review-submit-at", String(now));
+        if (reviewFormStatus) {
+          reviewFormStatus.textContent = "Thank you, your review is pending moderation.";
+          reviewFormStatus.style.color = "#047857";
+        }
+        reviewForm.reset();
+
+        if (window.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: "submit_review" });
+        }
+      } catch (err) {
+        if (reviewFormStatus) {
+          reviewFormStatus.textContent =
+            (err && err.message) ||
+            "Could not send your review. Please try again later.";
+          reviewFormStatus.style.color = "#b45309";
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
   }
 
   // FAQ Accordion
