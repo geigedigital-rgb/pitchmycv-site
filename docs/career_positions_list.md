@@ -101,3 +101,11 @@ property manager
 - [x] investment analyst (`/careers/investment-analyst-resume`)
 - [x] operations manager (`/careers/operations-manager-resume`)
 - [x] supply chain manager (`/careers/supply-chain-manager-resume`)
+
+## Completed (Batch 4)
+
+- [x] construction manager (`/careers/construction-manager-resume`)
+- [x] civil engineer (`/careers/civil-engineer-resume`)
+- [x] mechanical engineer (`/careers/mechanical-engineer-resume`)
+- [x] electrical engineer (`/careers/electrical-engineer-resume`)
+- [x] HR manager (`/careers/hr-manager-resume`)
