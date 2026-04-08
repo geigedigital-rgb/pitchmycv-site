@@ -417,6 +417,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   margin: 0 0 12px;
 }
 .hero-title { font-size: clamp(32px, 4vw, 44px); letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2; }
+.hero-title-line { display: block; }
+.hero-title-accent { font-style: italic; color: #1D4ED8; font-weight: inherit; }
 .hero-sub { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 24px; max-width: 100%; line-height: 1.55; }
 
 .hero-upload-panel {
