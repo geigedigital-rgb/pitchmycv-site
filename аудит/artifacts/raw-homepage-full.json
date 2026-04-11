@@ -1,0 +1,628 @@
+{
+  "page": {
+    "url": "https://pitchcv.app",
+    "status_code": 200,
+    "redirect_chain": [],
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Content-Disposition": "inline; filename=\"index.html\"",
+      "Content-Encoding": "gzip",
+      "Content-Type": "text/html; charset=utf-8",
+      "Date": "Sat, 11 Apr 2026 22:23:53 GMT",
+      "Etag": "\"3a866384496ffd1f38678fa08de76bb558cb32c5\"",
+      "Server": "railway-edge",
+      "Vary": "Accept-Encoding",
+      "X-Railway-Edge": "railway/us-east4-eqdc4a",
+      "X-Railway-Request-Id": "HXur4G4RTIC8EFPWPvyhXg",
+      "Transfer-Encoding": "chunked"
+    },
+    "meta_tags": {
+      "viewport": "width=device-width, initial-scale=1.0",
+      "theme-color": "#0f172a",
+      "description": "We compare your resume to real job requirements and show exactly what's missing \u2014 before you apply.",
+      "robots": "index,follow",
+      "reviews-api-base": "https://my.pitchcv.app/api",
+      "og:type": "website",
+      "og:title": "Match your resume to any job in seconds | Pitch My CV",
+      "og:description": "We compare your resume to real job requirements and show exactly what's missing \u2014 before you apply.",
+      "og:url": "https://pitchcv.app/",
+      "og:image": "https://pitchcv.app/examples/img/rsume_ats_cheker_free.webp",
+      "og:image:width": "1055",
+      "og:image:height": "1029",
+      "og:image:alt": "Professional resume templates with ATS check and success indicator \u2014 Pitch My CV",
+      "og:site_name": "Pitch My CV",
+      "og:locale": "en_US",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Match your resume to any job in seconds | Pitch My CV",
+      "twitter:description": "We compare your resume to real job requirements and show exactly what's missing \u2014 before you apply.",
+      "twitter:image": "https://pitchcv.app/examples/img/rsume_ats_cheker_free.webp",
+      "twitter:image:alt": "Professional resume templates with ATS check and success indicator \u2014 Pitch My CV"
+    },
+    "title": "Match your resume to any job in seconds | Pitch My CV",
+    "description": "We compare your resume to real job requirements and show exactly what's missing \u2014 before you apply.",
+    "canonical": "https://pitchcv.app/",
+    "h1_tags": [
+      "Match your resumeto any jobin seconds"
+    ],
+    "heading_structure": [
+      {
+        "level": 1,
+        "text": "Match your resumeto any jobin seconds"
+      },
+      {
+        "level": 2,
+        "text": "Improve your score in 5 mins"
+      },
+      {
+        "level": 2,
+        "text": "The hidden filter blocking your interviews"
+      },
+      {
+        "level": 2,
+        "text": "Diagnose and fix your resume in minutes"
+      },
+      {
+        "level": 2,
+        "text": "Get the interview with professional resume examples"
+      },
+      {
+        "level": 2,
+        "text": "203resumes created today"
+      },
+      {
+        "level": 2,
+        "text": "92%of customers recommend PitchCV"
+      },
+      {
+        "level": 2,
+        "text": "Ready to see if your resume fits the role of|"
+      },
+      {
+        "level": 2,
+        "text": "FAQ"
+      },
+      {
+        "level": 2,
+        "text": "Ready to improve your resume?"
+      },
+      {
+        "level": 3,
+        "text": "Check your resume free"
+      },
+      {
+        "level": 3,
+        "text": "A draft in 10 mins"
+      },
+      {
+        "level": 3,
+        "text": "Fewer mistakes"
+      },
+      {
+        "level": 3,
+        "text": "ATS templates"
+      },
+      {
+        "level": 3,
+        "text": "Higher salary confidence"
+      },
+      {
+        "level": 3,
+        "text": "Great ATS guidance"
+      },
+      {
+        "level": 3,
+        "text": "Fast and clear UI"
+      },
+      {
+        "level": 3,
+        "text": "Saved me hours"
+      },
+      {
+        "level": 3,
+        "text": "Useful keyword suggestions"
+      },
+      {
+        "level": 3,
+        "text": "Solid for CV updates"
+      },
+      {
+        "level": 3,
+        "text": "Better interview rate"
+      },
+      {
+        "level": 3,
+        "text": "Clean workflow"
+      },
+      {
+        "level": 3,
+        "text": "Great for role targeting"
+      },
+      {
+        "level": 3,
+        "text": "Helped with confidence"
+      },
+      {
+        "level": 3,
+        "text": "Simple and effective"
+      },
+      {
+        "level": 3,
+        "text": "Good ideas, wanted more templates"
+      },
+      {
+        "level": 3,
+        "text": "Worth using before applications"
+      },
+      {
+        "level": 3,
+        "text": "Leave a review"
+      },
+      {
+        "level": 3,
+        "text": "Check your resume free"
+      },
+      {
+        "level": 4,
+        "text": "ATS Compatibility Analysis"
+      },
+      {
+        "level": 4,
+        "text": "Keyword Optimization"
+      },
+      {
+        "level": 4,
+        "text": "Bullet Point Rewriting"
+      },
+      {
+        "level": 4,
+        "text": "Product"
+      },
+      {
+        "level": 4,
+        "text": "Free Tools"
+      },
+      {
+        "level": 4,
+        "text": "Resume Examples"
+      },
+      {
+        "level": 4,
+        "text": "Resources"
+      }
+    ],
+    "word_count": 1652,
+    "text_content": "Match your resume to any job in seconds | Pitch My CV Free ATS resume check Match your resume to any job in seconds Upload your resume and a job description. See missing keywords, weak structure, and ATS risks instantly. Check your resume free Drop your resume here or click to upload PDF, DOC, or DOCX \u00b7 max 5 MB PDF, DOC, or DOCX \u00b7 up to 5 MB Upload resume to check Full job posting from the job site Copy the full text from the job listing page and paste it here. Full job posting from the job site 0% Interview chances Check your resume free Privacy guaranteed \u2014 your resume is processed securely and never sold. Illustration of overlapping resume samples with decorative stars and an approval checkmark for ATS matching. Improve your score in 5 mins Make small improvements to your resume score. A match rate of 85% or higher significantly boosts your interview chances. 15% ATS Match 81% Resume Score HR Approved Skills Management Skills Analytical Thinking Leadership + Add skill ATS Parsing Keyword Match Action Verbs Formatting The hidden filter blocking your interviews Companies don't read every resume. They use Applicant Tracking Systems (ATS) to auto-screen candidates. Ensure every detail meets the highest parsing standards, exceeding recruiter expectations. 1 Upload 2 Scan 3 Issues 4 Fix Diagnose and fix your resume in minutes Our AI platform analyzes your document exactly like an employer's software, exposing weaknesses before you apply. Turn rejections into interviews. ATS Compatibility Analysis We parse your resume to ensure structural integrity. Find out if tables or complex layouts are corrupting your data. Keyword Optimization Paste the job description. Our system instantly identifies missing hard skills, soft skills, and industry terminology. Bullet Point Rewriting Transform weak duties into high-impact, measurable achievements using AI trained on successful resumes. 80 Candidates applied HR Manager 3 To interview 77 Auto-rejected \u2039 All Software Engineer Product Manager Marketing Data Scientist Sales HR Manager Designer Finance Operations Customer Support \u203a Get the interview with professional resume examples Impress employers and recruiters. Choose from hundreds of professionally-designed resume examples tailored for your exact role. Download to Word or PDF. See all resume examples 203 resumes created today A draft in 10 mins The AI builder is much faster than starting from scratch. Fewer mistakes Fix typos and formatting issues before recruiters review your resume. ATS templates Use recruiter-friendly structures that parse correctly in ATS systems. Higher salary confidence Present stronger impact and negotiate from a better position. 92% of customers recommend PitchCV Based on verified user reviews 4.5 out of 5 \u2605\u2605\u2605\u2605\u2606 based on 12 reviews Collected on PitchCV Also rated on Trustpilot Anna K. \u2605\u2605\u2605\u2605\u2605 Great ATS guidance The ATS analysis made the weak parts of my resume obvious in minutes. I rewrote two sections, improved keyword coverage, and started getting interview replies much faster than before. Read more Published on Mar 18, 2026 Michael R. \u2605\u2605\u2605\u2605\u2606 Fast and clear UI Compared with other resume tools, this one is easier to understand. I like that the suggestions explain why each change helps for ATS parsing. Read more Published on Mar 12, 2026 Priya S. \u2605\u2605\u2605\u2605\u2605 Saved me hours I used the ATS check before every application this month. It helped me tune each resume version quickly without rewriting everything from scratch. Read more Published on Mar 7, 2026 David L. \u2605\u2605\u2605\u2605\u2605 Useful keyword suggestions The tool flagged missing role keywords I had overlooked. After adding them naturally, my resume became much closer to the job posting requirements. Read more Published on Feb 28, 2026 Sofia M. \u2605\u2605\u2605\u2605\u2606 Solid for CV updates Good experience overall. I especially liked the formatting checks because they pointed out small issues that can break parsing in some ATS systems. Read more Published on Feb 20, 2026 James T. \u2605\u2605\u2605\u2605\u2605 Better interview rate After two resume iterations with PitchCV, I started getting responses for roles where I previously got none. The recommendations felt practical and specific. Read more Published on Feb 15, 2026 Nina V. \u2605\u2605\u2605\u2605\u2606 Clean workflow Upload, paste the job post, and get actionable feedback. It is straightforward and helped me improve resume clarity for hiring managers. Read more Published on Feb 9, 2026 Omar H. \u2605\u2605\u2605\u2605\u2605 Great for role targeting I used it for product and operations roles and the suggestions adapted well to both. It helped me keep one base resume and tailor faster. Read more Published on Feb 2, 2026 Laura P. \u2605\u2605\u2605\u2605\u2605 Helped with confidence The score and checklist gave me confidence before applying. I could see exactly what was missing and fix it quickly. Read more Published on Jan 27, 2026 Igor D. \u2605\u2605\u2605\u2605\u2605 Simple and effective No clutter, just clear steps and helpful suggestions. I improved the resume and cover letter alignment in one evening. Read more Published on Jan 21, 2026 Elena G. \u2605\u2605\u2605\u2606\u2606 Good ideas, wanted more templates The ATS checks were useful and I improved my resume. I would still like more industry-specific templates for niche roles. Read more Published on Jan 15, 2026 Ben C. \u2605\u2605\u2605\u2605\u2606 Worth using before applications It catches issues that are easy to miss. The product feels fast and practical for weekly job applications. Read more Published on Jan 10, 2026 Show more reviews Leave a review Leave a review Your review will be published only after moderation. Name * Email * (not public) Rating * Select 5 - Excellent 4 - Good 3 - Okay 2 - Poor 1 - Very poor Would you recommend PitchCV? * Select Yes No Review title * Job title / role Country Used feature Select feature ATS check CV editor Cover letter Keyword scanner Review text * I agree to publication of this review on the website. I agree to processing of my personal data for review moderation. Submit review Cancel Ready to see if your resume fits the role of | Upload your resume. It takes 10 seconds. Check ATS score free FAQ How do ATS systems work? ATS (Applicant Tracking Systems) scan resumes, extract text, and score candidates by how well the content matches job keywords and requirements. What file formats does Pitch My CV accept? We support standard resume formats including PDF (.pdf), Microsoft Word (.doc, .docx). For the most accurate scanning and formatting preservation, we highly recommend uploading your resume as a PDF file. The maximum file size limit is 5MB. Is the free ATS check really free? Yes, absolutely. You can run one comprehensive ATS scan for free without entering any credit card details. This gives you a clear baseline score and highlights critical formatting issues. For users needing deeper insights, unlimited scans, and advanced AI rewriting, we offer flexible Pro and Lifetime plans. How long does the scan take? Our scanning engine is built for speed. In most cases, analyzing your resume against industry-standard ATS algorithms takes less than 30 seconds. Complex PDFs with unusual formatting might occasionally take slightly longer. What is an ATS score? An ATS (Applicant Tracking System) score is an estimate of how effectively parsing software can read and understand your resume. It evaluates factors like keyword density, section headers, formatting structure, and measurable impact. A higher score means a human recruiter is much more likely to actually see your application. Does Pitch My CV rewrite my resume automatically? No, you remain in full control. We do not alter your original document. Instead, our AI provides actionable suggestions, identifies missing keywords, and offers targeted rewrite options for specific bullet points. You choose which recommendations to apply to craft the perfect narrative. Is my resume data kept private? Privacy is our top priority. We use secure encryption to process your files. We never sell your personal data or share your resume with third parties. Furthermore, files uploaded for the free scan are automatically deleted from our servers shortly after analysis. For full details, please review our Privacy Policy . How does the AI improve my resume? Our AI compares your resume content directly against the specific job description you provide. It identifies crucial missing hard and soft skills, flags vague or weak action verbs, and suggests concrete, metric-driven language to make your achievements stand out to both software filters and hiring managers. Does Pitch My CV guarantee interviews or job offers? While an optimized resume drastically improves your visibility, we cannot guarantee specific outcomes. Hiring decisions depend on numerous external factors including interview performance, market competition, and employer preferences. We guarantee to give you the best possible foundation to get past automated filters. What keywords should I add to my resume? The right keywords vary entirely by role. You should focus on specific technical tools, methodologies, and core competencies explicitly mentioned in the job description you're applying for. Our scanner automates this process by instantly extracting those vital keywords for you. Can I scan multiple resumes? The free tier allows for a single baseline scan to experience the platform. If you are tailoring resumes for multiple different job postings\u2014which is highly recommended for best results\u2014our Pro plans offer unlimited scanning and optimization features. Can I cancel my subscription? Yes, you can manage or cancel your subscription at any time directly from your account settings page. There are no hidden fees or lock-in contracts, and your premium access will remain active until the end of your current paid billing cycle. Ready to improve your resume? Scan your resume now to see your ATS score and fix what's holding you back. Check your resume free Drop your resume here or click to upload PDF, DOC, or DOCX \u00b7 max 5 MB PDF, DOC, or DOCX \u00b7 up to 5 MB Upload resume to check Full job posting from the job site Copy the full text from the job listing page and paste it here. Full job posting from the job site Check your resume free Privacy guaranteed \u2014 your resume is processed securely and never sold.",
+    "internal_links": [
+      {
+        "url": "https://pitchcv.app/examples#all",
+        "text": "All"
+      },
+      {
+        "url": "https://pitchcv.app/examples#software-engineer",
+        "text": "Software Engineer"
+      },
+      {
+        "url": "https://pitchcv.app/examples#product-manager",
+        "text": "Product Manager"
+      },
+      {
+        "url": "https://pitchcv.app/examples#marketing",
+        "text": "Marketing"
+      },
+      {
+        "url": "https://pitchcv.app/examples#data-scientist",
+        "text": "Data Scientist"
+      },
+      {
+        "url": "https://pitchcv.app/examples#sales",
+        "text": "Sales"
+      },
+      {
+        "url": "https://pitchcv.app/examples#hr-manager",
+        "text": "HR Manager"
+      },
+      {
+        "url": "https://pitchcv.app/examples#designer",
+        "text": "Designer"
+      },
+      {
+        "url": "https://pitchcv.app/examples#finance",
+        "text": "Finance"
+      },
+      {
+        "url": "https://pitchcv.app/examples#operations",
+        "text": "Operations"
+      },
+      {
+        "url": "https://pitchcv.app/examples#customer-support",
+        "text": "Customer Support"
+      },
+      {
+        "url": "https://pitchcv.app/examples",
+        "text": "See all resume examples"
+      },
+      {
+        "url": "https://pitchcv.app#upload-zone",
+        "text": "Check ATS score free"
+      },
+      {
+        "url": "https://pitchcv.app/privacy",
+        "text": "Privacy Policy"
+      }
+    ],
+    "external_links": [
+      {
+        "url": "https://www.trustpilot.com/review/pitchmycv.com",
+        "text": "Also rated on Trustpilot"
+      }
+    ],
+    "images": [
+      {
+        "src": "examples/img/rsume_ats_cheker_free.webp",
+        "alt": "Professional resume template examples with spotlight, sparkles, and a green success checkmark \u2014 free ATS resume check on Pitch My CV.",
+        "width": "1055",
+        "height": "1029",
+        "loading": "eager"
+      },
+      {
+        "src": "assets/check-cv-fob-offer.svg",
+        "alt": "",
+        "width": "360",
+        "height": "200",
+        "loading": "lazy"
+      },
+      {
+        "src": "assets/resume-example-1.png",
+        "alt": "",
+        "width": "420",
+        "height": "540",
+        "loading": "lazy"
+      },
+      {
+        "src": "assets/hr-approve-cv.png",
+        "alt": "Professional at laptop, resume and career focus",
+        "width": "600",
+        "height": "400",
+        "loading": "lazy"
+      },
+      {
+        "src": "./hr%20manager%20resume%20.jpg",
+        "alt": "HR Manager",
+        "width": "150",
+        "height": "150",
+        "loading": "lazy"
+      },
+      {
+        "src": "assets/resume-example-1.png",
+        "alt": "Sales Director Resume Example",
+        "width": null,
+        "height": null,
+        "loading": null
+      },
+      {
+        "src": "assets/resume-example-2.png",
+        "alt": "Senior Finance Analyst Resume Example",
+        "width": null,
+        "height": null,
+        "loading": null
+      },
+      {
+        "src": "assets/man-check-cv-aprove.png",
+        "alt": "Check your resume and boost your interview chances",
+        "width": null,
+        "height": null,
+        "loading": null
+      }
+    ],
+    "structured_data": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Pitch My CV",
+          "url": "https://pitchcv.app/",
+          "logo": "https://pitchcv.app/favicon.svg",
+          "sameAs": [
+            "https://www.trustpilot.com/review/pitchmycv.com"
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Pitch My CV",
+          "url": "https://pitchcv.app/",
+          "inLanguage": "en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": "https://pitchcv.app/#webpage",
+          "url": "https://pitchcv.app/",
+          "name": "Match your resume to any job in seconds | Pitch My CV",
+          "description": "We compare your resume to real job requirements and show exactly what's missing \u2014 before you apply.",
+          "inLanguage": "en",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "Pitch My CV",
+            "url": "https://pitchcv.app/"
+          },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://pitchcv.app/examples/img/rsume_ats_cheker_free.webp",
+            "contentUrl": "https://pitchcv.app/examples/img/rsume_ats_cheker_free.webp",
+            "width": 1055,
+            "height": 1029,
+            "caption": "Professional resume template designs with decorative accents and success checkmark for free ATS resume checking."
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Pitch My CV",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "url": "https://pitchcv.app/",
+          "description": "Resume optimization for applicant tracking systems. ATS checker, keyword scanner, and resume formatting to pass filters and get interviews.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "12",
+            "reviewCount": "12"
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Anna K."
+              },
+              "datePublished": "2026-03-18",
+              "name": "Great ATS guidance",
+              "reviewBody": "The ATS analysis made the weak parts of my resume obvious in minutes. I rewrote two sections, improved keyword coverage, and started getting interview replies much faster than before.",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Michael R."
+              },
+              "datePublished": "2026-03-12",
+              "name": "Fast and clear UI",
+              "reviewBody": "Compared with other resume tools, this one is easier to understand. I like that the suggestions explain why each change helps for ATS parsing.",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "4",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Elena G."
+              },
+              "datePublished": "2026-01-15",
+              "name": "Good ideas, wanted more templates",
+              "reviewBody": "The ATS checks were useful and I improved my resume. I would still like more industry-specific templates for niche roles.",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "3",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do ATS systems work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ATS (Applicant Tracking Systems) scan resumes, extract text, and score candidates by how well the content matches job keywords and requirements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What file formats does Pitch My CV accept?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "PDF and DOCX, up to 5MB."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the free ATS check really free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. One free scan, no card required. Pro plans add unlimited scans and AI optimization."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does the scan take?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Usually under 30 seconds."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is an ATS score?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A score that estimates how well your resume will parse and match keywords in typical ATS systems. Higher score = better chance of passing filters."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Pitch My CV rewrite my resume automatically?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. We suggest improvements; you decide what to accept, reject, or edit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my resume data kept private?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Files are processed securely, not sold, and can be deleted anytime."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the AI improve my resume?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It finds missing keywords from the job description and suggests natural rewrites with stronger, metric-driven language."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Pitch My CV guarantee interviews or job offers?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Results depend on many factors: employer systems, job market, your applications. We help optimize your resume for ATS filters."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What keywords should I add to my resume?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use terms from the job description: skills, tools, and qualifications. Our scan highlights missing keywords for the role you target."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I scan multiple resumes?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Free: one scan. Pro: unlimited scans."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I cancel my subscription?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Cancel anytime in account settings. Access continues until the end of the billing period."
+              }
+            }
+          ]
+        }
+      ]
+    ],
+    "has_ssr_content": true,
+    "security_headers": {
+      "Strict-Transport-Security": null,
+      "Content-Security-Policy": null,
+      "X-Frame-Options": null,
+      "X-Content-Type-Options": null,
+      "Referrer-Policy": null,
+      "Permissions-Policy": null
+    },
+    "errors": []
+  },
+  "robots": {
+    "url": "https://pitchcv.app/robots.txt",
+    "exists": true,
+    "content": "User-agent: *\nAllow: /\n\n# Keep report page out of search results\nDisallow: /scan\n\nSitemap: https://pitchcv.app/sitemap.xml\n",
+    "ai_crawler_status": {
+      "GPTBot": "ALLOWED_BY_DEFAULT",
+      "OAI-SearchBot": "ALLOWED_BY_DEFAULT",
+      "ChatGPT-User": "ALLOWED_BY_DEFAULT",
+      "ClaudeBot": "ALLOWED_BY_DEFAULT",
+      "anthropic-ai": "ALLOWED_BY_DEFAULT",
+      "PerplexityBot": "ALLOWED_BY_DEFAULT",
+      "CCBot": "ALLOWED_BY_DEFAULT",
+      "Bytespider": "ALLOWED_BY_DEFAULT",
+      "cohere-ai": "ALLOWED_BY_DEFAULT",
+      "Google-Extended": "ALLOWED_BY_DEFAULT",
+      "GoogleOther": "ALLOWED_BY_DEFAULT",
+      "Applebot-Extended": "ALLOWED_BY_DEFAULT",
+      "FacebookBot": "ALLOWED_BY_DEFAULT",
+      "Amazonbot": "ALLOWED_BY_DEFAULT"
+    },
+    "sitemaps": [
+      "https://pitchcv.app/sitemap.xml"
+    ],
+    "errors": []
+  },
+  "llms": {
+    "llms_txt": {
+      "url": "https://pitchcv.app/llms.txt",
+      "exists": false,
+      "content": ""
+    },
+    "llms_full_txt": {
+      "url": "https://pitchcv.app/llms-full.txt",
+      "exists": false,
+      "content": ""
+    },
+    "errors": []
+  },
+  "sitemap": [
+    "https://pitchcv.app/tools/ats-checker",
+    "https://pitchcv.app/about",
+    "https://pitchcv.app/terms",
+    "https://pitchcv.app/examples",
+    "https://pitchcv.app/careers/data-analyst-resume",
+    "https://pitchcv.app/examples/digital-marketing",
+    "https://pitchcv.app/careers/construction-manager-resume",
+    "https://pitchcv.app/examples/product-manager",
+    "https://pitchcv.app/careers/sales-manager-resume",
+    "https://pitchcv.app/careers/software-engineer-resume",
+    "https://pitchcv.app/privacy",
+    "https://pitchcv.app/careers/digital-marketing-specialist-resume",
+    "https://pitchcv.app/careers/account-manager-resume",
+    "https://pitchcv.app/careers/electrical-engineer-resume",
+    "https://pitchcv.app/careers/operations-manager-resume",
+    "https://pitchcv.app/careers/investment-analyst-resume",
+    "https://pitchcv.app/careers/customer-success-manager-resume",
+    "https://pitchcv.app/examples/software-engineer",
+    "https://pitchcv.app/pricing",
+    "https://pitchcv.app/careers/accountant-resume",
+    "https://pitchcv.app/careers/project-manager-resume",
+    "https://pitchcv.app/examples/event-planner",
+    "https://pitchcv.app/examples/sales-manager",
+    "https://pitchcv.app/resume-pelmeni-case",
+    "https://pitchcv.app/careers/mechanical-engineer-resume",
+    "https://pitchcv.app/ats-resume-checklist",
+    "https://pitchcv.app/contact",
+    "https://pitchcv.app/data-processing",
+    "https://pitchcv.app/examples/content-writer",
+    "https://pitchcv.app/careers/business-analyst-resume",
+    "https://pitchcv.app/",
+    "https://pitchcv.app/careers/supply-chain-manager-resume",
+    "https://pitchcv.app/ats-resume-mistakes",
+    "https://pitchcv.app/resume-keyword-optimization",
+    "https://pitchcv.app/examples/marketing-manager",
+    "https://pitchcv.app/examples/data-scientist",
+    "https://pitchcv.app/blog",
+    "https://pitchcv.app/careers/hr-manager-resume",
+    "https://pitchcv.app/careers/financial-analyst-resume",
+    "https://pitchcv.app/careers/marketing-manager-resume",
+    "https://pitchcv.app/careers/product-manager-resume",
+    "https://pitchcv.app/careers",
+    "https://pitchcv.app/careers/civil-engineer-resume"
+  ]
+}

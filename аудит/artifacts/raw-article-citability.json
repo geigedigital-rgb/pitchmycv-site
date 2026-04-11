@@ -1,0 +1,334 @@
+{
+  "url": "https://pitchcv.app/resume-keyword-optimization",
+  "total_blocks_analyzed": 11,
+  "average_citability_score": 30.5,
+  "optimal_length_passages": 0,
+  "grade_distribution": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 3,
+    "F": 8
+  },
+  "top_5_citable": [
+    {
+      "heading": "Resume Keyword Optimization",
+      "word_count": 65,
+      "total_score": 48,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 23,
+        "self_containment": 17,
+        "structural_readability": 8,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Use this advanced process to improve ATS keyword match while keeping your resume clear, credible, and human-readable. Keyword optimization is one of the highest-leverage steps in resume improvement. ATS systems..."
+    },
+    {
+      "heading": "Keyword rewrite example",
+      "word_count": 27,
+      "total_score": 41,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 3,
+        "uniqueness_signals": 0
+      },
+      "preview": "After:\"Planned and optimized multi-channel demand generation campaigns, increasing MQL-to-SQL conversion by 22% in two quarters.\" This version includes role-relevant keywords (demand generation, multi-channel, conversion) plus measurable outcome."
+    },
+    {
+      "heading": "FAQ: Resume keyword optimization",
+      "word_count": 73,
+      "total_score": 40,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 17,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "How many ATS keywords should a resume include?There is no fixed number. Include the highest-priority terms naturally where your experience supports them. Can keyword optimization increase interview chances?Yes. Better role..."
+    },
+    {
+      "heading": "Where to place keywords for maximum clarity",
+      "word_count": 54,
+      "total_score": 31,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 14,
+        "structural_readability": 9,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "A practical placement framework that balances ATS and human reading: Headline/Summary:role identity + 2-3 critical domain terms.Skills block:grouped tools and methods by relevance, not alphabetical order.Experience bullets:context + keyword +..."
+    },
+    {
+      "heading": "Step 3: Place keywords strategically",
+      "word_count": 33,
+      "total_score": 29,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 7,
+        "self_containment": 17,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Place primary keywords in three zones: headline/summary, skills section, and recent impact bullets. Do not rely on a single keyword dump list. Distribution across meaningful sections increases both ATS relevance..."
+    }
+  ],
+  "bottom_5_citable": [
+    {
+      "heading": "Step 1: Extract role-critical terms",
+      "word_count": 31,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 7,
+        "self_containment": 14,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Read the target job post and capture repeated phrases, required tools, responsibilities, and domain-specific terms. Separate \"must-have\" terms from \"nice-to-have\" terms. This creates a clear keyword hierarchy before editing your..."
+    },
+    {
+      "heading": "Step 2: Map terms to real experience",
+      "word_count": 31,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 7,
+        "self_containment": 14,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Only use keywords supported by real experience. For each important term, identify one bullet where you can show context, action, and result. This keeps the resume honest and improves interview..."
+    },
+    {
+      "heading": "Step 4: Validate and iterate",
+      "word_count": 26,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 6,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Run your resume in theATS checker, review missing or weak terms, and iterate. If your score improves but bullets sound vague, refine with theATS mistakes guide."
+    },
+    {
+      "heading": "How to prioritize keywords correctly",
+      "word_count": 35,
+      "total_score": 24,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 14,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Priority 1:Core role and mandatory skills (hard requirements).Priority 2:Tool stack and workflow terms used repeatedly in the vacancy.Priority 3:Domain language, stakeholder context, and scale indicators.Priority 4:Adjacent terms that support, but..."
+    },
+    {
+      "heading": "Common keyword optimization mistakes",
+      "word_count": 31,
+      "total_score": 27,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 17,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Copying long chunks from the job post without evidence.Using broad buzzwords with no project-level context.Ignoring section placement and relying only on a skills list.Optimizing for ATS only and weakening human..."
+    }
+  ],
+  "all_blocks": [
+    {
+      "heading": "Resume Keyword Optimization",
+      "word_count": 65,
+      "total_score": 48,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 23,
+        "self_containment": 17,
+        "structural_readability": 8,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Use this advanced process to improve ATS keyword match while keeping your resume clear, credible, and human-readable. Keyword optimization is one of the highest-leverage steps in resume improvement. ATS systems..."
+    },
+    {
+      "heading": "Step 1: Extract role-critical terms",
+      "word_count": 31,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 7,
+        "self_containment": 14,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Read the target job post and capture repeated phrases, required tools, responsibilities, and domain-specific terms. Separate \"must-have\" terms from \"nice-to-have\" terms. This creates a clear keyword hierarchy before editing your..."
+    },
+    {
+      "heading": "Step 2: Map terms to real experience",
+      "word_count": 31,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 7,
+        "self_containment": 14,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Only use keywords supported by real experience. For each important term, identify one bullet where you can show context, action, and result. This keeps the resume honest and improves interview..."
+    },
+    {
+      "heading": "Step 3: Place keywords strategically",
+      "word_count": 33,
+      "total_score": 29,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 7,
+        "self_containment": 17,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Place primary keywords in three zones: headline/summary, skills section, and recent impact bullets. Do not rely on a single keyword dump list. Distribution across meaningful sections increases both ATS relevance..."
+    },
+    {
+      "heading": "Step 4: Validate and iterate",
+      "word_count": 26,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 6,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Run your resume in theATS checker, review missing or weak terms, and iterate. If your score improves but bullets sound vague, refine with theATS mistakes guide."
+    },
+    {
+      "heading": "How to prioritize keywords correctly",
+      "word_count": 35,
+      "total_score": 24,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 14,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Priority 1:Core role and mandatory skills (hard requirements).Priority 2:Tool stack and workflow terms used repeatedly in the vacancy.Priority 3:Domain language, stakeholder context, and scale indicators.Priority 4:Adjacent terms that support, but..."
+    },
+    {
+      "heading": "Keyword rewrite example",
+      "word_count": 27,
+      "total_score": 41,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 3,
+        "uniqueness_signals": 0
+      },
+      "preview": "After:\"Planned and optimized multi-channel demand generation campaigns, increasing MQL-to-SQL conversion by 22% in two quarters.\" This version includes role-relevant keywords (demand generation, multi-channel, conversion) plus measurable outcome."
+    },
+    {
+      "heading": "Common keyword optimization mistakes",
+      "word_count": 31,
+      "total_score": 27,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 17,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Copying long chunks from the job post without evidence.Using broad buzzwords with no project-level context.Ignoring section placement and relying only on a skills list.Optimizing for ATS only and weakening human..."
+    },
+    {
+      "heading": "Role-specific keyword map examples",
+      "word_count": 55,
+      "total_score": 27,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 17,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Keyword strategy should change by function. The same format does not fit every role: Product roles:roadmap, prioritization, cross-functional, experimentation, adoption, retention.Marketing roles:demand generation, attribution, CAC, conversion, pipeline, lifecycle.Engineering roles:architecture, scalability,..."
+    },
+    {
+      "heading": "Where to place keywords for maximum clarity",
+      "word_count": 54,
+      "total_score": 31,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 8,
+        "self_containment": 14,
+        "structural_readability": 9,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "A practical placement framework that balances ATS and human reading: Headline/Summary:role identity + 2-3 critical domain terms.Skills block:grouped tools and methods by relevance, not alphabetical order.Experience bullets:context + keyword +..."
+    },
+    {
+      "heading": "FAQ: Resume keyword optimization",
+      "word_count": 73,
+      "total_score": 40,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 17,
+        "structural_readability": 2,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "How many ATS keywords should a resume include?There is no fixed number. Include the highest-priority terms naturally where your experience supports them. Can keyword optimization increase interview chances?Yes. Better role..."
+    }
+  ]
+}

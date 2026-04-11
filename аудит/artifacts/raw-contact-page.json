@@ -1,0 +1,78 @@
+{
+  "url": "https://pitchcv.app/contact",
+  "status_code": 200,
+  "redirect_chain": [],
+  "headers": {
+    "Accept-Ranges": "bytes",
+    "Content-Disposition": "inline; filename=\"index.html\"",
+    "Content-Encoding": "gzip",
+    "Content-Type": "text/html; charset=utf-8",
+    "Date": "Sat, 11 Apr 2026 22:24:31 GMT",
+    "Etag": "\"6714fc6bca67264bcd6f157c3960eb3418170bc8\"",
+    "Server": "railway-edge",
+    "Vary": "Accept-Encoding",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "KAtyRyGtQjCXMvhSo3UVLg",
+    "Transfer-Encoding": "chunked"
+  },
+  "meta_tags": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "theme-color": "#0f172a",
+    "description": "Contact Pitch My CV for product support, partnership requests, and privacy inquiries.",
+    "robots": "index,follow",
+    "og:type": "website",
+    "og:title": "Contact Pitch My CV",
+    "og:description": "Contact Pitch My CV for product support, partnership requests, and privacy inquiries.",
+    "og:url": "https://pitchcv.app/contact",
+    "og:image": "https://pitchcv.app/assets/hr-approve-cv.png",
+    "og:site_name": "Pitch My CV",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Contact Pitch My CV",
+    "twitter:description": "Contact Pitch My CV for product support, partnership requests, and privacy inquiries.",
+    "twitter:image": "https://pitchcv.app/assets/hr-approve-cv.png"
+  },
+  "title": "Contact Pitch My CV",
+  "description": "Contact Pitch My CV for product support, partnership requests, and privacy inquiries.",
+  "canonical": "https://pitchcv.app/contact",
+  "h1_tags": [
+    "Contact"
+  ],
+  "heading_structure": [
+    {
+      "level": 1,
+      "text": "Contact"
+    },
+    {
+      "level": 4,
+      "text": "Product"
+    },
+    {
+      "level": 4,
+      "text": "Free Tools"
+    },
+    {
+      "level": 4,
+      "text": "Resume Examples"
+    },
+    {
+      "level": 4,
+      "text": "Resources"
+    }
+  ],
+  "word_count": 20,
+  "text_content": "Contact Pitch My CV Contact We usually respond within 1-2 business days. General support: support@pitchmycv.com Privacy requests: privacy@pitchmycv.com Partnerships: partnerships@pitchmycv.com",
+  "internal_links": [],
+  "external_links": [],
+  "images": [],
+  "structured_data": [],
+  "has_ssr_content": true,
+  "security_headers": {
+    "Strict-Transport-Security": null,
+    "Content-Security-Policy": null,
+    "X-Frame-Options": null,
+    "X-Content-Type-Options": null,
+    "Referrer-Policy": null,
+    "Permissions-Policy": null
+  },
+  "errors": []
+}

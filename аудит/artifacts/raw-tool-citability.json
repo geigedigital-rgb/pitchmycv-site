@@ -1,0 +1,154 @@
+{
+  "url": "https://pitchcv.app/tools/ats-checker",
+  "total_blocks_analyzed": 3,
+  "average_citability_score": 31.3,
+  "optimal_length_passages": 0,
+  "grade_distribution": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 1,
+    "F": 2
+  },
+  "top_5_citable": [
+    {
+      "heading": "Free ATS Resume Checker",
+      "word_count": 26,
+      "total_score": 43,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 5,
+        "uniqueness_signals": 0
+      },
+      "preview": "Over 75% of resumes are rejected by Applicant Tracking Systems before a human ever sees them. Upload your resume below to check your ATS score instantly."
+    },
+    {
+      "heading": "Related resume guides",
+      "word_count": 22,
+      "total_score": 28,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 10,
+        "self_containment": 10,
+        "structural_readability": 8,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Use these practical resources to improve score, clarity, and recruiter relevance. ATS Resume ChecklistTop ATS Resume MistakesResume Keyword Optimization GuideRole-based Resume Examples"
+    },
+    {
+      "heading": "1. Formatting Parse Test",
+      "word_count": 25,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 6,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "We attempt to extract your text. If you use columns, tables, or complex designs, we'll flag exactly where the parser fails to read your experience."
+    }
+  ],
+  "bottom_5_citable": [
+    {
+      "heading": "1. Formatting Parse Test",
+      "word_count": 25,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 6,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "We attempt to extract your text. If you use columns, tables, or complex designs, we'll flag exactly where the parser fails to read your experience."
+    },
+    {
+      "heading": "Related resume guides",
+      "word_count": 22,
+      "total_score": 28,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 10,
+        "self_containment": 10,
+        "structural_readability": 8,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Use these practical resources to improve score, clarity, and recruiter relevance. ATS Resume ChecklistTop ATS Resume MistakesResume Keyword Optimization GuideRole-based Resume Examples"
+    },
+    {
+      "heading": "Free ATS Resume Checker",
+      "word_count": 26,
+      "total_score": 43,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 5,
+        "uniqueness_signals": 0
+      },
+      "preview": "Over 75% of resumes are rejected by Applicant Tracking Systems before a human ever sees them. Upload your resume below to check your ATS score instantly."
+    }
+  ],
+  "all_blocks": [
+    {
+      "heading": "Free ATS Resume Checker",
+      "word_count": 26,
+      "total_score": 43,
+      "grade": "D",
+      "label": "Low Citability",
+      "breakdown": {
+        "answer_block_quality": 21,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 5,
+        "uniqueness_signals": 0
+      },
+      "preview": "Over 75% of resumes are rejected by Applicant Tracking Systems before a human ever sees them. Upload your resume below to check your ATS score instantly."
+    },
+    {
+      "heading": "1. Formatting Parse Test",
+      "word_count": 25,
+      "total_score": 23,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 6,
+        "self_containment": 12,
+        "structural_readability": 5,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "We attempt to extract your text. If you use columns, tables, or complex designs, we'll flag exactly where the parser fails to read your experience."
+    },
+    {
+      "heading": "Related resume guides",
+      "word_count": 22,
+      "total_score": 28,
+      "grade": "F",
+      "label": "Poor Citability",
+      "breakdown": {
+        "answer_block_quality": 10,
+        "self_containment": 10,
+        "structural_readability": 8,
+        "statistical_density": 0,
+        "uniqueness_signals": 0
+      },
+      "preview": "Use these practical resources to improve score, clarity, and recruiter relevance. ATS Resume ChecklistTop ATS Resume MistakesResume Keyword Optimization GuideRole-based Resume Examples"
+    }
+  ]
+}
