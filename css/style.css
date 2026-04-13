@@ -192,6 +192,95 @@ ul { margin: 0; padding: 0; list-style: none; }
   background: #f8fafc;
 }
 
+/* --- 404 page (light, same tokens as site) --- */
+body.page-not-found-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body.page-not-found-body main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.page-not-found {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(40px, 8vw, 80px) 0 clamp(56px, 10vw, 100px);
+}
+.page-not-found-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 clamp(16px, 3vw, 24px);
+}
+.page-not-found-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+  margin-bottom: 10px;
+}
+.page-not-found-code {
+  font-size: clamp(3.25rem, 13vw, 5.25rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--text-main);
+  margin-bottom: 14px;
+}
+.page-not-found-title {
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+.page-not-found-text {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+.page-not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.page-not-found-links {
+  border-top: 1px solid var(--border-color);
+  padding-top: 26px;
+  margin-top: 22px;
+}
+.page-not-found-links-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.page-not-found-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.page-not-found-quick a {
+  font-size: 0.88rem;
+  color: var(--primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 7px 14px;
+  background: var(--bg-white);
+}
+.page-not-found-quick a:hover {
+  border-color: #bfdbfe;
+  background: var(--bg-light);
+}
+
 /* --- Cookie consent --- */
 .cookie-consent {
   position: fixed;
