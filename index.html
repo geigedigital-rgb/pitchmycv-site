@@ -184,12 +184,12 @@
             <span class="hero-title-line">Match your resume</span>
             <span class="hero-title-line"><em class="hero-title-accent">to any job</em> in seconds</span>
           </h1>
-          <p class="hero-sub">Upload your resume and a job description. See missing keywords, weak structure, and ATS risks instantly.</p>
+          <p class="hero-sub">Import your resume (PDF, DOCX, or text). Continue in the app to improve formatting, keywords, and ATS fit.</p>
 
           <div class="hero-upload-panel">
             <div class="compact-upload-card" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
               <h3 id="resume-upload-title" itemprop="name" class="sr-only">Check your resume free</h3>
-              <meta itemprop="description" content="Upload a resume file, add a job link, and run ATS analysis.">
+              <meta itemprop="description" content="Import a resume file to continue in the app.">
               <meta itemprop="totalTime" content="PT1M">
 
               <div class="compact-upload-stack">
@@ -206,30 +206,15 @@
                       </span>
                       <div class="compact-dropzone-text">
                         <div class="compact-dropzone-text-body">
-                          <strong id="dropzone-title"><span class="dropzone-title-desktop-only">Drop your resume here or click to upload</span></strong>
+                          <strong id="dropzone-title"><span class="dropzone-title-desktop-only">Import your resume — drop here or click to upload</span></strong>
                           <span id="dropzone-help"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <p class="sr-only" id="file-step-status" aria-live="polite"></p>
-                  <label for="file-input" class="btn btn-primary compact-upload-pick-btn">Upload resume to check</label>
+                  <label for="file-input" class="btn btn-primary compact-upload-pick-btn">Choose file</label>
                 </section>
-
-                <div id="compact-job-wrapper" class="compact-job-wrapper" hidden>
-                  <section class="compact-link-card" id="job-link-step" itemprop="step" itemscope itemtype="https://schema.org/HowToStep" aria-disabled="false">
-                    <meta itemprop="position" content="2">
-                    <meta itemprop="name" content="Full job posting from the job site">
-                    <meta itemprop="text" content="Paste the full job posting from the listing page to match your resume.">
-                    <div class="compact-link-inner">
-                      <strong>Full job posting from the job site</strong>
-                      <p class="compact-job-text-hint">Copy the full text from the job listing page and paste it here.</p>
-                      <label class="sr-only" for="job-text-input">Full job posting from the job site</label>
-                      <textarea id="job-text-input" class="upload-job-textarea" placeholder="Paste the full job posting here…" rows="3" disabled></textarea>
-                    </div>
-                    <p class="sr-only" id="job-link-note"></p>
-                  </section>
-                </div>
               </div>
 
               <div class="compact-upload-bottom">
@@ -262,7 +247,7 @@
                   <span class="gauge-label">Interview chances</span>
                 </div>
 
-                <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn" disabled aria-disabled="true">Check your resume free</button>
+                <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn" disabled aria-disabled="true">Import resume</button>
               </div>
             </div>
             <p class="hero-privacy"><i class="ph ph-lock" style="font-size:1rem" aria-hidden="true"></i><span>Privacy guaranteed — your resume is processed securely and never sold.</span></p>
@@ -970,31 +955,19 @@
                       </span>
                       <div class="compact-dropzone-text">
                         <div class="compact-dropzone-text-body">
-                          <strong id="dropzone-title-cta"><span class="dropzone-title-desktop-only">Drop your resume here or click to upload</span></strong>
+                          <strong id="dropzone-title-cta"><span class="dropzone-title-desktop-only">Import your resume — drop here or click to upload</span></strong>
                           <span id="dropzone-help-cta"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <p class="sr-only" id="file-step-status-cta" aria-live="polite"></p>
-                  <label for="file-input-cta" class="btn btn-primary compact-upload-pick-btn">Upload resume to check</label>
+                  <label for="file-input-cta" class="btn btn-primary compact-upload-pick-btn">Choose file</label>
                 </section>
-
-                <div id="compact-job-wrapper-cta" class="compact-job-wrapper" hidden>
-                  <section class="compact-link-card" id="job-link-step-cta" aria-disabled="false">
-                    <div class="compact-link-inner">
-                      <strong>Full job posting from the job site</strong>
-                      <p class="compact-job-text-hint">Copy the full text from the job listing page and paste it here.</p>
-                      <label class="sr-only" for="job-text-input-cta">Full job posting from the job site</label>
-                      <textarea id="job-text-input-cta" class="upload-job-textarea" placeholder="Paste the full job posting here…" rows="3" disabled></textarea>
-                    </div>
-                    <p class="sr-only" id="job-link-note-cta"></p>
-                  </section>
-                </div>
               </div>
 
               <div class="compact-upload-bottom compact-upload-bottom-no-gauge">
-                <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn-cta" disabled aria-disabled="true">Check your resume free</button>
+                <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn-cta" disabled aria-disabled="true">Import resume</button>
               </div>
             </div>
             <p class="hero-privacy"><i class="ph ph-lock" style="font-size:1rem" aria-hidden="true"></i><span>Privacy guaranteed — your resume is processed securely and never sold.</span></p>

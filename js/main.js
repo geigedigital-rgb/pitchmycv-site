@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Landing API: save → redirect to app login. See docs/LANDIND_API.md (§2, §10–11).
+  // Landing API: POST /api/landing/save → redirect to app login with ?pending=token. Resume-only: omit job_text.
   // For local backend use: "http://localhost:8000"
   const LANDING_API_BASE = "https://my.pitchcv.app";
 
@@ -438,11 +438,13 @@ document.addEventListener("DOMContentLoaded", () => {
     uploadInstances.forEach(({ zone, suffix }) => setupCompactUploadLayoutEnhancements(zone, suffix));
 
     const primary = uploadInstances[0];
-    const isTwoStepUploadFlow = Boolean(
+    const hasJobStep = Boolean(
+      qid(primary.suffix, "job-link-step") && qid(primary.suffix, "job-text-input")
+    );
+    const isLandingSaveFlow = Boolean(
       qid(primary.suffix, "upload-dropzone")
-        && qid(primary.suffix, "job-link-step")
-        && qid(primary.suffix, "job-text-input")
         && qid(primary.suffix, "analyze-resume-btn")
+        && qid(primary.suffix, "file-input")
     );
 
     const getEls = suffix => ({
@@ -488,13 +490,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const updateAnalyzeResumeButtonState = () => {
-      if (!isTwoStepUploadFlow) {
+      if (!isLandingSaveFlow) {
         return;
       }
       const hasFile = Boolean(selectedResumeFile);
-      const primaryJobInput = qid(primary.suffix, "job-text-input");
-      const hasJobText = Boolean(primaryJobInput?.value.trim());
-      const enabled = hasFile && hasJobText;
+      let enabled = hasFile;
+      if (hasJobStep) {
+        const primaryJobInput = qid(primary.suffix, "job-text-input");
+        const hasJobText = Boolean(primaryJobInput?.value.trim());
+        enabled = hasFile && hasJobText;
+      }
       uploadInstances.forEach(inst => {
         const btn = qid(inst.suffix, "analyze-resume-btn");
         if (!btn) {
@@ -506,7 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const setTwoStepState = file => {
-      if (!isTwoStepUploadFlow) {
+      if (!isLandingSaveFlow) {
         return;
       }
       selectedResumeFile = file;
@@ -531,22 +536,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.fileStepStatus) {
           e.fileStepStatus.textContent = "";
         }
-        if (e.jobTextInput) {
-          e.jobTextInput.disabled = !hasFile;
-        }
-        if (e.jobLinkNote) {
-          e.jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "";
-        }
-        if (jobWrapperEl) {
-          jobWrapperEl.hidden = !hasFile;
-        }
-        if (e.jobLinkStep) {
+        if (hasJobStep) {
+          if (e.jobTextInput) {
+            e.jobTextInput.disabled = !hasFile;
+          }
+          if (e.jobLinkNote) {
+            e.jobLinkNote.textContent = hasFile ? "Paste job description to continue" : "";
+          }
           if (jobWrapperEl) {
-            e.jobLinkStep.classList.remove("is-disabled");
-            e.jobLinkStep.setAttribute("aria-disabled", "false");
-          } else {
-            e.jobLinkStep.classList.toggle("is-disabled", !hasFile);
-            e.jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+            jobWrapperEl.hidden = !hasFile;
+          }
+          if (e.jobLinkStep) {
+            if (jobWrapperEl) {
+              e.jobLinkStep.classList.remove("is-disabled");
+              e.jobLinkStep.setAttribute("aria-disabled", "false");
+            } else {
+              e.jobLinkStep.classList.toggle("is-disabled", !hasFile);
+              e.jobLinkStep.setAttribute("aria-disabled", hasFile ? "false" : "true");
+            }
           }
         }
         if (e.zone) {
@@ -569,7 +576,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     };
 
-    if (isTwoStepUploadFlow) {
+    if (isLandingSaveFlow && hasJobStep) {
       uploadInstances.forEach(inst => {
         const e = getEls(inst.suffix);
         if (!e.jobTextInput || !e.jobLinkNote) {
@@ -590,7 +597,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    if (isTwoStepUploadFlow) {
+    if (isLandingSaveFlow) {
       uploadInstances.forEach(inst => {
         const e = getEls(inst.suffix);
         if (!e.uploadDropzone || !e.fileInput) {
@@ -679,7 +686,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const file = files[0];
 
         if (validTypes.includes(file.type) || file.name.match(/\.(pdf|doc|docx)$/i)) {
-          if (isTwoStepUploadFlow) {
+          if (isLandingSaveFlow) {
             setTwoStepState(file);
             return;
           }
@@ -693,7 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/scan";
           }, 1500);
         } else {
-          if (isTwoStepUploadFlow) {
+          if (isLandingSaveFlow) {
             uploadInstances.forEach(inst => {
               const fs = qid(inst.suffix, "file-step-status");
               if (fs) {
@@ -706,13 +713,19 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    if (isTwoStepUploadFlow) {
-      const loadingSteps = [
-        "Uploading resume…",
-        "Checking job description…",
-        "Preparing your analysis…",
-        "Almost there…",
-      ];
+    if (isLandingSaveFlow) {
+      const loadingSteps = hasJobStep
+        ? [
+            "Uploading resume…",
+            "Checking job description…",
+            "Preparing your analysis…",
+            "Almost there…",
+          ]
+        : [
+            "Uploading resume…",
+            "Preparing your session…",
+            "Almost there…",
+          ];
 
       const attachAnalyze = inst => {
         const btn = qid(inst.suffix, "analyze-resume-btn");
@@ -721,22 +734,28 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
+        if (!btn.dataset.defaultLabel) {
+          btn.dataset.defaultLabel = btn.textContent.trim();
+        }
+
         btn.addEventListener("click", async () => {
           if (!selectedResumeFile) {
             return;
           }
 
-          const jobText = qid(primary.suffix, "job-text-input")?.value.trim() || "";
-          if (!jobText) {
-            uploadInstances.forEach(i => {
-              const note = qid(i.suffix, "job-link-note");
-              if (note) {
-                note.textContent = "Please paste the job vacancy text to continue.";
-                note.classList.remove("sr-only");
-                note.classList.add("upload-link-note");
-              }
-            });
-            return;
+          if (hasJobStep) {
+            const jobText = qid(primary.suffix, "job-text-input")?.value.trim() || "";
+            if (!jobText) {
+              uploadInstances.forEach(i => {
+                const note = qid(i.suffix, "job-link-note");
+                if (note) {
+                  note.textContent = "Please paste the job vacancy text to continue.";
+                  note.classList.remove("sr-only");
+                  note.classList.add("upload-link-note");
+                }
+              });
+              return;
+            }
           }
 
           uploadInstances.forEach(i => {
@@ -775,7 +794,7 @@ document.addEventListener("DOMContentLoaded", () => {
             uploadInstances.forEach(i => {
               const b = qid(i.suffix, "analyze-resume-btn");
               if (b) {
-                b.textContent = "Check your resume free";
+                b.textContent = b.dataset.defaultLabel?.trim() || "Import resume";
               }
             });
             updateAnalyzeResumeButtonState();
@@ -784,7 +803,10 @@ document.addEventListener("DOMContentLoaded", () => {
           try {
             const formData = new FormData();
             formData.append("resume", selectedResumeFile);
-            formData.append("job_text", jobText);
+            if (hasJobStep) {
+              const jobText = qid(primary.suffix, "job-text-input")?.value.trim() || "";
+              formData.append("job_text", jobText);
+            }
 
             const response = await fetch(`${LANDING_API_BASE}/api/landing/save`, {
               method: "POST",
