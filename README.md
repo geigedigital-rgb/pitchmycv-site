@@ -1,4 +1,4 @@
-# Pitch My CV — Landing
+# PitchCV — Landing
 
 Conversion-focused landing page for an AI resume optimization product (Rezi/Enhancv style).
 
