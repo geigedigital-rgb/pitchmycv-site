@@ -78,17 +78,44 @@
     <section class="hero" style="padding-bottom: 40px;">
       <div class="wrap text-center" style="max-width: 800px;">
         <h1 class="hero-title">Free ATS Resume Checker</h1>
-        <p class="hero-sub" style="margin: 0 auto 32px;">Over 75% of resumes are rejected by Applicant Tracking Systems before a human ever sees them. Upload your resume below to check your ATS score instantly.</p>
-        
-        <div class="upload-card" id="upload-zone" style="max-width: 600px; margin: 0 auto;">
-          <div class="upload-icon">
-            <i class="ph ph-file-arrow-up" style="font-size:40px" aria-hidden="true"></i>
+        <p class="hero-sub" style="margin: 0 auto 32px;">Over 75% of resumes are rejected by Applicant Tracking Systems before a human ever sees them. Import your resume below — you will continue in the PitchCV app for the full ATS check (same flow as the homepage).</p>
+
+        <div class="hero-upload-panel" style="max-width: 640px; margin: 0 auto;">
+          <div class="compact-upload-card" id="upload-zone" itemscope itemtype="https://schema.org/HowTo" aria-labelledby="resume-upload-title">
+            <h3 id="resume-upload-title" itemprop="name" class="sr-only">Import resume for free ATS check</h3>
+            <meta itemprop="description" content="Import a resume file to continue in the app for ATS analysis.">
+            <meta itemprop="totalTime" content="PT1M">
+
+            <div class="compact-upload-stack">
+              <section class="compact-file-card compact-file-card-unified" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+                <meta itemprop="position" content="1">
+                <meta itemprop="name" content="Upload file">
+                <meta itemprop="text" content="Upload a resume in PDF, DOC, or DOCX format.">
+                <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
+                <div class="compact-resume-row" id="resume-drop-row">
+                  <div class="compact-dropzone compact-dropzone-compact" id="upload-dropzone" role="button" tabindex="0">
+                    <span class="upload-dropzone-icon" aria-hidden="true">
+                      <i class="ph ph-file-arrow-up icon-resume-upload" aria-hidden="true"></i>
+                      <i class="ph ph-arrows-clockwise icon-resume-replace" aria-hidden="true"></i>
+                    </span>
+                    <div class="compact-dropzone-text">
+                      <div class="compact-dropzone-text-body">
+                        <strong id="dropzone-title"><span class="dropzone-title-desktop-only">Import your resume — drop here or click to upload</span></strong>
+                        <span id="dropzone-help"><span class="dropzone-help-desktop">PDF, DOC, or DOCX · max 5 MB</span><span class="dropzone-help-mobile">PDF, DOC, or DOCX · up to 5 MB</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p class="sr-only" id="file-step-status" aria-live="polite"></p>
+                <label for="file-input" class="btn btn-primary compact-upload-pick-btn">Choose file</label>
+              </section>
+            </div>
+
+            <div class="compact-upload-bottom compact-upload-bottom-no-gauge">
+              <button type="button" class="btn btn-primary compact-btn" id="analyze-resume-btn" disabled aria-disabled="true">Import resume</button>
+            </div>
           </div>
-          <h3>Upload your resume</h3>
-          <p class="upload-hint"><strong>Click</strong> or <strong>drag and drop</strong> here</p>
-          <p class="upload-formats">PDF, DOCX (Max 5MB)</p>
-          <input type="file" id="file-input" accept=".pdf,.doc,.docx" hidden>
-          <button class="btn btn-primary btn-full mt-4" onclick="document.getElementById('file-input').click()">Check ATS Score Free</button>
+          <p class="hero-privacy"><i class="ph ph-lock" style="font-size:1rem" aria-hidden="true"></i><span>Privacy guaranteed — your resume is processed securely and never sold.</span></p>
         </div>
       </div>
     </section>
@@ -178,6 +205,6 @@
     </div>
   </footer>
 
-  <script src="../../js/main.js?v=2"></script>
+  <script src="../../js/main.js?v=3"></script>
 </body>
 </html>
