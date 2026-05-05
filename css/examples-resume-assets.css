@@ -177,3 +177,139 @@ a.example-share-icon:hover {
   color: var(--text-muted);
   line-height: 1.45;
 }
+
+/* Homepage-aligned trust strip + “validate in app” band (example detail pages) */
+.example-hero .hero-eyebrow {
+  margin-bottom: 10px;
+}
+
+.example-trust-pills {
+  padding: 18px 0 22px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.example-trust-pills .hiring-tags {
+  justify-content: center;
+  margin-top: 0;
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-home-bridge {
+  padding: clamp(40px, 5vw, 56px) 0;
+  border-top: 1px solid var(--border-color);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 55%, #f1f5f9 100%);
+}
+
+.example-home-bridge.example-anchor-section {
+  scroll-margin-top: 88px;
+}
+
+.example-bridge-inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.example-bridge-head {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.example-bridge-head h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  line-height: 1.25;
+  color: var(--text-main);
+}
+
+.example-bridge-head p {
+  margin: 0 auto;
+  max-width: 640px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.example-bridge-steps {
+  margin-top: 28px;
+  padding: 22px 18px 26px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px -24px rgba(15, 23, 42, 0.35);
+}
+
+.example-bridge-steps .modern-steps {
+  margin-top: 0;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-bridge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.example-bridge-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100%;
+  box-shadow: 0 8px 24px -20px rgba(15, 23, 42, 0.25);
+}
+
+.example-bridge-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+  border: 1px solid #e2e8f0;
+  color: var(--primary);
+}
+
+.example-bridge-card-icon i.ph {
+  font-size: 1.35rem;
+}
+
+.example-bridge-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.example-bridge-card p {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.example-bridge-card > a {
+  margin-top: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.example-bridge-card > a:hover {
+  text-decoration: underline;
+}
