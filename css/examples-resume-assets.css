@@ -68,3 +68,112 @@
   font-size: 0.85rem;
   transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
+
+.example-share-icon i.ph {
+  font-size: 1.1rem;
+  color: inherit;
+}
+
+a.example-share-icon {
+  text-decoration: none;
+  color: #0f172a;
+}
+
+a.example-share-icon:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Hero pill row on example pages (reuses .pill from global styles) */
+.example-hero .hiring-tags {
+  justify-content: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.example-spotlight {
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.example-spotlight .solution-features {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.example-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.example-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--text-main);
+  line-height: 1.45;
+}
+
+.example-checklist i.ph {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.example-cta-panel {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+}
+
+.example-cta-panel p {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.example-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.example-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.example-skill-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.example-skill-card h3 {
+  font-size: 0.95rem;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.example-skill-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
