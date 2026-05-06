@@ -29,20 +29,22 @@
   <meta name="theme-color" content="#0f172a">
 
   <title>Free Resume Keyword Scanner for ATS Match | PitchCV</title>
-  <meta name="description" content="Scan your resume for missing skills, tools, and role keywords recruiters and ATS systems look for. Upload PDF or DOCX and continue in PitchCV for structured keyword gap analysis.">
+  <meta name="description" content="Scan your resume for missing ATS keywords: skills, tools, certifications, and job-posting nouns. Upload PDF or DOCX, then continue in PitchCV for structured keyword gap analysis versus your target role.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://pitchcv.app/tools/resume-keyword-scanner">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Free Resume Keyword Scanner for ATS Match | PitchCV">
-  <meta property="og:description" content="Find missing resume keywords for ATS: skills, tools, and role terms. Import your file and continue in PitchCV for a guided gap analysis.">
+  <meta property="og:description" content="Scan your resume for missing ATS keywords: skills, tools, certifications, and job-posting nouns. Continue in PitchCV for structured gap analysis.">
   <meta property="og:url" content="https://pitchcv.app/tools/resume-keyword-scanner">
   <meta property="og:image" content="https://pitchcv.app/assets/hr-approve-cv.png">
   <meta property="og:site_name" content="PitchCV">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Free Resume Keyword Scanner for ATS Match | PitchCV">
-  <meta name="twitter:description" content="Find missing resume keywords for ATS: skills, tools, and role terms. Import your file and continue in PitchCV for a guided gap analysis.">
+  <meta name="twitter:description" content="Scan your resume for missing ATS keywords: skills, tools, certifications, and job-posting nouns. Continue in PitchCV for structured gap analysis.">
   <meta name="twitter:image" content="https://pitchcv.app/assets/hr-approve-cv.png">
   <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/examples-resume-assets.css">
+  <link rel="stylesheet" href="../../css/tools-pages.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,7 +53,7 @@
         "@type": "WebPage",
         "name": "Free Resume Keyword Scanner for ATS Match",
         "url": "https://pitchcv.app/tools/resume-keyword-scanner",
-        "description": "Free tool entry point to scan a resume for missing ATS and recruiter keywords, then continue in PitchCV for structured keyword gap analysis."
+        "description": "Resume keyword scanner landing: map skills, tools, and job-posting nouns to your CV, then continue in PitchCV for prioritized ATS vocabulary gaps."
       },
       {
         "@type": "BreadcrumbList",
@@ -93,6 +95,22 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "PDF and DOCX up to 5 MB, matching the same upload contract as the homepage and ATS checker tool."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What counts as a resume keyword for ATS purposes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hard skills (languages, frameworks, lab techniques), platforms (Salesforce, HubSpot, AWS services), certifications (PMP, CPA, SOC 2), methodologies (Agile, Six Sigma), and domain nouns repeated in the posting. Soft skills matter too, but ATS filters lean on concrete tokens first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I paste the full job description before scanning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes when you are inside PitchCV after import. Long postings help the model separate must-have requirements from nice-to-have lines so you can prioritize honest additions to your resume."
             }
           }
         ]
@@ -166,7 +184,95 @@
       </div>
     </section>
 
+    <section class="section-white tool-spotlight" aria-labelledby="kw-spotlight-title">
+      <div class="wrap" style="max-width: 900px;">
+        <p class="hero-eyebrow" style="text-align:center;margin-bottom:8px;">Free tool · Job description vocabulary</p>
+        <h2 id="kw-spotlight-title" style="text-align:center;font-size:clamp(1.2rem,2.4vw,1.45rem);margin-bottom:10px;">What resume keyword scanning solves</h2>
+        <p style="text-align:center;color:var(--text-muted);max-width:680px;margin:0 auto 20px;line-height:1.55;">Applicant tracking systems tokenize your resume and compare those tokens to the employer’s posting. This page explains how PitchCV surfaces <strong>missing or weakly phrased</strong> skills, tools, and domain nouns—without confusing that work with layout parsing (handled on the <a href="/tools/ats-checker">ATS checker</a> page).</p>
+        <p style="text-align:center;color:var(--text-muted);max-width:680px;margin:0 auto 22px;line-height:1.55;font-size:0.95rem;">Bring a target role in mind: identical job titles can require different stacks. The scanner is designed so you can align honest experience with the exact nouns recruiters search.</p>
+        <div class="solution-features">
+          <div class="s-feature">
+            <i class="ph ph-tag" style="font-size:24px" aria-hidden="true"></i>
+            <div>
+              <h4>Hard-skill tokens first</h4>
+              <p>Programming languages, design systems, ad platforms, finance models, and lab assays carry the highest ATS signal. We highlight where those tokens are absent or buried in unreadable sections.</p>
+            </div>
+          </div>
+          <div class="s-feature">
+            <i class="ph ph-arrows-left-right" style="font-size:24px" aria-hidden="true"></i>
+            <div>
+              <h4>Synonyms and acronym drift</h4>
+              <p>Posting says “SEM” but your resume only says “paid search,” or “Kubernetes” appears while you wrote “K8s.” Keyword scanning catches those mismatches so you can harmonize wording without stuffing.</p>
+            </div>
+          </div>
+          <div class="s-feature">
+            <i class="ph ph-book-bookmark" style="font-size:24px" aria-hidden="true"></i>
+            <div>
+              <h4>Compliance, clearance, and certifications</h4>
+              <p>Regulated industries reward explicit licenses (RN, CPA, Series 7) and compliance frameworks (HIPAA, GDPR). The scanner nudges you when those high-trust nouns are missing from visible text.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-light">
+      <div class="wrap tool-editorial">
+        <h2>Prepare a job description before you deep-dive keywords</h2>
+        <p class="lead">PitchCV compares your imported resume against the vocabulary of a posting. Spend two minutes cleaning the posting text so the comparison reflects must-haves instead of boilerplate.</p>
+        <ul class="example-checklist">
+          <li><i class="ph ph-seal-check" aria-hidden="true"></i> Remove salary paragraphs, legal disclaimers, and duplicate “about us” sections that dilute skill density.</li>
+          <li><i class="ph ph-seal-check" aria-hidden="true"></i> Keep bullets that list tools under “Requirements” or “What you’ll do”—those lines usually contain the strongest ATS nouns.</li>
+          <li><i class="ph ph-seal-check" aria-hidden="true"></i> Note verbs the employer repeats (launch, automate, forecast). Pair them with metrics in your resume after you validate keywords here.</li>
+        </ul>
+        <p class="lead" style="margin-top:18px;">Example clusters recruiters expect to see spelled out (not buried in graphics):</p>
+        <div class="tool-keyword-tags" aria-label="Example keyword clusters">
+          <span>SQL</span>
+          <span>Looker</span>
+          <span>Experiment design</span>
+          <span>B2B SaaS</span>
+          <span>Stakeholder workshops</span>
+          <span>Incident response</span>
+        </div>
+      </div>
+    </section>
+
     <section class="section-white">
+      <div class="wrap tool-editorial">
+        <h2>How keyword scanning differs from ATS layout checks</h2>
+        <p class="lead">Use both passes in order: first ensure parsers can read your file, then ensure the tokens inside match the posting.</p>
+        <div class="tool-compare-wrap">
+          <table class="tool-compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Stage</th>
+                <th scope="col">Resume keyword scanner</th>
+                <th scope="col"><a href="/tools/ats-checker">ATS resume checker</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Primary risk</th>
+                <td>Your resume never mentions the nouns the ATS extracted from the job description.</td>
+                <td>Headings, columns, or PDF quirks hide entire roles from the parser.</td>
+              </tr>
+              <tr>
+                <th scope="row">Typical fix</th>
+                <td>Add honest skill synonyms, certifications, and stack names to summary, skills, and bullets.</td>
+                <td>Simplify layout, restore plain-text sections, retest extraction.</td>
+              </tr>
+              <tr>
+                <th scope="row">Pairs with</th>
+                <td><a href="/resume-keyword-optimization">Keyword optimization guide</a> for placement rules.</td>
+                <td><a href="/ats-resume-checklist">ATS checklist</a> for structural hygiene.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-white" id="how-keyword-scanning-helps">
       <div class="wrap" style="max-width: 800px;">
         <h2>How keyword scanning helps</h2>
         <p style="color: var(--text-muted); margin-bottom: 24px;">This entry point matches the same secure handoff as our ATS checker: your file is saved for review after sign-in. In PitchCV, keyword work is organized so you can act on gaps without guesswork.</p>
@@ -188,7 +294,40 @@
       </div>
     </section>
 
-    <section class="section-light">
+    <section class="section-light" id="keyword-scanner-faq">
+      <div class="wrap">
+        <h2 style="text-align:center;margin-bottom:8px;">Frequently asked questions</h2>
+        <p style="text-align:center;color:var(--text-muted);max-width:560px;margin:0 auto 22px;font-size:0.95rem;">Visible answers align with the FAQ structured data on this URL.</p>
+        <div class="tool-faq">
+          <details>
+            <summary>What does a resume keyword scanner check?</summary>
+            <p>It focuses on vocabulary signals recruiters and ATS parsers use: hard skills, tools, certifications, and domain terms that appear in target roles. After you import your resume, PitchCV highlights gaps so you can prioritize what to add or rephrase.</p>
+          </details>
+          <details>
+            <summary>Is keyword scanning the same as a full ATS resume check?</summary>
+            <p>Keyword scanning is one pillar of ATS fit. A full ATS check also covers parsing risk from layout, section structure, and consistency. PitchCV combines these signals in the app after you sign in from this page.</p>
+          </details>
+          <details>
+            <summary>How should I use keywords without stuffing?</summary>
+            <p>Only add terms you can defend in an interview, place them in summary, skills, and impact bullets, and avoid unnatural repetition. Our keyword optimization guide explains extraction, prioritization, and placement.</p>
+          </details>
+          <details>
+            <summary>What file formats does PitchCV accept for scanning?</summary>
+            <p>PDF and DOCX up to 5 MB, matching the same upload contract as the homepage and ATS checker tool.</p>
+          </details>
+          <details>
+            <summary>What counts as a resume keyword for ATS purposes?</summary>
+            <p>Hard skills (languages, frameworks, lab techniques), platforms (Salesforce, HubSpot, AWS services), certifications (PMP, CPA, SOC 2), methodologies (Agile, Six Sigma), and domain nouns repeated in the posting. Soft skills matter too, but ATS filters lean on concrete tokens first.</p>
+          </details>
+          <details>
+            <summary>Should I paste the full job description before scanning?</summary>
+            <p>Yes when you are inside PitchCV after import. Long postings help the model separate must-have requirements from nice-to-have lines so you can prioritize honest additions to your resume.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-white">
       <div class="wrap" style="max-width: 800px;">
         <h2 style="margin-bottom: 12px;">Related guides and tools</h2>
         <p class="text-muted" style="margin-bottom: 18px;">Pair scanning with structure and phrasing resources from PitchCV.</p>
@@ -197,6 +336,7 @@
           <li><a href="/tools/ats-checker">ATS Resume Checker</a></li>
           <li><a href="/tools/action-verb-generator">Resume Action Verb Generator</a></li>
           <li><a href="/ats-resume-checklist">ATS Resume Checklist</a></li>
+          <li><a href="/examples/marketing-manager">Marketing manager resume example</a> (channel + metric vocabulary)</li>
         </ul>
       </div>
     </section>
